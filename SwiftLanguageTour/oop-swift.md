@@ -1,1 +1,1 @@
-## Swift Object Oriented Programming:
+## Swift Object Oriented Programming
