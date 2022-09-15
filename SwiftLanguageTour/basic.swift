@@ -7,7 +7,7 @@ var myVariable = 42
 let typeConversion = String(myVariable)
 
 
-// Multiple assaignment
+// Multiple var/let assaignment
 var red, green, blue: Double
 var x = 0.0, y = 0.0, z = 0.0
 let a = "a", b = "b", c = "c"
