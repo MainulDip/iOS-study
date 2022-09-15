@@ -60,10 +60,27 @@ print("teamScore: \(teamScore)")
 
 
 // Bool : Boolean || true, false || numeric (0,1) boolean is not allowed
-let boolTrue = true
-var boolOne = 1
-if(boolTrue == boolOne) {
+let boolTrue: Bool? = true
+var boolTrue2: Bool? = true
+if(boolTrue == boolTrue2) {
     print("Both are same")
 } else {
     print("they are different")
+}
+
+// Testing nil
+var optionalString: String? = "Hello"
+print(optionalString == nil)
+// Prints "false"
+
+var optionalNameNil: String?
+var nameSome: String? = "Somenaming" // opting "?" optional type will throw an error
+var greeting = "Hello!"
+if let name = optionalNameNil {
+    greeting = "Hello, \(name)"
+    print("greeting + name : \(greeting)")
+} else if var name = nameSome { // var is also possible
+    print("else if block : \(name)") // this will print at the end
+} else {
+    print("name is nil") // this will print if nameSome is also nil, but it is not
 }
