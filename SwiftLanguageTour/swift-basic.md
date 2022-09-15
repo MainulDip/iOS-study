@@ -99,3 +99,20 @@ if(boolTrue == boolOne) {
 You can use if and let together to work with values that might be missing.
 
 var/let can be initialized inside if/else conditions to work with values that might be missing. These values are represented as optionals. An optional value either contains a value or contains nil to indicate that a value is missing. Write a question mark (?) after the type of a value to mark the value as optional. if not the error will be -> initializer for conditional binding must have Optional type
+
+### String Interpolation & Ternary & Optionals:
+```swift
+let title: String? = "MD"
+let firstname : String? = nil
+let lastName : String = "Smith"
+let fullN = "\n\( title != nil ? title : "") \(firstname ?? "(No FirstName)") \(lastName ?? "No Lastname")"
+print(fullN)
+
+// optional type casting is for later conditinal let/var initialization
+print(title) // Optional("MD")
+print(title ?? "Something Else") // MD
+
+// string interpolation using optional check with ternary
+let fullN2 = "\n\(title ?? "(No Title)")\(title != nil ? "." : "") \(firstname ?? "(No FirstName)") \(lastName ?? "No Lastname")"
+print(fullN2)
+```

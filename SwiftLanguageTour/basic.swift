@@ -68,7 +68,7 @@ if(boolTrue == boolTrue2) {
     print("they are different")
 }
 
-// Testing nil
+// Testing nil | Optional nullable
 var optionalString: String? = "Hello"
 print(optionalString == nil)
 // Prints "false"
@@ -84,3 +84,22 @@ if let name = optionalNameNil {
 } else {
     print("name is nil") // this will print if nameSome is also nil, but it is not
 }
+
+let nickname: String? = nil
+let fullName: String = "John Appleseed"
+let informalGreeting = "Hi \(nickname ?? fullName)"
+print(informalGreeting)
+
+let title: String? = "MD"
+let firstname : String? = nil
+let lastName : String = "Smith"
+let fullN = "\n\( title != nil ? title : "") \(firstname ?? "(No FirstName)") \(lastName ?? "No Lastname")"
+print(fullN)
+
+// optional type casting is for later conditinal let/var initialization
+print(title) // Optional("MD")
+print(title ?? "Something Else") // MD
+
+// string interpolation using optional check with ternary
+let fullN2 = "\n\(title ?? "(No Title)")\(title != nil ? "." : "") \(firstname ?? "(No FirstName)") \(lastName ?? "No Lastname")"
+print(fullN2)
