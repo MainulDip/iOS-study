@@ -49,7 +49,7 @@ favoriteGenres = [] // deletes all the "set" elements using empty array notratio
 let individualScores = [75, 43, 103, 87, 12]
 var teamScore = 0
 for score in individualScores {
-    if score > 50 {
+    if score > 50 {  // if condition should be Boolean
         teamScore += 3
     } else {
         teamScore += 1
@@ -57,3 +57,13 @@ for score in individualScores {
 }
 print("\nConditionals and Loops:")
 print("teamScore: \(teamScore)")
+
+
+// Bool : Boolean || true, false || numeric (0,1) boolean is not allowed
+let boolTrue = true
+var boolOne = 1
+if(boolTrue == boolOne) {
+    print("Both are same")
+} else {
+    print("they are different")
+}

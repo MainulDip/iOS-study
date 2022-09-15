@@ -74,8 +74,28 @@ print(teamScore)
 // Prints "11"
 ```
 
+### Condition | Comparison Operators | nil | Bool : Boolean || true, false || numeric (0,1) boolean is not allowed:
+
 In an if statement, the conditional must be a Boolean expression—this means that code such as if score { ... } is an error, not an implicit comparison to zero.
 
+* comparison should be of same type String/String, Int/Int, etc.
+* comparison operators: == | != | > | < | >= | <=
+
+```swift
+// Bool : Boolean || true, false || numeric (0,1) boolean is not allowed
+let boolTrue :Bool? = true
+var boolOne : Bool? = true
+if(boolTrue == boolOne) {
+    print("Both are same")
+} else {
+    print("they are different")
+}
+```
+
+* nil:
+```swift
+
+```
 You can use if and let together to work with values that might be missing. These values are represented as optionals. An optional value either contains a value or contains nil to indicate that a value is missing. Write a question mark (?) after the type of a value to mark the value as optional.
 
 
