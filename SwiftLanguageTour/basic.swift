@@ -39,6 +39,21 @@ var occupations : [String: Float] = [:] // empty dictionary, have to provide typ
 var favoriteGenres: Set = ["Rock", "Classical", "Hip hop"] // initializing set with Type: Set and array literal notation
 favoriteGenres = [] // deletes all the "set" elements using empty array notration, but it is still "set", not empty array
 
+// Conditionals and Loops:
 
+// - conditionals : if | switch
+// - loop: for-in | while | repeat-while
+// - Braces around the body are required.
+// - Parentheses around the condition or loop variable are optional.
 
-
+let individualScores = [75, 43, 103, 87, 12]
+var teamScore = 0
+for score in individualScores {
+    if score > 50 {
+        teamScore += 3
+    } else {
+        teamScore += 1
+    }
+}
+print("\nConditionals and Loops:")
+print("teamScore: \(teamScore)")

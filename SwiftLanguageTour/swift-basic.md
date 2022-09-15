@@ -55,7 +55,10 @@ favoriteGenres = [] // deletes all the "set" elements using empty array notratio
 ```
 
 ### Control Flow, conditionals, loop and nil:
-Use if and switch to make conditionals, and use for-in, while, and repeat-while to make loops. Parentheses around the condition or loop variable are optional. Braces around the body are required.
+- conditionals : if | switch
+- loop: for-in | while | repeat-while
+- Braces around the body are required.
+- Parentheses around the condition or loop variable are optional. 
 
 ```swift
 let individualScores = [75, 43, 103, 87, 12]
