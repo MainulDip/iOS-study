@@ -46,10 +46,12 @@ var emptySet = Set<String>() // empty set
 var emptySet2: Set<String> = [] // empty set
 var emptyDictionary: [String: Float] = [:] // empty Dictionary, key : value
 
-// type inferred
-fruits = [] // empty array
-occupations = [:] // empty dictionary
-var favoriteGenres: Set = ["Rock", "Classical", "Hip hop"]
+// type inferration not working for collections
+var fruits: [String] = [] // if type is infreed, it will throw error
+fruits = ["Hello", "World!"]
+var occupations : [String: Float] = [:] // empty dictionary, have to provide type
+var favoriteGenres: Set = ["Rock", "Classical", "Hip hop"] // initializing set with Type: Set and array literal notation
+favoriteGenres = [] // deletes all the "set" elements using empty array notration, but it is still "set", not empty array
 ```
 
 ### Control Flow, conditionals, loop and nil:
@@ -72,3 +74,6 @@ print(teamScore)
 In an if statement, the conditional must be a Boolean expression—this means that code such as if score { ... } is an error, not an implicit comparison to zero.
 
 You can use if and let together to work with values that might be missing. These values are represented as optionals. An optional value either contains a value or contains nil to indicate that a value is missing. Write a question mark (?) after the type of a value to mark the value as optional.
+
+
+### Struct (Data) vs Class:
