@@ -106,4 +106,60 @@ print(fullN2) // MD. (No FirstName) Smith
 print(title) // Optional("MD")
 print(title ?? "Something Else") // MD
 
+// switch statement
+import Foundation
+
+let vegetable = "red pepper"
+switch vegetable {
+    case "celery":
+    print("Add some raisins and make ant on a log.")
+    case "cucumber", "watercress":
+    print("That would make a good tea sandwich.")
+    case let x where x.hasSuffix("pepper"):
+    print("Is it a spicy \(x)")
+    default:
+    print("Everything tastes good in soup")
+}
+
+// Dictionary Iteration
+let interestingNumbers = [
+    "Prime": [2, 3, 5, 7, 11, -13],
+    "Fibonacci": [1, 1, 2, 3, 5, 8],
+    "Square": [1, 4, 9, 16, 25],
+]
+var largest = 0
+for (_, numbers) in interestingNumbers {
+    for number in numbers {
+        if number > largest {
+            largest = number
+        }
+    }
+}
+print(largest)
+// Prints "25"
+
+var smallest: Int?
+var smallestV = -77
+
+for (_, values) in interestingNumbers {
+    for (index, value) in values.enumerated() {
+
+        if index == 0 && smallest == nil {
+            smallest = value
+            smallestV = value
+        } else {
+            if value < smallestV {
+                smallestV = value
+            }
+        }
+    }
+}
+print("Smallest Number is : \(smallestV)")
+
+// Smallest Number is : -13
+
+for (key, value) in interestingNumbers {
+    print("\(key) : \(value)")
+}
+
 

@@ -1,4 +1,4 @@
-## Swift Object Oriented Programmings:
+## Swift Object Oriented Programmings
 Topic maps including below
 
 ### Struct (Data) vs Class:
