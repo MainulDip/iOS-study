@@ -182,3 +182,35 @@ for (key, value) in interestingNumbers {
     print("\(key) : \(value)")
 }
 ```
+
+### Swift Optionals:
+https://www.programiz.com/swift-programming/optionals
+
+```swift
+// Optionals wrapped | unwrapped
+var someValue:Int? // optional
+var someAnotherValue:Int! // optional
+print(someValue) // nil
+print(someAnotherValue) // none
+
+someValue = 77
+someAnotherValue = 7
+print(someValue) // Optional(77)
+print(someAnotherValue) // some(7)
+
+// using unwarpped !
+print(someValue!) // 77
+print(someAnotherValue!) // 7
+
+var newOvalue: Int! = 777
+print(newOvalue) // some(777)
+print(newOvalue!) // 777
+
+var castingOptional: Int?
+var castingValue = castingOptional
+print(castingValue) // nil
+
+castingOptional = 7777
+var castingOptionalSecond = castingOptional!
+print(castingOptionalSecond) // 7777
+```
