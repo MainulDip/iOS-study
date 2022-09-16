@@ -94,12 +94,16 @@ let title: String? = "MD"
 let firstname : String? = nil
 let lastName : String = "Smith"
 let fullN = "\n\( title != nil ? title : "") \(firstname ?? "(No FirstName)") \(lastName ?? "No Lastname")"
-print(fullN)
+print(fullN) // Optional("MD") (No FirstName) Smith  
 
-// optional type casting is for later conditinal let/var initialization
-print(title) // Optional("MD")
-print(title ?? "Something Else") // MD
+// its not expected practice to use optional typed var/let straight
 
 // string interpolation using optional check with ternary
 let fullN2 = "\n\(title ?? "(No Title)")\(title != nil ? "." : "") \(firstname ?? "(No FirstName)") \(lastName ?? "No Lastname")"
-print(fullN2)
+print(fullN2) // MD. (No FirstName) Smith
+
+// optional type casting is for late conditinal let/var initialization
+print(title) // Optional("MD")
+print(title ?? "Something Else") // MD
+
+
