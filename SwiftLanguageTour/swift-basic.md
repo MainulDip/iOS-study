@@ -214,3 +214,68 @@ castingOptional = 7777
 var castingOptionalSecond = castingOptional!
 print(castingOptionalSecond) // 7777
 ```
+### while(){} | repeat{} while(){} Loop:
+NB: condition parenthesis is optional, body braces is required.
+```swift
+var n = 2
+while n < 100 {
+    n *= 2
+}
+print(n)
+// Prints "128"
+
+var m = 2
+repeat {
+    m *= 2
+} while m < 100
+print(m)
+// Prints "128"
+```
+
+### range | 0..<4 | 0...4 in for loop:
+0..<4 : from 0 to lessthan 4
+0...4 : from 0 to equalt to 4
+```swift
+// range
+var total = 0
+for i in 0..<4 {
+    total += i
+}
+print(total)
+// Prints "6" | 0 + 1 + 2 + 3
+
+var counter = 0
+for i in 0...4 {
+    counter += i
+}
+print(counter)
+// prints 10 | | 0 + 1 + 2 + 3 + 4
+```
+
+### Functions:
+- func to delcare function
+- -> to separate the parameter names and types from the function’s return type.
+```swift
+func greet(person: String, day: String) -> String {
+    return "Hello \(person), today is \(day)."
+}
+greet(person: "Bob", day: "Tuesday")
+```
+### Functions parameter labeling:
+By default, functions use their parameter names as labels for their arguments. provide something before parameter names to make it label. Use "_" to declare no label. 
+
+If lebel is specified, it is required to provide "label : parameter-value" when called.
+```swift
+// function parameter labeling
+func hellotest(_ firstname: String, ln lastname: String) -> String {
+    return "Hello \(firstname) \(lastname)"
+}
+print(hellotest("FirstN", ln: "LastN"))
+```
+
+### Tuple:
+https://www.programiz.com/swift-programming/tuples
+
+In Swift, a tuple is a group of different values. And, each value inside a tuple can be of different data types.
+
+tuple can be simple values or named values. also tuple can store another tuple or dictionary/ies. 

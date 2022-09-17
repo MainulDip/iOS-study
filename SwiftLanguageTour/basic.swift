@@ -189,3 +189,48 @@ print(castingValue) // nil
 castingOptional = 7777
 var castingOptionalSecond = castingOptional!
 print(castingOptionalSecond) // 7777
+
+// while | repeat while
+var n = 2
+while n < 100 {
+    n *= 2
+}
+print(n)
+// Prints "128"
+
+var m = 2
+repeat {
+    m *= 2
+} while m < 100
+print(m)
+// Prints "128"
+
+
+// range
+var total = 0
+for i in 0..<4 {
+    total += i
+}
+print(total)
+// Prints "6" | 0 + 1 + 2 + 3
+
+var counter = 0
+for i in 0...4 {
+    counter += i
+}
+print(counter)
+// prints 10 | | 0 + 1 + 2 + 3 + 4
+
+
+
+// functions
+func greet(person: String, day: String) -> String {
+    return "Hello \(person), today is \(day)."
+}
+print(greet(person: "Bob", day: "Tuesday"))
+
+// function parameter labeling
+func hellotest(_ firstname: String, ln lastname: String) -> String {
+    return "Hello \(firstname) \(lastname)"
+}
+print(hellotest("FirstN", ln: "LastN"))
