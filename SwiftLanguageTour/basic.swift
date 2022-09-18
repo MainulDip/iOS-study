@@ -234,3 +234,27 @@ func hellotest(_ firstname: String, ln lastname: String) -> String {
     return "Hello \(firstname) \(lastname)"
 }
 print(hellotest("FirstN", ln: "LastN"))
+
+
+// Tuples:
+var unNamedTuple = ("MackBook", 1099.99)
+var namedTuple = (product: "AirPod", varsion: 1234)
+var tupleNestedDictionary = (productsTuple: (laptop: 4, desktop: 3), productsDictionary: ["Montery": 12, "Big Sur": 11, "Catalina": 10.15], ("Mojave", "High Sierra", "Sierra") )
+
+print(unNamedTuple.0) // Mackbook
+print(namedTuple.product) // Airpod
+print(tupleNestedDictionary.productsTuple.laptop) // 4
+print(tupleNestedDictionary.productsDictionary) // ["Catalina": 10.15, "Big Sur": 11.0, "Montery": 12.0]
+print(tupleNestedDictionary.productsDictionary["Catalina"]) // Optional(10.15)
+print(tupleNestedDictionary.productsDictionary["Catalina"]!) // 10.15
+
+// Only tuple's dictionary elements can be added or removed. Other than tuple's size/count is fixed so new elements cannot be added or removed.
+// But, old values can be modified
+
+// adding element into tuple's dictionary
+tupleNestedDictionary.productsDictionary["Mojave"] = 10.14
+// removing element from tuple's dictionary
+tupleNestedDictionary.productsDictionary["Catalina"] = nil
+
+print(tupleNestedDictionary.productsDictionary) // ["Mojave": 10.140000000000001, "Big Sur": 11.0, "Montery": 12.0]
+print(tupleNestedDictionary.productsDictionary["Mojave"]!) // 10.14

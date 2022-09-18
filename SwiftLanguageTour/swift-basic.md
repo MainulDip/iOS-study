@@ -279,3 +279,31 @@ https://www.programiz.com/swift-programming/tuples
 In Swift, a tuple is a group of different values. And, each value inside a tuple can be of different data types.
 
 tuple can be simple values or named values. also tuple can store another tuple or dictionary/ies. 
+
+- Only tuple's dictionary elements can be added or removed. Other than tuple's member size/count is fixed so new elements cannot be added or removed.
+- But value/member can be edited
+
+```swift
+// Tuples:
+var unNamedTuple = ("MackBook", 1099.99)
+var namedTuple = (product: "AirPod", varsion: 1234)
+var tupleNestedDictionary = (productsTuple: (laptop: 4, desktop: 3), productsDictionary: ["Montery": 12, "Big Sur": 11, "Catalina": 10.15], ("Mojave", "High Sierra", "Sierra") )
+
+print(unNamedTuple.0) // Mackbook
+print(namedTuple.product) // Airpod
+print(tupleNestedDictionary.productsTuple.laptop) // 4
+print(tupleNestedDictionary.productsDictionary) // ["Catalina": 10.15, "Big Sur": 11.0, "Montery": 12.0]
+print(tupleNestedDictionary.productsDictionary["Catalina"]) // Optional(10.15)
+print(tupleNestedDictionary.productsDictionary["Catalina"]!) // 10.15
+
+// Only tuple's dictionary elements can be added or removed. Other than tuple's member size/count is fixed so new elements cannot be added or removed.
+// But value/member can be edited
+
+// adding element into tuple's dictionary
+tupleNestedDictionary.productsDictionary["Mojave"] = 10.14
+// removing element from tuple's dictionary
+tupleNestedDictionary.productsDictionary["Catalina"] = nil
+
+print(tupleNestedDictionary.productsDictionary) // ["Mojave": 10.140000000000001, "Big Sur": 11.0, "Montery": 12.0]
+print(tupleNestedDictionary.productsDictionary["Mojave"]!) // 10.14
+```
