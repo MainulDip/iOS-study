@@ -384,3 +384,6 @@ func lessThanTen(number: Int) -> Bool {
 var numbers = [20, 19, 7, 12]
 hasAnyMatches(list: numbers, condition: lessThanTen)
 ```
+
+
+### Swift Higher Order Fn and Closures:
