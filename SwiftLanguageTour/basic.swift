@@ -258,3 +258,28 @@ tupleNestedDictionary.productsDictionary["Catalina"] = nil
 
 print(tupleNestedDictionary.productsDictionary) // ["Mojave": 10.140000000000001, "Big Sur": 11.0, "Montery": 12.0]
 print(tupleNestedDictionary.productsDictionary["Mojave"]!) // 10.14
+
+// Function returning tuple
+func calculateStatistics(scores: [Int]) -> (min: Int, max: Int, sum: Int) {
+    var min = scores[0]
+    var max = scores[0]
+    var sum = 0
+
+    for score in scores {
+        if score > max {
+            max = score
+        } else if score < min {
+            min = score
+        }
+        sum += score
+    }
+
+    return (min, max, sum)
+}
+let statistics = calculateStatistics(scores: [5, 3, 100, 3, 9])
+print(statistics.sum)
+// Prints "120"
+print(statistics.2)
+// Prints "120"
+print(statistics)
+// Prints "(min: 3, max: 100, sum: 120)"

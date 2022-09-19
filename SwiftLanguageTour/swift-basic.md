@@ -307,3 +307,80 @@ tupleNestedDictionary.productsDictionary["Catalina"] = nil
 print(tupleNestedDictionary.productsDictionary) // ["Mojave": 10.140000000000001, "Big Sur": 11.0, "Montery": 12.0]
 print(tupleNestedDictionary.productsDictionary["Mojave"]!) // 10.14
 ```
+
+### Function returning compound values as Tuple | list/array as argument:
+```swift
+func calculateStatistics(scores: [Int]) -> (min: Int, max: Int, sum: Int) {
+    var min = scores[0]
+    var max = scores[0]
+    var sum = 0
+
+    for score in scores {
+        if score > max {
+            max = score
+        } else if score < min {
+            min = score
+        }
+        sum += score
+    }
+
+    return (min, max, sum)
+}
+let statistics = calculateStatistics(scores: [5, 3, 100, 3, 9])
+print(statistics.sum)
+// Prints "120"
+print(statistics.2)
+// Prints "120"
+```
+
+### Nested Fn | Fn returning Fn or taking Function as argument | Fn are first-class type:
+
+* Nested Functions:
+Nested functions have access to variables that were declared in the outer function.
+```swift
+func returnFifteen() -> Int {
+    var y = 10
+    func add() {
+        y += 5
+    }
+    add()
+    return y
+}
+returnFifteen()
+```
+
+* Function Returning Another Function:
+
+In Swift, functions are first-class, that means, a function can return another function and call by reference after.
+```swift
+func makeIncrementer() -> ((Int) -> Int) {
+    func addOne(number: Int) -> Int {
+        return 1 + number
+    }
+    return addOne
+}
+var increment = makeIncrementer()
+increment(7)
+```
+
+### Closure Functions/Fn | Injecting fn in another fn's parameter:
+A closure function can take another function as one of its arguments, which can be injected later. It is also a nested fn in Swift.
+
+- closures: blocks of code that can be called later. 
+The code in a closure has access to things like variables and functions that were available in the scope where the closure was created, even if the closure is in a different scope when it’s executed.
+
+```swift
+func hasAnyMatches(list: [Int], condition: (Int) -> Bool) -> Bool {
+    for item in list {
+        if condition(item) {
+            return true
+        }
+    }
+    return false
+}
+func lessThanTen(number: Int) -> Bool {
+    return number < 10
+}
+var numbers = [20, 19, 7, 12]
+hasAnyMatches(list: numbers, condition: lessThanTen)
+```
