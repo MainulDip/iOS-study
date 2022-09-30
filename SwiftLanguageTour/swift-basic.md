@@ -100,7 +100,9 @@ You can use if and let together to work with values that might be missing.
 
 var/let can be initialized inside if/else conditions to work with values that might be missing. These values are represented as optionals. An optional value either contains a value or contains nil to indicate that a value is missing. Write a question mark (?) after the type of a value to mark the value as optional. if not the error will be -> initializer for conditional binding must have Optional type
 
-### String Interpolation & Ternary & Optionals
+### String Interpolation & Ternary & Optionals:
+There is no "''" single quote in swift. All is double quote. To declare a character, Character type should be used expricitly. Like let a: Character = "a"
+
 ```swift
 let title: String? = "MD"
 let firstname : String? = nil
@@ -385,5 +387,30 @@ var numbers = [20, 19, 7, 12]
 hasAnyMatches(list: numbers, condition: lessThanTen)
 ```
 
+### Closure {} braces/anomymous and named function style:
+Closure can be written without a name by surrounding code with braces ({}). Use "in"to separate the arguments and return type from the body.
+```swift
+// Clouser using {} braces/anonymous and "named function" both style
+func countTotal(list: [Int], math: (Int, Int) -> Int) -> Int {
+    var total = 0;
+    for item in list {
+        total = math(total, item)
+    }
+    return total
+}
+let numberList = [21, 19, 7, 12]
 
+// closure {} braces/anonymous style | "in" is used to separate the arguments and return type from body
+var totalMath = countTotal(list: numberList, math: { (old: Int, new: Int) -> Int in
+    return old + new
+})
+print("totalMath: \(totalMath)")
+
+// closure "named function" style | define the closure
+func calculation (old: Int, new: Int) -> Int {
+    return old + new
+}
+var getTheTotal = countTotal(list: numberList, math: calculation)
+print("Getting total from named closure: \(getTheTotal)")
+```
 ### Swift Higher Order Fn and Closures:
