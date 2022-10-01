@@ -413,4 +413,4 @@ func calculation (old: Int, new: Int) -> Int {
 var getTheTotal = countTotal(list: numberList, math: calculation)
 print("Getting total from named closure: \(getTheTotal)")
 ```
-### Swift Higher Order Fn and Closures:
+### closuer trailing, numbered agruments, multiple closure, lazy closure:

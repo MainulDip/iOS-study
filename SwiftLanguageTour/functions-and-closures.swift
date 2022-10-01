@@ -96,3 +96,12 @@ func calculation (old: Int, new: Int) -> Int {
 var getTheTotal = countTotal(list: numberList, math: calculation)
 print("Getting total from named closure: \(getTheTotal)")
 
+// closure number parameters
+
+// closure as last argument or only argument
+var totalMathLast = countTotal(list: numberList) { (old: Int, new: Int) -> Int in
+    return old + new
+}
+print("totalMathLast: \(totalMathLast)")
+
+print ("\([1,2].map { n in 3*n})")

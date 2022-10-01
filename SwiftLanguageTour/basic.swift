@@ -1,7 +1,7 @@
 print("Hello World!")
 
 // let, var, type, type conversion, string interpolation
-// specifying let/var is mandatory but initial type assaignment is optional
+// specifying let/var is mandatory but initial type assaignment is optionals
 let myConstant: String = "CONSTANT"
 var myVariable = 42
 let typeConversion = String(myVariable)
