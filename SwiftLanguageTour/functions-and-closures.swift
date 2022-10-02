@@ -104,4 +104,28 @@ var totalMathLast = countTotal(list: numberList) { (old: Int, new: Int) -> Int i
 }
 print("totalMathLast: \(totalMathLast)")
 
-print ("\([1,2].map { n in 3*n})")
+// closure type inference
+var totalMathLastTypeInference = countTotal(list: numberList) { (old, new) -> Int in
+    return old + new
+}
+print("totalMathLastTypeInference: \(totalMathLastTypeInference)")
+
+// closure implicit return type, also removing parameter parenthesis
+// if parameter types are ingerred, parameter parenthesis can be removed
+var totalMathListImplicitReturn = countTotal(list: numberList) { old, new in
+    old + new
+}
+print("totalMathListImplicitreturn: \(totalMathListImplicitReturn)")
+
+// Closure Shorthand Argument Name, Numbered Arguments
+var totalMathLaisNumberedArguments = countTotal(list: numberList) { $0 + $1 }
+print("totalMathLaisNumberedArguments: \(totalMathLaisNumberedArguments)")
+
+// Closure Operator Methods, even shorter syntax to apply and return operator on closures parameter
+var totalMathLaisOperatorMethods = countTotal(list: numberList, math: +)
+print("totalMathLaisOperatorMethods: \(totalMathLaisOperatorMethods)")
+
+
+// Higher Order Map
+let mappedList = [1,2].map { n in 3*n}
+print ("mappedList: \(mappedList)")

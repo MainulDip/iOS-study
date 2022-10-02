@@ -371,7 +371,9 @@ A closure function can take another function as one of its arguments, which can 
 - closures: blocks of code that can be called later. 
 The code in a closure has access to things like variables and functions that were available in the scope where the closure was created, even if the closure is in a different scope when it’s executed.
 
-Closures in Swift are similar to blocks in C and Objective-C and to lambdas in other programming languages
+Closures in Swift are similar to blocks in C and Objective-C and to lambdas in other programming languages.
+
+* Closure Expression Syntax: {(parameters) -> return-type in body/statement/return  }
 
 ```swift
 func hasAnyMatches(list: [Int], condition: (Int) -> Bool) -> Bool {
