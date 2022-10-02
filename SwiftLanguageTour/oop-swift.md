@@ -9,7 +9,7 @@ when two different class instances have the same value for each of their stored 
 
 * Use structures by default.
 
-* Use classes when you need Objective-C interoperability.
+* Use classes when you need Objective-C interoperability
 
 * Use classes when you need to control the identity of the data you’re modeling.
 
