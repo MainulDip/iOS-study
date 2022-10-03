@@ -418,3 +418,48 @@ var getTheTotal = countTotal(list: numberList, math: calculation)
 print("Getting total from named closure: \(getTheTotal)")
 ```
 ### closuer trailing, numbered agruments, multiple closure, lazy closure:
+
+* Multiple Closures: omit the argument label for the first trailing closure and provide label the remaining trailing closures.
+```swift
+func loadPicture(from server: Server, completion: (Picture) -> Void, onFailure: () -> Void) {
+    if let picture = download("photo.jpg", from: server) {
+        completion(picture)
+    } else {
+        onFailure()
+    }
+}
+
+loadPicture(from: someServer) { picture in
+    someView.currentPicture = picture
+} onFailure: {
+    print("Couldn't download the next picture.")
+}
+```
+
+### Closure/Function's Reference Type and Capturing Values:
+In Swift, the simplest form of a closure that can capture values is a nested function, written within the body of another function. A nested function can capture any of its outer function’s arguments and can also capture any constants and variables defined within the outer function.
+
+```swift
+func makeIncrementer(forIncrement amount: Int) -> () -> Void {
+    var runningTotal = 0
+    func incrementer() -> Void {
+        runningTotal += amount
+        print(runningTotal)
+    }
+    return incrementer
+}
+
+let incrementByTen = makeIncrementer(forIncrement: 10)
+incrementByTen()
+// prints a value of 10
+incrementByTen()
+// prints a value of 20
+incrementByTen()
+// prints a value of 30
+
+let incrementBySeven = makeIncrementer(forIncrement: 7)
+incrementBySeven()
+// prints a value of 7
+incrementBySeven()
+// prints a value of 14
+```

@@ -19,4 +19,4 @@ let strings = numbers.map { number -> String in
     return output
 }
 print(strings)
-print(9/10) // 0 , because of Int, not Double
+print(9/10) // 0 , because of Int type, not Double

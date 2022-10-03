@@ -129,3 +129,28 @@ print("totalMathLaisOperatorMethods: \(totalMathLaisOperatorMethods)")
 // Higher Order Map
 let mappedList = [1,2].map { n in 3*n}
 print ("mappedList: \(mappedList)")
+
+
+// Closure/Function's Reference Type and Capturing Values
+func makeIncrementer(forIncrement amount: Int) -> () -> Void {
+    var runningTotal = 0
+    func incrementer() -> Void {
+        runningTotal += amount
+        print(runningTotal)
+    }
+    return incrementer
+}
+
+let incrementByTen = makeIncrementer(forIncrement: 10)
+incrementByTen()
+// prints a value of 10
+incrementByTen()
+// prints a value of 20
+incrementByTen()
+// prints a value of 30
+
+let incrementBySeven = makeIncrementer(forIncrement: 7)
+incrementBySeven()
+// prints a value of 7
+incrementBySeven()
+// prints a value of 14
