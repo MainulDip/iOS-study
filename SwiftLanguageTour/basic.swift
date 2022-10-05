@@ -26,7 +26,7 @@ And then I said "I have \(apples + oranges) pieces of fruit."
 
 print(quotation)
 
-// Collections
+// Collections.
 var emptyArray: [String] = [] // rmpty array
 var emptySet = Set<String>() // empty set
 var emptySet2: Set<String> = [] // empty set
