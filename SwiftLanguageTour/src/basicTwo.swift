@@ -1,4 +1,6 @@
-// Optionals in depth
+/**
+ * Optionals in depth
+*/
 let cNum = "1234"
 let cStr = "Something"
 let convertNumToInt = Int(cNum) // implicit type is "Int?"
@@ -21,18 +23,20 @@ print(convertNumToIntUnwrapped) // 1234
 /**
  * If Statements and Forced Unwrapping
 */
-print("\nIf Statements and Forced Unwrapping:\n")
+print("\nIf Statements and Forced Unwrapping Starts:\n")
 
 // Only apply Forced Unwrapping "value!" when you're sure, as it will throw error on "nil"
 if convertNumToInt != nil {
     print("convertNumToInt contains some integer value of \(convertNumToInt!).")
 }
 
+print("\nIf Statements and Forced Unwrapping Ends:\n")
+
 /**
  * Optional Binding
  * this can be used to find out whether an optional contains a value, and if so, to make that value available as a temporary constant or variable.
 */
-print("\nOptional Binding:\n")
+print("\nOptional Binding Starts:\n")
 
 if let convertedInt = Int(cNum) {
     print ("The string \"\(cNum)\" is covertable to Integer : \(convertedInt) ")
@@ -40,13 +44,39 @@ if let convertedInt = Int(cNum) {
     print("\"\(cNum)\" is not covertable to Integer value")
 }
 
+print("\nOptional Bindings Ends:\n")
+
+/**
+ * Implicitly Unwrapped Optionals
+ * it’s clear from a program’s structure that an optional will always have a value
+ * to define place an exclamation point after the optional’s type when declared
+ * The primary use of implicitly unwrapped optionals in Swift is during class initialization
+*/
+print("\nImplicitly Unwrapped Optionals Starts:\n")
+    
+let possibleString: String? = "An optional string."
+let forcedString: String = possibleString! // requires an exclamation point
+print("forcedString: \(forcedString)") // Prints "forcedString: An optional string."
+
+var assumedString: String!
+print(assumedString)// Prints "none"
+print("assumedString == nil : \(assumedString == nil)") // Prints "assumedString == nil : true"
+assumedString = "An implicitly unwrapped optional string."
+print(assumedString) // Prints "some("An implicitly unwrapped optional string.")"
+print(assumedString!) // Prints "An implicitly unwrapped optional string."
+
+let implicitString: String = assumedString // no need for an exclamation point
+print(implicitString) // Prints "An implicitly unwrapped optional string."
+
+print("\nImplicitly Unwrapped Optionals Ends:\n")
+
 /**
  * guard Statement
  * like an if statement, executes statements depending on the Boolean value of an expression.
  * requires "esle" clause unlike if (where "else" is optional)
 */
 
-print("\nguard Statement:\n")
+print("\nguard Statement console starts:\n")
 
 func greet(person: [String: String]) {
     guard let name = person["name"] else {
@@ -77,3 +107,5 @@ greet(person: ["name": "Jane", "location": "Cupertino"])
 
 greet(person: [:])
 // Print "No name is applied, nothing will be called after this return underneth"
+
+print("\nguard Statement console Ends:\n")
