@@ -39,3 +39,41 @@ if let convertedInt = Int(cNum) {
 } else {
     print("\"\(cNum)\" is not covertable to Integer value")
 }
+
+/**
+ * guard Statement
+ * like an if statement, executes statements depending on the Boolean value of an expression.
+ * requires "esle" clause unlike if (where "else" is optional)
+*/
+
+print("\nguard Statement:\n")
+
+func greet(person: [String: String]) {
+    guard let name = person["name"] else {
+        print("No name is applied, nothing will be called after this return underneth")
+        return
+    }
+
+    print("Hello \(name)!")
+
+    guard let location = person["location"] else {
+        print("I hope the weather is nice near you.")
+        return
+    }
+
+    print("I hope the weather is nice in \(location).")
+}
+
+greet(person: ["name": "John"])
+// Prints "Hello John!"
+// Prints "I hope the weather is nice near you."
+
+greet(person: ["location": "Cupertino"])
+// Prints "No name is applied, nothing will be called after this return underneth"
+
+greet(person: ["name": "Jane", "location": "Cupertino"])
+// Prints "Hello Jane!"
+// Prints "I hope the weather is nice in Cupertino."
+
+greet(person: [:])
+// Print "No name is applied, nothing will be called after this return underneth"

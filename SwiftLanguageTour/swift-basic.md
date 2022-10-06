@@ -464,6 +464,6 @@ incrementBySeven()
 // prints a value of 14
 ```
 
-### Closure ARC (Automatic Reference Counting):
+### Closure ARC (Automatic Reference Counting)
 
 Docs: https://docs.swift.org/swift-book/LanguageGuide/AutomaticReferenceCounting.html
