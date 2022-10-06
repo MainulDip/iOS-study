@@ -107,7 +107,7 @@ print("Example 3 (weak Reference) ----------Starts---------")
     class ApartmentEx3 {
         let unit: String
         init(unit: String) { self.unit = unit }
-        // weak var tenant: PersonEx3?
+        weak var tenant: PersonEx3?
         deinit { print("ApartmentEx3 \(unit) is being deinitialized") }
     }
 
@@ -118,10 +118,19 @@ print("Example 3 (weak Reference) ----------Starts---------")
     unit4AEx3 = ApartmentEx3(unit: "4A")
 
     johnEx3!.apartment = unit4AEx3
-    // unit4AEx3!.tenant = johnEx3
+    unit4AEx3!.tenant = johnEx3
 
-    johnEx3 = nil
-    // unit4AEx3 = nil
+    johnEx3 = nil // if this line is commented, setting unit4AEx3 to nil will not call any deinit becaues johnEx3!.apartment still holding a strong reference to unit4AEx3 instance
+    // setting johnEx3 = nil will call PersonEx3 's deinit, because, there is only a weak reference holding that instance inside ApartmentEx3 class
+    
+    print("unit4AEx3!.tenant: \(unit4AEx3!.tenant)") // Prints "unit4AEx3!.tenant: nil"
+    
+    unit4AEx3 = nil
+    // setting unit4AEx3 = nil will call deinit of the ApartmentEx3's class as PersonEx3 is deallocated alredy, no strong reference exists
+
+    
+    // though PersonEx3's apartment is not declared "weak", if no strong reference is found for PersonEx3 object instance ARC will deallocate it, and everythig will be on default state on that class, hence appartment will be nil
+    // if unit4AEx3 is set to nil only (leaving johnEx3 instance intact), no deinit will be called becaues johnEx3!.apartment still holding a strong reference to unit4AEx3 instance
 
 
 

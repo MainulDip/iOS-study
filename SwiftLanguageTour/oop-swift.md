@@ -13,7 +13,7 @@ when two different class instances have the same value for each of their stored 
 
 * Use classes when you need to control the identity of the data you’re modeling.
 
-* Use structures along with protocols to adopt behavior by sharing implementations
+* Use structures along with protocols to adopt behavior by sharing implementations.
 
 ```swift
 struct PenPalRecord {
