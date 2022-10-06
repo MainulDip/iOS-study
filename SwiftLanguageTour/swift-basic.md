@@ -466,4 +466,4 @@ incrementBySeven()
 
 ### Closure ARC (Automatic Reference Counting)
 
-Docs: https://docs.swift.org/swift-book/LanguageGuide/AutomaticReferenceCounting.html .......
+Docs: https://docs.swift.org/swift-book/LanguageGuide/AutomaticReferenceCounting.html

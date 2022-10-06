@@ -93,8 +93,44 @@ if let firstNumber = Int("4") {
 Implicitly Unwrapped Optionals:
 https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html#ID334
 
-### guard Statement | another king of if:
 
+### guard Statement | another king of if:
+```swift
+/**
+ * guard Statement
+ * like an if statement, executes statements depending on the Boolean value of an expression.
+ * requires "esle" clause unlike if (where "else" is optional)
+*/
+func greet(person: [String: String]) {
+    guard let name = person["name"] else {
+        print("No name is applied, nothing will be called after this return underneth")
+        return
+    }
+
+    print("Hello \(name)!")
+
+    guard let location = person["location"] else {
+        print("I hope the weather is nice near you.")
+        return
+    }
+
+    print("I hope the weather is nice in \(location).")
+}
+
+greet(person: ["name": "John"])
+// Prints "Hello John!"
+// Prints "I hope the weather is nice near you."
+
+greet(person: ["location": "Cupertino"])
+// Prints "No name is applied, nothing will be called after this return underneth"
+
+greet(person: ["name": "Jane", "location": "Cupertino"])
+// Prints "Hello Jane!"
+// Prints "I hope the weather is nice in Cupertino."
+
+greet(person: [:])
+// Print "No name is applied, nothing will be called after this return underneth"
+```
 
 ### Error Handling:
 A function indicates that it can throw an error by including the throws keyword in its declaration. When you call a function that can throw an error, you prepend the try keyword to the expression.

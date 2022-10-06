@@ -138,8 +138,11 @@ print("Example 3 (weak Reference) ----------Ends---------\n")
 
 /**
 * unwoned Reference
+* only when it is sure that the reference always refers to an instance that hasn’t been deallocated
+* if try to access deallocated instances reference set with unowned, it will throw runtime error where "weak" will return nil
 */
 print("Example 1 (unowned References) ----------Starts---------")
+
 
 print("Example 1 (unowned References) ----------Ends---------\n")
 
