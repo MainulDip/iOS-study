@@ -24,3 +24,38 @@ struct PenPalRecord {
 
 var myRecord = try JSONDecoder().decode(PenPalRecord.self, from: jsonResponse)
 ```
+
+
+### Object and Classes:
+```swift
+// simple swift class
+class NamedShape {
+    var numberOfSides: Int = 0
+    var name: String
+
+    init(name: String) {
+        self.name = name
+    }
+
+    func simpleDescription() -> String {
+        return "A shape with \(numberOfSides) sides."
+    }
+
+    deinit {
+        print("Do some cleanup when deallocated")
+    }
+}
+
+var shape: NamedShape? = NamedShape(name : "Some Names")
+shape?.numberOfSides = 7
+
+print("shape.name : \(shape!.name)")
+print("shape.numberOfSides : \(shape!.numberOfSides)")
+print("shape.simpleDescription() : \(shape!.simpleDescription())")
+shape = nil
+```
+
+
+### Structures:
+
+### Enumerations:
