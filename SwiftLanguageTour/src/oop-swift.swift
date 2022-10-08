@@ -14,7 +14,7 @@ class NamedShape {
         print("Do some cleanup when deallocated")
     }
 }
-
+// to utilize deinit, class instantiation should be keept inside optional variable. If deinitialization is not necessary, then could be referenced with regular variable like -> var shape = NameeShape(name: "SomeNames")
 var shape: NamedShape? = NamedShape(name : "Some Names")
 shape?.numberOfSides = 7
 
@@ -51,3 +51,26 @@ print("test.simpleDescription(): \(test.simpleDescription())")
 
 test.numberOfSides = 7 // Accessing Super Classes's Property
 print("test.numberOfSides : \(test.numberOfSides)")
+
+/*
+* Getters & Setters
+* 
+*/
+class TwelveOrLess {
+    private var number = 0
+    var filteredNumber: Int {
+        get { return number }
+        set { number = min(newValue, 12) }
+    }
+
+    init(number: Int = 7){
+        self.filteredNumber = number
+    }
+}
+
+var tol = TwelveOrLess(number: 24)
+print(tol.filteredNumber) // 12
+tol.filteredNumber = 4
+print(tol.filteredNumber)
+var tolD = TwelveOrLess()
+print(tolD.filteredNumber)

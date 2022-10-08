@@ -26,9 +26,14 @@ var myRecord = try JSONDecoder().decode(PenPalRecord.self, from: jsonResponse)
 ```
 
 
-### Object and Classes:
+### Object, Classes and Inheritances :
+* class / base-class : Swift classes don’t inherit from a universal base class (unlike kotlin, All classes in Kotlin have a common superclass, Any). Classes you define without specifying a superclass automatically become base classes for you to build upon on swift.
+
+* init / constructor : init block is the class constructor
+* super-class constructor parameters on sub-class : super.init() is used to map with super-class constructor.
+* deinit / deallocation: deinit block (no param allowed) is used to do cleanup when the object is deallocated.
 ```swift
-// simple swift class
+// simple swift class or Base class
 class NamedShape {
     var numberOfSides: Int = 0
     var name: String
@@ -46,6 +51,7 @@ class NamedShape {
     }
 }
 
+// to utilize deinit, class instantiation should be keept inside optional variable. If deinitialization is not necessary, then could be referenced with regular variable like -> var shape = NameeShape(name: "SomeNames")
 var shape: NamedShape? = NamedShape(name : "Some Names")
 shape?.numberOfSides = 7
 
@@ -53,7 +59,38 @@ print("shape.name : \(shape!.name)")
 print("shape.numberOfSides : \(shape!.numberOfSides)")
 print("shape.simpleDescription() : \(shape!.simpleDescription())")
 shape = nil
+
+
+/*
+* Inheritance / Sub Class / Super Class
+* Implement Super Classes' Initializer with "super.init()"
+*/
+class Square: NamedShape {
+    var sideLength: Double
+
+    init(sideLength: Double, name: String) {
+        self.sideLength = sideLength
+        super.init(name: name)
+        numberOfSides = 4 // Setting Super Classes' Property
+    }
+
+    func area() -> Double {
+        return sideLength * sideLength
+    }
+
+    override func simpleDescription() -> String {
+        return "A square with sides of length \(sideLength)."
+    }
+}
+let test = Square(sideLength: 5.2, name: "my test square")
+print("test.area(): \(test.area())")
+
+print("test.simpleDescription(): \(test.simpleDescription())")
+
+test.numberOfSides = 7 // Accessing Super Classes's Property
+print("test.numberOfSides : \(test.numberOfSides)")
 ```
+
 
 
 ### Structures:
