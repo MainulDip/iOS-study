@@ -468,5 +468,5 @@ incrementBySeven()
 
 Docs: https://docs.swift.org/swift-book/LanguageGuide/AutomaticReferenceCounting.html
 
-### Attributes | @attributes | @attributes(params):
+### Attributes | @attributes | @attributes(params)
 https://docs.swift.org/swift-book/ReferenceManual/Attributes.html

@@ -21,7 +21,7 @@ shape?.numberOfSides = 7
 print("shape.name : \(shape!.name)")
 print("shape.numberOfSides : \(shape!.numberOfSides)")
 print("shape.simpleDescription() : \(shape!.simpleDescription())")
-shape = nil
+// shape = nil
 
 /*
 * Inheritance / Sub Class / Super Class
@@ -61,6 +61,8 @@ class TwelveOrLess {
     var filteredNumber: Int {
         get { return number }
         set { number = min(newValue, 12) }
+        // In the setter for perimeter, the new value has the implicit name newValue. You can provide an explicit name in parentheses after set.
+        // like // set (someval) {number = min(someval, 12)}
     }
 
     init(number: Int = 7){
@@ -74,3 +76,55 @@ tol.filteredNumber = 4
 print(tol.filteredNumber)
 var tolD = TwelveOrLess()
 print(tolD.filteredNumber)
+
+/*
+* willset and didset method to run before and after setting new values to class properties
+*/
+
+class EquilateralTriangle: NamedShape {
+    var sideLength: Double = 0.0
+
+    init(sideLength: Double, name: String) {
+        self.sideLength = sideLength
+        super.init(name: name)
+        numberOfSides = 3
+    }
+
+    var perimeter: Double {
+        get {
+            return 3.0 * sideLength
+        }
+        set {
+            sideLength = newValue / 3.0
+        }
+    }
+
+    override func simpleDescription() -> String {
+        return "An equilateral triangle with sides of length \(sideLength)."
+    }
+}
+
+    class TriangleAndSquare {
+        var triangle: EquilateralTriangle {
+            willSet {
+                square.sideLength = newValue.sideLength
+            }
+        }
+        var square: Square {
+            willSet {
+                triangle.sideLength = newValue.sideLength
+            }
+        }
+        init(size: Double, name: String) {
+            square = Square(sideLength: size, name: name)
+            triangle = EquilateralTriangle(sideLength: size, name: name)
+        }
+    }
+    var triangleAndSquare = TriangleAndSquare(size: 10, name: "another test shape")
+    print("triangleAndSquare.square.sideLength : \(triangleAndSquare.square.sideLength)")
+    // Prints "10.0"
+    print("triangleAndSquare.triangle.sideLength : \(triangleAndSquare.triangle.sideLength)")
+    // Prints "10.0"
+    triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
+    print("triangleAndSquare.triangle.sideLength : \(triangleAndSquare.triangle.sideLength)")
+    // Prints "50.0"
