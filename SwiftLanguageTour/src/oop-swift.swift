@@ -64,6 +64,14 @@ class TwelveOrLess {
         set { number = min(newValue, 12) }
         // In the setter for perimeter, the new value has the implicit name newValue. You can provide an explicit name in parentheses after set.
         // like // set (someval) {number = min(someval, 12)}
+        // willSet and didSet cannot work get/set at the same property
+        // willSet {
+        //     print("willSet calling from TwelveOrLess : newValue is \(newValue)")
+        // }
+
+        // didSet {
+        //     print("didSet calling from TwelveOrLess : oldValue is \(oldValue)")
+        // }
     }
 
     init(number: Int = 7){
