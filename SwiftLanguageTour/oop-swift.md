@@ -94,7 +94,7 @@ print("test.numberOfSides : \(test.numberOfSides)")
 ### Setter, Getter, willset and didset:
 * get/set (getter/setter):
 * set implicit param:
-* willset and didset method to run before and after setting new values to class properties
+* willset and didset method to run before and after setting new values to class properties.
 
 
 ### Structures:

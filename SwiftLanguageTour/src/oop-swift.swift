@@ -3,6 +3,7 @@ class NamedShape {
     var name: String
 
     init(name: String) {
+        // print("New NamedShape Instance Init")
         self.name = name
     }
 
@@ -21,7 +22,7 @@ shape?.numberOfSides = 7
 print("shape.name : \(shape!.name)")
 print("shape.numberOfSides : \(shape!.numberOfSides)")
 print("shape.simpleDescription() : \(shape!.simpleDescription())")
-// shape = nil
+shape = nil
 
 /*
 * Inheritance / Sub Class / Super Class
@@ -102,21 +103,32 @@ class EquilateralTriangle: NamedShape {
     override func simpleDescription() -> String {
         return "An equilateral triangle with sides of length \(sideLength)."
     }
+
+    deinit {
+        print("EquilateralTirangle Deallocation")
+    }
 }
 
     class TriangleAndSquare {
+        /*
+        * When triangle setter will call, it will also update square with same value and vice-versa
+        */
         var triangle: EquilateralTriangle {
             willSet {
                 square.sideLength = newValue.sideLength
             }
         }
         var square: Square {
+            didSet {
+                print("didSet calling: setting square which will also update triangle's sidelength")
+            }
             willSet {
+                print("willSet calling: setting same sidelength for triangle")
                 triangle.sideLength = newValue.sideLength
             }
         }
         init(size: Double, name: String) {
-            square = Square(sideLength: size, name: name)
+            self.square = Square(sideLength: size, name: name)
             triangle = EquilateralTriangle(sideLength: size, name: name)
         }
     }
@@ -125,6 +137,10 @@ class EquilateralTriangle: NamedShape {
     // Prints "10.0"
     print("triangleAndSquare.triangle.sideLength : \(triangleAndSquare.triangle.sideLength)")
     // Prints "10.0"
-    triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
+    triangleAndSquare.square = Square(sideLength: 50, name: "larger square") // also setting a new instance will call the old instance's deinit for "no reference" cause
     print("triangleAndSquare.triangle.sideLength : \(triangleAndSquare.triangle.sideLength)")
     // Prints "50.0"
+
+    triangleAndSquare.square = Square(sideLength: 77, name: "Plus larger square")
+    print("triangleAndSquare.triangle.sideLength : \(triangleAndSquare.triangle.sideLength)")
+    print("triangleAndSquare.square.sideLength : \(triangleAndSquare.square.sideLength)")
