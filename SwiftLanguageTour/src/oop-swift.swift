@@ -327,6 +327,8 @@ print("\nStructure-Vs-Class-Enum----------------------Ends----------------\n")
 * Protocols and Extensions
 * Interface in other programming languages
 * cannot instantiate a protocol by itself
+* Extensions can add computed instance properties and computed type properties to existing types.
+* extension must not contain stored properties like (var sth: String = "Stored Properties")
 */
 print("\nProtocol/Interface----------------------Starts----------------\n")
 
@@ -345,6 +347,7 @@ print("\nProtocol/Interface----------------------Starts----------------\n")
     var a = SimpleClass()
     a.adjust()
     let aDescription = a.simpleDescription
+    print(aDescription)
 
     struct SimpleStructure: ExampleProtocol {
         var simpleDescription: String = "A simple structure"
@@ -355,6 +358,42 @@ print("\nProtocol/Interface----------------------Starts----------------\n")
     var b = SimpleStructure()
     b.adjust()
     let bDescription = b.simpleDescription
+    print(bDescription)
+
+
+    print("\nExtension--------------------------Example 1-------------------\n")
+
+    
+    extension Int: ExampleProtocol {
+        var simpleDescription: String { // extensions can return computed instance properties, not stored
+            return "Some Description For Number \(self)"
+        }
+
+        mutating func adjust() {
+            self += 42
+        }
+    }
+    var x = 7
+    print(x.simpleDescription)
+    x.adjust()
+    print(x.simpleDescription)
+
+    print("\nExtension ------------------- Example 2 -------------------------\n")
+    
+    extension Double {
+        var km: Double { return self * 1_000.0 }
+        var m: Double { return self }
+        var cm: Double { return self / 100.0 }
+        var mm: Double { return self / 1_000.0 }
+        var ft: Double { return self / 3.28084 }
+    }
+    let oneInch = 25.4.mm
+    print("One inch is \(oneInch) meters")
+    // Prints "One inch is 0.0254 meters"
+    let threeFeet = 3.ft
+    print("Three feet is \(threeFeet) meters")
+    // Prints "Three feet is 0.914399970739201 meters"
+
 
 
 print("\nProtocol/Interface----------------------Ends----------------\n")

@@ -94,7 +94,7 @@ Implicitly Unwrapped Optionals:
 https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html#ID334
 
 
-### guard Statement | another king of if:
+### guard Statement | another kind of if:
 ```swift
 /**
  * guard Statement
