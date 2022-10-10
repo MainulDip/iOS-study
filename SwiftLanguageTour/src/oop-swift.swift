@@ -23,11 +23,13 @@ print("shape.name : \(shape!.name)")
 print("shape.numberOfSides : \(shape!.numberOfSides)")
 print("shape.simpleDescription() : \(shape!.simpleDescription())")
 shape = nil
+print("\nbasic-class---------------Ends----------------\n")
 
 /*
 * Inheritance / Sub Class / Super Class
 * Implement Super Classes' Initializer with "super.init()"
 */
+print("\ninheritance/sub/super-Class---------------Starts----------------\n")
 class Square: NamedShape {
     var sideLength: Double
 
@@ -52,11 +54,13 @@ print("test.simpleDescription(): \(test.simpleDescription())")
 
 test.numberOfSides = 7 // Accessing Super Classes's Property
 print("test.numberOfSides : \(test.numberOfSides)")
+print("\ninheritance/sub/super-Class---------------Ends----------------\n")
 
 /*
 * Getters & Setters
-* 
+* set get the parameter newValue or custom parameter can also be set
 */
+print("\nget/set---------------Starts----------------\n")
 class TwelveOrLess {
     private var number = 0
     var filteredNumber: Int {
@@ -85,10 +89,13 @@ tol.filteredNumber = 4
 print(tol.filteredNumber)
 var tolD = TwelveOrLess()
 print(tolD.filteredNumber)
+print("\nget/set---------------Ends----------------\n")
 
 /*
 * willset and didset method to run before and after setting new values to class properties
+* get/set and willSet/didSet will not work at the same time, use either couple
 */
+print("\nwillSet/didSet---------------Starts----------------\n")
 
 class EquilateralTriangle: NamedShape {
     var sideLength: Double = 0.0
@@ -128,10 +135,10 @@ class EquilateralTriangle: NamedShape {
         }
         var square: Square {
             didSet {
-                print("didSet calling: setting square which will also update triangle's sidelength")
+                print("didSet calling: setting square which will also update triangle's sidelength and the oldValue : \(oldValue)")
             }
             willSet {
-                print("willSet calling: setting same sidelength for triangle")
+                print("willSet calling: setting same sidelength for triangle and the newValue : \(newValue)")
                 triangle.sideLength = newValue.sideLength
             }
         }
@@ -145,10 +152,10 @@ class EquilateralTriangle: NamedShape {
     // Prints "10.0"
     print("triangleAndSquare.triangle.sideLength : \(triangleAndSquare.triangle.sideLength)")
     // Prints "10.0"
-    triangleAndSquare.square = Square(sideLength: 50, name: "larger square") // also setting a new instance will call the old instance's deinit for "no reference" cause
+
+    // also setting a new instance will call the old instance's deinit for "no reference" cause
+    triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
     print("triangleAndSquare.triangle.sideLength : \(triangleAndSquare.triangle.sideLength)")
     // Prints "50.0"
 
-    triangleAndSquare.square = Square(sideLength: 77, name: "Plus larger square")
-    print("triangleAndSquare.triangle.sideLength : \(triangleAndSquare.triangle.sideLength)")
-    print("triangleAndSquare.square.sideLength : \(triangleAndSquare.square.sideLength)")
+    print("\nwillSet/didSet---------------Ends----------------\n")
