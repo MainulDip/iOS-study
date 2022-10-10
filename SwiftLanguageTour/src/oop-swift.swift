@@ -159,3 +159,166 @@ class EquilateralTriangle: NamedShape {
     // Prints "50.0"
 
     print("\nwillSet/didSet---------------Ends----------------\n")
+
+    /*
+    * Enumerations
+    * should be in CamelCase and Singular
+    */
+print("\nEnumerations/enum---------------Starts----------------\n")
+
+enum Suit {
+    case spades, hearts, diamonds, clubs
+
+    func simpleDescription() -> String {
+        switch self {
+        case .spades:
+            return "spades"
+        case .hearts:
+            return "hearts"
+        case .diamonds:
+            return "diamonds"
+        case .clubs:
+            return "clubs"
+        }
+    }
+}
+let hearts = Suit.hearts
+let heartsDescription = hearts.simpleDescription()
+print("heartsDescription : \(heartsDescription)")
+
+
+print("\nEnumerations/enum---------------Example 2----------------\n")
+
+enum ServerResponse {
+    case result(String, String)
+    case failure(String)
+}
+
+let success = ServerResponse.result("6:00 am", "8:09 pm")
+let failure = ServerResponse.failure("Out of cheese.")
+
+switch success {
+case let .result(sunrise, sunset):
+    print("Sunrise is at \(sunrise) and sunset is at \(sunset).")
+case let .failure(message):
+    print("Failure...  \(message)")
+}
+
+switch failure {
+case let .result(sunrise, sunset):
+    print("Sunrise is at \(sunrise) and sunset is at \(sunset).")
+case let .failure(message):
+    print("Failure...  \(message)")
+}
+
+
+print("\nEnumerations/enum---------------Example 3----------------\n")
+
+enum Rank: Int { // rawValue is only available to Int
+    case test = 77
+    case ace = 1
+    case two, three, four, five, six, seven, eight, nine, ten
+    case jack, queen, king
+
+    func simpleDescription() -> String {
+        switch self {
+        case .ace:
+            return "Printing ace"
+        case .jack:
+            return "Printing jack"
+        case .queen:
+            return "Printing queen"
+        case .king:
+            return "Printing king"
+        default:
+            return "Giving Back Default Case, and the enum name and rawValue are \(self) : \(self.rawValue)"
+        }
+    }
+}
+print(Rank(rawValue: 77)!) // rawValues are only available to Int enum type
+var ace = Rank.ace
+print(ace.simpleDescription())
+let aceRawValue = ace.rawValue
+print("aceRawValue : \(aceRawValue)")
+
+ace = .king
+print(ace.simpleDescription())
+
+ace = .seven
+print(ace.simpleDescription())
+
+
+print("\nEnumerations/enum---------------Ends----------------\n")
+
+/*
+* Structure || struct
+* creating instances is similar to the class
+* same as class but carried over by copying where classes are references
+*/
+
+print("\nStructures||struct-------------------Starts-----------------\n")
+
+
+struct Card {
+    var rank: Rank
+    var suit: Suit
+    func simpleDescription() -> String {
+        return "The \(rank.simpleDescription()) of \(suit.simpleDescription())"
+    }
+}
+let threeOfSpades = Card(rank: .three, suit: .spades)
+let threeOfSpadesDescription = threeOfSpades.simpleDescription()
+print("threeOfSpadesDescription : \(threeOfSpadesDescription)")
+
+
+print("\nStructure||struct----------------------Ends----------------\n")
+
+/*
+* Structure vs Class
+* Structures (also Enumerations) are value type. reference of reference are completely different
+* Classes are reference type, references of a reference are both same
+*/
+
+print("\nStructure-Vs-Class-Enum----------------------Starts----------------\n")
+
+struct TestStruct {
+    var a : Int
+    var b : Int
+
+    init (_ v1: Int, _ v2: Int) {
+        a = v1
+        b = v2
+    }
+}
+let testStruct1 = TestStruct(1, 2)
+print("testStruct1.a : \(testStruct1.a) and testStruct1.b : \(testStruct1.b)")
+
+// value type, 2 copies are different
+var testStruct2 = testStruct1
+testStruct2.a = 11
+testStruct2.b = 22
+print("testStruct2.a : \(testStruct2.a) and testStruct2.b : \(testStruct2.b)")
+print("testStruct1.a : \(testStruct1.a) and testStruct1.b : \(testStruct1.b)")
+
+
+class TestClass {
+    var x : Int
+    var y : Int
+
+    init (_ v1: Int, _ v2: Int) {
+        x = v1
+        y = v2
+    }
+}
+
+let testClass1 = TestClass(3, 4)
+print("testClass1.a : \(testClass1.x) and testClass1.b : \(testClass1.y)")
+
+// reference type, 2 copies are same
+var testClass2 = testClass1
+testClass2.x = 33
+testClass2.y = 44
+print("testClass2.x : \(testClass2.x) and testClass2.y : \(testClass2.y)")
+print("testClass1.x : \(testClass1.x) and testClass1.y : \(testClass1.y)")
+
+print("\nStructure-Vs-Class-Enum----------------------Ends----------------\n")

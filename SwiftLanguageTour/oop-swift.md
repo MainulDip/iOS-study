@@ -100,3 +100,7 @@ print("test.numberOfSides : \(test.numberOfSides)")
 ### Structures:
 
 ### Enumerations:
+An enumeration defines a common type for a group of related values. By these enumeration cases can specify associated values of any type to be stored along with each different case value.
+
+
+### Structure/Enumeration vs Class (value type vs reference type):
