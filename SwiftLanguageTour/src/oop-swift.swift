@@ -322,3 +322,39 @@ print("testClass2.x : \(testClass2.x) and testClass2.y : \(testClass2.y)")
 print("testClass1.x : \(testClass1.x) and testClass1.y : \(testClass1.y)")
 
 print("\nStructure-Vs-Class-Enum----------------------Ends----------------\n")
+
+/*
+* Protocols and Extensions
+* Interface in other programming languages
+* cannot instantiate a protocol by itself
+*/
+print("\nProtocol/Interface----------------------Starts----------------\n")
+
+    protocol ExampleProtocol {
+        var simpleDescription: String { get }
+        mutating func adjust()
+    }
+
+    class SimpleClass: ExampleProtocol {
+        var simpleDescription: String = "A very simple class."
+        var anotherProperty: Int = 69105
+        func adjust() {
+            simpleDescription += "  Now 100% adjusted."
+        }
+    }
+    var a = SimpleClass()
+    a.adjust()
+    let aDescription = a.simpleDescription
+
+    struct SimpleStructure: ExampleProtocol {
+        var simpleDescription: String = "A simple structure"
+        mutating func adjust() {
+            simpleDescription += " (adjusted)"
+        }
+    }
+    var b = SimpleStructure()
+    b.adjust()
+    let bDescription = b.simpleDescription
+
+
+print("\nProtocol/Interface----------------------Ends----------------\n")

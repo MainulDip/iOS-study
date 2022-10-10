@@ -104,3 +104,27 @@ An enumeration defines a common type for a group of related values. By these enu
 
 
 ### Structure/Enumeration vs Class (value type vs reference type):
+* value type vs reference type
+
+* structure needs "mutating" keyword before method name to change struct's property, but methods on a class can always modify the class so no need for mutating keyword.
+
+### Protocol (like Interface):
+A protocol defines a blueprint of methods, properties, and other requirements that suit a particular task or piece of functionality. The protocol can then be adopted by a class, structure, or enumeration to provide an actual implementation of those requirements. Any type that satisfies the requirements of a protocol is said to conform to that protocol.
+
+In addition to specifying requirements that conforming types must implement, you can extend a protocol to implement some of these requirements or to implement additional functionality that conforming types can take advantage of.
+
+```swift
+protocol FirstProtocol {
+    // protocol definition goes here
+}
+
+protocol SecondProtocol {
+    // protocol definition goes here
+}
+
+// Implementing protocol folows by coma after inheriting super classes (if any)
+
+class SomeClass: SomeSuperclassIfAny, FirstProtocol, SecondProtocol {
+    // class definition goes here
+}
+```
