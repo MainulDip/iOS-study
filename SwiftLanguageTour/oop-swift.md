@@ -164,3 +164,8 @@ extension Double {
 ```
 
 ### Properties In Depth:
+
+
+### Property Wrappers (@propertyWrapper):
+A property wrapper adds a layer of separation between code that manages how a property is stored and the code that defines a property. It helps to write the management code once (when defining the wrapper), and then reuse that management code by applying it to multiple properties.
+.......
