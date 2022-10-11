@@ -163,3 +163,4 @@ extension Double {
     // Prints "Three feet is 0.914399970739201 meters"
 ```
 
+### Properties In Depth:
