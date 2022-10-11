@@ -254,6 +254,7 @@ print("\nEnumerations/enum---------------Ends----------------\n")
 * Structure || struct
 * creating instances is similar to the class
 * same as class but carried over by copying where classes are references
+* automatically call initializer on declared public var/cons
 */
 
 print("\nStructures||struct-------------------Starts-----------------\n")
@@ -285,12 +286,12 @@ struct TestStruct {
     var a : Int
     var b : Int
 
-    init (_ v1: Int, _ v2: Int) {
-        a = v1
-        b = v2
-    }
+    // init (_ v1: Int, _ v2: Int) {
+    //     a = v1
+    //     b = v2
+    // }
 }
-let testStruct1 = TestStruct(1, 2)
+let testStruct1 = TestStruct(a: 1, b: 2)
 print("testStruct1.a : \(testStruct1.a) and testStruct1.b : \(testStruct1.b)")
 
 // value type, 2 copies are different
