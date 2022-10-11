@@ -163,5 +163,3 @@ extension Double {
     // Prints "Three feet is 0.914399970739201 meters"
 ```
 
-### Subscripts:
-Classes, structures, and enumerations can define subscripts, which are shortcuts for accessing the member elements of a collection, list, or sequence. 

@@ -163,3 +163,17 @@ assert(age >= 0, "A person's age can't be less than zero.")
 // In the implementation of a subscript...
 precondition(index > 0, "Index must be greater than zero.")
 ```
+
+### Properties
+
+* Stored Properties
+
+* lazy property:
+
+* computed property:
+
+* Read-Only Computed Properties:
+### Methods:
+
+### Subscripts:
+Classes, structures, and enumerations can define subscripts, which are shortcuts for accessing the member elements of a collection, list, or sequence. 
