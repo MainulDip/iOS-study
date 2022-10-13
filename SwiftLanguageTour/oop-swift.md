@@ -167,5 +167,78 @@ extension Double {
 
 
 ### Property Wrappers (@propertyWrapper):
-A property wrapper adds a layer of separation between code that manages how a property is stored and the code that defines a property. It helps to write the management code once (when defining the wrapper), and then reuse that management code by applying it to multiple properties.
-.......
+A property wrapper adds a layer of separation between code that manages how a property is stored and the code that defines a property. It helps to write the management code once (when defining the wrapper), and then reuse that management code by applying it to multiple properties. It's somewhat like delegated properties in kotlin.
+```swift
+@propertyWrapper
+struct TwelveOrLess {
+    private var number = 0
+    var wrappedValue: Int {
+        get { return number }
+        set { number = min(newValue, 12) }
+    }
+}
+
+struct SmallRectangle {
+    @TwelveOrLess var height: Int
+    @TwelveOrLess var width: Int
+}
+
+
+var rectangle = SmallRectangle()
+print(rectangle.height)
+// Prints "0"
+
+rectangle.height = 10
+print(rectangle.height)
+// Prints "10"
+
+rectangle.height = 24
+print(rectangle.height)
+// Prints "12"
+```
+
+Example: [property-wrappers.swift](./src/property-wrappers.swift)
+
+
+### Static / Type-Properties:
+Properties that belong to the type itself, not to any one instance of that type. There will only ever be one copy of these properties, no matter how many instances of that type you create. These kinds of properties are called type properties. 
+
+* Type properties are queried and set on the type, not on an instance of that type
+
+```swift
+/* 
+* The example below shows the syntax for stored and computed type properties and how to call them
+*/
+
+struct SomeStructure {
+    static var storedTypeProperty = "Some value."
+    static var computedTypeProperty: Int {
+        return 1
+    }
+}
+enum SomeEnumeration {
+    static var storedTypeProperty = "Some value."
+    static var computedTypeProperty: Int {
+        return 6
+    }
+}
+class SomeClass {
+    static var storedTypeProperty = "Some value."
+    static var computedTypeProperty: Int {
+        return 27
+    }
+    class var overrideableComputedTypeProperty: Int {
+        return 107
+    }
+}
+
+print(SomeStructure.storedTypeProperty)
+// Prints "Some value."
+SomeStructure.storedTypeProperty = "Another value."
+print(SomeStructure.storedTypeProperty)
+// Prints "Another value."
+print(SomeEnumeration.computedTypeProperty)
+// Prints "6"
+print(SomeClass.computedTypeProperty)
+// Prints "27"
+```
