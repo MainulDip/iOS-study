@@ -7,7 +7,7 @@ To make sure that instances don’t disappear while they’re still needed, ARC 
 To make this possible, whenever you assign a class instance to a property, constant, or variable, that property, constant, or variable makes a strong reference to the instance. The reference is called a “strong” reference because it keeps a firm hold on that instance, and doesn’t allow it to be deallocated for as long as that strong reference remain.
 
 * Strong Refs:
-Strong Ref can sometimes create mamory leack by not allowing ARC to deallocate. In the example below, making the instance nil do not deallocate the instance mamory because there are still strong reference between them through tanant and apartment.
+Strong Ref can sometimes create mamory leack by not allowing ARC to deallocate. In the example below, making the instance nil do not deallocate the instance mamory because there are still strong reference between them through tanant and apartment
 ```swift
 class Person {
     let name: String
