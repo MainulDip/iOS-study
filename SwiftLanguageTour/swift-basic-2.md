@@ -175,5 +175,5 @@ precondition(index > 0, "Index must be greater than zero.")
 * Read-Only Computed Properties:
 ### Methods:
 
-### Subscripts:
+### Subscripts
 Classes, structures, and enumerations can define subscripts, which are shortcuts for accessing the member elements of a collection, list, or sequence. 
