@@ -177,3 +177,20 @@ precondition(index > 0, "Index must be greater than zero.")
 
 ### Subscripts
 Classes, structures, and enumerations can define subscripts, which are shortcuts for accessing the member elements of a collection, list, or sequence. 
+
+```swift
+/*
+* Basic Subscripts
+* define in class/struct using "subscript (param: type) -> return-type { body }"
+* call on newInstance[value]
+*/
+
+struct TimesTable {
+    let multiplier: Int
+    subscript(index: Int) -> Int {
+        return multiplier * index
+    }
+}
+let threeTimesTable = TimesTable(multiplier: 3)
+print("seven times three is \(threeTimesTable[7])") // prints "seven times three is 21"
+```

@@ -52,6 +52,11 @@ fruits = ["Hello", "World!"]
 var occupations : [String: Float] = [:] // empty dictionary, have to provide type
 var favoriteGenres: Set = ["Rock", "Classical", "Hip hop"] // initializing set with Type: Set and array literal notation
 favoriteGenres = [] // deletes all the "set" elements using empty array notration, but it is still "set", not empty array
+
+//If you need an array that is preinitialized with a fixed number of default values, use the Array(repeating:count:) initializer.
+var digitCounts = Array(repeating: 0, count: 10)
+print(digitCounts)
+// Prints "[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]"
 ```
 
 ### Control Flow, conditionals, loop and nil:
