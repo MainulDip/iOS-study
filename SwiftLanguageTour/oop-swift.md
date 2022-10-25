@@ -242,3 +242,5 @@ print(SomeEnumeration.computedTypeProperty)
 print(SomeClass.computedTypeProperty)
 // Prints "27"
 ```
+
+### Generics:

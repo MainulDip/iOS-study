@@ -194,3 +194,6 @@ struct TimesTable {
 let threeTimesTable = TimesTable(multiplier: 3)
 print("seven times three is \(threeTimesTable[7])") // prints "seven times three is 21"
 ```
+
+
+### Generics:
