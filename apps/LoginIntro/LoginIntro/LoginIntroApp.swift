@@ -7,11 +7,17 @@
 
 import SwiftUI
 
+var isUserLoggedIn : Bool = true;
+
 @main
 struct LoginIntroApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if isUserLoggedIn {
+                MainView()
+            } else {
+                LoginUIView()
+            }
         }
     }
 }
