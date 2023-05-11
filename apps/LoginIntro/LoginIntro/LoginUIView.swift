@@ -16,7 +16,7 @@ struct LoginUIView: View {
         
         VStack (alignment: .center) {
         
-            Section (header: Text("Login Info") ) {
+            Section (header: Text("Login") ) {
                 
                 Form {
                     TextField("Email", text: $email)
