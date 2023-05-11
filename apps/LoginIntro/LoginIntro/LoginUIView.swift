@@ -16,7 +16,7 @@ struct LoginUIView: View {
         
         VStack (alignment: .center) {
         
-            Section (header: Text("Login Form") ) {
+            Section (header: Text("Login Info") ) {
                 
                 Form {
                     TextField("Email", text: $email)
@@ -27,15 +27,15 @@ struct LoginUIView: View {
             
             Section {
                 Button(action: {
-                    print("Loging Now")
+                    print("\(email) \(password)")
                 }) {
-                    Text("Button")
+                        Text("Button")
                 }
             }
             
             Spacer() // available ios 13.0 +
             
-        }.ignoresSafeArea()
+        }
     }
     
 // Centering Vertical
@@ -57,7 +57,7 @@ struct LoginUIView: View {
 //                                    .overlay(
 //                                        Text("My\nmultiline label")
 //                                            .multilineTextAlignment(.center)
-//                                            .font(.title)
+//                                            .font(.title) 1
 //                                            .foregroundColor(.white)
 //                                )
 //                            }
