@@ -56,14 +56,32 @@ struct LoginUIView: View {
                 
                 Section {
                     HStack {
-                        NavigationLink(
-                            destination: RegisterView(),
-                            label: {
-                                Spacer()
-                                Text("Register")
-                                    .foregroundColor(Color.blue)
-                                Spacer()
-                            })
+//                        NavigationLink(
+//                            destination: RegisterView(),
+//                            label: {
+//                                Spacer()
+//                                Text("Register")
+//                                    .foregroundColor(Color.blue)
+//                                Spacer()
+//                            }
+//                        )
+                        
+                        /***
+                         * Navigation Without Trailing Arrow
+                         */
+                        
+                        List {
+                            Spacer()
+                            Text("Register")
+                                .overlay(
+                                    NavigationLink(
+                                        destination: RegisterView()) {
+                                        EmptyView()
+                                    }
+                                )
+                                .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                            Spacer()
+                        }
                     }
                 }
             }
