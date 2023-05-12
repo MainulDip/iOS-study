@@ -14,29 +14,64 @@ struct LoginUIView: View {
     
     var body: some View {
         
-        VStack (alignment: .center) {
+        NavigationView {
         
-            Section (header: Text("Login") ) {
+            VStack (alignment: .center) {
+            
+            
+            HStack {
+                Spacer()
+                Text("Login")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.blue)
+                Spacer()
+
+            }
+            
+            Form {
                 
-                Form {
+                Section {
                     TextField("Email", text: $email)
                     SecureField("Password", text: $password)
                 }
-            }
-            
-            
-            Section {
-                Button(action: {
-                    print("\(email) \(password)")
-                }) {
-                        Text("Button")
+                
+                Section {
+                    HStack {
+                        Spacer()
+                        
+                        Button(action: { print("\(email) \(password)") }) {
+                            Text("Button")
+                                .fontWeight(.bold)
+                                .foregroundColor(Color.orange)
+                                .font(/*@START_MENU_TOKEN@*/.callout/*@END_MENU_TOKEN@*/)
+                            
+                            
+                        }
+                        
+                        Spacer()
+                    }
+                    
+                }
+                
+                Section {
+                    HStack {
+                        NavigationLink(
+                            destination: RegisterView(),
+                            label: {
+                                Spacer()
+                                Text("Register")
+                                    .foregroundColor(Color.blue)
+                                Spacer()
+                            })
+                    }
                 }
             }
             
-            Spacer() // available ios 13.0 +
-            
         }
     }
+        .navigationBarHidden(true)
+}
     
 // Centering Vertical
 //    var body: some View {

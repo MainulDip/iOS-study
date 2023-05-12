@@ -12,6 +12,7 @@
 		6914112A2A0B31CF00EAC6BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 691411292A0B31CF00EAC6BC /* Assets.xcassets */; };
 		6914112D2A0B31CF00EAC6BC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6914112C2A0B31CF00EAC6BC /* Preview Assets.xcassets */; };
 		691411362A0B335200EAC6BC /* LoginUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691411352A0B335200EAC6BC /* LoginUIView.swift */; };
+		69BA51EF2A0EB3730055EC17 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BA51EE2A0EB3730055EC17 /* RegisterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		6914112C2A0B31CF00EAC6BC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6914112E2A0B31CF00EAC6BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		691411352A0B335200EAC6BC /* LoginUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUIView.swift; sourceTree = "<group>"; };
+		69BA51EE2A0EB3730055EC17 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				6914112E2A0B31CF00EAC6BC /* Info.plist */,
 				6914112B2A0B31CF00EAC6BC /* Preview Content */,
 				691411352A0B335200EAC6BC /* LoginUIView.swift */,
+				69BA51EE2A0EB3730055EC17 /* RegisterView.swift */,
 			);
 			path = LoginIntro;
 			sourceTree = "<group>";
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				691411362A0B335200EAC6BC /* LoginUIView.swift in Sources */,
+				69BA51EF2A0EB3730055EC17 /* RegisterView.swift in Sources */,
 				691411282A0B31CD00EAC6BC /* MainView.swift in Sources */,
 				691411262A0B31CD00EAC6BC /* LoginIntroApp.swift in Sources */,
 			);
