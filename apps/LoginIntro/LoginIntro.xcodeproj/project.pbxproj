@@ -12,6 +12,9 @@
 		6914112A2A0B31CF00EAC6BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 691411292A0B31CF00EAC6BC /* Assets.xcassets */; };
 		6914112D2A0B31CF00EAC6BC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6914112C2A0B31CF00EAC6BC /* Preview Assets.xcassets */; };
 		691411362A0B335200EAC6BC /* LoginUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691411352A0B335200EAC6BC /* LoginUIView.swift */; };
+		69B9DFDB2A12AEED00DD1018 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B9DFDA2A12AEED00DD1018 /* SettingsView.swift */; };
+		69B9DFDF2A12AF0800DD1018 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B9DFDE2A12AF0800DD1018 /* ProfileView.swift */; };
+		69B9DFE22A12AF2400DD1018 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B9DFE12A12AF2400DD1018 /* DashboardView.swift */; };
 		69BA51EF2A0EB3730055EC17 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BA51EE2A0EB3730055EC17 /* RegisterView.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +26,9 @@
 		6914112C2A0B31CF00EAC6BC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6914112E2A0B31CF00EAC6BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		691411352A0B335200EAC6BC /* LoginUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUIView.swift; sourceTree = "<group>"; };
+		69B9DFDA2A12AEED00DD1018 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		69B9DFDE2A12AF0800DD1018 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		69B9DFE12A12AF2400DD1018 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		69BA51EE2A0EB3730055EC17 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -56,6 +62,7 @@
 		691411242A0B31CD00EAC6BC /* LoginIntro */ = {
 			isa = PBXGroup;
 			children = (
+				69B9DFD92A12AEA300DD1018 /* NavigationViews */,
 				691411252A0B31CD00EAC6BC /* LoginIntroApp.swift */,
 				691411272A0B31CD00EAC6BC /* MainView.swift */,
 				691411292A0B31CF00EAC6BC /* Assets.xcassets */,
@@ -73,6 +80,16 @@
 				6914112C2A0B31CF00EAC6BC /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		69B9DFD92A12AEA300DD1018 /* NavigationViews */ = {
+			isa = PBXGroup;
+			children = (
+				69B9DFDA2A12AEED00DD1018 /* SettingsView.swift */,
+				69B9DFDE2A12AF0800DD1018 /* ProfileView.swift */,
+				69B9DFE12A12AF2400DD1018 /* DashboardView.swift */,
+			);
+			path = NavigationViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,9 +161,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69B9DFDB2A12AEED00DD1018 /* SettingsView.swift in Sources */,
 				691411362A0B335200EAC6BC /* LoginUIView.swift in Sources */,
 				69BA51EF2A0EB3730055EC17 /* RegisterView.swift in Sources */,
+				69B9DFE22A12AF2400DD1018 /* DashboardView.swift in Sources */,
 				691411282A0B31CD00EAC6BC /* MainView.swift in Sources */,
+				69B9DFDF2A12AF0800DD1018 /* ProfileView.swift in Sources */,
 				691411262A0B31CD00EAC6BC /* LoginIntroApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

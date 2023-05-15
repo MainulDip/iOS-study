@@ -1,6 +1,6 @@
 import SwiftUI
 
-var isUserLoggedIn : Bool = false;
+var isUserLoggedIn : Bool = true;
 
 @main
 struct LoginIntroApp: App {
