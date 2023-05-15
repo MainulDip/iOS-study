@@ -1,10 +1,3 @@
-//
-//  LoginUIView.swift
-//  LoginIntro
-//
-//  Created by kaka beautha on 5/9/23.
-//
-
 import SwiftUI
 
 struct LoginUIView: View {
@@ -12,19 +5,29 @@ struct LoginUIView: View {
     @State var email: String = "";
     @State var password: String = "";
     
+    @State var goToMain: Bool = false;
+    
     var body: some View {
         
         NavigationView {
         
-            VStack (alignment: .center) {
+            VStack {
+                
+            NavigationLink(
+                destination: MainView(),
+                isActive: $goToMain,
+                label: {
+                    EmptyView()
+                })
             
             
             HStack {
                 Spacer()
-                Text("Login")
+                Text("Login Form")
                     .font(.title3)
                     .fontWeight(.bold)
                     .foregroundColor(Color.blue)
+                
                 Spacer()
 
             }
@@ -40,8 +43,13 @@ struct LoginUIView: View {
                     HStack {
                         Spacer()
                         
-                        Button(action: { print("\(email) \(password)") }) {
-                            Text("Button")
+                        Button(action: {
+                                
+                            print("\(email) \(password)")
+                            goToMain = true;
+                            
+                        }) {
+                            Text("Login")
                                 .fontWeight(.bold)
                                 .foregroundColor(Color.orange)
                                 .font(/*@START_MENU_TOKEN@*/.callout/*@END_MENU_TOKEN@*/)
@@ -52,10 +60,25 @@ struct LoginUIView: View {
                         Spacer()
                     }
                     
+                    HStack {
+                        List {
+                            Spacer()
+                            Text("Register")
+                                .overlay(
+                                    NavigationLink(
+                                        destination: RegisterView()) {
+                                        EmptyView();
+                                    }
+                                )
+                                .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                            Spacer()
+                        }
+                    }
+                    
                 }
                 
-                Section {
-                    HStack {
+//                Section {
+//                    HStack {
 //                        NavigationLink(
 //                            destination: RegisterView(),
 //                            label: {
@@ -65,29 +88,29 @@ struct LoginUIView: View {
 //                                Spacer()
 //                            }
 //                        )
-                        
-                        /***
-                         * Navigation Without Trailing Arrow
-                         */
-                        
-                        List {
-                            Spacer()
-                            Text("Register")
-                                .overlay(
-                                    NavigationLink(
-                                        destination: RegisterView()) {
-                                        EmptyView()
-                                    }
-                                )
-                                .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-                            Spacer()
-                        }
-                    }
-                }
+//
+//                        /***
+//                         * Navigation Without Trailing Arrow
+//                         */
+//
+//                        List {
+//                            Spacer()
+//                            Text("Register")
+//                                .overlay(
+//                                    NavigationLink(
+//                                        destination: RegisterView()) {
+//                                        EmptyView()
+//                                    }
+//                                )
+//                                .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+//                            Spacer()
+//                        }
+//                    }
+//                }
             }
             
         }
-    }
+        }
         .navigationBarHidden(true)
 }
     

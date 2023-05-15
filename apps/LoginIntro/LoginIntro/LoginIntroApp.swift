@@ -1,10 +1,3 @@
-//
-//  LoginIntroApp.swift
-//  LoginIntro
-//
-//  Created by kaka beautha on 5/9/23.
-//
-
 import SwiftUI
 
 var isUserLoggedIn : Bool = false;

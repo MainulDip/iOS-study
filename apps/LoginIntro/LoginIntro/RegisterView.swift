@@ -1,10 +1,3 @@
-//
-//  RegisterView.swift
-//  LoginIntro
-//
-//  Created by kaka beautha on 5/12/23.
-//
-
 import SwiftUI
 
 struct RegisterView: View {
