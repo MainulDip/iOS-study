@@ -35,3 +35,65 @@ func wash(_ vehicle: some Vehicle)  {
 }
 ```
 - CGFloat : 
+
+### SwiftUI Basics:
+- Starting Point: <ProjectName>App.swift is the starting point which is denoted by @main attribute before the struct name. The struct inherit App protocol.
+```swift
+import SwiftUI
+
+var isUserLoggedIn : Bool = true;
+
+@main // starting point
+struct LoginIntroApp: App { // inherit App protocol
+    var body: some Scene {
+        WindowGroup {
+            if isUserLoggedIn {
+                MainView()
+            } else {
+                LoginUIView()
+            }
+        }
+    }
+}
+```
+- Scene : protocol Scene acts as a container for a view hierarchy. It's lifecycle is managed by the system.
+- WindowGroup: It's a Scene that represents a group of identically structured windows or view hierarchy. It behaves differently on ios, macos and ipados. Each window created form this maintains independent state. 
+- Views : Views are placed inside body. ie: var body: some View { //views are placed here }
+    - Layout Views: VStack, HStack, ZStack, Lazy V/H Stacks, Spacer, etc.
+    - Control Views: Text, Label, Button, TabView, NavigationView/NavigationLink, Label, etc
+    - Paints Views: Angular/Linear/Radial Gradient
+    - Other Views: Image, Group, Capsule, Container Relative Shape, Empty View, Menu etc.
+- Icons : There are many system icons which can be listed/viewed using "SF Symbols" developer app (need to install it from apples's developer website). And can be inserted into views using : Image(systemName: "NameOfTheIcon")
+### Navigation:
+
+```swift
+import SwiftUI
+
+struct MainView: View {
+    var body: some View {
+        TabView(selection: Selection ) {
+            DashboardView().tabItem { Label(
+                title: { Text("Label") },
+                icon: { Image(systemName: "house.circle") })
+            }
+            ProfileView().tabItem { Label(
+                title: { Text("Label") },
+                icon: { Image(systemName: "person") })
+            }
+            SettingsView().tabItem {
+                Label(
+                    title: { Text("Label") },
+                    icon: { Image(systemName: "gear") })
+            }
+        }
+    }
+}
+```
+
+### TabView:
+
+
+### Swift Language Checklists:
+- Delegation: var body: some View {}
+- Lambda Syntax
+- Generics
