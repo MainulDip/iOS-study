@@ -67,6 +67,54 @@ struct LoginIntroApp: App { // inherit App protocol
 ### Navigation:
 
 ```swift
+
+@State var goToMain: Bool = false;
+
+var body: some View {
+    
+    NavigationView {
+    
+        VStack {
+
+            /**
+            * Navigate on state change
+            */
+                
+            NavigationLink(
+                destination: MainView(),
+                isActive: $goToMain,
+                label: {
+                    EmptyView()
+                }
+            )
+
+            /**
+            * Click Navigation
+            */
+                    
+            HStack {
+                    List {
+                        Spacer()
+                        Text("Register")
+                            .overlay(
+                                NavigationLink(
+                                    destination: RegisterView()) {
+                                    EmptyView();
+                                }
+                            )
+                            .foregroundColor(blue)
+                        Spacer()
+                    }
+            }
+                    
+        }
+    }
+    .navigationBarHidden(true)
+}
+```
+
+### TabView:
+```swift
 import SwiftUI
 
 struct MainView: View {
@@ -89,8 +137,6 @@ struct MainView: View {
     }
 }
 ```
-
-### TabView:
 
 
 ### Swift Language Checklists:
