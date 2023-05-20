@@ -3,5 +3,8 @@
 
 - Integrated Docs : Unique Feature. All the developer's docs can be found of the "help" section of xcode.
 
+### Major areas:
+- Left (cmd 0) | Right | Bottom (Debug Area) (shift + cmd + y)
+
 ### Shortcuts:
 - Build : cmd + r
