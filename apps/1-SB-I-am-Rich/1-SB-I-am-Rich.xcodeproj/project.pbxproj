@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		69162BFE2A19763900A767A3 /* appstore.png in Resources */ = {isa = PBXBuildFile; fileRef = 69162BFD2A19763900A767A3 /* appstore.png */; };
 		6977F0532A15256300582944 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6977F0522A15256300582944 /* AppDelegate.swift */; };
 		6977F0552A15256300582944 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6977F0542A15256300582944 /* SceneDelegate.swift */; };
 		6977F0572A15256300582944 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6977F0562A15256300582944 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		69162BFD2A19763900A767A3 /* appstore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appstore.png; sourceTree = "<group>"; };
 		6977F04F2A15256300582944 /* 1-SB-I-am-Rich.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "1-SB-I-am-Rich.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6977F0522A15256300582944 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6977F0542A15256300582944 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				6977F0582A15256300582944 /* Main.storyboard */,
 				6977F05B2A15256400582944 /* Assets.xcassets */,
 				6977F05D2A15256400582944 /* LaunchScreen.storyboard */,
+				69162BFD2A19763900A767A3 /* appstore.png */,
 				6977F0602A15256400582944 /* Info.plist */,
 			);
 			path = "1-SB-I-am-Rich";
@@ -125,6 +128,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6977F05F2A15256400582944 /* LaunchScreen.storyboard in Resources */,
+				69162BFE2A19763900A767A3 /* appstore.png in Resources */,
 				6977F05C2A15256400582944 /* Assets.xcassets in Resources */,
 				6977F05A2A15256300582944 /* Main.storyboard in Resources */,
 			);
