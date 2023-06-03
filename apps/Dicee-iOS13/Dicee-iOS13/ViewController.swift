@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var diceImageView1: UIImageView!
     @IBOutlet weak var diceImageView2: UIImageView!
     
@@ -22,7 +22,14 @@ class ViewController: UIViewController {
         diceImageView2.image = #imageLiteral(resourceName: "DiceTwo")
         diceImageView2.alpha = 0.4
     }
-
-
+    
+    @IBAction func rollButtonPressed(_ sender: Any) {
+        print("Button got tapped!!!!");
+        
+        
+        diceImageView1.image =  UIImage(imageLiteralResourceName: "DiceFour")
+        
+        diceImageView2.image =  UIImage(imageLiteralResourceName: "DiceThree")
+        
+    }
 }
-
