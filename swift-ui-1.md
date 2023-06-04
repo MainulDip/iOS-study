@@ -1,7 +1,7 @@
 ### iOS intro: 
 It's a jump start personalized guide to jump start iOS projects.
 
-### Basic Project Structure:
+### Basic Project Structures:
 * Directory:
     - ProjectName : Source file for the App
     - ProjectNameTests : Unit Tests

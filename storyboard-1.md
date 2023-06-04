@@ -46,4 +46,4 @@ diceImageView1.image =  UIImage(imageLiteralResourceName: "DiceSix")
 - snake_case : for scripting languages (python, js)
 - PascalCase : Classes, Interfaces, Structs, Namespaces
 
-###
+### np x++ or x-- or ++x or --x:

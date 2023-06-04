@@ -13,6 +13,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var diceImageView1: UIImageView!
     @IBOutlet weak var diceImageView2: UIImageView!
     
+    var images: [String] = ["DiceOne", "DiceTwo", "DiceThree", "DiceFour", "DiceFive", "DiceSix"];
+    
+    var leftDiceNumber = 1
+    var rightDiceNumber = 2
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -27,9 +32,13 @@ class ViewController: UIViewController {
         print("Button got tapped!!!!");
         
         
-        diceImageView1.image =  UIImage(imageLiteralResourceName: "DiceFour")
+        diceImageView1.image =  UIImage(imageLiteralResourceName: images[leftDiceNumber])
         
-        diceImageView2.image =  UIImage(imageLiteralResourceName: "DiceThree")
+        diceImageView2.image =  UIImage(imageLiteralResourceName: images[rightDiceNumber])
+        
+        
+        leftDiceNumber += 1;
+        rightDiceNumber += 1;
         
     }
 }
