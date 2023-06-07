@@ -49,7 +49,7 @@ diceImageView1.image =  UIImage(imageLiteralResourceName: "DiceSix")
 ### np x++ or x-- or ++x or --x:
 
 ### generating random numbers:
-Either use random number generator "Int.random(in: 0..uperLimit)" or use array.randomElement()
+Either use random number generator "Int.random(in: 0...uperLimit)" or use array.randomElement()
 ```swift
 import UIKit
 
