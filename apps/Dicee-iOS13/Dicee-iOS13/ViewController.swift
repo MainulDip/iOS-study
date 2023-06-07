@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var diceImageView1: UIImageView!
     @IBOutlet weak var diceImageView2: UIImageView!
     
-    var images: [String] = ["DiceOne", "DiceTwo", "DiceThree", "DiceFour", "DiceFive", "DiceSix"];
+    let images: [String] = ["DiceOne", "DiceTwo", "DiceThree", "DiceFour", "DiceFive", "DiceSix"];
     var leftDiceNumber: Int?
     var rightDiceNumber: Int?
     
@@ -34,12 +34,12 @@ class ViewController: UIViewController {
         rightDiceNumber = Int.random(in: 0..<self.images.count)
         
         print("Button got tapped!!!!");
-        print("Dices images cound: \(images.count)")
+        print("Dices images count: \(images.count)")
         
         
         diceImageView1.image =  UIImage(imageLiteralResourceName: images[leftDiceNumber!])
         
-        diceImageView2.image =  UIImage(imageLiteralResourceName: images[rightDiceNumber!])
+        diceImageView2.image =  UIImage(imageLiteralResourceName: images.randomElement()!) // array.randomElement() is used instade of reandom number generator
         
         
 //        leftDiceNumber += 1;

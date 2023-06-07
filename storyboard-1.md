@@ -47,3 +47,29 @@ diceImageView1.image =  UIImage(imageLiteralResourceName: "DiceSix")
 - PascalCase : Classes, Interfaces, Structs, Namespaces
 
 ### np x++ or x-- or ++x or --x:
+
+### generating random numbers:
+Either use random number generator "Int.random(in: 0..uperLimit)" or use array.randomElement()
+```swift
+import UIKit
+
+class ViewController: UIViewController { 
+
+    var images: [String] = ["DiceOne", "DiceTwo", "DiceThree", "DiceFour", "DiceFive", "DiceSix"]; // swift array/collection
+    var leftDiceNumber: Int? // swift optional/nullable
+    var rightDiceNumber: Int? // optional/nullable
+
+    @IBAction func somefunction(_ sender: Any) { 
+        leftDiceNumber = Int.random(in: 0..<images.count)
+        rightDiceNumber = Int.random(in: 0..<self.images.count) // self is optional/implicit but can be explicit
+
+        print("Dices images count: \(images.count)")
+
+        diceImageView1.image =  UIImage(imageLiteralResourceName: images[leftDiceNumber!])
+
+        // diceImageView2.image =  UIImage(imageLiteralResourceName: images[rightDiceNumber!])
+
+        diceImageView2.image =  UIImage(imageLiteralResourceName: images.randomElement()!) // array.randomElement() is used instade of reandom number generator
+    }
+}
+```
