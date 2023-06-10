@@ -9,6 +9,6 @@
 ### Shortcuts:
 - Build : cmd + r
 
-### task:
+### task
 - clone view : alt/option drag
 - view to IBOutlet Connection : ctrl + drag the arrow

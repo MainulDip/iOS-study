@@ -73,3 +73,6 @@ class ViewController: UIViewController {
     }
 }
 ```
+
+### Auto layout:
+Constraints are used to provide device agnostic responsive layout option. Besides setting the superview option, sometimes the view itself needs to little tweaking inside it's size inspectors. 
