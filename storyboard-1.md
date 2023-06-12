@@ -80,3 +80,5 @@ Constraints are used to provide device agnostic responsive layout option. Beside
 - UIView / View : Container for other views to constrain multiple views easily using editor -> embed in -> view/stack etc. There is a quick embed in option at the bottom right corner of the storyboard visual builder window.
 - Stack View : Container View Horizontal and Vertical Stack View arrangements
 - Give attention to constraint to super view or safe area
+
+* See Calculator and Dicee App for examples.
