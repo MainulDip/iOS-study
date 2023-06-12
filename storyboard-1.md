@@ -82,3 +82,6 @@ Constraints are used to provide device agnostic responsive layout option. Beside
 - Give attention to constraint to super view or safe area
 
 * See Calculator and Dicee App for examples.
+
+### IBAction to multiple UI Views:
+A single IBAction can be triggered by multiple UI Views/Elements.
