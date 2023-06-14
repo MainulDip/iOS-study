@@ -85,3 +85,38 @@ Constraints are used to provide device agnostic responsive layout option. Beside
 
 ### IBAction to multiple UI Views:
 A single IBAction can be triggered by multiple UI Views/Elements.
+
+### Playing Sound:
+```swift
+import UIKit
+import AVFoundation
+
+class ViewController: UIViewController {
+
+    var player: AVAudioPlayer!
+    
+    func playSound(sn fileName: String?) {
+        
+        // nil check will bypass all the optional checking afterwards
+        if (fileName == nil) {
+            return
+        }
+        
+        let url = Bundle.main.url(forResource: fileName, withExtension: "wav")
+        player = try! AVAudioPlayer(contentsOf: url!)
+//        player.play()
+        
+        print("Playing Sound Of \(fileName!)")
+        
+    }
+    
+    
+    @IBAction func keyPressed(_ sender: UIButton) {
+        let soundName: String? = sender.titleLabel?.text
+        playSound(sn : soundName)
+        print( soundName ?? "No title label has been set yet"); // providing default value if soundName is nil
+    }
+    
+    
+}
+```

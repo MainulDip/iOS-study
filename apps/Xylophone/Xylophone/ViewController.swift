@@ -36,10 +36,17 @@ class ViewController: UIViewController {
     //        }
     //    }
     
-    func playSound() {
-        let url = Bundle.main.url(forResource: "C", withExtension: "wav")
+    func playSound(sn fileName: String?) {
+        
+        if (fileName == nil) {
+            return
+        }
+        
+        let url = Bundle.main.url(forResource: fileName, withExtension: "wav")
         player = try! AVAudioPlayer(contentsOf: url!)
-        player.play()
+//        player.play()
+        
+        print("Playing Sound Of \(fileName!)")
         
     }
     
@@ -50,7 +57,9 @@ class ViewController: UIViewController {
     
     
     @IBAction func keyPressed(_ sender: UIButton) {
-        playSound()
+        let soundName: String? = sender.titleLabel?.text
+        playSound(sn : soundName)
+        print( soundName ?? "No title lable has been set yet");
     }
     
     
