@@ -103,6 +103,7 @@ class ViewController: UIViewController {
         }
         
         let url = Bundle.main.url(forResource: fileName, withExtension: "wav")
+        
         player = try! AVAudioPlayer(contentsOf: url!)
 //        player.play()
         
@@ -116,7 +117,5 @@ class ViewController: UIViewController {
         playSound(sn : soundName)
         print( soundName ?? "No title label has been set yet"); // providing default value if soundName is nil
     }
-    
-    
 }
 ```
