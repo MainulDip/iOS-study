@@ -74,7 +74,7 @@ class ViewController: UIViewController {
 }
 ```
 
-### Auto layouts
+### Auto layouts:
 Constraints are used to provide device agnostic responsive layout option. Besides setting the superview option, sometimes the view itself needs to little tweaking inside it's size inspectors.
 - Embeding one or multiple views easily using 
 - UIView / View : Container for other views to constrain multiple views easily using editor -> embed in -> view/stack etc. There is a quick embed in option at the bottom right corner of the storyboard visual builder window.
