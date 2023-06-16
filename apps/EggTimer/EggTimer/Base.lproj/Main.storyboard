@@ -121,6 +121,19 @@
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nJN-th-c5K" userLabel="Timer View">
                                         <rect key="frame" x="0.0" y="532" width="361" height="227"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="00:00:00" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fiq-yb-AYg">
+                                                <rect key="frame" x="0.0" y="0.0" width="361" height="227"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="46"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="fiq-yb-AYg" secondAttribute="bottom" id="0yD-mb-RUS"/>
+                                            <constraint firstAttribute="trailing" secondItem="fiq-yb-AYg" secondAttribute="trailing" id="GgX-dc-800"/>
+                                            <constraint firstItem="fiq-yb-AYg" firstAttribute="top" secondItem="nJN-th-c5K" secondAttribute="top" id="cBa-ad-UF9"/>
+                                            <constraint firstItem="fiq-yb-AYg" firstAttribute="leading" secondItem="nJN-th-c5K" secondAttribute="leading" id="mh0-fd-STy"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                             </stackView>
@@ -134,10 +147,13 @@
                             <constraint firstAttribute="trailingMargin" secondItem="wI6-ag-afn" secondAttribute="trailing" id="dky-ZA-Z3J"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="countDown" destination="fiq-yb-AYg" id="wVa-9n-wgT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
+            <point key="canvasLocation" x="135.1145038167939" y="137.32394366197184"/>
         </scene>
     </scenes>
     <resources>

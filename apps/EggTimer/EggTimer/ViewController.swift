@@ -13,14 +13,13 @@ class ViewController: UIViewController {
     let hardNess: [String: Float] = ["Soft":0.1,"Medium":0.2,"Hard": 0.3]
     
     var setTimeDuration: Float?
-    var counter: Float = 0;
+    var counting: Int = 0;
     var timer = Timer()
+    
+    @IBOutlet weak var countDown: UITextField!
     
     @IBAction func cookingType(_ sender: UIButton) {
         let buttonName = sender.titleLabel!.text
-        
-        
-        
         
         switch buttonName {
         case "Soft" :
@@ -36,33 +35,30 @@ class ViewController: UIViewController {
 //            print("Default Case")
             setTimeDuration = 0
         }
-        	
-//        func sayhi() {
-            timer.invalidate() // just in case this button is tapped multiple times
-
-                    // start the timer
-                    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(callBack), userInfo: nil, repeats: true)
-//        }
         
+        // converting setTimeDuration float into seconds
+        let setTimeMinToSec = setTimeDuration!.rounded(.towardZero) / 60
         
-//        print(setTimeDuration!, sayhi())
-//        sayhi()
+        let setTimeSec = setTimeDuration!.truncatingRemainder(dividingBy: 60) * 100
+        setTimeDuration = setTimeMinToSec + setTimeSec
+        counting = Int(setTimeDuration!)
+        
+        timer.invalidate() // start fresh
+        
+        // start the timer
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(callBack), userInfo: nil, repeats: true)
     }
     
     @objc func callBack () {
         
-        print(Int(counter))
-        
-        if (counter >= setTimeDuration! * 60) {
+        if (counting <= 0) {
             timer.invalidate()
             print("Done")
         }
         
-        // Task
-        // Convert decima into secnds
-        // count reverse order on the setTimeDuration -= 1 and stop at 0
-        
-        counter += 1
+        print("\(counting / 3600):\(counting / 60 % 60):\(counting % 60)")
+        countDown.text = "\(counting / 3600):\(counting / 60 % 60):\(counting % 60)"
+        counting -= 1
     }
     
 }
