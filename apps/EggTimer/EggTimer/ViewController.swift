@@ -14,11 +14,17 @@ class ViewController: UIViewController {
     
     var setTimeDuration: Float?
     var counting: Int = 0;
+    var progress: Float = 0;
     var timer = Timer()
     
     @IBOutlet weak var countDown: UITextField!
+    @IBOutlet weak var cookingProgress: UIProgressView!
     
     @IBAction func cookingType(_ sender: UIButton) {
+        
+        cookingProgress.progress = 0
+        progress = 0
+        
         let buttonName = sender.titleLabel!.text
         
         switch buttonName {
@@ -51,13 +57,18 @@ class ViewController: UIViewController {
     
     @objc func callBack () {
         
-        if (counting <= 0) {
-            timer.invalidate()
+        if (counting < 0) {
+            countDown.text = "Done Cooking"
             print("Done")
+            cookingProgress.progress = 1
+            timer.invalidate()
+            return
         }
         
         print("\(counting / 3600):\(counting / 60 % 60):\(counting % 60)")
         countDown.text = "\(counting / 3600):\(counting / 60 % 60):\(counting % 60)"
+        cookingProgress.progress = progress / setTimeDuration!
+        progress += 1
         counting -= 1
     }
     
