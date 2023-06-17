@@ -14,6 +14,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var examProgress: UIProgressView!
     @IBOutlet weak var btnTrue: UIButton!
     @IBOutlet weak var btnFalse: UIButton!
+    
+    
+    // Questions Storage
+//    var questions: [[String, Bool]] = [["1+2=3", true]]
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
