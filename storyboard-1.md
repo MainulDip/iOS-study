@@ -120,4 +120,4 @@ class ViewController: UIViewController {
 }
 ```
 
-### @objc func :
+### @objc func
