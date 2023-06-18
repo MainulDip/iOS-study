@@ -11,6 +11,10 @@ struct FixedLengthRange {
     let length: Int = 7 // though it is const, if not set/assaigned with value, can be set using init block
     var someVar: Int? // possible nil type is also a initial value
     private var sth: Int
+    // Getting the private property using public computed property
+    var sthGet: Int {
+        sth
+    }
     lazy var callMeLater: Int = Int() // lazy properties must have an initializer, this will only be called when accessed only
     init(_ a: Int){
         firstValue = a
@@ -23,6 +27,7 @@ print("\(rangeOfThreeItems.firstValue) \(rangeOfThreeItems.length)")
 print(rangeOfThreeItems.callMeLater)
 rangeOfThreeItems.callMeLater = 77
 print(rangeOfThreeItems.callMeLater)
+print("rangeOfThreeItems.sthGet = \(rangeOfThreeItems.sthGet)")
 
 print("\nStored-Lazy-Properties-----------------------------Ends-----------------------------\n")
 
@@ -32,6 +37,7 @@ print("\nStored-Lazy-Properties-----------------------------Ends----------------
 * by defining custom getter and setter
 * A computed property with a getter but no setter is known as a read-only computed property.
 * can simplify the declaration of a read-only computed property by removing the get keyword and its braces
+* can be used to access the private member's value
 */
 
 print("\nComputed-Properties-----------------------------Starts-----------------------------\n")

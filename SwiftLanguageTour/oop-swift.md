@@ -24,6 +24,41 @@ struct PenPalRecord {
 
 var myRecord = try JSONDecoder().decode(PenPalRecord.self, from: jsonResponse)
 ```
+### Class vs Structure Example :
+```swift
+class StudentClass {
+   var name: String
+   var grade: Int
+   init(name: String, grade: Int) {
+      self.name = name
+      self.grade = grade
+   }
+}
+let student1 = StudentClass(name: "Ramesh Chandra", grade: 9)
+
+let student2 = student1
+student2.name = "Ramesh Kant" // this will also make the student1 name "Ramesh Kant", as classes are references based
+print("student1 name: \(student1.name)")
+print("student2 name: \(student2.name)")
+
+struct StudentStruct {
+   var name: String
+   var grade: Int
+}
+let student3 = StudentStruct(name: "Anish Sharma", grade: 8)
+var student4 = student3
+student4.name = "Anish Gupta" // this will not change the student3 name, as Structures are value based
+print("student3 name: \(student3.name)")
+print("student4 name: \(student4.name)")
+```
+Output:
+student1 name: Ramesh Kant
+student2 name: Ramesh Kant
+student3 name: Anish Sharma
+student4 name: Anish Gupta
+
+
+Note: changing value of a classes form a referenced class will also change the referenced class's value. Structure will keep the value separate from referenced structures.
 
 
 ### Object, Classes and Inheritances :
