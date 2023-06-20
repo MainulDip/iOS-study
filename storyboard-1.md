@@ -121,3 +121,36 @@ class ViewController: UIViewController {
 ```
 
 ### @objc func :
+### mutating || mutating func :
+To be able to change a struct's property (within the struct) form a function, the function needs to be prefixed with the mutating keyword.
+```swift
+struct QuestionStore {
+
+    var currentQuestion = 0
+
+    // this function is changing the currentQuestion property's value, so it must prefixed with mutating keyword
+    mutating func getNextQuestion() -> Int {
+        currentQuestion += 1
+        return currentQuestion
+    }
+}
+```
+
+```swift
+struct baseStruct {
+    mutating func getNextQuestion() -> Int
+}
+struct QuestionStore : baseStruct {
+
+    var currentQuestion = 0
+
+    // this function is changing the currentQuestion property's value, so it must prefixed with mutating keyword
+    override func getNextQuestion() -> Int {
+        currentQuestion += 1
+        return currentQuestion
+    }
+}
+
+var qs = QuestionStore()
+print(qs.getNextQuestion(), qs.getNextQuestion())
+```

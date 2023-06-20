@@ -46,9 +46,13 @@ class ViewController: UIViewController {
         let btn = sender.titleLabel?.text
         
         
+        // check if answer is correct and get the boolean result
+        let isAnswerCorrect: Bool = questionStore.checkAnswer(btn!)
+        
+        
         
         // Check if anser is correct
-        if (btn == questionAns){
+        if isAnswerCorrect {
             print("Answer is corect")
             sender.backgroundColor = UIColor.green
         } else {
@@ -66,16 +70,14 @@ class ViewController: UIViewController {
 //            nextQuestion()
         }
         
-        timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(nextQuestion), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(updateUI), userInfo: nil, repeats: false)
     }
     
-    @objc func nextQuestion() {
-        currentQuestion += 1
-        print(currentQuestion, questions.count, (Float(currentQuestion) / Float(questions.count)))
-        if (currentQuestion > (questions.count - 1)) {
-            currentQuestion = 0
-            print("called2")
-        }
+    @objc func updateUI() {
+        
+        // point next question and update ui
+        let nextQuestion: Int = questionStore.getNextQuestion()
+        
         qText.text = questions[currentQuestion].text
         examProgress.progress = Float(currentQuestion) / Float(questions.count - 1)
         btnTrue.backgroundColor = UIColor.clear

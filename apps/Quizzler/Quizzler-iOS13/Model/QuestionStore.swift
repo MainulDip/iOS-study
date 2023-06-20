@@ -24,4 +24,18 @@ struct QuestionStore {
     ]
     
     var currentQuestion = 0
+    
+    func checkAnswer(_ submittedBtn: String) -> Bool {
+        questions[currentQuestion].answer == submittedBtn ? true : false ;
+    }
+    
+    mutating func getNextQuestion() -> Int {
+        currentQuestion += 1
+        print(currentQuestion, questions.count, (Float(currentQuestion) / Float(questions.count)))
+        if (currentQuestion > (questions.count - 1)) {
+            currentQuestion = 0
+            print("called2")
+        }
+        return currentQuestion
+    }
 }
