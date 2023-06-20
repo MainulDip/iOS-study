@@ -13,5 +13,5 @@
 - clone view : alt/option drag
 - view to IBOutlet Connection : ctrl + drag the arrow
 
-### Code Indentations and butification:
+### Code Indentations and beautification:
 To refactor the code indentation (beatify/pretty), xcode requires you to select the code block and then editor -> Structure -> Re-indent 

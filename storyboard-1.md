@@ -136,16 +136,19 @@ struct QuestionStore {
 }
 ```
 
+Note: if a protocol prefixes a method with mutating keyword, inherited class's method does not need to be prefixed with it. Like "class ViewController: UIViewController{}" in ios
 ```swift
-struct baseStruct {
+protocol baseProtocol {
+    // if protocol states the mutating keyword, inherited method does not need to be prefixed with mutating
     mutating func getNextQuestion() -> Int
 }
-struct QuestionStore : baseStruct {
+
+class QuestionStore : baseProtocol {
 
     var currentQuestion = 0
 
-    // this function is changing the currentQuestion property's value, so it must prefixed with mutating keyword
-    override func getNextQuestion() -> Int {
+    // Inherited method inside class does not need the mutating keyword
+    func getNextQuestion() -> Int {
         currentQuestion += 1
         return currentQuestion
     }
@@ -153,4 +156,6 @@ struct QuestionStore : baseStruct {
 
 var qs = QuestionStore()
 print(qs.getNextQuestion(), qs.getNextQuestion())
+
+// prints => 1 2
 ```
