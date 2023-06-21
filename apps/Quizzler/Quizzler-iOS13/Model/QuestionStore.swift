@@ -24,9 +24,17 @@ struct QuestionStore {
     ]
     
     var currentQuestion = 0
+    var score = 0
     
-    func checkAnswer(_ submittedBtn: String) -> Bool {
-        questions[currentQuestion].answer == submittedBtn ? true : false ;
+    mutating func checkAnswer(_ submittedBtn: String) -> Bool {
+//        questions[currentQuestion].answer == submittedBtn ? true : false ;
+        if (questions[currentQuestion].answer == submittedBtn) {
+            // update score
+            score += 1
+            return true
+        } else {
+            return false
+        }
     }
     
     mutating func getNextQuestion() -> Int {
@@ -34,6 +42,9 @@ struct QuestionStore {
         print(currentQuestion, questions.count, (Float(currentQuestion) / Float(questions.count)))
         if (currentQuestion > (questions.count - 1)) {
             currentQuestion = 0
+            
+            // also set score to 0
+            score = 0
             print("called2")
         }
         return currentQuestion

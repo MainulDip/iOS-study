@@ -14,8 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var examProgress: UIProgressView!
     @IBOutlet weak var btnTrue: UIButton!
     @IBOutlet weak var btnFalse: UIButton!
-    
-    
+    @IBOutlet weak var scoreField: UITextField!
+        
     private var questionStore = QuestionStore()
     
     // computed properties
@@ -77,12 +77,19 @@ class ViewController: UIViewController {
         
         // point next question and update ui
         let nextQuestion: Int = questionStore.getNextQuestion()
+        print(nextQuestion)
         
         qText.text = questions[currentQuestion].text
+        
+        // Update Progress
         examProgress.progress = Float(currentQuestion) / Float(questions.count - 1)
+        
+        // Update UI to reflect right or wrong answer
         btnTrue.backgroundColor = UIColor.clear
         btnFalse.backgroundColor = UIColor.clear
         
+        // Update Score
+        scoreField.text = String(questionStore.score)
         
     }
     
