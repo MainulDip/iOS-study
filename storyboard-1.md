@@ -159,7 +159,7 @@ print(qs.getNextQuestion(), qs.getNextQuestion())
 
 // prints => 1 2
 ```
-### Float's N number of Decimal point:
+### Float's N number of Digits after the Decimal point:
 ```swift
 let floatNumber = 3.1416
 let twoDecimalPoint: String = String(format: "%.2f", floatNumber)

@@ -9,6 +9,8 @@ let myConstant: String = "CONSTANT"
 var myVariable = 42
 let typeConversion = String(myVariable)
 var optionalType : String? = "Some Values"
+let floatN = 3.1416;
+let twoDecimalPointFloat = String(format: "%.1f", floatN)
 
 
 // Multiple assaignment
