@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     
     @IBAction func sliderWeightChange(_ sender: UISlider) {
         print(sender.value)
-//        valueWeight.text = String(Int(sender.value))
+        valueWeight.text = "\(String(format: "%.0f",Float(sender.value)))Kg"
     }
 }
 
