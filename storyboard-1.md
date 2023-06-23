@@ -171,10 +171,20 @@ print(twoDecimalPoint) // 3.14
 - Struct can only inherit protocol, a struct cannot inherit any struct or class.
 - If class properties are left empty (no value assigned), init method is required. Struct's properties can be empty. 
 - Classes are reference based and Structs are value based. A copied version of a class object is always in a reference with the base class. Chaiging either's property will reflect another. Where structs can be copy and both will be hold their values separately.
-- Structs need "mutating" keyword before a function if that function changes any struct/self properties.
+- Structs need "mutating" keyword before a function if that function changes any struct/self properties. As Structs are Immutable.
 - Class method/function does not need mutating keyword
 
 ### NSObject (Next Steps) and ios inheritances:
 Base class for ios. All classes inherit from this class. Steeve Jobs started this when he was kicked off from the Apple. Its a generic class (which describe general things, not specific), at last inheritance ends up being more specific, Like UIButton is very specific class describing Button specific things rather than being general or agnostic.
 
 EX: UIButton <= UIControl <= UIView <= UIResponder <= NSObject
+
+### UIKit:
+Everything that starts with UI (UIButton, UILable, etc) are coming from UIKit.
+
+### CG | CoreGraphics:
+- CGRect : Core Graphics Rectangle
+### Navigation | Controller to Controller :
+```swift
+// initialize the controller and call self.present with the controller as one of its parameter.
+```

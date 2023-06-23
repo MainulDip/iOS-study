@@ -12,6 +12,8 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var valueHeight: UILabel!
     @IBOutlet weak var valueWeight: UILabel!
+    @IBOutlet weak var sliderHeight: UISlider!
+    @IBOutlet weak var sliderWidth: UISlider!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,14 @@ class ViewController: UIViewController {
     @IBAction func sliderWeightChange(_ sender: UISlider) {
         print(sender.value)
         valueWeight.text = "\(String(format: "%.0f",Float(sender.value)))Kg"
+    }
+    @IBAction func calculateBtn(_ sender: UIButton) {
+        // calcuate the BMI value and send it to the SecondViewController to display
+        let bmi = sliderWidth.value / pow(sliderHeight.value, 2)
+        
+        let secondViewController = SecondViewController()
+        
+        self.present(secondViewController, animated: true)
     }
 }
 
