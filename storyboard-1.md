@@ -188,3 +188,39 @@ Everything that starts with UI (UIButton, UILable, etc) are coming from UIKit.
 ```swift
 // initialize the controller and call self.present with the controller as one of its parameter.
 ```
+### Creating View on the fly by code Without Storyboard/GUI:
+```swift
+import UIKit
+
+class SecondViewController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // creating view programaticaly
+        
+        // view is the parent element of all other views that comes with UIViewController
+        view.backgroundColor = .blue
+        
+        let lable = UILabel()
+        lable.text = "Second View Controller lable"
+        // because textColor: UIColor! { get set }, we can write only .white instade of full UIColor.white
+        lable.textColor = .white
+        lable.frame = CGRect(x: 0, y: 0, width: 100, height: 67)
+        
+        // add the newly created lable view inside the container parent view
+        view.addSubview(lable)
+    }
+}
+```
+### Type as! Type || Down Casting:
+### Optional Unwrapping, Optional Binding, Nil Coalescing Operations (??):
+
+### Optional Struct and Optional Chaining:
+
+### tasks:
+- navigation using segway, cocoa touch and back navigation
+- sending parameters to the navigated view controller using segway prepare
+- convert to MVC
+- Implement background color change of the second screen based on BMI result
+- Give advice based-on BMI

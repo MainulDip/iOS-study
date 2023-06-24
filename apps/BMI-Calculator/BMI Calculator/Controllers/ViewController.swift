@@ -38,6 +38,9 @@ class ViewController: UIViewController {
         let secondViewController = SecondViewController()
         
         self.present(secondViewController, animated: true)
+        
+        // bmi : under weight < 18.5 || Over wight > 24.9
+        let color = UIColor.init(cgColor: )
     }
 }
 

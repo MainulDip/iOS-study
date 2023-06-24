@@ -12,7 +12,6 @@ class SecondViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("ViewDidLoad for SecondViewController")
         
         // creating view programaticaly
         
@@ -21,8 +20,11 @@ class SecondViewController: UIViewController {
         
         let lable = UILabel()
         lable.text = "Second View Controller lable"
+        // because textColor: UIColor! { get set }, we can write only .white instade of full UIColor.white
+        lable.textColor = .white
         lable.frame = CGRect(x: 0, y: 0, width: 100, height: 67)
         
+        // add the newly created lable view inside the container parent view
         view.addSubview(lable)
     }
 }
