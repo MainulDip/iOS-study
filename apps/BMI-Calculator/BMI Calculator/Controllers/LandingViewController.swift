@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LandingViewController: UIViewController {
 
     @IBOutlet weak var valueHeight: UILabel!
     @IBOutlet weak var valueWeight: UILabel!
@@ -35,12 +35,16 @@ class ViewController: UIViewController {
         // calcuate the BMI value and send it to the SecondViewController to display
         let bmi = sliderWidth.value / pow(sliderHeight.value, 2)
         
-        let secondViewController = SecondViewController()
+//        let secondViewController = SecondViewController()
         
-        self.present(secondViewController, animated: true)
+//        self.present(secondViewController, animated: true)
+        
+        // navigation using storyboard, cocoa touch viewController and segue
+//        let resultViewController = ResultViewController()
+        self.performSegue(withIdentifier: "navigateToResult", sender: self)
         
         // bmi : under weight < 18.5 || Over wight > 24.9
-        let color = UIColor.init(cgColor: )
+//        let color = UIColor.init(cgColor: )
     }
 }
 
