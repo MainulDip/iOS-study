@@ -15,6 +15,9 @@ class LandingViewController: UIViewController {
     @IBOutlet weak var sliderHeight: UISlider!
     @IBOutlet weak var sliderWidth: UISlider!
     
+    
+    var calulatedBMI: Float = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -33,7 +36,7 @@ class LandingViewController: UIViewController {
     }
     @IBAction func calculateBtn(_ sender: UIButton) {
         // calcuate the BMI value and send it to the SecondViewController to display
-        let bmi = sliderWidth.value / pow(sliderHeight.value, 2)
+        calulatedBMI = sliderWidth.value / pow(sliderHeight.value, 2)
         
 //        let secondViewController = SecondViewController()
         
@@ -46,5 +49,16 @@ class LandingViewController: UIViewController {
         // bmi : under weight < 18.5 || Over wight > 24.9
 //        let color = UIColor.init(cgColor: )
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        let resultViewController: ResultViewController = segue.destination as! ResultViewController
+        // Pass the selected object to the new view controller.
+        resultViewController.bmiScores = calulatedBMI
+    }
+    
+    // move all the calculation logic to model
+    // create a model for BMI
+    // create BMI Advice and calculation logic in same model
 }
 

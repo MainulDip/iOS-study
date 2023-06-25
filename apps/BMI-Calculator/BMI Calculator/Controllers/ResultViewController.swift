@@ -9,11 +9,14 @@
 import UIKit
 
 class ResultViewController: UIViewController {
+    
+    var bmiScores: Float = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        print(bmiScores, "From ResultViewController")
     }
     
 
