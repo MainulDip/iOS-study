@@ -218,10 +218,27 @@ class SecondViewController: UIViewController {
 - The newly created viewcontroller class name needs to be supplied inside storyboard's targeted scene's identity inspectory's class properties name.
 - Then to create a navigation direction a segue need to be created by holding ctrl and dragging a connection handle form Storyboard's view controller to view controller.
 - After creating the segue connection, the segue connection itseft needs an identifire which will be used to perform navigation suing self.performSegue form a ViewController class.
-### Type as! Type || Down Casting:
+### DownCasting | Forced DownCasting | Type as! Type:
+If a class is inheriting form a superClass, we can treat the class as the superClass elsewhere in our application by DownCasing.
+```swift
+// like segue context
+// ex : class CustomViewController : UIViewController {...}
+let customViewController = method.thatReturnUIViewController as! CustomViewController // forced DownCasting as the custom class
+// send values as class parameter or something else
+cutomViewController.props = newValue
+``` 
 ### Optional Unwrapping, Optional Binding, Nil Coalescing Operations (??):
+- Optional Unwrapping: optional!
+- Optional Binding : if let safeOptional = optional { do something with safeOptional if it is really not nil }
+- Nil Coalescing Operator : return optional ?? "some other value if optional is nil"
 
 ### Optional Struct and Optional Chaining:
+Anything can be optional. Structs are treated as a Type, it can be optional too.
+```swift
+struct SomeStruct {...}
+let struct: SomeStruct?
+print("\(struct?.prop ?? "default value")")
+```
 
 ### tasks:
 - navigation using segway, cocoa touch and back navigation

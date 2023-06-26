@@ -16,6 +16,6 @@
 ### Code Indentations and beautification:
 To refactor the code indentation (beatify/pretty), xcode requires you to select the code block and then editor -> Structure -> Re-indent 
 
-### IBOutlet and IBActions's Connections UI:
+### IBOutlet and IBActions's Connections UIs
 It is at the lat entry of the storyboard's view's attribute panel.
 All IB connections are there. Disconnected connections should be removed. Otherwise there will be Error. Always clean the disconnected outlet
