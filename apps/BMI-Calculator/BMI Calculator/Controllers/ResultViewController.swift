@@ -10,16 +10,25 @@ import UIKit
 
 class ResultViewController: UIViewController {
     
-    var bmiScores: Float = 0
+    var bmiObj: BMI?
+    
+    // add all the ui IBOutlets to change UI Background color form the bmi response
+    // also show the suggessions based on the responses
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        print(bmiScores, "From ResultViewController")
+        print(bmiObj?.bmi ?? "bmi not set yet", "From ResultViewController")
     }
     
-
+    @IBAction func reCalculate(_ sender: UIButton) {
+        bmiObj = nil
+//        navigationController?.popToViewController(LandingViewController() as UIViewController, animated: true)
+        self.dismiss(animated: true, completion: nil)
+        print(bmiObj?.bmi ?? "bmi cleared")
+    }
+    
     /*
     // MARK: - Navigation
 

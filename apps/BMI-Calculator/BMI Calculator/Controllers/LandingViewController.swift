@@ -9,6 +9,8 @@
 import UIKit
 
 class LandingViewController: UIViewController {
+    
+    var bmi : BMI?
 
     @IBOutlet weak var valueHeight: UILabel!
     @IBOutlet weak var valueWeight: UILabel!
@@ -20,7 +22,8 @@ class LandingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        // initialize BMI
+        bmi = BMI()
     }
 
 
@@ -36,7 +39,7 @@ class LandingViewController: UIViewController {
     }
     @IBAction func calculateBtn(_ sender: UIButton) {
         // calcuate the BMI value and send it to the SecondViewController to display
-        calulatedBMI = sliderWidth.value / pow(sliderHeight.value, 2)
+        bmi?.setBMI(sliderWidth.value, sliderHeight.value)
         
 //        let secondViewController = SecondViewController()
         
@@ -54,11 +57,13 @@ class LandingViewController: UIViewController {
         // Get the new view controller using segue.destination.
         let resultViewController: ResultViewController = segue.destination as! ResultViewController
         // Pass the selected object to the new view controller.
-        resultViewController.bmiScores = calulatedBMI
+        resultViewController.bmiObj = self.bmi
     }
     
     // move all the calculation logic to model
     // create a model for BMI
     // create BMI Advice and calculation logic in same model
+    
+    
 }
 
