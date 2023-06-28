@@ -240,7 +240,7 @@ let struct: SomeStruct?
 print("\(struct?.prop ?? "default value")")
 ```
 
-### tasks:
+### task
 - navigation using segway, cocoa touch and back navigation
 - sending parameters to the navigated view controller using segway prepare
 - convert to MVC

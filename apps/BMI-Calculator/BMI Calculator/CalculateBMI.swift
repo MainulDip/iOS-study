@@ -9,5 +9,13 @@
 import Foundation
 
 struct CalculateBMI {
+    var bmi: Float
     
+    mutating func getBMI(_ w: Float, _ h: Float) -> Float {
+        bmi = w / powf(h, 2)
+        return bmi
+    }
+    
+    // provide ui change based on bmi value
+    // move other calculating
 }
