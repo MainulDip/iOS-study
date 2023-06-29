@@ -208,6 +208,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CRM-tK-iZa"/>
+                    <connections>
+                        <outlet property="bmiScore" destination="VU9-2W-Sd5" id="M5b-W6-URH"/>
+                        <outlet property="resultAdvice" destination="9IV-CT-mxw" id="X7D-nO-v8Z"/>
+                        <outlet property="resultBackground" destination="r83-N3-Ash" id="U6J-yB-CUj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4fn-rV-g4l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

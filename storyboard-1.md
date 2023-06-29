@@ -217,7 +217,16 @@ class SecondViewController: UIViewController {
 - To perform Navigation based on storyboard design, Cocoa Touch Template can be used to make the view controller for it. 
 - The newly created viewcontroller class name needs to be supplied inside storyboard's targeted scene's identity inspectory's class properties name.
 - Then to create a navigation direction a segue need to be created by holding ctrl and dragging a connection handle form Storyboard's view controller to view controller.
-- After creating the segue connection, the segue connection itseft needs an identifire which will be used to perform navigation suing self.performSegue form a ViewController class.
+- After creating the segue connection, the segue connection itself needs an identifier which will be used to perform navigation suing self.performSegue form a ViewController class (btn action event usually).
+- Sending Data form controller to controller : "override func prepare(for segue: UIStoryboardSegue, sender: Any?){}" is used. and segue.destination is used to get the destination controller object itself.
+```swift
+override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        let destinationViewController: DestinationViewController = segue.destination as! DestinationViewController
+        // Pass the selected object to the new view controller.
+        resultViewController.bmiObj = self.bmi // sending a object as the destination controller's class property.
+    }
+``` 
 ### DownCasting | Forced DownCasting | Type as! Type:
 If a class is inheriting form a superClass, we can treat the class as the superClass elsewhere in our application by DownCasing.
 ```swift

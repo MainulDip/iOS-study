@@ -10,6 +10,9 @@ import UIKit
 
 class ResultViewController: UIViewController {
     
+    @IBOutlet weak var resultBackground: UIImageView!
+    @IBOutlet weak var bmiScore: UILabel!
+    @IBOutlet weak var resultAdvice: UILabel!
     var bmiObj: BMI?
     
     // add all the ui IBOutlets to change UI Background color form the bmi response
@@ -20,6 +23,12 @@ class ResultViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         print(bmiObj?.bmi ?? "bmi not set yet", "From ResultViewController")
+
+        let (advice, color) = bmiObj!.bmiSideEffect()
+        resultBackground.backgroundColor = color
+        resultAdvice.text = advice
+        resultAdvice.textColor = .black
+        print(advice, "Advice")
     }
     
     @IBAction func reCalculate(_ sender: UIButton) {
