@@ -255,8 +255,20 @@ Apple only provide system color with dark/light mode variant. For custo color, "
 - image: form xcassets add the "image set", set the appearances to "any light and dark" then set light/dark mode images. For vector image, set scales to single as vector image don't need other higher res variant
 
 ### task
-- navigation using segway, cocoa touch and back navigation
-- sending parameters to the navigated view controller using segway prepare
-- convert to MVC
-- Implement background color change of the second screen based on BMI result
-- Give advice based-on BMI
+- set the search field: 
+    - set IBOutlet and IBAction for search btn (get and print the search input text)
+    - set the keyboard (soft) enter button bind with the text field search button
+    - UITextFieldDelegate: Implement from the viewController and add textFieldCustom.delegate = self (the view controller will be notified on text field event)
+    - textFielShouldReturn : this will bind the soft keyboard's return/go btn with the text field's search
+    - textFieldCustom.endEditing(true) : this will dismiss the soft keyboard upon the search button pressed
+    - textFieldDidEndEditing : its a delegated method, it will triggered when the soft keyboard's enter btn is pressed. can be used to clear the search's text
+    - textFieldShouldEndEditing : will trigger if user touche else where, or during the typing. can be used to validate the input text. true will dismiss the kyboard and the textFieldDidEndEditing method will be called
+    - 
+
+
+### Delegates (Protocol):
+It's the interface in other programming language. Both class and struct can implement form Protocol/s. Structs can only implement form Protocol/s not form another struct. But properties/methods can return anything (class or structure)
+- for class, superclass comes first, the protocol/s => class myClass: SuperClass1, SuperClass2, Protocol1, Protocol2 {}
+- protocol method cannot have bodies 
+
+### Delegate Design Pattern: 
