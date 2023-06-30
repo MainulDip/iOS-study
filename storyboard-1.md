@@ -219,6 +219,7 @@ class SecondViewController: UIViewController {
 - Then to create a navigation direction a segue need to be created by holding ctrl and dragging a connection handle form Storyboard's view controller to view controller.
 - After creating the segue connection, the segue connection itself needs an identifier which will be used to perform navigation suing self.performSegue form a ViewController class (btn action event usually).
 - Sending Data form controller to controller : "override func prepare(for segue: UIStoryboardSegue, sender: Any?){}" is used. and segue.destination is used to get the destination controller object itself.
+- Back Navigaiton: 
 ```swift
 override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
@@ -248,6 +249,10 @@ struct SomeStruct {...}
 let struct: SomeStruct?
 print("\(struct?.prop ?? "default value")")
 ```
+### Light/Dark Mode || Appearance :
+Apple only provide system color with dark/light mode variant. For custo color, "color set" of the xcassets is used for dark/light variant.
+- color: From xcassets, add the color "color set" option to set the light mode and dark mode color, use the appearance attribute to "any light and dark" to get the option for dark mode variant.
+- image: form xcassets add the "image set", set the appearances to "any light and dark" then set light/dark mode images. For vector image, set scales to single as vector image don't need other higher res variant
 
 ### task
 - navigation using segway, cocoa touch and back navigation
