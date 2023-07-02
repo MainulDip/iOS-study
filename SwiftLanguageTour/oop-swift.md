@@ -164,6 +164,67 @@ class SomeClass: SomeSuperclassIfAny, FirstProtocol, SecondProtocol {
     // class definition goes here
 }
 ```
+### Protocol | Delegation Pattern | Event Firing:
+Delegation pattern works like event firing. The heat of it lies in the class's reference type behavior. 
+Delegation pattern: A class property can call the assigned object's method without knowing (being agnostic) the later implemented class before hand by the help of protocol/interface. 
+In reality, the (later) class implementing the protocol/interface, assign itself to the caller class's property (delegate) on it's init block.
+```swift
+protocol AdvancedLifeSupport {
+    func performCPR()
+}
+
+class EmergencyCallHandler {
+    var delegate: AdvancedLifeSupport?
+
+    func assessSituation() {
+        print("Can you tell me what happened?")
+    }
+
+    func medicalEmergency() {
+        delegate?.performCPR() ?? print("No Delegation Found Yet")
+        
+    }
+}
+
+// class will also work
+struct Paramedic: AdvancedLifeSupport {
+
+    let id: String = "1234" // just for comparing object
+
+    // init binds the EmergencyCallHandler
+    init(_ handler: EmergencyCallHandler) {
+        handler.delegate = self // this actually bind the object with EmergencyCallHandler's delegated property, (optional) nil delegated is not nil anymore after this
+    }
+
+    // performCPR method is required by AdvancedLifeSupport protocol
+    func performCPR() {
+        print("The paramedic does chest compression, 30 per second")
+        
+    } 
+}
+
+var ECH = EmergencyCallHandler()
+ECH.medicalEmergency() // will print: No Delegation Found Yet
+var someParamedic = Paramedic(ECH)
+ECH.medicalEmergency() // will print: The paramedic does chest compression, 30 per second
+
+/**
+* As class works by reference (on same instance), when the handler.delegate = self is called through Paramedic(ECH) Instantiation, 
+* then "delegated: AdvancedLifeSupport?" optional property of the
+* EmergencyCallHandler is actually updated/assigned with the someParamedic object. 
+* So the ECH.medicalEmergency() will call the same someParamedic.performCPR() method.
+*/
+
+// Checking if both are same object
+if ((ECH.delegate! as! Paramedic).id == someParamedic.id) {
+    print("Both are same object")
+} else {
+    print("Not Same")
+}
+
+// print((ECH.delegate! as! Paramedic).id)
+// print(someParamedic.id)
+```
 
 ### Extensions:
 Extensions add new functionality to an existing class, structure, enumeration, or protocol type. This includes the ability to extend types for which you don’t have access to the original source code (known as retroactive modeling). Extensions are similar to categories in Objective-C. (Unlike Objective-C categories, Swift extensions don’t have names.)
