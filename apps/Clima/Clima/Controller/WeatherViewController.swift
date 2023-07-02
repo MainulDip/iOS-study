@@ -8,17 +8,50 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController {
-
+class WeatherViewController: UIViewController, UITextFieldDelegate {
+    
+    // Search Fields IBOutlets
+    @IBOutlet weak var searchTextField: UITextField!
+    // Other IBOutlets
     @IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view
+            
+        // set self as delegate
+        searchTextField.delegate = self
     }
 
-
+    @IBAction func btnSearchPressed(_ sender: UIButton) {
+        print("The search term is : \(searchTextField?.text ?? "Not yet set")")
+        searchTextField.endEditing(true)
+    }
+    
+    // implement the return/go button
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("Go Pressed", "Search Value is : \(searchTextField?.text ?? "Not yet set")")
+        // do some validation and the return true
+        
+        // hide the keyboard
+        searchTextField.endEditing(true)
+        return true
+    }
+    
+    // in lifecycle, if this return true, other function/event will start exequting, otherwise not
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        print("Checking Event")
+        return true
+    }
+    
+    // good place to track if the user touched anywher else other than the textField or soft keyboard, if so the soft keyboard can be hide or something else to do
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("Touched or Tapped on the screen, not on the text field or soft keyboard")
+        // good time to hide the keyboard if necessary
+        searchTextField.endEditing(true)
+    }
+    
 }
 

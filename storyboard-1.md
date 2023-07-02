@@ -263,6 +263,8 @@ Apple only provide system color with dark/light mode variant. For custo color, "
     - textFieldCustom.endEditing(true) : this will dismiss the soft keyboard upon the search button pressed
     - textFieldDidEndEditing : its a delegated method, it will triggered when the soft keyboard's enter btn is pressed. can be used to clear the search's text
     - textFieldShouldEndEditing : will trigger if user touche else where, or during the typing. can be used to validate the input text. true will dismiss the kyboard and the textFieldDidEndEditing method will be called
+
+    - touchesBegan : to track if user touched/clicked somewhere else other than the soft keyboard or desired places.
     - 
 
 
