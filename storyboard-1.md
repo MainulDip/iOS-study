@@ -267,6 +267,8 @@ Apple only provide system color with dark/light mode variant. For custo color, "
     - touchesBegan : to track if user touched/clicked somewhere else other than the soft keyboard or desired places.
     - 
 
+### Lifecycle method's naming and functions:
+...ShouldEnd... 's return true will trigger ...DidEnd... function
 
 ### Delegates (Protocol) :
 It's the interface in other programming language. Both class and struct can implement form Protocol/s. Structs can only implement form Protocol/s not form another struct. But properties/methods can return anything (class or structure)
@@ -274,3 +276,5 @@ It's the interface in other programming language. Both class and struct can impl
 - protocol method cannot have bodies 
 
 ### Delegate Design Pattern: 
+
+

@@ -17,6 +17,10 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     
+    // get the WeatherManager
+    let weatherManager = WeatherManager()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view
@@ -44,6 +48,15 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         print("Checking Event")
         return true
+    }
+    
+    // will call this if textFieldShouldEndEditing returns true
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let searchText = searchTextField?.text {
+            weatherManager.fetchWeatherByCity(searchText)
+        }
+        // clear the search text
+        searchTextField?.text = ""
     }
     
     // good place to track if the user touched anywher else other than the textField or soft keyboard, if so the soft keyboard can be hide or something else to do
