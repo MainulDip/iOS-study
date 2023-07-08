@@ -223,7 +223,7 @@ castingOptional = 7777
 var castingOptionalSecond = castingOptional!
 print(castingOptionalSecond) // 7777
 ```
-### while(){} | repeat{} while(){} Loop:
+### while(){} | repeat{} while(){} Loop
 NB: condition parenthesis is optional, body braces is required.
 ```swift
 var n = 2

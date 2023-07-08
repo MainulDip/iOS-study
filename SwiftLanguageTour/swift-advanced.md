@@ -1,7 +1,7 @@
 ## Overview:
 Deeper dive into swift in some advanced topic. All are from https://docs.swift.org/swift-book/
 
-### ARC (Automatic Referencee Counting) | stront/week/unowned References
+### ARC (Automatic Referencee Counting) | strong/week/unowned References
 To make sure that instances don’t disappear while they’re still needed, ARC tracks how many properties, constants, and variables are currently referring to each class instance. ARC will not deallocate an instance as long as at least one active reference to that instance still exists.
 
 To make this possible, whenever you assign a class instance to a property, constant, or variable, that property, constant, or variable makes a strong reference to the instance. The reference is called a “strong” reference because it keeps a firm hold on that instance, and doesn’t allow it to be deallocated for as long as that strong reference remain.
