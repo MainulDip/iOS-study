@@ -19,3 +19,6 @@ To refactor the code indentation (beatify/pretty), xcode requires you to select 
 ### IBOutlet and IBActions's Connections UIs:
 It is at the lat entry of the storyboard's view's attribute panel.
 All IB connections are there. Disconnected connections should be removed. Otherwise there will be Error. Always clean the disconnected outlet.
+
+### Using Environmental Variables:
+Docs : https://www.swiftdevjournal.com/using-environment-variables-in-swift-apps/

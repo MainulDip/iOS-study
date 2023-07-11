@@ -375,6 +375,12 @@ increment(7)
 ### Closure Functions/Fn | Injecting fn in another fn's parameter:
 A closure function can take another function as one of its arguments, which can be injected later. It is also a nested fn in Swift.
 
+```swift
+// closure signature : (arg1: type, arg2: type)-> return-type
+{(parameters) -> return-type in closure-body }
+// Note: Calling another method from a closure needs the self keyword explicitly
+```
+
 - closures: blocks of code that can be called later. 
 The code in a closure has access to things like variables and functions that were available in the scope where the closure was created, even if the closure is in a different scope when it’s executed.
 

@@ -86,9 +86,24 @@ calculator(n1: 1, n2: 2) { $0 + $1 }
 // practical closure implementation
 let arr_list = [1,2,3,4]
 arr_list.map { print($0) } // looping all the array elements and printing using minimalist code of the swift closure
+
+
+// Note: Calling another method from a closure needs the self keyword explicitly
 ```
 
 ### Swift Higher Level Function:
 * Map
 * Reduce
 * Filter
+
+### JSON Decoding into Swift Struct:
+=> First create a structure for the data to map. Mapping everything is not required. Map the data with struct as necessary.
+=> Decode
+```swift
+let decoder = JSONDecoder()
+do {
+  try decoder.decode(Structure.self, data)  
+} catch {
+    print(error)
+}
+```

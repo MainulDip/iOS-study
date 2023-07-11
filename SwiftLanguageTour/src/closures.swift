@@ -29,3 +29,5 @@ calculator(n1: 1, n2: 2) { $0 + $1 }
 // practical closure implementation
 let arr_list = [1,2,3,4]
 arr_list.map { print($0) } // looping all the array elements and printing using minimalist code of the swift closure
+
+// Note: Calling another method from a closure needs the self keyword explicitly
