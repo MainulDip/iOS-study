@@ -107,3 +107,11 @@ do {
     print(error)
 }
 ```
+### Task:
+=> Implement the weatherapi
+    - network call (see instruction above this)
+    - json decoding
+    - implement mvc
+    - update images based on weather condition
+    - update ui
+    - computed property
