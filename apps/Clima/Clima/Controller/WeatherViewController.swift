@@ -32,10 +32,13 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     @IBAction func btnSearchPressed(_ sender: UIButton) {
         print("The search term is : \(searchTextField?.text ?? "Not yet set")")
         searchTextField.endEditing(true)
+        
+
     }
     
     // implement the return/go button
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         print("Go Pressed", "Search Value is : \(searchTextField?.text ?? "Not yet set")")
         // do some validation and the return true
         
@@ -55,6 +58,14 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
         if let searchText = searchTextField?.text {
             weatherManager.fetchWeatherByCity(searchText)
         }
+        
+        // get the api key from xcode's scheme
+//        if let open_weather =  ProcessInfo.processInfo.environment["OPEN_WEATHER"] {
+//            print("OPEN_WEATHER", open_weather)
+//        }
+        let theUrl = weatherManager.fetchWeatherByCity("london")
+        print("weatherManager.fetchByCity", theUrl)
+        
         // clear the search text
         searchTextField?.text = ""
     }

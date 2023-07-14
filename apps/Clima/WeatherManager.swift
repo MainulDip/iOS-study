@@ -9,11 +9,38 @@
 import Foundation
 
 struct WeatherManager {
-    let weatherURL = "https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}&units=metric"
+    let apiKey = ProcessInfo.processInfo.environment["OPEN_WEATHER"] ?? "Invalid API KEY"
+    let baseURL : String = "https://api.openweathermap.org/data/2.5/weather"
     
     func fetchWeatherByCity(_ cityName: String) -> String {
-        let urlString = "\(weatherURL)&q=\(cityName)"
+        let urlString = "\(baseURL)?q=\(cityName)&appid=\(apiKey)&units=metric"
         print(urlString)
+        
+        // do network request, build session and call
+        let theURL = URL(string: urlString)
+        let getSession = URLSession(configuration: URLSessionConfiguration.default)
+        let task = getSession.dataTask(with: theURL!) { (data, response, error) in
+            if error != nil {
+                print(error!)
+                return
+            }
+            
+            if let safedata = data {
+                let dataString = String(data: safedata, encoding: .utf8)
+                let jsonDecoder = JSONDecoder()
+                
+//                let parsedData = try
+                
+                print("Thi dataString", dataString)
+            }
+            
+        }
+        
+        task.resume()
+        
+        // get the json response, parse/decode into string or weather object
+        
+        // return the weather object
         return urlString
     }
 }
