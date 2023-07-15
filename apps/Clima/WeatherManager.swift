@@ -26,12 +26,15 @@ struct WeatherManager {
             }
             
             if let safedata = data {
+                
+                // print the returned data to check
                 let dataString = String(data: safedata, encoding: .utf8)
-                let jsonDecoder = JSONDecoder()
+                print(dataString ?? "Nothing Found")
                 
-//                let parsedData = try
+                // decode the dataString
+                let weatherDataObj = self.perseJson(safedata)
                 
-                print("Thi dataString", dataString)
+                print("City Name", weatherDataObj.name)
             }
             
         }
@@ -42,5 +45,18 @@ struct WeatherManager {
         
         // return the weather object
         return urlString
+    }
+    
+    func perseJson(_ data: Data) -> WeatherData {
+        let jsonDecoder = JSONDecoder()
+        var weatherData: WeatherData?
+        
+        do {
+            weatherData = try jsonDecoder.decode(WeatherData.self, from: data)
+        } catch {
+            print(error)
+        }
+        
+        return weatherData!
     }
 }

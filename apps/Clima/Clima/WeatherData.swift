@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct WeatherData {
+struct WeatherData: Decodable {
     let name: String
 }

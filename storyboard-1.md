@@ -274,6 +274,6 @@ Apple only provide system color with dark/light mode variant. For custo color, "
 It's the interface in other programming language. Both class and struct can implement form Protocol/s. Structs can only implement form Protocol/s not form another struct. But properties/methods can return anything (class or structure)
 - for class, superclass comes first, the protocol/s => class myClass: SuperClass1, SuperClass2, Protocol1, Protocol2 {}
 - protocol method cannot have bodies 
-### Delegate Design Pattern: 
+### Delegate Design Pattern
 
 

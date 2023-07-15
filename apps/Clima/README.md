@@ -98,7 +98,7 @@ arr_list.map { print($0) } // looping all the array elements and printing using 
 
 ### JSON Decoding into Swift Struct:
 => First create a structure for the data to map. Mapping everything is not required. Map the data with struct as necessary.
-=> Decode
+=> Decodable Implementation: The struct is required to implement Decodable Protocol to be used
 ```swift
 let decoder = JSONDecoder()
 do {
@@ -106,6 +106,22 @@ do {
 } catch {
     print(error)
 }
+```
+
+Implementation:
+```swift
+func perseJson(_ data: Data) -> WeatherData {
+        let jsonDecoder = JSONDecoder()
+        var weatherData: WeatherData?
+        
+        do {
+            weatherData = try jsonDecoder.decode(WeatherData.self, from: data)
+        } catch {
+            print(error)
+        }
+        
+        return weatherData!
+    }
 ```
 ### Task:
 => Implement the weatherapi
