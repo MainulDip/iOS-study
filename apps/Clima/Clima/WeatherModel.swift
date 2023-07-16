@@ -13,7 +13,7 @@ struct WeatherModel {
     let cityName : String
     let temperature : Double
     
-    func getWeatherIcon(_ conditionID: Int) -> String {
+    var weatherConditionGetIcon: String {
         switch conditionID {
                 case 200...232:
                     return "cloud.bolt"

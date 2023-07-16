@@ -34,7 +34,7 @@ struct WeatherManager {
                 // decode the dataString and convert into WeatherModel
                 if let safeWeatherDataParsed = self.perseJson(safedata) {
                     let weatherModel = weatherDataToWeatherModel(safeWeatherDataParsed)
-                    print("weatherModel.conditionID" ,weatherModel.conditionID)
+                    print("weatherModel.conditionID" ,weatherModel.weatherConditionGetIcon)
                 }
                 
 //                print("City Name", weatherDataObj?.name ?? "Error")
