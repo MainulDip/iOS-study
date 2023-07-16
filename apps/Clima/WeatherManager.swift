@@ -31,12 +31,21 @@ struct WeatherManager {
                 let dataString = String(data: safedata, encoding: .utf8)
                 print(dataString ?? "Nothing Found")
                 
-                // decode the dataString
-                let weatherDataObj = self.perseJson(safedata)
+                // decode the dataString and convert into WeatherModel
+                if let safeWeatherDataParsed = self.perseJson(safedata) {
+                    let weatherModel = weatherDataToWeatherModel(safeWeatherDataParsed)
+                    print("weatherModel.conditionID" ,weatherModel.conditionID)
+                }
                 
-                print("City Name", weatherDataObj?.name ?? "Error")
-                print("Temp", weatherDataObj?.main.temp! ?? "Error")
-                print("Temp", weatherDataObj?.weather[0].main! ?? "Error")
+//                print("City Name", weatherDataObj?.name ?? "Error")
+//                print("Temp", weatherDataObj?.main.temp! ?? "Error")
+//                print("Temp", weatherDataObj?.weather[0].main! ?? "Error")
+//
+//                if let weatherConditionIcon = weatherDataObj?.weather[0].id {
+//                    print("weatherConditionIcon", getWeatherIcon(weatherConditionIcon))
+//                }
+                
+                
             }
             
         }
@@ -60,5 +69,34 @@ struct WeatherManager {
         }
         
         return weatherData
+    }
+    
+    func weatherDataToWeatherModel (_ weatherD: WeatherData ) -> WeatherModel {
+        let cityName = weatherD.name!
+        let weatherConditionID = weatherD.weather[0].id!
+        let temperature = weatherD.main.temp!
+        
+        return WeatherModel(conditionID: weatherConditionID, cityName: cityName, temperature: temperature)
+    }
+    
+    func getWeatherIcon(_ conditionID: Int) -> String {
+        switch conditionID {
+                case 200...232:
+                    return "cloud.bolt"
+                case 300...321:
+                    return "cloud.drizzle"
+                case 500...531:
+                    return "cloud.rain"
+                case 600...622:
+                    return "cloud.snow"
+                case 701...781:
+                    return "cloud.fog"
+                case 800:
+                    return "sun.max"
+                case 801...804:
+                    return "cloud.bolt"
+                default:
+                    return "cloud"
+                }
     }
 }
