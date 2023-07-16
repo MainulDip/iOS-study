@@ -96,9 +96,9 @@ arr_list.map { print($0) } // looping all the array elements and printing using 
 * Reduce
 * Filter
 
-### JSON Decoding into Swift Struct:
+### JSON Decoding into Swift Structs
 => First create a structure for the data to map. Mapping everything is not required. Map the data with struct as necessary.
-=> Decodable Implementation: The struct is required to implement Decodable Protocol to be used
+=> Decodable Implementation: The struct is required to implement Decodable Protocol to be used. Also other structs within the struct also need to be Decodable protocol
 ```swift
 let decoder = JSONDecoder()
 do {

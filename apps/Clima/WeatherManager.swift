@@ -34,7 +34,9 @@ struct WeatherManager {
                 // decode the dataString
                 let weatherDataObj = self.perseJson(safedata)
                 
-                print("City Name", weatherDataObj.name)
+                print("City Name", weatherDataObj?.name ?? "Error")
+                print("Temp", weatherDataObj?.main.temp! ?? "Error")
+                print("Temp", weatherDataObj?.weather[0].main! ?? "Error")
             }
             
         }
@@ -47,7 +49,7 @@ struct WeatherManager {
         return urlString
     }
     
-    func perseJson(_ data: Data) -> WeatherData {
+    func perseJson(_ data: Data) -> WeatherData? {
         let jsonDecoder = JSONDecoder()
         var weatherData: WeatherData?
         
@@ -57,6 +59,6 @@ struct WeatherManager {
             print(error)
         }
         
-        return weatherData!
+        return weatherData
     }
 }

@@ -228,7 +228,7 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         resultViewController.bmiObj = self.bmi // sending a object as the destination controller's class property.
     }
 ``` 
-### DownCasting | Forced DownCasting | Type as! Type:
+### DownCasting | Forced DownCasting | Type as! Type
 If a class is inheriting form a superClass, we can treat the class as the superClass elsewhere in our application by DownCasing.
 ```swift
 // like segue context
