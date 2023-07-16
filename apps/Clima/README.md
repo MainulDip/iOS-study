@@ -123,11 +123,23 @@ func perseJson(_ data: Data) -> WeatherData {
         return weatherData!
     }
 ```
+### Type-alias | Combining Protocol Into 1 :
+It combines multiple protocol into/under single name. Like Decodable and Encodable Protocols can be used using Codeable type-alias for both combined.
+
+### Delegation Workflow:
+=> Create a protocol with function to implement
+=> Create/set a delegate property as optional type of the protocol on the sender class
+=> Implement the protocol on the class that need ot expose it's method to receive/update data and set "self" of that class as the sender class delegate property
+=> class the self.delegate.methodName form the sender class/struct to call the receiver class's method (method that is on the protocol)
+### Struct with Empty Property vs Filled Property:
+If a struct's property value is not assigned (or non optional) when declared, it is necessary to provide those values when it needs be to instantiated. 
+If the property value is assigned (or optional) when declared/create, instantiation/initialization does not required to provide values.
 ### Task:
 => Implement the weatherapi
     - network call (see instruction above this)
     - json decoding
     - implement mvc
+    - update data from weatherManager to controller using delegate pattern
     - update images based on weather condition
     - update ui
     - computed property

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController, UITextFieldDelegate {
+class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherDidUpdateDelegate {
     
     // Search Fields IBOutlets
     @IBOutlet weak var searchTextField: UITextField!
@@ -18,7 +18,7 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var cityLabel: UILabel!
     
     // get the WeatherManager
-    let weatherManager = WeatherManager()
+    var weatherManager = WeatherManager()
     
     
     override func viewDidLoad() {
@@ -27,6 +27,9 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
             
         // set self as delegate
         searchTextField.delegate = self
+        
+        // set delegate property of weatherManger to this class, so the weather manager can call weatherDidUpdate method of this class
+        weatherManager.delegate = self
     }
 
     @IBAction func btnSearchPressed(_ sender: UIButton) {
@@ -68,6 +71,20 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
         
         // clear the search text
         searchTextField?.text = ""
+    }
+    
+    
+    /**
+     * Custom function to check and update the weather result on success form the weather manager
+     * the weather manager will call this when the api request come back with data after parsing json into swift data
+     * weathermanager will use delegate parrtern to access this method form there
+     */
+    func weatherDidUpdate (_ weatherMoldel: WeatherModel) -> Bool {
+        
+        // check if weather updated or not, return true or false
+        
+        print("controller.weatherDidUpdate function is called")
+        return true
     }
     
     // good place to track if the user touched anywher else other than the textField or soft keyboard, if so the soft keyboard can be hide or something else to do

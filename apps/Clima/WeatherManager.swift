@@ -8,7 +8,14 @@
 
 import Foundation
 
+protocol WeatherDidUpdateDelegate {
+    func weatherDidUpdate(weatherModel : WeatherModel) -> Bool
+}
+
 struct WeatherManager {
+    
+    var delegate : WeatherDidUpdateDelegate?
+    
     let apiKey = ProcessInfo.processInfo.environment["OPEN_WEATHER"] ?? "Invalid API KEY"
     let baseURL : String = "https://api.openweathermap.org/data/2.5/weather"
     
@@ -35,6 +42,7 @@ struct WeatherManager {
                 if let safeWeatherDataParsed = self.perseJson(safedata) {
                     let weatherModel = weatherDataToWeatherModel(safeWeatherDataParsed)
                     print("weatherModel.conditionID" ,weatherModel.weatherConditionGetIcon)
+                    print("weatherModel.temperature" ,weatherModel.temperatureSting)
                 }
                 
 //                print("City Name", weatherDataObj?.name ?? "Error")
