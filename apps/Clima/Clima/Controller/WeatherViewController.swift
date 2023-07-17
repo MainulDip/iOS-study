@@ -79,7 +79,7 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherDidUp
      * the weather manager will call this when the api request come back with data after parsing json into swift data
      * weathermanager will use delegate parrtern to access this method form there
      */
-    func weatherDidUpdate (_ weatherMoldel: WeatherModel) -> Bool {
+    func weatherDidUpdate (weatherModel weatherMoldel: WeatherModel) -> Bool {
         
         // check if weather updated or not, return true or false
         

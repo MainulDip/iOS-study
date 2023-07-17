@@ -19,7 +19,7 @@ struct WeatherManager {
     let apiKey = ProcessInfo.processInfo.environment["OPEN_WEATHER"] ?? "Invalid API KEY"
     let baseURL : String = "https://api.openweathermap.org/data/2.5/weather"
     
-    func fetchWeatherByCity(_ cityName: String) -> String {
+    func fetchWeatherByCity(_ cityName: String) {
         let urlString = "\(baseURL)?q=\(cityName)&appid=\(apiKey)&units=metric"
         print(urlString)
         
@@ -43,6 +43,9 @@ struct WeatherManager {
                     let weatherModel = weatherDataToWeatherModel(safeWeatherDataParsed)
                     print("weatherModel.conditionID" ,weatherModel.weatherConditionGetIcon)
                     print("weatherModel.temperature" ,weatherModel.temperatureSting)
+                    if ((self.delegate?.weatherDidUpdate(weatherModel: weatherModel)) == true) {
+                        print("delegate?.weatherDidUpdate is called form the weatherManager")
+                    }
                 }
                 
 //                print("City Name", weatherDataObj?.name ?? "Error")
@@ -63,7 +66,7 @@ struct WeatherManager {
         // get the json response, parse/decode into string or weather object
         
         // return the weather object
-        return urlString
+//        return urlString
     }
     
     func perseJson(_ data: Data) -> WeatherData? {
@@ -85,26 +88,5 @@ struct WeatherManager {
         let temperature = weatherD.main.temp!
         
         return WeatherModel(conditionID: weatherConditionID, cityName: cityName, temperature: temperature)
-    }
-    
-    func getWeatherIcon(_ conditionID: Int) -> String {
-        switch conditionID {
-                case 200...232:
-                    return "cloud.bolt"
-                case 300...321:
-                    return "cloud.drizzle"
-                case 500...531:
-                    return "cloud.rain"
-                case 600...622:
-                    return "cloud.snow"
-                case 701...781:
-                    return "cloud.fog"
-                case 800:
-                    return "sun.max"
-                case 801...804:
-                    return "cloud.bolt"
-                default:
-                    return "cloud"
-                }
     }
 }
