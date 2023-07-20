@@ -134,7 +134,7 @@ It combines multiple protocol into/under single name. Like Decodable and Encodab
 ### Struct with Empty Property vs Filled Property:
 If a struct's property value is not assigned (or non optional) when declared, it is necessary to provide those values when it needs be to instantiated. 
 If the property value is assigned (or optional) when declared/create, instantiation/initialization does not required to provide values.
-### Task:
+### Task
 => Implement the weatherapi
     - network call (see instruction above this)
     - json decoding
