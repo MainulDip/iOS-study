@@ -84,6 +84,12 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherDidUp
         // check if weather updated or not, return true or false
         
         print("controller.weatherDidUpdate function is called")
+        DispatchQueue.main.async {
+            self.cityLabel.text = weatherModel.cityName
+            self.temperatureLabel.text = weatherModel.temperatureSting
+            self.conditionImageView.image = UIImage(systemName: weatherModel.weatherConditionGetIcon)
+        }
+        
         return true
     }
     

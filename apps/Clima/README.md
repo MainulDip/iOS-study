@@ -134,6 +134,13 @@ It combines multiple protocol into/under single name. Like Decodable and Encodab
 ### Struct with Empty Property vs Filled Property:
 If a struct's property value is not assigned (or non optional) when declared, it is necessary to provide those values when it needs be to instantiated. 
 If the property value is assigned (or optional) when declared/create, instantiation/initialization does not required to provide values.
+### Threads and DispatchQueue :
+Any background (non main thread) tasks (like network request or long running computation) need the help of DispatchQueue to update the main thread.
+```swift
+DispatchQueue.main.async {
+    self.cityLabel.text = weatherModel.cityName
+}
+```
 ### Task
 => Implement the weatherapi
     - network call (see instruction above this)
@@ -143,3 +150,4 @@ If the property value is assigned (or optional) when declared/create, instantiat
     - update images based on weather condition
     - update ui
     - computed property
+    - Debug the double request for London
