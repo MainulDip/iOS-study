@@ -52,7 +52,7 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherDidUp
     
     // in lifecycle, if this return true, other function/event will start exequting, otherwise not
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        print("Checking Event")
+        print("Checking Event from textFieldShouldEndEditing")
         return true
     }
     
@@ -66,8 +66,8 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherDidUp
 //        if let open_weather =  ProcessInfo.processInfo.environment["OPEN_WEATHER"] {
 //            print("OPEN_WEATHER", open_weather)
 //        }
-        let theUrl = weatherManager.fetchWeatherByCity("london")
-        print("weatherManager.fetchByCity", theUrl)
+//        let theUrl = weatherManager.fetchWeatherByCity("london")
+//        print("weatherManager.fetchByCity", theUrl)
         
         // clear the search text
         searchTextField?.text = ""
