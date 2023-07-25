@@ -168,6 +168,17 @@ var myDouble = 3.1416
 
 print(myDouble.round(3)) // outputs 3.141
 ```
+### Core Location :
+Start By adding "Privacy - Location When ..." prop with value (that will be shown to the user) inside info.plist
+```swift
+import CoreLocation
+// class prop
+let locationManager = CLLocationManager()
+// on viewDidLoad request for user permission
+locationManager.requestWhenInUseAuthorization()
+// if granted, then request for actual location
+locationManager.requestLocation() // will return location onetime 
+```
 ### Task
 => Implement the weatherapi
     - network call (see instruction above this)
@@ -178,3 +189,5 @@ print(myDouble.round(3)) // outputs 3.141
     - update ui
     - computed property
     - Debug the double request for London
+### Ongoing:
+- 14.47

@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreLocation
 
-class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherDidUpdateDelegate {
+class WeatherViewController: UIViewController {
     
     // Search Fields IBOutlets
     @IBOutlet weak var searchTextField: UITextField!
@@ -17,19 +18,30 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherDidUp
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     
-    // get the WeatherManager
+    // get the and initialize WeatherManager
     var weatherManager = WeatherManager()
     
-    
+    // get the CoreLocation Manager init
+    let locationManager = CLLocationManager()
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view
-            
+           
         // set self as delegate
         searchTextField.delegate = self
         
         // set delegate property of weatherManger to this class, so the weather manager can call weatherDidUpdate method of this class
         weatherManager.delegate = self
+        
+        // request for location access
+        locationManager.requestWhenInUseAuthorization()
+        
+        // Set Location Manager Delegate, it must come before the requestLocation()
+        locationManager.delegate = self
+        
+        locationManager.requestLocation()
+        
+       
     }
 
     @IBAction func btnSearchPressed(_ sender: UIButton) {
@@ -39,6 +51,17 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherDidUp
 
     }
     
+    // good place to track if the user touched anywher else other than the textField or soft keyboard, if so the soft keyboard can be hide or something else to do
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("Touched or Tapped on the screen, not on the text field or soft keyboard")
+        // good time to hide the keyboard if necessary
+        searchTextField.endEditing(true)
+    }
+    
+}
+
+//MARK: - Button Delegation
+extension WeatherViewController: UITextFieldDelegate {
     // implement the return/go button
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
@@ -72,8 +95,10 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherDidUp
         // clear the search text
         searchTextField?.text = ""
     }
-    
-    
+}
+
+//MARK: -  Delegation
+extension WeatherViewController: WeatherDidUpdateDelegate {
     /**
      * Custom function to check and update the weather result on success form the weather manager
      * the weather manager will call this when the api request come back with data after parsing json into swift data
@@ -96,13 +121,22 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherDidUp
     func didFailWithError(error: Error) {
         print(error)
     }
-    
-    // good place to track if the user touched anywher else other than the textField or soft keyboard, if so the soft keyboard can be hide or something else to do
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Touched or Tapped on the screen, not on the text field or soft keyboard")
-        // good time to hide the keyboard if necessary
-        searchTextField.endEditing(true)
-    }
-    
 }
 
+//MARK: - Location Manager Delegates
+extension WeatherViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("Calling Location Manager didUpdateLocation")
+        
+        if let location = locations.last {
+            let lat = location.coordinate.latitude
+            let lon = location.coordinate.longitude
+            
+            print(lat, lon)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("LocationManager didFailWithError called")
+    }
+}

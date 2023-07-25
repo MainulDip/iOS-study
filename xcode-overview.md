@@ -22,3 +22,11 @@ All IB connections are there. Disconnected connections should be removed. Otherw
 
 ### Using Environmental Variables:
 Docs : https://www.swiftdevjournal.com/using-environment-variables-in-swift-apps/
+
+### Creating Section In Xcode Overview:
+//MARK: - Some Texts
+
+### Custom Code Snippet:
+- select the code in xcode amd mark it as code snippet by right clicking
+- integrate palceholder using <#Placeholder>
+- and add the completion text | by what typing will trigger the code snippet
