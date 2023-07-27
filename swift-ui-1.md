@@ -64,7 +64,7 @@ struct LoginIntroApp: App { // inherit App protocol
     - Paints Views: Angular/Linear/Radial Gradient
     - Other Views: Image, Group, Capsule, Container Relative Shape, Empty View, Menu etc.
 - Icons : There are many system icons which can be listed/viewed using "SF Symbols" developer app (need to install it from apples's developer website). And can be inserted into views using : Image(systemName: "NameOfTheIcon") 
-### Navigation : 
+### Navigation: 
 
 ```swift
 

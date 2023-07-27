@@ -24,8 +24,22 @@ struct WeatherManager {
         let urlString = "\(baseURL)?q=\(cityName)&appid=\(apiKey)&units=metric"
         print(urlString)
         
+        performNetworkRequest(urlString)
+        
+        // get the json response, parse/decode into string or weather object
+        
+        // return the weather object
+//        return urlString
+    }
+    
+    func fetchCurrentLocWeather (lat: String, lon: String) {
+        let urlString = "\(baseURL)?q=\(lat)&appid=\(apiKey)&units=metric"
+    }
+    
+    // Network Request
+    func performNetworkRequest (_ url: String) {
         // do network request, build session and call
-        let theURL = URL(string: urlString)
+        let theURL = URL(string: url)
         let getSession = URLSession(configuration: URLSessionConfiguration.default)
         let task = getSession.dataTask(with: theURL!) { (data, response, error) in
             if error != nil {
@@ -63,11 +77,6 @@ struct WeatherManager {
         }
         
         task.resume()
-        
-        // get the json response, parse/decode into string or weather object
-        
-        // return the weather object
-//        return urlString
     }
     
     func perseJson(_ data: Data) -> WeatherData? {
