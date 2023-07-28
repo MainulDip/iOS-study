@@ -188,7 +188,7 @@ Everything that starts with UI (UIButton, UILable, etc) are coming from UIKit.
 ```swift
 // initialize the controller and call self.present with the controller as one of its parameter.
 ```
-### Creating View on the fly by code Without Storyboard/GUI :
+### Creating View on the fly by code Without Storyboard/GUI:
 ```swift
 import UIKit
 

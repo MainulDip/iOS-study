@@ -23,7 +23,13 @@ class WeatherViewController: UIViewController {
     
     // get the CoreLocation Manager init
     let locationManager = CLLocationManager()
-        
+    
+    
+    @IBAction func updateToCurrentLocation() {
+        print("Back To Current Location")
+        locationManager.requestLocation()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
            
@@ -129,9 +135,15 @@ extension WeatherViewController: CLLocationManagerDelegate {
         print("Calling Location Manager didUpdateLocation")
         
         if let location = locations.last {
+            // stop updating weather when it find a locaiton, it will find eventually as this function will be called
+            locationManager.stopUpdatingLocation() // Though in my test, requestLocation is working 
+            
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
             
+            // call the weatherManger's function providing the params, what will againg update with results
+            // by the weatherDidUpdateDelegate's
+            weatherManager.fetchCurrentLocWeather(lat: lat, lon: lon)
             print(lat, lon)
         }
     }
@@ -140,3 +152,8 @@ extension WeatherViewController: CLLocationManagerDelegate {
         print("LocationManager didFailWithError called")
     }
 }
+
+//MARK: - Back To Current Location
+//extension WeatherManager: UIViewController {
+//
+//}

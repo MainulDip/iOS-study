@@ -174,10 +174,34 @@ Start By adding "Privacy - Location When ..." prop with value (that will be show
 import CoreLocation
 // class prop
 let locationManager = CLLocationManager()
+
+// delegation to the caller class should be done before the requestLocation()
+locationManager.delegate = self
 // on viewDidLoad request for user permission
 locationManager.requestWhenInUseAuthorization()
-// if granted, then request for actual location
-locationManager.requestLocation() // will return location onetime 
+
+// if granted, then request for actual location will be supplied to the must implemented delegated methods locationManager:didUpdateLocation and locationManager:didFailWithError functions
+locationManager.requestLocation() // will return location onetime
+
+extension WeatherViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("Calling Location Manager didUpdateLocation")
+        
+        if let location = locations.last {
+            let lat = location.coordinate.latitude
+            let lon = location.coordinate.longitude
+            
+            // call the weatherManger's function providing the params, what will againg update with results
+            // by the weatherDidUpdateDelegate's
+            weatherManager.fetchCurrentLocWeather(lat: lat, lon: lon)
+            print(lat, lon)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("LocationManager didFailWithError called")
+    }
+}
 ```
 ### Task
 => Implement the weatherapi

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol WeatherDidUpdateDelegate {
     func weatherDidUpdate(_ weatherModel : WeatherModel) -> Bool
@@ -32,8 +33,9 @@ struct WeatherManager {
 //        return urlString
     }
     
-    func fetchCurrentLocWeather (lat: String, lon: String) {
-        let urlString = "\(baseURL)?q=\(lat)&appid=\(apiKey)&units=metric"
+    func fetchCurrentLocWeather (lat: CLLocationDegrees, lon: CLLocationDegrees) {
+        let urlString = "\(baseURL)?appid=\(apiKey)&units=metric&lat=\(lat)&lon=\(lon)"
+        performNetworkRequest(urlString)
     }
     
     // Network Request
