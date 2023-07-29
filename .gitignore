@@ -14,3 +14,4 @@ xcuserdata/
 # Podfiles
 Pods/
 api-key.swift
+Podfile.lock
