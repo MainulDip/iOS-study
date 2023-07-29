@@ -31,6 +31,6 @@ Docs : https://www.swiftdevjournal.com/using-environment-variables-in-swift-apps
 - integrate palceholder using <#Placeholder>
 - and add the completion text | by what typing will trigger the code snippet
 
-### Simulator Location Customize:
+### Simulator Location Customizing:
 It's in Debug -> Simulator Location
 Custom Location can be set to debug different things, like CoreLocations

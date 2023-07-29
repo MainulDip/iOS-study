@@ -319,4 +319,6 @@ Docs : https://cocoapods.org/
 - Setup the newly generated "Podfile" (a ruby file), customize the platform version, and other things
 - inside the "target '' do" (ruby function) append the 3rd party library to add, ex: pod 'CLTypingLabel'
 - then run "pod install"
-- after the install, close any running xcode project, and open current project into xcode using newly generated ...xcworkspace file (as of cocoapod instruction) 
+- after the install, close any running xcode project, and open current project into xcode using newly generated ...xcworkspace file (as of cocoapod instruction)
+* Updating Packages/Library:
+- add version number after the pod name inside the Podfile, ex: pod 'podname', '~> 0.4.0'  then close xcode and run 'pod install' again. 
