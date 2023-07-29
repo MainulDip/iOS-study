@@ -279,3 +279,34 @@ It's the interface in other programming language. Both class and struct can impl
 ### Clima App:
 
 ### Flash-Chat App:
+A chatting app, it's inside the apps dir
+### Table View (android's LitView):
+It is a vertical scrolling component, it stacks elements one after another vertically (ie: chatting interface) 
+
+### Animation | Basing Using For Loop:
+```swift
+@IBOutlet weak var titleLabel: UILabel!
+    
+override func viewDidLoad() {
+    super.viewDidLoad()
+
+    titleLabel.text = ""
+    
+    var count = 0.0
+    let textToAnimate = "⚡️FlashChat"
+    
+    for letter in textToAnimate {
+        
+        Timer.scheduledTimer(withTimeInterval: 0.1 * count, repeats: false) {_ in
+            self.titleLabel.text?.append(letter)
+        }
+
+        count += 1   
+    }
+}
+```
+
+### CocoaPod | 3rd Party Library:
+CocoaPods is a dependency manager for Swift and Objective-C Cocoa projects.
+CocoaPods is built with Ruby and is installable with the default Ruby available on macOS.
+Docs : https://cocoapods.org/
