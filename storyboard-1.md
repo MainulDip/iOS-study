@@ -329,3 +329,8 @@ Docs : https://cocoapods.org/
 - Carthage:
 - Swift Package Manager: Does not integrate with cocapod at the same time. (Note: if the package contain ...podspec file, it has support cocapod, if Pakage.swift is there, it support "swift package manager")
 ### Firebase Integration:
+- add the firebase "GoogleService-Info.plist" file to the root of the project
+- add the cocapod entries for specific firebase api's 
+   -  pod 'FirebaseAuth'
+    - pod 'FirebaseFirestore'
+- pod install
