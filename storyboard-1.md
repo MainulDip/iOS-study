@@ -306,7 +306,7 @@ override func viewDidLoad() {
 }
 ```
 
-### CocoaPod | 3rd Party Library:
+### CocoaPod | 3rd Party Library | Installing, Updating and Removing Pods:
 CocoaPods is a dependency manager for Swift and Objective-C Cocoa projects.
 CocoaPods is built with Ruby and is installable with the default Ruby available on macOS.
 Docs : https://cocoapods.org/
@@ -321,4 +321,11 @@ Docs : https://cocoapods.org/
 - then run "pod install"
 - after the install, close any running xcode project, and open current project into xcode using newly generated ...xcworkspace file (as of cocoapod instruction)
 * Updating Packages/Library:
-- add version number after the pod name inside the Podfile, ex: pod 'podname', '~> 0.4.0'  then close xcode and run 'pod install' again. 
+- updating a specific pod: add version number after the pod name inside the Podfile, ex: pod 'podname', '~> 0.4.0'  then close xcode and run 'pod install' again. 
+- updating all pods: also, running "pod update" will also update all the pods
+* Uninstalling / Removing Pods :
+- remove the pod name form the "Podfile" -> Close xcode and run "pod install", that will update the current state of the Podfile (remove the pod in this case)
+### CocaPod Alternatives:
+- Carthage:
+- Swift Package Manager: Does not integrate with cocapod at the same time. (Note: if the package contain ...podspec file, it has support cocapod, if Pakage.swift is there, it support "swift package manager")
+### Firebase Integration:
