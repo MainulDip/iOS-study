@@ -1,2 +1,2 @@
 ## Overviews:
-All the apps are stored here.
+All the apps are stored here
