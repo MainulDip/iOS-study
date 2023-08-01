@@ -334,3 +334,6 @@ Docs : https://cocoapods.org/
    -  pod 'FirebaseAuth'
     - pod 'FirebaseFirestore'
 - pod install
+### Adding New User To firebase:
+- First enable the authentication user by email and password form firebase console.
+- Then Follow instruction of the firebase docs

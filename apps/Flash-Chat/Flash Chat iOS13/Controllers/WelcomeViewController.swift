@@ -11,12 +11,12 @@ import CLTypingLabel
 
 class WelcomeViewController: UIViewController {
 
-    @IBOutlet weak var titleLabel: CLTypingLabel!
+    @IBOutlet weak var titleLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        titleLabel.text = "⚡️FlashChat"
+//        titleLabel.text = "⚡️FlashChat"
 //        
 //        var count = 0.0
 //        let textToAnimate = "⚡️FlashChat"
