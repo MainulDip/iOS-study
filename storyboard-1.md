@@ -334,6 +334,22 @@ Docs : https://cocoapods.org/
    -  pod 'FirebaseAuth'
     - pod 'FirebaseFirestore'
 - pod install
-### Adding New User To firebase:
+### Adding New User To firebase store:
 - First enable the authentication user by email and password form firebase console.
 - Then Follow instruction of the firebase docs
+```swift
+ if let email = emailTextfield.text, let password = passwordTextfield.text {
+    Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+        if let e = error {
+            print(e)
+        }
+        
+        if let res = authResult {
+            print("Printing auth resust --------")
+            self.performSegue(withIdentifier: "RegisterToChat", sender: self)
+            print(res)
+        }
+        print("registerPressed Called")
+    }
+}
+```
