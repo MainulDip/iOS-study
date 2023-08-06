@@ -29,7 +29,7 @@ class LoginViewController: UIViewController {
                     print(authRes.user.email!)
                     print("Now Navigate") // 1@2.com 123456
                     
-                    strongSelf.performSegue(withIdentifier: "LoginToChat", sender: self)
+                    strongSelf.performSegue(withIdentifier: K.loginSegue, sender: self)
                 }
                 
                 print("loginPressed is called")

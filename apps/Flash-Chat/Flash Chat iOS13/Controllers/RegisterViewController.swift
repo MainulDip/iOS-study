@@ -23,7 +23,7 @@ class RegisterViewController: UIViewController {
                 
                 if let res = authResult {
                     print("Printing auth resust --------")
-                    self.performSegue(withIdentifier: "RegisterToChat", sender: self)
+                    self.performSegue(withIdentifier: K.registerSegue, sender: self)
                     print(res)
                 }
                 print("registerPressed Called")

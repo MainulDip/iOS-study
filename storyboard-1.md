@@ -353,3 +353,60 @@ Docs : https://cocoapods.org/
     }
 }
 ```
+### Login | Logout and Other :
+See Flash Chat repo
+
+### Constants from Global Use:
+- Developers Use "K" as Constants (practice), and store all the constants inside the struct as typed property (static)
+- Then assess the property using K.property name. 
+```swift
+struct K {
+    static let appName = "⚡️FlashChat"
+    static let cellIdentifier = "ReusableCell"
+    static let cellNibName = "MessageCell"
+    static let registerSegue = "RegisterToChat"
+    static let loginSegue = "LoginToChat"
+    
+    struct BrandColors {
+        static let purple = "BrandPurple"
+        static let lightPurple = "BrandLightPurple"
+        static let blue = "BrandBlue"
+        static let lighBlue = "BrandLightBlue"
+    }
+    
+    struct FStore {
+        static let collectionName = "messages"
+        static let senderField = "sender"
+        static let bodyField = "body"
+        static let dateField = "date"
+    }
+}
+```
+
+### Instance vs Type Property:
+Struct, Class, Emum can have instance property and type (static property) also methods.
+Type property does not require an Instance (Like other programming languages, Java, Kotlin)
+Docs: https://docs.swift.org/swift-book/documentation/the-swift-programming-language/properties/
+```swift
+struct SomeStructure {
+    static var storedTypeProperty = "Some value."
+    static var computedTypeProperty: Int {
+        return 1
+    }
+}
+enum SomeEnumeration {
+    static var storedTypeProperty = "Some value."
+    static var computedTypeProperty: Int {
+        return 6
+    }
+}
+class SomeClass {
+    static var storedTypeProperty = "Some value."
+    static var computedTypeProperty: Int {
+        return 27
+    }
+    class var overrideableComputedTypeProperty: Int {
+        return 107
+    }
+}
+```
