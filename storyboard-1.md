@@ -410,3 +410,18 @@ class SomeClass {
     }
 }
 ```
+
+### Table View (Scrollable listView):
+- table view : its the ListView/Recycler View in Android. It contains all the lists/cells as "table view cells"
+    - attribute :  separator : separator for each line
+- table view cells || prototype cell/view : blueprint of the list element
+    * important attribute:
+    - identifier : String to Identify the cell blueprint form code
+- table view controller : it's little limited compared to the "table view", so stick with that
+### TableView DataSource vs Delegate:
+- DataSource : forward data to the controller. It populate the tableView
+- Delegate : 
+### Table Cell Customization:
+- create a CocaTouch file with subclass of UITableViewCell (with xib checked) inside views directory to implement the fine-grain control over cell
+```swift
+```
