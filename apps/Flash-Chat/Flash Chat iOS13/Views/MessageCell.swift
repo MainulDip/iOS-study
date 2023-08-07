@@ -14,9 +14,12 @@ class MessageCell: UITableViewCell { // MessageCell
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var messageBubble: UIView!
     
+    // called for every table cell item
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        messageBubble.layer.cornerRadius = messageBubble.frame.height / 4
+    
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

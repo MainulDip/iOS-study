@@ -421,7 +421,7 @@ class SomeClass {
 ### TableView DataSource vs Delegate:
 - DataSource : forward data to the controller. It populate the tableView
 - Delegate : 
-### Table Cell Customization:
+### Table Cell Init:
 - create a CocaTouch file with subclass of UITableViewCell (with xib checked) inside views directory to implement the fine-grain control over cell
 - xcode will create 2 files, 1 swift and 1 XIB
 - Note: XIB is a design file (formally known as NIB). It's like a storyboard file and the controller of this XIB file is the newly created swift file.
@@ -431,4 +431,17 @@ class SomeClass {
 ```swift
 // inside viewDidLoad
 tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
+```
+
+### Table cell customization:
+- label/text multiline : set line number to 0 to get dynamic multiline
+- border radius : from the xib's controller, change the xib's view elements property through IBOutlet.
+```swift
+// it's kina same like viewDidLoad in UIController
+// this function gets called when the nib/xib loads
+override func awakeFromNib() {
+    super.awakeFromNib()
+    
+    messageBubble.layer.cornerRadius = messageBubble.frame.height / 4
+}
 ```
