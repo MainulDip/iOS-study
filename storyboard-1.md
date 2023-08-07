@@ -423,5 +423,12 @@ class SomeClass {
 - Delegate : 
 ### Table Cell Customization:
 - create a CocaTouch file with subclass of UITableViewCell (with xib checked) inside views directory to implement the fine-grain control over cell
+- xcode will create 2 files, 1 swift and 1 XIB
+- Note: XIB is a design file (formally known as NIB). It's like a storyboard file and the controller of this XIB file is the newly created swift file.
+- provide an identifier for the top level container of the xib file
+- after designing the xib file, connect IBOutlets and other things with the assistance.
+- then the xib design file needs to be registered in the tableView Controller file. we need the "identifier" the parent/top container (Table View Cell) inside the xib and the name of the xib file (without xib extension)
 ```swift
+// inside viewDidLoad
+tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
 ```
