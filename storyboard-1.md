@@ -445,3 +445,19 @@ override func awakeFromNib() {
     messageBubble.layer.cornerRadius = messageBubble.frame.height / 4
 }
 ```
+
+### is || as || as? || as! (type check & casting):
+- is : check to see if the object is a certain type. like: if sth of Type {}
+- as : used to upcast into the superclass. Used less frequently in practice compared to downcast
+- as! : used to forced downcast into subclass. throws error if the class doesn't match. You've to 100% certain about the casting class
+- as? : used to optional downcast into subclass, can be used with "if let" binding
+
+### Any || AnyObject || NSObject:
+- Any : Anything Class of Struct
+- AnyObject : Anything that is a object of any class (not struct)
+- NSObject : Anything thst is a object of Apple's Foundation Library
+```swift
+let mixedList: [Any] = ["Sth", 7, 7.4] // String, Int & Float on same list by casting to Any
+let classObje: [AnyObject] = [objectOfClass1, objectOfClass2] // object created form any class is supported here
+let fuoundationList: [NSObject] = [NSString(""abc), NSNumber(123)] // object form apple's foundation library can go here
+```
