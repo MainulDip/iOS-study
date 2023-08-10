@@ -461,3 +461,32 @@ let mixedList: [Any] = ["Sth", 7, 7.4] // String, Int & Float on same list by ca
 let classObje: [AnyObject] = [objectOfClass1, objectOfClass2] // object created form any class is supported here
 let fuoundationList: [NSObject] = [NSString(""abc), NSNumber(123)] // object form apple's foundation library can go here
 ```
+### Fetching FireStore Data and Merging With Structure:
+```swift
+// MARK : FireStore Getting Data
+extension ChatViewController {
+    func getFireStoreData() {
+        let docRef = db.collection(K.FStore.collectionName)
+
+        docRef.getDocuments() { [self] (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data()[K.FStore.senderField]!)")
+                    let sender: String = document.data()[K.FStore.senderField]! as! String
+                    let body: String = document.data()[K.FStore.bodyField]! as! String
+                    let newMsg = Message(sender: sender, body: body)
+                    self.messages.append(newMsg)
+                    print(messages.count)
+                    
+                    // update the table view, also DispatchQueue to be extra safe side to confirm the background thread is synced into main thread
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        }
+    }
+}
+```
