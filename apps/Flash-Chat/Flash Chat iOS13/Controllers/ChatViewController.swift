@@ -55,7 +55,7 @@ class ChatViewController: UIViewController {
         // implement firestore
         if let messageBody = messageTextfield.text,
            let messageSender = Auth.auth().currentUser?.email {
-            db.collection(K.FStore.collectionName).addDocument(data: [K.FStore.senderField: messageSender, K.FStore.bodyField: messageBody]) { error in
+            db.collection(K.FStore.collectionName).addDocument(data: [K.FStore.senderField: messageSender, K.FStore.bodyField: messageBody, K.FStore.dateField: Date().timeIntervalSince1970]) { error in
                 if let e = error {
                     print("FireStore Error: ", e)
                 } else {
@@ -104,9 +104,13 @@ extension ChatViewController: UITableViewDelegate {
 // MARK : FireStore Getting Data
 extension ChatViewController {
     func getFireStoreData() {
+        
+        // clear messages
+        self.messages = []
+        
         let docRef = db.collection(K.FStore.collectionName)
 
-        docRef.getDocuments() { [self] (querySnapshot, err) in
+        docRef.order(by: K.FStore.dateField).addSnapshotListener { [self] (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {

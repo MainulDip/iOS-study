@@ -434,7 +434,7 @@ tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdent
 ```
 
 ### Table cell customization:
-- label/text multiline : set line number to 0 to get dynamic multiline
+- label/text multiline : set line number to 0 to get dynamic multiline.
 - border radius : from the xib's controller, change the xib's view elements property through IBOutlet.
 ```swift
 // it's kina same like viewDidLoad in UIController
