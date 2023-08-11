@@ -60,7 +60,10 @@ class ChatViewController: UIViewController {
                     print("FireStore Error: ", e)
                 } else {
                     print("Firestore Database Updated Successfully")
-                    self.getFireStoreData()
+                    
+                    DispatchQueue.main.async {
+                        self.messageTextfield.text = ""
+                    }
                 }
             }
         }
@@ -88,8 +91,23 @@ extension ChatViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // create a cell
+        let message = messages[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! MessageCell
-        cell.label.text = "\(messages[indexPath.row].body)"
+        cell.label.text = message.body
+        
+        if message.sender == Auth.auth().currentUser?.email {
+            cell.leftImageView.isHidden = true
+            cell.rightImageView.isHidden = false
+            cell.messageBubble.backgroundColor = UIColor(named: K.BrandColors.lighBlue)
+            cell.label.textColor = UIColor(named: K.BrandColors.blue)
+        } else {
+            cell.leftImageView.isHidden = false
+            cell.rightImageView.isHidden = true
+            cell.messageBubble.backgroundColor = UIColor(named: K.BrandColors.purple)
+            cell.label.textColor = UIColor(named: K.BrandColors.lightPurple)
+        }
+        
+        
         return cell
     }
 }
@@ -125,6 +143,10 @@ extension ChatViewController {
                     // update the table view, also DispatchQueue to be extra safe side to confirm the background thread is synced into main thread
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
+                        
+                        // scroll to the last message thats been newly sent
+                        let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+                        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
                     }
                 }
             }
