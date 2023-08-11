@@ -328,6 +328,8 @@ Docs : https://cocoapods.org/
 ### CocaPod Alternatives:
 - Carthage:
 - Swift Package Manager: Does not integrate with cocapod at the same time. (Note: if the package contain ...podspec file, it has support cocapod, if Pakage.swift is there, it support "swift package manager")
+### Adding Package Using Swift Package Manager:
+It a package is eligible for swift package manager, the root directory of the package must have "Package.swift" file. If so, then we can add the package through xcode -> file -> add packages -> paste the github package url (top right corner of the box)
 ### Firebase Integration:
 - add the firebase "GoogleService-Info.plist" file to the root of the project
 - add the cocapod entries for specific firebase api's 

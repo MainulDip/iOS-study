@@ -10,4 +10,7 @@ target 'Flash Chat iOS13' do
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
 
+  # change current editing textfield position based on soft keyboard
+  # pod 'IQKeyboardManagerSwift'
+
 end
