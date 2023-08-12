@@ -494,7 +494,7 @@ extension ChatViewController {
 ```
 
 ### Always Call Super.Func:
-Its a good practice to call the super.override-function
+Its a good practice to call the super.override-function.
 
 ### ViewController Lifecycle:
 viewDidLoad() -> viewWillAppear() -> viewDidAppear() | just appeared visible -> viewWillDisappear() | stop animation or change UI -> viewDidDisappear() | last lifecycle
