@@ -495,3 +495,19 @@ extension ChatViewController {
 
 ### Always Call Super.Func:
 Its a good practice to call the super.override-function
+
+### ViewController Lifecycle:
+viewDidLoad() -> viewWillAppear() -> viewDidAppear() | just appeared visible -> viewWillDisappear() | stop animation or change UI -> viewDidDisappear() | last lifecycle
+
+* viewDidDisappear() will be called after the next screen/controller's viewWillAppear()
+* form segue, the next controller's ui properties cannot be changed directly, because the viewDidLoad() is not called yet.
+
+### App Lifecycle:
+App Launched -> App Visible -> App Recedes into background -> resources reclaimed
+* AppDelegate.swift:
+- (application:didFinishLaunchingWithOptions:)
+* SceneDelegate.swift:
+after ios 13 and iPadOS ... there is the ability to run multiple windows simultaneously. So there's this (SceneDelegate.swift) app lifecycle file along with previous AppDelegate.swift.
+- sceneWillResignActive
+- sceneDidEnterBackground
+* Note: print(#function) will print the containing function name
