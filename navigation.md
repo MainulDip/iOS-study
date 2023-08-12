@@ -43,7 +43,7 @@ To get the back button and navigation stacking feature, the "entry point" view c
 ```swift
 navigationController?.popToRootViewController(animated: true)
 ```
-### Navigation Title and Hiding Specific (Back) Button:
+### Navigation Title and Hiding Specific (Back) Button
 ```swift
 override func viewDidLoad() {
         super.viewDidLoad()

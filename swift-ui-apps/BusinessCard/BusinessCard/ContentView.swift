@@ -10,15 +10,16 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         ZStack {
-            Color(.lightGray)
+            Color(red: 0.27, green: 0.76, blue: 0.97)
                 .edgesIgnoringSafeArea(.all)
             VStack {
-                        Image(systemName: "globe")
-                            .imageScale(.large)
-                            .foregroundColor(.accentColor)
-                        Text("Hello, world!")
-                    }
-                    .padding()
+                Image(systemName: "globe")
+                    .imageScale(.large)
+                    .foregroundColor(.accentColor)
+                Text("Hello, world!").foregroundColor(.black)
+                
+            }
+            .padding()
         }
         
     }

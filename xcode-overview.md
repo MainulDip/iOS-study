@@ -8,6 +8,8 @@
 
 ### Shortcuts:
 - Build : cmd + r
+- Code Suggestion : put the cursor inside a function and press "Esc"
+- code indentation : ctrl + i 
 
 ### task
 - clone view : alt/option drag
