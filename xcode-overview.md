@@ -10,6 +10,7 @@
 - Build : cmd + r
 - Code Suggestion : put the cursor inside a function and press "Esc"
 - code indentation : ctrl + i 
+- action center: cmd + alt + click || to embed, extract-subview (convert to reusable component), etc
 
 ### task
 - clone view : alt/option drag
