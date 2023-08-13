@@ -71,7 +71,7 @@ struct LoginIntroApp: App { // inherit App protocol
 - Icons : There are many system icons which can be listed/viewed using "SF Symbols" developer app (need to install it from apples's developer website). And can be inserted into views using : Image(systemName: "NameOfTheIcon") 
 
 ### Background Color:
-Background color works with ZStack (depth stack). So everything needs to be inserted into it.
+Background color works with ZStack (depth stack). So everything needs to be inserted into
 ```swuft
 ZStack {
     Color(.lightGray)
@@ -81,7 +81,7 @@ ZStack {
 ### Custom Font Integration:
 - Download the font file (.ttf) and place into project (make a new group/dir named "fonts" and paste the ttf file) 
 - check the forn form launchscreen
-- add info.plist entry on "Fonts provided by application" category, and add the fontName.ttf in the value param. Multiple fonts can be added there, as the category accept array.
+- add info.plist (on swiftui & xcode14 it's the info of the target) entry on "Fonts provided by application" category, and add the fontName.ttf in the value param. Multiple fonts can be added there, as the category accept array.
 - use font as : View(...).font(Font.custom("Font-Name", size: Int))
 ### Navigations:
 
