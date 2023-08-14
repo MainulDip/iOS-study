@@ -83,6 +83,16 @@ ZStack {
 - check the forn form launchscreen
 - add info.plist (on swiftui & xcode14 it's the info of the target) entry on "Fonts provided by application" category, and add the fontName.ttf in the value param. Multiple fonts can be added there, as the category accept array.
 - use font as : View(...).font(Font.custom("Font-Name", size: Int))
+
+### Preview Only the content:
+```swift
+struct ContactBtn_Previews: PreviewProvider {
+    static var previews: some View {
+        ContactBtn(sysIcon: "link", infoTexts: "Some Text").previewLayout(.sizeThatFits)
+    }
+}
+// also make the preview area "selectable" form the left bottom panel of the preview area
+```
 ### Navigations:
 
 ```swift
