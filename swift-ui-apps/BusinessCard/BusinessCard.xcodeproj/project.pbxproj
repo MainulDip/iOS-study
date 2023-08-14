@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		727B034C2A889DCE0096D562 /* CinzelDecorative-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 727B034A2A8898F00096D562 /* CinzelDecorative-Bold.ttf */; };
+		72925EFE2A89E0C8005FBE1F /* ContactBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72925EFD2A89E0C8005FBE1F /* ContactBtn.swift */; };
 		72D491D42A8754E50046B6D2 /* BusinessCardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D491D32A8754E50046B6D2 /* BusinessCardApp.swift */; };
 		72D491D62A8754E50046B6D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D491D52A8754E50046B6D2 /* ContentView.swift */; };
 		72D491D82A8754E70046B6D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72D491D72A8754E70046B6D2 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 
 /* Begin PBXFileReference section */
 		727B034A2A8898F00096D562 /* CinzelDecorative-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CinzelDecorative-Bold.ttf"; sourceTree = "<group>"; };
+		72925EFD2A89E0C8005FBE1F /* ContactBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactBtn.swift; sourceTree = "<group>"; };
 		72D491D02A8754E50046B6D2 /* BusinessCard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusinessCard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72D491D32A8754E50046B6D2 /* BusinessCardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCardApp.swift; sourceTree = "<group>"; };
 		72D491D52A8754E50046B6D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				72D491D52A8754E50046B6D2 /* ContentView.swift */,
 				72D491D72A8754E70046B6D2 /* Assets.xcassets */,
 				72D491D92A8754E70046B6D2 /* Preview Content */,
+				72925EFD2A89E0C8005FBE1F /* ContactBtn.swift */,
 			);
 			path = BusinessCard;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72D491D62A8754E50046B6D2 /* ContentView.swift in Sources */,
+				72925EFE2A89E0C8005FBE1F /* ContactBtn.swift in Sources */,
 				72D491D42A8754E50046B6D2 /* BusinessCardApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
