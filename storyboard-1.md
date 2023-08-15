@@ -493,7 +493,7 @@ extension ChatViewController {
 }
 ```
 
-### Always Call Super.Func :
+### Always Call Super.Func:
 Its a good practice to call the super.override-function.
 
 ### ViewController Lifecycle:

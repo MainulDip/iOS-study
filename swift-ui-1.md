@@ -93,6 +93,21 @@ struct ContactBtn_Previews: PreviewProvider {
 }
 // also make the preview area "selectable" form the left bottom panel of the preview area
 ```
+### Scene Background Color:
+```swift
+var body: some View {
+    ZStack {
+        // some background view
+        // some foreground view
+        // some view on top of the foreground view
+    }
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .background(Color.green)
+}
+```
+
+### Working With Images :
+
 ### Navigations:
 
 ```swift
