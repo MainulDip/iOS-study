@@ -20,12 +20,24 @@ class NetworkManager {
                 if let d = data {
                     print(d)
                     // perse json
+                    let decoder = JSONDecoder()
+//                    let parsedData = try decoder.decode(Results.self, from: d)
+                    do {
+                        let parsedData = try decoder.decode(Results.self, from: d)
+                        DispatchQueue.main.async {
+                            print(parsedData.hits)
+                        }
+                    } catch {
+                        
+                    }
                 }
                 
                 if let res = response {
                     print(res)
                 }
             }
+            
+            task.resume()
         }
     }
 }

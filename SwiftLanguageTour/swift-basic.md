@@ -241,9 +241,9 @@ print(m)
 // Prints "128"
 ```
 
-### range | 0..<4 | 0...4 in for loop:
-0..<4 : from 0 to lessthan 4
-0...4 : from 0 to equalt to 4
+### range/closed-Range | 0..<4 | 0...4 | 0...4 in for loop:
+0..<4 : from 0 to lessthan 4 | Data type => Range<Int>
+0...4 : from 0 to equalt to 4 | Data type = ClosedRange<Int>
 ```swift
 // range
 var total = 0

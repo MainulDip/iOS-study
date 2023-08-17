@@ -8,11 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var networkResult = NetworkManager()
+    
     var body: some View {
         NavigationView {
-            List(posts) { post in
-                Text("\(post.id): \(post.title)")
+            
+            List(1..<4) { n in
+                Text("Hi")
             }
+            
+//            List((1...2)) { post in
+                Text("Hello")
+                    .onTapGesture {
+                        networkResult.fetchUrl()
+                    }
+//            }
         }
         .navigationBarTitle("Hacker News")
     }
