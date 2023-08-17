@@ -174,6 +174,7 @@ struct DiceView: View {
 ```
 
 ### Lists and Identifiable Protocol:
+* Identifiable protocol: It helps to create List items sort by and ID. We need to implement the Identifiable protocol to the SingleList Item struct
 ### Navigation View With List:
 
 ### Advanced State management with Observer Pattern:
