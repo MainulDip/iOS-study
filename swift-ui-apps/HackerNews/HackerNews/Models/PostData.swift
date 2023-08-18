@@ -8,7 +8,7 @@
 import Foundation
 
 struct Results: Decodable {
-    let hits: [Post]
+    var hits: [Post]
 }
 
 struct Post: Decodable, Identifiable {

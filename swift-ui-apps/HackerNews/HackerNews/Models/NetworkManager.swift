@@ -7,7 +7,8 @@
 
 import Foundation
 
-class NetworkManager {
+class NetworkManager: ObservableObject {
+    @Published var res = [Post]()
     func fetchUrl() {
         if let theUrl = URL(string: "http://hn.algolia.com/api/v1/search?tags=front_page") {
             let session = URLSession(configuration: .default)
@@ -21,20 +22,20 @@ class NetworkManager {
                     print(d)
                     // perse json
                     let decoder = JSONDecoder()
-//                    let parsedData = try decoder.decode(Results.self, from: d)
                     do {
                         let parsedData = try decoder.decode(Results.self, from: d)
                         DispatchQueue.main.async {
-                            print(parsedData.hits)
+//                            print(parsedData.hits)
+                            self.res = parsedData.hits
                         }
                     } catch {
-                        
+                        print("Catch Block Error: ", error)
                     }
                 }
                 
-                if let res = response {
-                    print(res)
-                }
+//                if let res = response {
+//                    print(res)
+//                }
             }
             
             task.resume()

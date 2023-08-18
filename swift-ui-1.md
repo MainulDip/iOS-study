@@ -230,7 +230,7 @@ var body: some View {
 }
 ```
 
-### TabView:
+### TabView
 ```swift
 import SwiftUI
 
