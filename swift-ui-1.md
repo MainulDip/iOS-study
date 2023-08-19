@@ -198,6 +198,29 @@ struct ContentView: View {
 }
 ```
 ### UIKit (WebKit) into SwiftUI:
+Using WebKit (form UIKit) into SwiftUI, we need to implement the UIViewRepresentable protocol to our custom merging struct
+```swift
+import WebKit
+
+struct WebView: UIViewRepresentable {
+    
+//    typealias UIViewType = WKWebView
+    let urlStirg: String?
+    
+    func makeUIView(context: Context) -> WKWebView {
+        WKWebView()
+    }
+    
+    func updateUIView(_ uiView: WKWebView, context: Context) {
+        if let url_s = urlStirg {
+            if let url = URL(string: url_s) {
+                let request = URLRequest(url: url)
+                uiView.load(request)
+            }
+        }
+    }
+}
+```
 
 ### Navigations:
 

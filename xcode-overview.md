@@ -11,6 +11,8 @@
 - Code Suggestion : put the cursor inside a function and press "Esc"
 - code indentation : ctrl + i 
 - action center: cmd + alt + click || to embed, extract-subview (convert to reusable component), etc
+- esc: place the cursor on any function and press "esc" key to get the auto suggestions and quick look at the other options and params docs
+- alt + click : to see further docs of a function
 
 ### task
 - clone view : alt/option drag
