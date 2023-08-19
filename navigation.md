@@ -34,6 +34,10 @@ cutomViewController.props = newValue
 ### Segue | element/btn to controller | controller to controller :
 - element/btn to controller navigation using segue can be done using selecting the element/btn of a controller and ctrl + dragging into the destination view/controller, it does not require the segue identifiers (as those are unconditional direct navigation)
 - controller to controller navigation using segue require to have identifier declared, what we will use to navigate if certain condition is match.
+```swift
+// call from controller
+self.performSegue(...)
+```
 ### Navigation Stack | Embedding in Navigation View Controller:
 To get the back button and navigation stacking feature, the "entry point" view can set (embed in Navigation View Controller) by selecting and going through "Editor -> Embed in -> Navigation Controller" 
 ### Navigation Bar Button:
@@ -50,4 +54,13 @@ override func viewDidLoad() {
         title = "Flash Chat"
         navigationItem.hidesBackButton = true
     }
+```
+
+### SwiftUI Navigation:
+```swift
+NavigationView {
+    NavigationLink(destination: DetailView(url: post.url)) {
+        Text("\(post.points): \(post.title)")
+    }      
+}
 ```

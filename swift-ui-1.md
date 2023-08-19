@@ -181,7 +181,7 @@ struct DiceView: View {
 This consist of 3 this (at minimum):
 - Publisher Class:  A class implementing ObservableObject Protocol
 - Publisher Prop: A prop with @Published property wrapper in the ObservableObject Implementing class.
-- Subscriber Pops: A prop in Another class declared with @ObservableObject property wrapper.
+- Subscriber Pops: A prop in Another class declared with @ObservedObject property wrapper.
 
 * When a publisher prop's (from the publisher class) value will be changed, it will update the subscriber prop on another class/struct
 ```swift
