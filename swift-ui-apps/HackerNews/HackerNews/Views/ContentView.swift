@@ -14,7 +14,9 @@ struct ContentView: View {
         NavigationView {
             VStack(alignment: .leading, spacing: 0) {
                 List(networkResult.res) { post in
-                    Text("\(post.points): \(post.title)")
+                    NavigationLink(destination: DetailView(url: post.url)) {
+                        Text("\(post.points): \(post.title)")
+                    }
                 }
             }
             .navigationBarTitleDisplayMode(.inline)

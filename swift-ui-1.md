@@ -178,7 +178,25 @@ struct DiceView: View {
 ### Navigation View With List:
 
 ### Advanced State management with Observer Pattern:
+This consist of 3 this (at minimum):
+- Publisher Class:  A class implementing ObservableObject Protocol
+- Publisher Prop: A prop with @Published property wrapper in the ObservableObject Implementing class.
+- Subscriber Pops: A prop in Another class declared with @ObservableObject property wrapper.
 
+* When a publisher prop's (from the publisher class) value will be changed, it will update the subscriber prop on another class/struct
+```swift
+// Publisher class and prop
+class NetworkManager: ObservableObject {
+    @Published var res = [Post]()
+    ...
+}
+
+// Subscriber prop
+struct ContentView: View {
+    @ObservedObject var networkResult = NetworkManager()
+    ...
+}
+```
 ### UIKit (WebKit) into SwiftUI:
 
 ### Navigations:
