@@ -18,7 +18,10 @@ class TodoListViewController: UITableViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        
     }
+    
+    // MARK - TableView Cell Bindings
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemArray.count
@@ -31,5 +34,22 @@ class TodoListViewController: UITableViewController {
         
         return cell
     }
+    
+    // MARK - TableView Delegates Methods
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("The selected row is \(indexPath.row)")
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if (tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark) {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .none
+        } else {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        }
+    }
+    
+    // MARK - Add New Item
+    
+     
 }
 

@@ -31,7 +31,11 @@
                             <outlet property="delegate" destination="IGy-1S-dBe" id="uhL-d1-6fC"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Todo" id="YlW-wD-mih"/>
+                    <navigationItem key="navigationItem" title="Todo" customizationIdentifier="custom-navigation-bar-props" id="YlW-wD-mih">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="enc-Yx-06b">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="25B-gi-oic" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -42,9 +46,12 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6N6-RF-Ac6" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Be1-H1-gYq">
+                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" id="Be1-H1-gYq">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" systemColor="linkColor"/>
+                        <color key="tintColor" systemColor="linkColor"/>
+                        <color key="barTintColor" systemColor="linkColor"/>
                         <navigationBarAppearance key="scrollEdgeAppearance">
                             <color key="backgroundColor" systemColor="linkColor"/>
                             <textAttributes key="titleTextAttributes">
