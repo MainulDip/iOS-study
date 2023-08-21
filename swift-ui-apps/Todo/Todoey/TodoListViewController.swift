@@ -50,6 +50,9 @@ class TodoListViewController: UITableViewController {
     
     // MARK - Add New Item
     
-     
+    @IBAction func addItem(_ sender: UIBarButtonItem) {
+        print("adding item")
+    }
+    
 }
 

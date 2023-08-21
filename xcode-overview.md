@@ -43,5 +43,5 @@ Docs : https://www.swiftdevjournal.com/using-environment-variables-in-swift-apps
 It's in Debug -> Simulator Location
 Custom Location can be set to debug different things, like CoreLocations
 
-### Code Scenes:
+### Code Scenes
 L: Local Variable (also maybe passed when extending another class)
