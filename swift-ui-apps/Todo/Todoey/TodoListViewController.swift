@@ -39,6 +39,8 @@ class TodoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("The selected row is \(indexPath.row)")
+        
+        // seleced row flash effect
         tableView.deselectRow(at: indexPath, animated: true)
         
         if (tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark) {
