@@ -11,10 +11,16 @@ import UIKit
 class TodoListViewController: UITableViewController {
     
     var itemArray = ["Item 1", "Item 2", "Item 3" ]
+    
+    // Persistance local sotrage using UserDefaults
+    let defaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        // load local data
+        if let items = defaults.array(forKey: "TodoListArray") as? [String] {
+            itemArray = items
+        }
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -62,6 +68,11 @@ class TodoListViewController: UITableViewController {
             if let text = textField.text {
                 DispatchQueue.main.async {
                     self.itemArray.append(text)
+                    
+                    // update to the persistance UserDefaults
+                    self.defaults.set(self.itemArray, forKey: "TodoListArray")
+                    
+                    // reload the tableView
                     self.tableView.reloadData()
                 }
             }

@@ -36,12 +36,14 @@ Docs : https://www.swiftdevjournal.com/using-environment-variables-in-swift-apps
 
 ### Custom Code Snippet:
 - select the code in xcode amd mark it as code snippet by right clicking
-- integrate palceholder using <#Placeholder>
+- integrate placeholder using <#Placeholder>
 - and add the completion text | by what typing will trigger the code snippet
 
 ### Simulator Location Customizing
 It's in Debug -> Simulator Location
 Custom Location can be set to debug different things, like CoreLocations
 
+### Printing/Debugging on Debug Panel:
+- applying breakpoint will provide the interactive shell like interface. Use "print someVar" to print the values of the variable
 ### Code Scenes
 L: Local Variable (also maybe passed when extending another class)
