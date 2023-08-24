@@ -108,7 +108,7 @@ You can use if and let together to work with values that might be missing.
 var/let can be initialized inside if/else conditions to work with values that might be missing. These values are represented as optionals. An optional value either contains a value or contains nil to indicate that a value is missing. Write a question mark (?) after the type of a value to mark the value as optional. if not the error will be -> initializer for conditional binding must have Optional type
 
 ### String Interpolation & Ternary & Optionals:
-There is no "''" single quote in swift. All is double quote. To declare a character, Character type should be used expricitly. Like let a: Character = "a"
+There is no "''" single quote in swift. All is double quote. To declare a character, Character type should be used explicitly. Like let a: Character = "a"
 
 ```swift
 let title: String? = "MD"
@@ -117,13 +117,14 @@ let lastName : String = "Smith"
 let fullN = "\n\( title != nil ? title : "") \(firstname ?? "(No FirstName)") \(lastName ?? "No Lastname")"
 print(fullN)
 
-// optional type casting is for later conditinal let/var initialization
+// optional type casting is for later conditional let/var initialization
 print(title) // Optional("MD")
 print(title ?? "Something Else") // MD
 
-// string interpolation using optional check with ternary
+// string interpolation using optional check with ternary and nil check
 let fullN2 = "\n\(title ?? "(No Title)")\(title != nil ? "." : "") \(firstname ?? "(No FirstName)") \(lastName ?? "No Lastname")"
 print(fullN2)
+// ternary: let sth = Boolean ? "return if true" : "false" 
 ```
 
 ### Switch:

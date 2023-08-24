@@ -22,6 +22,31 @@ class TodoListViewController: UITableViewController {
             itemArray = items
         }
         
+        let newItem = Item(title: "New Item 1")
+//        newItem.done = true
+        itemArray.append(newItem)
+        itemArray.append(Item(title: "New Item 1"))
+        itemArray.append(Item(title: "New Item 1"))
+        itemArray.append(Item(title: "New Item 1"))
+        itemArray.append(Item(title: "New Item 1"))
+        itemArray.append(Item(title: "New Item 1"))
+        itemArray.append(Item(title: "New Item 1"))
+        itemArray.append(Item(title: "New Item 1"))
+        itemArray.append(Item(title: "New Item 1"))
+        itemArray.append(Item(title: "New Item 1"))
+        itemArray.append(Item(title: "New Item 1"))
+        itemArray.append(Item(title: "New Item 1"))
+        itemArray.append(Item(title: "New Item 1"))
+        itemArray.append(Item(title: "New Item 1"))
+        itemArray.append(Item(title: "New Item 1"))
+        itemArray.append(Item(title: "New Item 1"))
+        itemArray.append(Item(title: "New Item 1"))
+        itemArray.append(Item(title: "New Item 1"))
+        itemArray.append(Item(title: "New Item 1"))
+        itemArray.append(Item(title: "New Item 1"))
+    
+        
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -36,7 +61,9 @@ class TodoListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoListCell", for: indexPath)
         
-        cell.textLabel?.text = itemArray[indexPath.row].title
+        let theItem = itemArray[indexPath.row]
+        cell.textLabel?.text = theItem.title
+        cell.accessoryType = theItem.done ? .checkmark : .none
         
         return cell
     }
@@ -49,11 +76,9 @@ class TodoListViewController: UITableViewController {
         // seleced row flash effect
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if (tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark) {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        } else {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        }
+        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+        
+        tableView.reloadData()
     }
     
     // MARK - Add New Item

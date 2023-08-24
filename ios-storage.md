@@ -30,4 +30,4 @@ print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, t
 ```
 
 ### Singleton in Swift:
-- Kinda same as Java and other programming languages, use static property to initialize and get the object
+- Kinda same as Java and other programming languages, use static property to initialize and get the object.
