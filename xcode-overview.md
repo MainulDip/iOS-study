@@ -6,6 +6,9 @@
 ### Major areas:
 - Left (cmd 0) | Right | Bottom (Debug Area) (shift + cmd + y)
 
+### Codings:
+- Find the end of a block (closing braces): 
+ 1st click to select the beginning of braces (first brace), then double click to highlight the entire block
 ### Shortcuts:
 - Build : cmd + r
 - Code Suggestion : put the cursor inside a function and press "Esc"

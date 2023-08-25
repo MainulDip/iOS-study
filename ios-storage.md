@@ -29,5 +29,10 @@ defaults.set(self.itemArray, forKey: "SomeKey")
 print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last! as String)
 ```
 
+### iOS Storage File Inspection:
+- get the file path
+- navigate using terminal | cd / (will point to the root) | cd ~ (will point to home dir)
+- use "open ." to open in macos finder app
+
 ### Singleton in Swift:
 - Kinda same as Java and other programming languages, use static property to initialize and get the object.
