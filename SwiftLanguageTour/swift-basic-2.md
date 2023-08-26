@@ -197,3 +197,48 @@ print("seven times three is \(threeTimesTable[7])") // prints "seven times three
 
 
 ### Generics:
+```swift
+
+let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Item.plist")
+
+override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    // get local data and update the local list using generics
+    if let url = dataFilePath {
+        // this do automatic type inference
+        // itemArray = decodeItemDataGenerics(filePath: url)
+
+        // the type of the generic will be captured form sth: [Item]
+        let sth: [Item] = decodeItemDataGenerics(filePath: url)
+        itemArray = sth
+    }
+}
+
+// regular function
+func decodeItemData (filePath: URL) {
+    let decoder = PropertyListDecoder()
+    
+    do {
+        let data = try Data(contentsOf: filePath)
+        itemArray = try decoder.decode([Item].self, from: data)
+    } catch {
+        print("Decoder Error: ", error)
+    }
+}
+
+// over engineering using generics
+func decodeItemDataGenerics<T: Decodable> (filePath: URL) -> [T] {
+    let decoder = PropertyListDecoder()
+    var storedItemArray: [T] = []
+    
+    do {
+        let data = try Data(contentsOf: filePath)
+        storedItemArray = try decoder.decode([T].self, from: data)
+    } catch {
+        print("Decoder Error: ", error)
+    }
+    
+    return storedItemArray
+}
+```

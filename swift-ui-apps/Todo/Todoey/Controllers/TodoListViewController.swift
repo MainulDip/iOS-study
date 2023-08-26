@@ -24,10 +24,15 @@ class TodoListViewController: UITableViewController {
         print(dataFilePath ?? "dataFilePant is nil lol")
         
         // load local data
+//        if let url = dataFilePath {
+//            decodeItemData(fitePath: url)
+//        }
+        
+        // get local data and update the local list using generics
         if let url = dataFilePath {
-            decodeItemData(fitePath: url)
+            let sth: [Item] = decodeItemDataGenerics(filePath: url)
+            itemArray = sth
         }
-    
         
         
         tableView.delegate = self
@@ -59,9 +64,10 @@ class TodoListViewController: UITableViewController {
         // seleced row flash effect
         tableView.deselectRow(at: indexPath, animated: true)
         
+        // toggle the object prop
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
-        self.encodeAndStore(data: self.itemArray, filePath: self.dataFilePath!)
-        
+        // encode and store local data using NSCoder
+        self.encodeAndStore(localData: self.itemArray, filePath: self.dataFilePath!)
         tableView.reloadData()
     }
     
@@ -83,7 +89,7 @@ class TodoListViewController: UITableViewController {
 //                    self.defaults.set(self.itemArray, forKey: "TodoListArray")
                     
                     // using NSCoder
-                    self.encodeAndStore(data: self.itemArray, filePath: self.dataFilePath!)
+                    self.encodeAndStore(localData: self.itemArray, filePath: self.dataFilePath!)
                     
                     
                     // reload the tableView
@@ -107,11 +113,11 @@ class TodoListViewController: UITableViewController {
     
     // MARK - Custom NSCoder Encoder and Decoder Function
     
-    func encodeAndStore(data: Encodable, filePath: URL) {
+    func encodeAndStore(localData: Encodable, filePath: URL) {
         let encoder = PropertyListEncoder()
         
         do {
-            let data = try encoder.encode(data)
+            let data = try encoder.encode(localData)
             try data.write(to: filePath)
             
         } catch {
@@ -128,6 +134,21 @@ class TodoListViewController: UITableViewController {
         } catch {
             print("Decoder Error: ", error)
         }
+    }
+    
+    // over-engineering using generics
+    func decodeItemDataGenerics<T: Decodable> (filePath: URL) -> [T] {
+        let decoder = PropertyListDecoder()
+        var storedItemArray: [T] = []
+        
+        do {
+            let data = try Data(contentsOf: filePath)
+            storedItemArray = try decoder.decode([T].self, from: data)
+        } catch {
+            print("Decoder Error: ", error)
+        }
+        
+        return storedItemArray
     }
     
 }

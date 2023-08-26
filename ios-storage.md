@@ -36,3 +36,9 @@ print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, t
 
 ### Singleton in Swift:
 - Kinda same as Java and other programming languages, use static property to initialize and get the object.
+
+### Storing Custom Objects Using NSCoder:
+To store custom objects UserDefaults show it's limitation. As UserDefault store data as property lists (key value pair dictionary), any object besides form built in types need the NSCoder Route.
+
+To Use NSCoder to store custom objects into the plist file, we need
+- url, where the data will be stored.
