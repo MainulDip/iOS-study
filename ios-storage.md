@@ -120,7 +120,9 @@ class TodoListViewController: UITableViewController {
 }
 ```
 ### Storage with CoreData:
-- Adding CoreData:
+* Adding CoreData to projects:
+- https://developer.apple.com/documentation/coredata/setting_up_a_core_data_stack
+
  - add new file, select CoreData Section's Data Model
  - add all the AppDelegate functions for CoreData, NSPersistentContainer name should match with the newly created DataModel filename. (Don't forget to add/import the CoreData package)
 
