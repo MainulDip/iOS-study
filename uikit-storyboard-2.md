@@ -4,7 +4,7 @@
 * and the cell inside TableView needs an Identifier (Reuse Identifier)
 
 
-### iOS alert:
+### iOS alert
 ```swift
 let alert = UIAlertController(title: "Add New Todo Item", message: "", preferredStyle: .alert)
 let action = UIAlertAction(title: "Add Item", style: .default) { action in

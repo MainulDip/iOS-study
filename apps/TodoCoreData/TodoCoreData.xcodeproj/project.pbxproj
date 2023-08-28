@@ -42,6 +42,7 @@
 		72B506F12A9679B5004273C6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				72AC142D2A9AE1DF00A5175C /* DataModel.xcdatamodeld */,
 				72B506EF2A9679A9004273C6 /* Item.swift */,
 			);
 			path = Models;
@@ -89,7 +90,6 @@
 				EB2BE504239524DC00FB933B /* LaunchScreen.storyboard */,
 				EB2BE507239524DC00FB933B /* Info.plist */,
 				72B506F12A9679B5004273C6 /* Models */,
-				72AC142D2A9AE1DF00A5175C /* DataModel.xcdatamodeld */,
 			);
 			path = TodoCoreData;
 			sourceTree = "<group>";

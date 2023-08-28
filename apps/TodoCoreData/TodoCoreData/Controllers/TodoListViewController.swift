@@ -19,6 +19,8 @@ class TodoListViewController: UITableViewController {
     
     // Persistance local sotrage using UserDefaults
     let defaults = UserDefaults.standard
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,10 +39,10 @@ class TodoListViewController: UITableViewController {
 //        }
         
         // get local data and update the local list using generics
-        if let url = dataFilePath {
-            let sth: [Item] = decodeItemDataGenerics(filePath: url)
-            itemArray = sth
-        }
+//        if let url = dataFilePath {
+//            let sth: [Item] = decodeItemDataGenerics(filePath: url)
+//            itemArray = sth
+//        }
         
         
         tableView.delegate = self
@@ -74,8 +76,7 @@ class TodoListViewController: UITableViewController {
         
         // toggle the object prop
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
-        // encode and store local data using NSCoder
-        self.encodeAndStore(localData: self.itemArray, filePath: self.dataFilePath!)
+        saveItem()
         tableView.reloadData()
     }
     
@@ -90,15 +91,13 @@ class TodoListViewController: UITableViewController {
             
             if let text = textField.text {
                 DispatchQueue.main.async {
-                    let newItem = Item(title: text)
+                    let newItem = Item(context: self.context)
+                    newItem.title = text
+                    newItem.done = false
                     self.itemArray.append(newItem)
                     
-                    // update to the persistance UserDefaults
-//                    self.defaults.set(self.itemArray, forKey: "TodoListArray")
                     
-                    // using NSCoder
-                    self.encodeAndStore(localData: self.itemArray, filePath: self.dataFilePath!)
-                    
+                    self.saveItem()
                     
                     // reload the tableView
                     self.tableView.reloadData()
@@ -121,43 +120,39 @@ class TodoListViewController: UITableViewController {
     
     // MARK - Custom NSCoder Encoder and Decoder Function
     
-    func encodeAndStore(localData: Encodable, filePath: URL) {
-        let encoder = PropertyListEncoder()
-        
+    func saveItem() {
         do {
-            let data = try encoder.encode(localData)
-            try data.write(to: filePath)
-            
+            try context.save()
         } catch {
-            print("Custom PropertyList Encoder: ", error)
+            print("Saving Context Error: ", error)
         }
     }
     
-    func decodeItemData (fitePath: URL) {
-        let decoder = PropertyListDecoder()
-        
-        do {
-            let data = try Data(contentsOf: fitePath)
-            itemArray = try decoder.decode([Item].self, from: data)
-        } catch {
-            print("Decoder Error: ", error)
-        }
-    }
+//    func decodeItemData (fitePath: URL) {
+//        let decoder = PropertyListDecoder()
+//
+//        do {
+//            let data = try Data(contentsOf: fitePath)
+////            itemArray = try decoder.decode([Item].self, from: data)
+//        } catch {
+//            print("Decoder Error: ", error)
+//        }
+//    }
     
     // over-engineering using generics
-    func decodeItemDataGenerics<T: Decodable> (filePath: URL) -> [T] {
-        let decoder = PropertyListDecoder()
-        var storedItemArray: [T] = []
-        
-        do {
-            let data = try Data(contentsOf: filePath)
-            storedItemArray = try decoder.decode([T].self, from: data)
-        } catch {
-            print("Decoder Error: ", error)
-        }
-        
-        return storedItemArray
-    }
+//    func decodeItemDataGenerics<T: Decodable> (filePath: URL) -> [T] {
+//        let decoder = PropertyListDecoder()
+//        var storedItemArray: [T] = []
+//
+//        do {
+//            let data = try Data(contentsOf: filePath)
+//            storedItemArray = try decoder.decode([T].self, from: data)
+//        } catch {
+//            print("Decoder Error: ", error)
+//        }
+//
+//        return storedItemArray
+//    }
     
 }
 
