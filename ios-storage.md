@@ -122,9 +122,12 @@ class TodoListViewController: UITableViewController {
 ### Storage with CoreData:
 * Adding CoreData to projects:
 - https://developer.apple.com/documentation/coredata/setting_up_a_core_data_stack
+- Note: window?.rootViewController is available form SceneDelegate science ios13
+- access the lazy persistentContainer using : rootVC.container = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
 
  - add new file, select CoreData Section's Data Model
- - add all the AppDelegate functions for CoreData, NSPersistentContainer name should match with the newly created DataModel filename. (Don't forget to add/import the CoreData package)
+ - add all the AppDelegate persistentContainer lazy initialization prop and saveContext function, NSPersistentContainer name should match with the newly created DataModel filename. (Don't forget to add/import the CoreData package)
+
 
 * CoreData Terms:
 - Entity (Class)
