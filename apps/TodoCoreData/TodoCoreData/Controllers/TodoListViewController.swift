@@ -11,7 +11,7 @@ import CoreData
 
 class TodoListViewController: UITableViewController {
     
-    var container: NSPersistentContainer!
+//    var container: NSPersistentContainer!
     
     var itemArray: [Item] = []
     
@@ -23,9 +23,9 @@ class TodoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard container != nil else {
-            fatalError("This view needs a persistent container.")
-        }
+//        guard container != nil else {
+//            fatalError("This view needs a persistent container.")
+//        }
         // The persistent container is available.
         
         print("Our DataFilePath", FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))

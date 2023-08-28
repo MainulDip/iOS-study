@@ -130,6 +130,12 @@ class TodoListViewController: UITableViewController {
 
 
 * CoreData Terms:
-- Entity (Class)
+- Entity (Class): Like a table in db
 - Attributes (Property)
 - Entities are table of data
+
+* CoreData Codegen Props:
+- manual/none:
+- class definition: xcode automatically converts/generates entities and attributes into classes and properties into project's build folder (which is not accessible form xcode, navigate to build dir in terminal, and open in finder to open the build directory)
+ - project build folder : /users/username/Library/Developer/Xcode/DerivedData
+- category extension:
