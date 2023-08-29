@@ -140,3 +140,8 @@ class TodoListViewController: UITableViewController {
  - project build folder : /users/username/Library/Developer/Xcode/DerivedData
  - From there: projectName/build/intermediates.sth/appName.build/Debug-iphonesimulator/appname.build/DeriveSources/CoreDataGenerated/ModelName
 - category extension (mostly used): to use custom coredata entity/attribute dataClass instead of xcode auto generated file, which xcode will link automatically with some generated code (not fully generated)
+
+* Database file (sql) location:
+
+- follow output form : /Users/mainuldip/Library/Developer/CoreSimulator/Devices/9E7D6618-EEE7-46EA-8658-B0D5A448F4E6/data/Containers/Data/Application/AB06A594-DB23-48C9-96C1-C459596301ED/Library/
+- then find the sql files inside Application Support Directory
