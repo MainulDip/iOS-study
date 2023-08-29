@@ -33,10 +33,14 @@ class TodoListViewController: UITableViewController {
         print("Our DataFilePath", FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask))
         print(dataFilePath ?? "dataFilePant is nil lol")
         
-        // load local data
-//        if let url = dataFilePath {
-//            decodeItemData(fitePath: url)
-//        }
+        // load data form CoreData Database
+        var storedData: [Item] = []
+        do {
+            storedData = try context.fetch(.init(entityName: "Item"))
+        } catch {
+            print("Data Fetching Error: ", error)
+        }
+        itemArray = storedData
         
         // get local data and update the local list using generics
 //        if let url = dataFilePath {

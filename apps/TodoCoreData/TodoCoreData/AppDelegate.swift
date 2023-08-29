@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK - Setting up CoreData Stack
     
-    var persistentContainer: NSPersistentContainer = {
+    lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "DataModel")
         container.loadPersistentStores { description, error in
             if let error = error {

@@ -24,7 +24,7 @@
 - zoon in 100% storyboard editor : ctrl + cmd + =
 - zoom out : use the bottom zoom in/out button
 
-### Code Indentations and beautification:
+### Code Indentations and beautification
 To refactor the code indentation (beatify/pretty), xcode requires you to select the code block and then editor -> Structure -> Re-indent 
 
 ### IBOutlet and IBActions's Connections UIs:
