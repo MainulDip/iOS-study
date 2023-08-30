@@ -209,9 +209,15 @@ let request = Item.fetchRequest()
 let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text ?? "")
 request.predicate = predicate
 
+// sorting
+let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+request.sortDescriptors = [sortDescriptor]
+
 do {
     itemArray = try context.fetch(request)
 } catch {
     print("Some Error: \(error)")
 }
 ```
+
+### CoreData RelationShips:

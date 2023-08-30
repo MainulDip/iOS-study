@@ -127,20 +127,13 @@ class TodoListViewController: UITableViewController{
         }
     }
     
-    func loadData() {
-        var storedData: [Item] = []
-        
-        // let request = Item.fetchRequest() // can build the request object this way too
+    func loadData(with requet: NSFetchRequest<Item> = Item.fetchRequest()) {
         do {
-            storedData = try context.fetch(.init(entityName: "Item"))
+            itemArray = try context.fetch(requet)
         } catch {
             print("Data Fetching Error: ", error)
         }
-        itemArray = storedData
     }
-    
-    
-    
 }
 
 // MARK: - SearBar Fucntions
@@ -154,14 +147,25 @@ extension TodoListViewController: UISearchBarDelegate {
         let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text ?? "")
         request.predicate = predicate
         
-        do {
-            itemArray = try context.fetch(request)
-        } catch {
-            print("Some Error: \(error)")
-        }
+        // sorting
+        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+        
+        loadData(with: request)
         
         tableView.reloadData()
         print("Btn Pressed For: Search Text: ", itemArray)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            loadData()
+            
+            DispatchQueue.main.async {
+                // hide the searchBar
+                searchBar.resignFirstResponder()
+            }
+        }
     }
 }
 
