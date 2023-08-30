@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class TodoListViewController: UITableViewController {
+class TodoListViewController: UITableViewController{
     
 //    var container: NSPersistentContainer!
     
@@ -34,13 +34,8 @@ class TodoListViewController: UITableViewController {
         print(dataFilePath ?? "dataFilePant is nil lol")
         
         // load data form CoreData Database
-        var storedData: [Item] = []
-        do {
-            storedData = try context.fetch(.init(entityName: "Item"))
-        } catch {
-            print("Data Fetching Error: ", error)
-        }
-        itemArray = storedData
+        loadData()
+        
         
         // get local data and update the local list using generics
 //        if let url = dataFilePath {
@@ -54,7 +49,7 @@ class TodoListViewController: UITableViewController {
         
     }
     
-    // MARK - TableView Cell Bindings
+    // MARK: - TableView Cell Bindings
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemArray.count
@@ -70,7 +65,7 @@ class TodoListViewController: UITableViewController {
         return cell
     }
     
-    // MARK - TableView Delegates Methods
+    // MARK: - TableView Delegates Methods
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("The selected row is \(indexPath.row)")
@@ -84,7 +79,7 @@ class TodoListViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    // MARK - Add New Item
+    // MARK: - Add New Item
     
     @IBAction func addItem(_ sender: UIBarButtonItem) {
         print("adding item")
@@ -122,7 +117,7 @@ class TodoListViewController: UITableViewController {
         present(alert, animated: true)
     }
     
-    // MARK - Custom NSCoder Encoder and Decoder Function
+    // MARK: - Custom NSCoder Encoder and Decoder Function
     
     func saveItem() {
         do {
@@ -132,31 +127,41 @@ class TodoListViewController: UITableViewController {
         }
     }
     
-//    func decodeItemData (fitePath: URL) {
-//        let decoder = PropertyListDecoder()
-//
-//        do {
-//            let data = try Data(contentsOf: fitePath)
-////            itemArray = try decoder.decode([Item].self, from: data)
-//        } catch {
-//            print("Decoder Error: ", error)
-//        }
-//    }
+    func loadData() {
+        var storedData: [Item] = []
+        
+        // let request = Item.fetchRequest() // can build the request object this way too
+        do {
+            storedData = try context.fetch(.init(entityName: "Item"))
+        } catch {
+            print("Data Fetching Error: ", error)
+        }
+        itemArray = storedData
+    }
     
-    // over-engineering using generics
-//    func decodeItemDataGenerics<T: Decodable> (filePath: URL) -> [T] {
-//        let decoder = PropertyListDecoder()
-//        var storedItemArray: [T] = []
-//
-//        do {
-//            let data = try Data(contentsOf: filePath)
-//            storedItemArray = try decoder.decode([T].self, from: data)
-//        } catch {
-//            print("Decoder Error: ", error)
-//        }
-//
-//        return storedItemArray
-//    }
     
+    
+}
+
+// MARK: - SearBar Fucntions
+extension TodoListViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        // build the request
+        let request = Item.fetchRequest()
+        
+        // NSPredicate, [cd] makes the search case and diacritic insensitive
+        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text ?? "")
+        request.predicate = predicate
+        
+        do {
+            itemArray = try context.fetch(request)
+        } catch {
+            print("Some Error: \(error)")
+        }
+        
+        tableView.reloadData()
+        print("Btn Pressed For: Search Text: ", itemArray)
+    }
 }
 

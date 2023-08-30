@@ -171,11 +171,13 @@ newItem.done = false
 self.itemArray.append(newItem)
 // get the appDelegate's persistentContainer's context
 let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-// commit create
-do {
-    try context.save()
-} catch {
-    print("Saving Context Error: ", error)
+// save current context state to commit create
+func saveItem() {
+    do {
+        try context.save()
+    } catch {
+        print("Saving Context Error: ", error)
+    }
 }
 ```
 
@@ -191,4 +193,25 @@ do {
 itemArray = storedData
 ```
 * Update:
+Same as saveData part of the CREATE
 * Delete:
+- delete item form the context: context.delete(list[index])
+- then delete Item form local variable: list.remove(at: index)
+- save the current context state using context.save() 
+- order matters for context.delete -> to -> list.remove
+### CoreData Searching:
+- Build the context request object and request.predicate = the NSPredicate with the sql like query and placeholder and search text
+- Check NSPredicate CheatSheet by Realm and Mattt Thompson's article on NSPredicate (Search Google).
+```swift
+let request = Item.fetchRequest()
+
+// NSPredicate, [cd] makes the search case and diacritic insensitive
+let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text ?? "")
+request.predicate = predicate
+
+do {
+    itemArray = try context.fetch(request)
+} catch {
+    print("Some Error: \(error)")
+}
+```
