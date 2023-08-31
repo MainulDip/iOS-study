@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7279358C2A9F98120011207D /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7279358B2A9F98120011207D /* CategoryViewController.swift */; };
+		728B4A102AA0FCB900C5D2FF /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728B4A0F2AA0FCB900C5D2FF /* Category.swift */; };
 		72AC142F2A9AE1DF00A5175C /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72AC142D2A9AE1DF00A5175C /* DataModel.xcdatamodeld */; };
 		72B506F02A9679A9004273C6 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B506EF2A9679A9004273C6 /* Item.swift */; };
 		EB2BE4FA239524DB00FB933B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BE4F9239524DB00FB933B /* AppDelegate.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		7279358B2A9F98120011207D /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		728B4A0F2AA0FCB900C5D2FF /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		72AC142E2A9AE1DF00A5175C /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		72B506EF2A9679A9004273C6 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		EB2BE4F6239524DB00FB933B /* TodoCoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoCoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,6 +48,7 @@
 			children = (
 				72AC142D2A9AE1DF00A5175C /* DataModel.xcdatamodeld */,
 				72B506EF2A9679A9004273C6 /* Item.swift */,
+				728B4A0F2AA0FCB900C5D2FF /* Category.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 				72AC142F2A9AE1DF00A5175C /* DataModel.xcdatamodeld in Sources */,
 				72B506F02A9679A9004273C6 /* Item.swift in Sources */,
 				EB2BE4FA239524DB00FB933B /* AppDelegate.swift in Sources */,
+				728B4A102AA0FCB900C5D2FF /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

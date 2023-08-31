@@ -14,6 +14,11 @@ class TodoListViewController: UITableViewController{
 //    var container: NSPersistentContainer!
     
     var itemArray: [Item] = []
+    var selectedCategory: Category? {
+        didSet {
+            loadData()
+        }
+    }
     
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Item.plist")
     
@@ -34,7 +39,7 @@ class TodoListViewController: UITableViewController{
         print(dataFilePath ?? "dataFilePant is nil lol")
         
         // load data form CoreData Database
-        loadData()
+//        loadData()
         
         
         // get local data and update the local list using generics
@@ -93,6 +98,7 @@ class TodoListViewController: UITableViewController{
                     let newItem = Item(context: self.context)
                     newItem.title = text
                     newItem.done = false
+                    newItem.parentCategory = self.selectedCategory
                     self.itemArray.append(newItem)
                     
                     
@@ -127,9 +133,20 @@ class TodoListViewController: UITableViewController{
         }
     }
     
-    func loadData(with requet: NSFetchRequest<Item> = Item.fetchRequest()) {
+    func loadData(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        
+        if let additionalPredicate = predicate {
+            let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [additionalPredicate, categoryPredicate])
+            request.predicate = compoundPredicate
+        } else {
+            request.predicate = categoryPredicate
+        }
+        
+        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        
         do {
-            itemArray = try context.fetch(requet)
+            itemArray = try context.fetch(request)
         } catch {
             print("Data Fetching Error: ", error)
         }
@@ -145,13 +162,12 @@ extension TodoListViewController: UISearchBarDelegate {
         
         // NSPredicate, [cd] makes the search case and diacritic insensitive
         let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text ?? "")
-        request.predicate = predicate
         
         // sorting
         let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
         request.sortDescriptors = [sortDescriptor]
         
-        loadData(with: request)
+        loadData(with: request, predicate: predicate)
         
         tableView.reloadData()
         print("Btn Pressed For: Search Text: ", itemArray)

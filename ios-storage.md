@@ -221,3 +221,7 @@ do {
 ```
 
 ### CoreData RelationShips:
+- set the relationship in the CoreData Model File and and use predicate to fetch them
+```swift
+let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+```
