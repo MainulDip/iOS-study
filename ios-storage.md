@@ -225,3 +225,6 @@ do {
 ```swift
 let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
 ```
+
+### ios Realm:
+=> Getting Started : https://www.mongodb.com/docs/realm/sdk/swift/install/#std-label-ios-install

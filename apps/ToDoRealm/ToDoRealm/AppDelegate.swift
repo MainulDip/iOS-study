@@ -1,5 +1,6 @@
 import UIKit
 import CoreData
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -8,9 +9,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        if let rootVC = window?.rootViewController as? TodoListViewController {
-//            rootVC.container = persistentContainer
+        // Realm DB file location
+        print(Realm.Configuration.defaultConfiguration.fileURL)
+        
+        // init Realm
+        let data = Data()
+        data.name = "Something"
+        data.age = 12
+        
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(data)
+            }
+        } catch {
+            print("Something Went Wrong With Realm: \(error)")
         }
+        
+//        if let rootVC = window?.rootViewController as? TodoListViewController {
+////            rootVC.container = persistentContainer
+//        }
         
         return true
     }
