@@ -8,8 +8,11 @@
 
 import UIKit
 import CoreData
+import RealmSwift
 
 class CategoryViewController: UITableViewController {
+    
+    let realm = try! Realm()
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -18,7 +21,7 @@ class CategoryViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadData()
+//        loadData()
     }
     
     
@@ -32,12 +35,12 @@ class CategoryViewController: UITableViewController {
             
             if let text = textField.text {
                 DispatchQueue.main.async {
-                    let newItem = Category(context: self.context)
+                    let newItem = Category()
                     newItem.name = text
                     self.categoryArr.append(newItem)
                     
                     
-                    self.saveItem()
+                    self.save(category: newItem)
                     
                     // reload the tableView
                     self.tableView.reloadData()
@@ -58,21 +61,23 @@ class CategoryViewController: UITableViewController {
         present(alert, animated: true)
     }
     
-    func saveItem() {
+    func save(category: Category) {
         do {
-            try context.save()
+            try realm.write({
+                realm.add(category)
+            })
         } catch {
             print("Saving Context Error: ", error)
         }
     }
     
-    func loadData(with requet: NSFetchRequest<Category> = Category.fetchRequest()) {
-        do {
-            categoryArr = try context.fetch(requet)
-        } catch {
-            print("Data Fetching Error: ", error)
-        }
-    }
+//    func loadData(with requet: NSFetchRequest<Category> = Category.fetchRequest()) {
+//        do {
+//            categoryArr = try context.fetch(requet)
+//        } catch {
+//            print("Data Fetching Error: ", error)
+//        }
+//    }
     
     // MARK: - TableView DataSource and Delegate Methods
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

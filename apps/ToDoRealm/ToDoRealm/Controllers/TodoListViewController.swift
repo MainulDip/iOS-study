@@ -16,7 +16,7 @@ class TodoListViewController: UITableViewController{
     var itemArray: [Item] = []
     var selectedCategory: Category? {
         didSet {
-            loadData()
+//            loadData()
         }
     }
     
@@ -95,10 +95,10 @@ class TodoListViewController: UITableViewController{
             
             if let text = textField.text {
                 DispatchQueue.main.async {
-                    let newItem = Item(context: self.context)
+                    let newItem = Item()
                     newItem.title = text
                     newItem.done = false
-                    newItem.parentCategory = self.selectedCategory
+//                    newItem.parentCategory = self.selectedCategory
                     self.itemArray.append(newItem)
                     
                     
@@ -133,55 +133,55 @@ class TodoListViewController: UITableViewController{
         }
     }
     
-    func loadData(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
-        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
-        
-        if let additionalPredicate = predicate {
-            let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [additionalPredicate, categoryPredicate])
-            request.predicate = compoundPredicate
-        } else {
-            request.predicate = categoryPredicate
-        }
-        
-        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-        
-        do {
-            itemArray = try context.fetch(request)
-        } catch {
-            print("Data Fetching Error: ", error)
-        }
-    }
+//    func loadData(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
+//        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+//
+//        if let additionalPredicate = predicate {
+//            let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [additionalPredicate, categoryPredicate])
+//            request.predicate = compoundPredicate
+//        } else {
+//            request.predicate = categoryPredicate
+//        }
+//
+//        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+//
+//        do {
+//            itemArray = try context.fetch(request)
+//        } catch {
+//            print("Data Fetching Error: ", error)
+//        }
+//    }
 }
 
 // MARK: - SearBar Fucntions
-extension TodoListViewController: UISearchBarDelegate {
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        // build the request
-        let request = Item.fetchRequest()
-        
-        // NSPredicate, [cd] makes the search case and diacritic insensitive
-        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text ?? "")
-        
-        // sorting
-        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
-        request.sortDescriptors = [sortDescriptor]
-        
-        loadData(with: request, predicate: predicate)
-        
-        tableView.reloadData()
-        print("Btn Pressed For: Search Text: ", itemArray)
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchBar.text?.count == 0 {
-            loadData()
-            
-            DispatchQueue.main.async {
-                // hide the searchBar
-                searchBar.resignFirstResponder()
-            }
-        }
-    }
-}
+//extension TodoListViewController: UISearchBarDelegate {
+//
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        // build the request
+//        let request = Item.fetchRequest()
+//
+//        // NSPredicate, [cd] makes the search case and diacritic insensitive
+//        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text ?? "")
+//
+//        // sorting
+//        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+//        request.sortDescriptors = [sortDescriptor]
+//
+//        loadData(with: request, predicate: predicate)
+//
+//        tableView.reloadData()
+//        print("Btn Pressed For: Search Text: ", itemArray)
+//    }
+//
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        if searchBar.text?.count == 0 {
+//            loadData()
+//
+//            DispatchQueue.main.async {
+//                // hide the searchBar
+//                searchBar.resignFirstResponder()
+//            }
+//        }
+//    }
+//}
 

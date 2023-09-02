@@ -220,11 +220,47 @@ do {
 }
 ```
 
-### CoreData RelationShips:
+### CoreData RelationShips and query:
 - set the relationship in the CoreData Model File and and use predicate to fetch them
 ```swift
 let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
 ```
 
-### ios Realm:
+### ios Realm init:
 => Getting Started : https://www.mongodb.com/docs/realm/sdk/swift/install/#std-label-ios-install
+```swift
+// model class
+import RealmSwift
+
+class Data: Object {
+    // dynamic is a "declaration" keyword which makes it a dynamic dispatch instade of a static dispatch
+    // allows the marked property beign monitord for change wihile on runtime (app running)
+    // @objc denotes merkes it clear that this "dynamic" keyword is comming form the Ojective C API
+    @objc dynamic var name: String = ""
+    @objc dynamic var age: Int = 0
+}
+
+
+// appDelegate Entry
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+// Realm DB file location
+print(Realm.Configuration.defaultConfiguration.fileURL)
+
+// init Realm
+let data = Data()
+data.name = "Something"
+data.age = 12
+
+do {
+    let realm = try Realm()
+    try realm.write {
+        realm.add(data)
+    }
+} catch {
+    print("Something Went Wrong With Realm: \(error)")
+}
+
+return true
+}
+```

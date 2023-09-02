@@ -12,16 +12,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Realm DB file location
         print(Realm.Configuration.defaultConfiguration.fileURL)
         
-        // init Realm
-        let data = Data()
-        data.name = "Something"
-        data.age = 12
-        
         do {
             let realm = try Realm()
-            try realm.write {
-                realm.add(data)
-            }
         } catch {
             print("Something Went Wrong With Realm: \(error)")
         }
