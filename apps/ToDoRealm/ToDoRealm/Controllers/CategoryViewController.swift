@@ -16,12 +16,12 @@ class CategoryViewController: UITableViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    var categoryArr: [Category] = []
+    var categoryArr: Results<Category>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        loadData()
+        loadData()
     }
     
     
@@ -37,7 +37,6 @@ class CategoryViewController: UITableViewController {
                 DispatchQueue.main.async {
                     let newItem = Category()
                     newItem.name = text
-                    self.categoryArr.append(newItem)
                     
                     
                     self.save(category: newItem)
@@ -71,36 +70,32 @@ class CategoryViewController: UITableViewController {
         }
     }
     
-//    func loadData(with requet: NSFetchRequest<Category> = Category.fetchRequest()) {
-//        do {
-//            categoryArr = try context.fetch(requet)
-//        } catch {
-//            print("Data Fetching Error: ", error)
-//        }
-//    }
+    func loadData() {
+        categoryArr = realm.objects(Category.self)
+    }
     
     // MARK: - TableView DataSource and Delegate Methods
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categoryArr.count
+        return categoryArr?.count ?? 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
         
-        let theItem = categoryArr[indexPath.row]
+        let theItem = categoryArr![indexPath.row]
         cell.textLabel?.text = theItem.name
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Selected Row Text is : ", categoryArr[indexPath.row].name)
+        print("Selected Row Text is : ", categoryArr![indexPath.row].name)
         performSegue(withIdentifier: "GoToItems", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! TodoListViewController
         if let indexPath = tableView.indexPathForSelectedRow {
-            destinationVC.selectedCategory = categoryArr[indexPath.row]
+            destinationVC.selectedCategory = categoryArr![indexPath.row]
         }
 //        destinationVC.itemArray = []
     }

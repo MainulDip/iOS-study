@@ -264,3 +264,35 @@ do {
 return true
 }
 ```
+### Realm RelationShips:
+```swuft
+class Category: Object {
+    @objc dynamic var name: String = ""
+    var items = List<Item>()
+}
+
+class Item: Object {
+    @objc dynamic var title: String = ""
+    @objc dynamic var done: Bool = false
+    var parentCategory = LinkingObjects(fromType: Category.self, property: "items")
+}
+
+SomeViewController: UIViewController {
+    let realm = try! Realm()
+
+    fun somefun() {
+        let newItem = Category()
+        newItem.name = text
+        self.categoryArr.append(newItem)
+
+        do {
+            try realm.write({
+                realm.add(newItem)
+            })
+        } catch {
+            print("Saving Context Error: ", error)
+        }
+
+    }
+}
+```
