@@ -279,11 +279,11 @@ class Item: Object {
 
 SomeViewController: UIViewController {
     let realm = try! Realm()
+    var categoryArr: Results<Category>?
 
-    fun somefun() {
+    fun storeData() {
         let newItem = Category()
-        newItem.name = text
-        self.categoryArr.append(newItem)
+        newItem.name = text ?? "Some Texts"
 
         do {
             try realm.write({
@@ -293,6 +293,10 @@ SomeViewController: UIViewController {
             print("Saving Context Error: ", error)
         }
 
+    }
+
+    fun loadData() {
+        categoryArr = realm.objects(Category.self)
     }
 }
 ```
