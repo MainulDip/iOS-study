@@ -292,11 +292,40 @@ SomeViewController: UIViewController {
         } catch {
             print("Saving Context Error: ", error)
         }
+    }
 
+    func saveItem() {
+        if let currentCategory = self.selectedCategory {
+            do {
+                try self.realm.write {
+                    let newItem = Item()
+                    newItem.title = text
+                    currentCategory.items.append(newItem)
+                }
+            } catch {
+                print(error)
+            }
+        }
     }
 
     fun loadData() {
-        categoryArr = realm.objects(Category.self)
+        todoItems = selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
+    }
+
+    fun updateOrDeleteData(){
+        if let item = todoItems?[indexPath.row] {
+            do {
+                try realm.write {
+                    // updating item's prop
+                    item.done = !item.done
+                    
+                    // deleting
+                    // realm.delete(item)
+                }
+            } catch {
+                print ("error updating", error)
+            }
+        }
     }
 }
 ```

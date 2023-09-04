@@ -30,3 +30,13 @@ alert.addTextField { alertTextField in
 alert.addAction(action)
 present(alert, animated: true)
 ```
+
+### First Time Init to Check:
+```swift
+// on AppDelegate, initialize the Realm without let and assign to underscores inside do/catch block
+_ = Try Realm()
+```
+### Task
+=> SwipeCellKit (Delete feature for todo realm app)
+=> In App Purchase | Not Now
+=> Swift Deep Diving
