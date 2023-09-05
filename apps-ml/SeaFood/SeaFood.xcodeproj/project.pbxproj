@@ -13,6 +13,7 @@
 		7265A28E2AA7CAC800E97CDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7265A28C2AA7CAC800E97CDA /* Main.storyboard */; };
 		7265A2902AA7CAC900E97CDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7265A28F2AA7CAC900E97CDA /* Assets.xcassets */; };
 		7265A2932AA7CAC900E97CDA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7265A2912AA7CAC900E97CDA /* LaunchScreen.storyboard */; };
+		7265A29B2AA7D30A00E97CDA /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7265A29A2AA7D30A00E97CDA /* Inceptionv3.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		7265A28F2AA7CAC900E97CDA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7265A2922AA7CAC900E97CDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7265A2942AA7CAC900E97CDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7265A29A2AA7D30A00E97CDA /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				7265A28F2AA7CAC900E97CDA /* Assets.xcassets */,
 				7265A2912AA7CAC900E97CDA /* LaunchScreen.storyboard */,
 				7265A2942AA7CAC900E97CDA /* Info.plist */,
+				7265A29A2AA7D30A00E97CDA /* Inceptionv3.mlmodel */,
 			);
 			path = SeaFood;
 			sourceTree = "<group>";
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7265A28B2AA7CAC800E97CDA /* ViewController.swift in Sources */,
+				7265A29B2AA7D30A00E97CDA /* Inceptionv3.mlmodel in Sources */,
 				7265A2872AA7CAC800E97CDA /* AppDelegate.swift in Sources */,
 				7265A2892AA7CAC800E97CDA /* SceneDelegate.swift in Sources */,
 			);
