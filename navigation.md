@@ -43,7 +43,7 @@ To get the back button and navigation stacking feature, the "entry point" view c
 ### Navigation Bar Button:
 - Bar Button Item : A specialized button for placement on a toolbar, navigation bar, or shortcuts bar.
 - Bar Button Item Group: Container form multiple Navigation Bar item
-### Popping into root view navigation:
+### Popping into root view navigation
 ```swift
 navigationController?.popToRootViewController(animated: true)
 ```

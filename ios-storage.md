@@ -129,7 +129,7 @@ class TodoListViewController: UITableViewController {
  - add all the AppDelegate persistentContainer lazy initialization prop and saveContext function, NSPersistentContainer name should match with the newly created DataModel filename. (Don't forget to add/import the CoreData package)
 
 
-### CoreData Terms and CodeGen Options:
+### CoreData Terms and CodeGen Options
 - Entity (Class): Like a table in db. Extends NSManagedObject of CoreData
 - Attributes (Property)
 - Entities are table of data
