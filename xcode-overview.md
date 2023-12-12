@@ -6,10 +6,16 @@
 ### Major areas:
 - Left (cmd 0) | Right | Bottom (Debug Area) (shift + cmd + y)
 
+### SwiftUI Preview Area (Canvas):
+- Show Preview -> alt/option + cmd + enter/return
+- Hide Preview -> cmd + enter/return
+- Refresh/Build Preview -> cmd + alt/option + p
+
 ### Codings:
 - Find the end of a block (closing braces): 
  1st click to select the beginning of braces (first brace), then double click to highlight the entire block
 ### Shortcuts:
+- Indent/Re-Indent Code : Ctrl + i 
 - Build : cmd + r
 - Code Suggestion : put the cursor inside a function and press "Esc"
 - code indentation : ctrl + i 
@@ -25,7 +31,7 @@
 - zoom out : use the bottom zoom in/out button
 
 ### Code Indentations and beautification
-To refactor the code indentation (beatify/pretty), xcode requires you to select the code block and then editor -> Structure -> Re-indent 
+To refactor the code indentation (beatify/pretty), xcode requires you to select the code block and then editor -> Structure -> Re-indent, or `ctrl + i`. Ctrl is `^` mac
 
 ### IBOutlet and IBActions's Connections UIs:
 It is at the lat entry of the storyboard's view's attribute panel.
