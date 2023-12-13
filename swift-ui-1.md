@@ -6,7 +6,7 @@ It's a declarative layout system based on VHZ (Vertical/Y, Horizontal/X, Depth/z
 * Initially provides 2 structs, 1 for the actual content (ContentView) and other is for the preview/canvas area as Content_Previews
 * Device/Canvas Preview frame can be changed in the previews function by using => ContentView().previewDevice(PreviewDevice(rawValue: "iPhone SE"))
 
-### Basic Project Structures
+### Basic Project Structures:
 * Directory:
     - ProjectName : Source file for the App
     - ProjectNameTests : Unit Tests

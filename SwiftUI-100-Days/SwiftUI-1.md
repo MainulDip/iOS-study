@@ -23,6 +23,8 @@ struct ContentView: View {
 ### @State and Two Way Binding ($):
 To be able to get a mutable variable `@State` property-wrapper (annotation).
 
+It's said that `SwiftUI’s views are a function of their state`. So if state change the view will be updated.
+
 `$ Two Way Binding` (Binding<Type>) - is used to change/mutate/read (Read/Write) the declared state variable inside and outside of the body property at the same time. using two way binding, the view is informed about the change on a defined State. Is done by `$stateName` inside of a body::view and declaration of @State var.
 ```swift
 struct ContentView: View {
@@ -79,4 +81,5 @@ Locale is a massive struct built into iOS that is responsible for storing all th
 Also, if not set, we can set default
 ```swift
 TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+.keyboardType(.decimalPad) // .numberPad and .decimalPad will make the popup keyboard number only mode
 ```

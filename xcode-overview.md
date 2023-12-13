@@ -14,7 +14,7 @@
 ### Codings:
 - Find the end of a block (closing braces): 
  1st click to select the beginning of braces (first brace), then double click to highlight the entire block
-### Shortcuts:
+### Shortcuts
 - Indent/Re-Indent Code : Ctrl + i 
 - Build : cmd + r
 - Code Suggestion : put the cursor inside a function and press "Esc"
