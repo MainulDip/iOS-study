@@ -134,3 +134,43 @@ TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.
 `@UIApplicationDelegateAdaptor` is used to create and register a class as the app delegate for an iOS app. This owns its data. 
 
 From : https://www.hackingwithswift.com/quick-start/swiftui/all-swiftui-property-wrappers-explained-and-compared
+### VStack, HStack and ZStack:
+`VStack` for arranging things vertically
+`HStack` for arranging things horizontally
+`ZStack` for arranging things by depth, draws its contents from top to bottom, back to front.
+
+Docs - https://developer.apple.com/tutorials/swiftui-concepts/adjusting-the-space-between-views
+```swift
+/**
+ * A Screen With Fill with Red Color, including safe area and
+ * 2 Vertical Rows  each with 2 Horizontal Columns
+ * the order of modifier matters like
+ * padding will not work if placed after backgorund
+ */
+
+struct ContentView: View {
+    var body: some View {
+        ZStack {
+            Color.red.edgesIgnoringSafeArea(.all) // same as .ignoresSafeArea()
+            VStack(spacing: 20) {
+                HStack(spacing: 20) {
+                    Text("Your content 1").padding(10).background(Color.orange)
+                    Text("||")
+                    Text("Your content 2").padding(10).background(Color.cyan)
+                }
+                .background(Color.white)
+                .cornerRadius(10) // round corner
+                
+                HStack(spacing: 20) {
+                    Text("Your content 3")
+                    Text("||")
+                    Text("Your content 4")
+                }
+                .padding(20) // the order of padding and background matters, will not work if placed after backgorund
+                .background(Color.white)
+                .cornerRadius(10)
+            }
+        }
+    }
+}
+```
