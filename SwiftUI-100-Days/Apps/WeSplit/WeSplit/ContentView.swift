@@ -33,7 +33,8 @@ struct ContentView: View {
                 Section {
                     TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                         .keyboardType(.decimalPad)
-                    
+                        .focused($amountIsFocused)
+
                     Section("How much tip do you want to leave?") {
                         Picker("Tip percentage", selection: $tipPercentage) {
                             ForEach(tipPercentages, id: \.self) {
@@ -52,11 +53,19 @@ struct ContentView: View {
                     
                     Section {
                         Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                            
                     }
                 }
             }
             .navigationTitle("WeSplit")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                if amountIsFocused {
+                    Button("Done") {
+                        amountIsFocused = false
+                    }
+                }
+            }
         }
     }
 }
