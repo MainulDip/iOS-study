@@ -56,4 +56,27 @@ struct ContentView: View {
 ### Picker and ForEach with id: KeyPath<T> as (\Class.PropertyName
 ):
 https://docs.swift.org/swift-book/documentation/the-swift-programming-language/expressions/#Key-Path-Expression
+```swift
+struct ContentView: View {
+    
+    let students = ["Harry", "Hermione", "Ron"]
+    @State private var selectedStudent = "Harry"
+    
+    var body: some View {
+        
+        // using 2 way binding on $selectedStudent as bot read/write
+        Picker("Select your Student", selection: $selectedStudent) {
+            ForEach(students, id: \.self) { // \.self the the KeyPath for using key/id which refers to the students array's item 
+                Text($0)
+            }
+        }      
+    }
+}
+```
 
+### Local to get User's Settings:
+Locale is a massive struct built into iOS that is responsible for storing all the user’s region settings – what calendar they use, how they separate thousands digits in numbers, whether they use the metric system, and more.
+Also, if not set, we can set default
+```swift
+TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+```

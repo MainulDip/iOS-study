@@ -9,44 +9,18 @@ import SwiftUI
 
 struct ContentView: View {
     
-    let students = ["Harry", "Hermione", "Ron"]
-    @State private var selectedStudent = "Harry"
+    @State private var checkAmount = 0.0
+    @State private var numberOfPeople = 2
+    @State private var tipPercentage = 20
     
-    @State private var tapCount = 0
-    
-    @State private var name = ""
+    let tipPercentages = [10, 15, 20, 25, 0]
     
     var body: some View {
-        
-        NavigationStack {
-            Form {
-                
-                Section {
-                    TextField("Enter Your Name", text: $name)
-                    Text("Hello, World by \(name)")
-                }
-                
-                
-                Section {
-                    Picker("Select your Student", selection: $selectedStudent) {
-                        ForEach(students, id: \.self) {
-                            Text($0)
-                        }
-                    }
-                }
-            }
-            .navigationTitle("SwiftUI")
-            .navigationBarTitleDisplayMode(.inline)
-            
-            Button("Tap Count: \(tapCount)") {
-                self.tapCount += 1
-            }
-            Button("Tap Count: \(tapCount)") {
-                self.tapCount += 1
+        Form {
+            Section {
+                TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
             }
         }
-        
-        
     }
 }
 
