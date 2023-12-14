@@ -4,7 +4,7 @@ Jump starting guide on Networking
 ### Process
 - 1st: Build the url form String
 - 2nd: Create a Session Instance
-- 3rd : build task as dataTask on the session instance with the url and implement data and error handling. This part we also need to parse json data. To perse JSON data, we need to create data structure )mapping swift object from json) with same prop name as json data 
+- 3rd : build task as dataTask on the session instance with the url and implement data and error handling. This part we also need to parse json data. To perse JSON data, we need to create data structure (`mapping swift object from json`) with same prop name as json data
 - 4th: finally start the task with task.resume
 ```swift
 class NetworkManager: ObservableObject {

@@ -1,3 +1,4 @@
+--------------------------- WeSplit-1 ---------------------
 ### Stop content from scrolling beyond top Safe Ares:
 - Put the content inside of a NavigationStack and add the .navigationTitle("") on the content's container
 ```swift
@@ -134,10 +135,18 @@ TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.
 `@UIApplicationDelegateAdaptor` is used to create and register a class as the app delegate for an iOS app. This owns its data. 
 
 From : https://www.hackingwithswift.com/quick-start/swiftui/all-swiftui-property-wrappers-explained-and-compared
+
+
+--------------------------- GuessTheFlag-2 ---------------------
+
+
 ### VStack, HStack and ZStack:
-`VStack` for arranging things vertically
+`VStack` for arranging things vertically.
 `HStack` for arranging things horizontally
 `ZStack` for arranging things by depth, draws its contents from top to bottom, back to front.
+* Each Stack take same vertical space as its content.
+* the size of the stack can be set using `.frame(maxWidth:maxHeight)` attaching with the stack.
+* `.frame(maxWidth: .infinity, maxHeight: .infinity)` will make the stack as much space as possible.
 
 Docs - https://developer.apple.com/tutorials/swiftui-concepts/adjusting-the-space-between-views
 ```swift
@@ -239,3 +248,234 @@ struct ContentView: View {
     }
 }
 ```
+
+
+--------------------------- ViewsAndModifiers-3 ---------------------
+
+### SwiftUI View Structure and Modifiers:
+Almost every time we apply a modifier to a SwiftUI view, we actually create a new view with that change applied.
+
+- Whats under the main view? -> `UIHostingController`, it is the bridge between UIKit (Apple’s original iOS UI framework) and SwiftUI. But its not for regular purpose use. like the size of the stack can be set using `.frame(maxWidth:maxHeight)` attaching with the stack. ex, `.frame(maxWidth: .infinity, maxHeight: .infinity)` will make the stack as much space as possible.
+
+* the order of your modifiers matters.
+we can use `print(type(of: self.body))` to inspect the view and modifiers underlying ViewClass<T>. Where ViewClass<T1, T2> is not same as ViewClass<T2, T1>.
+```swift
+Button("Hello, world!") {
+    print(type(of: self.body))
+}
+.frame(width: 200, height: 200)
+.background(.red)
+
+// is not same as, later case background color will not applied to the new set dimension.
+Button("Hello, world!") {
+    print(type(of: self.body))
+}
+.background(.red)
+.frame(width: 200, height: 200)
+```
+
+* Same Modifier for multiple times in combination: An important side effect of using modifiers is that we can apply the same effect multiple times: each one simply adds to whatever was there before.
+```swift
+Text("Hello, world!")
+    .padding()
+    .background(.red)
+    .padding()
+    .background(.blue)
+    .padding()
+    .background(.green)
+    .padding()
+    .background(.yellow)
+```
+
+
+### some View and Opaque Type Protocol:
+Opaque Type Hide implementation details about a value’s type. Likw `: some View` is any type Struct that implements View Protocol. (NB, Structs cannot inherit from another struct, can only implement multiple protocols and class can do both)
+docs: https://docs.swift.org/swift-book/documentation/the-swift-programming-language/opaquetypes/
+
+
+### Conditional Modifiers:
+Using Modifies Conditionally to generate value using ternary operators based on a @State is more efficient than Conditionally generate different views.
+```swift
+@State private var useRedText = false
+
+var body: some View {
+    Button("Hello World") {
+        // flip the Boolean between true and false
+        useRedText.toggle()            
+    }
+    .foregroundStyle(useRedText ? .red : .blue)
+}
+
+/**
+* ternary conditional modifiers with @State is more efficient than
+* conditional view generation
+*/
+var body: some View {
+    if useRedText {
+        Button("Hello World") {
+            useRedText.toggle()
+        }
+        .foregroundStyle(.red)
+    } else {
+        Button("Hello World") {
+            useRedText.toggle()
+        }
+        .foregroundStyle(.blue)
+    }
+}
+```
+### Environment Modifiers vs Regular Modifiers:
+When applied to multiple views at a time, we can override/remove environment modifiers from the child view, but not regular modifiers. Regular modifier will adds effects any way. Like `.font` is a environment modifier, but `.blur` is regular.
+```swift
+// the fist text will override the container applied modifier
+VStack {
+    Text("Gryffindor")
+        .font(.largeTitle)
+    Text("Hufflepuff")
+    Text("Ravenclaw")
+    Text("Slytherin")
+}
+.font(.title)
+
+// the first text will not override the container modifier, rather adds
+VStack {
+    Text("Gryffindor")
+        .blur(radius: 1)
+    Text("Hufflepuff")
+    Text("Ravenclaw")
+    Text("Slytherin")
+}
+.blur(radius: 6)
+```
+
+* NB: there is no way of knowing ahead of time which modifiers are environment modifiers and which are regular modifiers other than reading the individual documentation for each modifier
+
+### Properties to store and compute Views:
+View can be stored to Structs propety and can be used inside layout (body: some View). 
+```swift
+struct ContentView: View {
+    let motto1 = Text("Draco dormiens")
+    let motto2 = Text("nunquam titillandus")
+
+    var body: some View {
+        VStack {
+            motto1
+                .foregroundStyle(.red)
+            motto2
+                .foregroundStyle(.blue)
+        }
+    }
+}
+```
+
+Computed properties of View can be created as well.
+```swift
+var motto1: some View {
+    Text("Draco dormiens")
+}
+```
+* Swift doesn’t let us create one stored property that refers to other stored properties, because it would cause problems when the object is created. This means trying to create a TextField bound to a local property will cause problems.
+
+But unlike the body property, Swift won’t automatically apply the @ViewBuilder attribute here, so if you want to send multiple views back you have three options.
+```swift
+// 1
+var spells: some View {
+    VStack {
+        Text("Lumos")
+        Text("Obliviate")
+    }
+}
+
+// 2
+var spells: some View {
+    Group {
+        Text("Lumos")
+        Text("Obliviate")
+    }
+}
+
+// 3
+@ViewBuilder var spells: some View {
+    Text("Lumos")
+    Text("Obliviate")
+}
+```
+### View Composition:
+SwiftUI lets us break complex views down into smaller views without incurring much if any performance impact.
+```swift
+struct CapsuleText: View {
+    var text: String
+
+    var body: some View {
+        Text(text)
+            .font(.largeTitle)
+            .padding()
+            .background(.blue)
+    }
+}
+
+struct ContentView: View {
+    var body: some View {
+        VStack(spacing: 10) {
+            CapsuleText(text: "First")
+                .foregroundStyle(.white)
+            CapsuleText(text: "Second")
+                .foregroundStyle(.yellow)
+        }
+    }
+}
+```
+
+### Custom Modifiers:
+To create a custom modifier, create a new struct that conforms to the ViewModifier protocol. This has only one requirement, which is a method called body that accepts whatever content it’s being given to work with, and must return some View. And hook it using `.modifier(YourCustomModifier)`
+
+```swift
+struct CustomModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+            .foregroundStyle(.white)
+            .padding()
+            .background(.blue)
+            .clipShape(.rect(cornerRadius: 10))
+    }
+}
+
+// use the Custom Modifiers
+Text("Hello World")
+    .modifier(CustomModifier())
+```
+
+### Custom Modifiers With View Extension:
+Extension on View (``) can be created to use the custom defined modifier in more customized way.
+```swift
+// Using custom modifier
+struct ContentView: View {
+    var body: some View {   
+        Text("Hello World")
+            .myCustomStyle()
+    }
+}
+
+// attaching custom modifier with `extension View`
+extension View {
+    func myCustomStyle() -> some View {
+        modifier(MyCustoModifier())
+    }
+}
+
+// defining custom modifier with ViewModifier Protocol Implementation
+struct MyCustoModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+            .foregroundStyle(.white)
+            .padding()
+            .background(.blue)
+            .cornerRadius(10)
+    }
+}
+```
+* custom view modifiers can have their own stored properties, whereas extensions to View cannot. So sometimes it’s better to add a custom view modifier versus just adding a new method to View
+
+### Custom Container:
