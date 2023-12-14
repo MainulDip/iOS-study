@@ -178,6 +178,7 @@ struct ContentView: View {
 `cornerRadius` for rounded corner
 `clipShape(Capsule())` for clipping with capsule shape (rounded corner effect)
 `.background(.red.gradient)` prebuilt gradient on some color (to elevate the design)
+`.shadow(radius: 7)` drop shadows
 
 ### Interesting Views with Modifies:
 - Gradient
