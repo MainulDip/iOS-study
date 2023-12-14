@@ -174,3 +174,67 @@ struct ContentView: View {
     }
 }
 ```
+### Interesting Modifiers:
+`cornerRadius` for rounded corner
+`clipShape(Capsule())` for clipping with capsule shape (rounded corner effect)
+`.background(.red.gradient)` prebuilt gradient on some color (to elevate the design)
+
+### Interesting Views with Modifies:
+- Gradient
+```swift
+LinearGradient(stops: [
+    .init(color: .white, location: 0.45),
+    .init(color: .black, location: 0.55),
+], startPoint: .top, endPoint: .bottom)
+
+RadialGradient(colors: [.blue, .black], center: .center, startRadius: 20, endRadius: 200)
+
+AngularGradient(colors: [.red, .yellow, .green, .blue, .purple, .red], center: .center)
+```
+
+- Button and Click Action and Images
+```swift
+Button("Title", role: .destructive, action: executeDelete)
+.buttonStyle(.bordered)
+.tint(.mint)
+
+func executeDelete() {
+    print("Now deleting…")
+}
+```
+
+- Image
+`Image("pencil")` will load an image called “Pencil” that you have added to your project.
+`Image(decorative: "pencil")` will load the same image, but won’t read it out for users who have enabled the screen reader. This is useful for images that don’t convey additional important information.
+`Image(systemName: "pencil")` will load the pencil icon that is built into iOS. This uses Apple’s SF Symbols icon collection,
+```Swift
+// Button can have image too
+Button {
+    print("Edit button was tapped")
+} label: { 
+    Image(systemName: "pencil")
+}
+
+// also 
+Button("Edit", systemImage: "pencil") {
+    print("Edit button was tapped")
+}
+```
+
+- Alerts
+```swift
+struct ContentView: View {
+    @State private var showingAlert = false
+
+    var body: some View {
+        Button("Show Alert") {
+            showingAlert = true
+        }
+        .alert("Important message", isPresented: $showingAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("Please read this.")
+        }
+    }
+}
+```

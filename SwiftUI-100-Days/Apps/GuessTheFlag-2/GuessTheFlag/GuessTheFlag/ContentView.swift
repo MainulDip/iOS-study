@@ -24,17 +24,6 @@ struct ContentView: View {
                     Text("||")
                     Text("Your content 2").padding(10).background(Color.cyan)
                 }
-                .background(Color.white)
-                .cornerRadius(10) // round corner
-                
-                HStack(spacing: 20) {
-                    Text("Your content 3")
-                    Text("||")
-                    Text("Your content 4")
-                }
-                .padding(20) // the order of padding and background matters, will not work if placed after backgorund
-                .background(Color.white)
-                .cornerRadius(10)
             }
         }
     }
