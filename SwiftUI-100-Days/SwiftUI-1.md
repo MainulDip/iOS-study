@@ -188,6 +188,7 @@ struct ContentView: View {
 `clipShape(Capsule())` for clipping with capsule shape (rounded corner effect)
 `.background(.red.gradient)` prebuilt gradient on some color (to elevate the design)
 `.shadow(radius: 7)` drop shadows
+`.frame()` taking control of of a View's height/width and min/max, ex `Spacer().frame(height: 30)` 
 
 ### Interesting Views with Modifies:
 - Gradient
@@ -515,3 +516,23 @@ struct ContentView: View {
 --------------------------- Better-Rest-4 ---------------------
 
 ### Stepper & Slider View:
+```swift
+struct ContentView: View {
+    
+    @State private var sleepAmount = 7.0
+    @State private var celsius: Double = 0
+    
+    var body: some View {
+        VStack(){
+
+            Stepper("\(sleepAmount.formatted()) hours", value: $sleepAmount, in: 4...12, step: 0.25)
+
+            Spacer().frame(height: 30)
+            
+            Slider(value: $celsius, in: -100...100)
+                        Text("\(celsius, specifier: "%.1f") Celsius is \(celsius * 9 / 5 + 32, specifier: "%.1f") Fahrenheit")
+        }
+        .padding()
+    }
+}
+```
