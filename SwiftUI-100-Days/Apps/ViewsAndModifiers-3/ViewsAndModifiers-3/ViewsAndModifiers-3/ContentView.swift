@@ -10,8 +10,20 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         
-        Text("Hello World")
-            .myCustomStyle()
+        VStack {
+            // custom stack based container
+            CustomGridStack(rows: 4, columns: 3) { row, col in
+                Image(systemName: "\(row * 4 + col).circle")
+                Text("R\(row) C\(col)")
+            }
+            
+            // custom modifier applied
+            HStack {
+                Text("Hello World")
+                    .myCustomStyle()
+            }
+        }
+        
         
         
 //        VStack {
@@ -88,5 +100,26 @@ struct MyCustoModifier: ViewModifier {
             .padding()
             .background(.blue)
             .cornerRadius(10)
+    }
+}
+
+// Custom Stack Container Defination
+struct CustomGridStack<Content: View>: View {
+    let rows: Int
+    let columns: Int
+    // let content: (Int, Int) -> Content
+    // adds more flexibility to return multiple view with @ViewBuilder wrapper, so we don't need to place the content inside another Stack to return multiple view when applying
+    @ViewBuilder let content: (Int, Int) -> Content
+
+    var body: some View {
+        VStack {
+            ForEach(0..<rows, id: \.self) { row in
+                HStack {
+                    ForEach(0..<columns, id: \.self) { column in
+                        content(row, column)
+                    }
+                }
+            }
+        }
     }
 }

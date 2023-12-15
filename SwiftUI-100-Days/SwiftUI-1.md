@@ -478,4 +478,36 @@ struct MyCustoModifier: ViewModifier {
 ```
 * custom view modifiers can have their own stored properties, whereas extensions to View cannot. So sometimes it’s better to add a custom view modifier versus just adding a new method to View
 
-### Custom Container:
+### Custom Container View (Stacks):
+We can create custom Stack Container based on built-in Stacks and Views.
+```swift
+struct GridStack<Content: View>: View {
+    let rows: Int
+    let columns: Int
+    // let content: (Int, Int) -> Content
+    // adds more flexibility to return multiple view with @ViewBuilder wrapper, so we don't need to place the content inside another Stack to return multiple view when applying
+    @ViewBuilder let content: (Int, Int) -> Content
+
+    var body: some View {
+        VStack {
+            ForEach(0..<rows, id: \.self) { row in
+                HStack {
+                    ForEach(0..<columns, id: \.self) { column in
+                        content(row, column)
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Use the custom Container
+struct ContentView: View {
+    var body: some View {
+        GridStack(rows: 4, columns: 4) { row, col in
+            Image(systemName: "\(row * 4 + col).circle")
+            Text("R\(row) C\(col)")
+        }
+    }
+}
+```
