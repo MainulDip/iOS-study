@@ -516,6 +516,7 @@ struct ContentView: View {
 --------------------------- Better-Rest-4 ---------------------
 
 ### Stepper & Slider View:
+<img src="./Images/slider-and-stepper-swiftui.png"/>
 ```swift
 struct ContentView: View {
     

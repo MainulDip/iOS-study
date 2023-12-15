@@ -1,7 +1,7 @@
 ## Overview:
 
 ### Structure:
-- LaunchScreen.storyboard : Launch Screen of the app, only associated with intro animation/screen
+- LaunchScreen.storyboard : Launch Screen of the app, only associated with intro animation/screen.
 - Main.storyboard : App's first screen/view
 - ViewController.swift : Interface Builder
 - SceneDelegate.swift :
