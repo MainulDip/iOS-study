@@ -418,7 +418,7 @@ class SomeClass {
     - attribute :  separator : separator for each line
 - table view cells || prototype cell/view : blueprint of the list element
     * important attribute:
-    - identifier : String to Identify the cell blueprint form code
+    - identifier : String to identify the cell blueprint form code
 - table view controller : it's little limited compared to the "table view", so stick with that
 ### TableView DataSource vs Delegate:
 - DataSource : forward data to the controller. It populate the tableView

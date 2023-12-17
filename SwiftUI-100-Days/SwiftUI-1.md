@@ -183,6 +183,19 @@ struct ContentView: View {
     }
 }
 ```
+### Alignments (leading/top | center | trailing/bottom):
+`HStack` has vertical alignment on it's constructor. To set Horizontal alignment, use `.frame(alignment: .leading)` or center/trailing for setting Vertical alignment. Same for VStack in opposite direction.
+```swift
+ HStack(alignment: .center, spacing: 0) {
+    Text("When do you want to wake up?")
+        .font(.headline)
+        .frame(maxWidth: .infinity, alignment: .leading) // will start from start of the line and take as much space as possible including empty space
+    
+    DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
+        .labelsHidden()
+        .frame(alignment: .trailing) // wil push the view to right end and as no maxWidth mentioned, take as much space as its content and give other view to grow
+}
+```
 ### Interesting Modifiers:
 `cornerRadius` for rounded corner
 `clipShape(Capsule())` for clipping with capsule shape (rounded corner effect)
