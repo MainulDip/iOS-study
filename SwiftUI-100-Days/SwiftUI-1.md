@@ -664,45 +664,53 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            Form {
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("When do you want to wake up?")
-                        .font(.headline)
-
-                    DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
-                        .labelsHidden()
-                }
-
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("Desired amount of sleep")
-                        .font(.headline)
-
-                    Stepper("\(sleepAmount.formatted()) hours", value: $sleepAmount, in: 4...12, step: 0.25)
-                }
-                
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("Daily coffee intake")
-                        .font(.headline)
-
-//                    Stepper(coffeeAmount == 1 ? "1 cup" : "\(coffeeAmount) cup(s)", value: $coffeeAmount, in: 1...20)
+            ZStack {
+                Color(UIColor.lightGray)
+                    .brightness(0.27)
+                    .edgesIgnoringSafeArea(.bottom)
+                VStack {
+                    HStack(alignment: .center, spacing: 0) {
+                        Text("When do you want to wake up?")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
+                            .labelsHidden()
+                            .frame(alignment: .trailing)
+                    }
                     
-                    // let swift handle the pluralization using markdown syntax
-                    Stepper("^[\(coffeeAmount) cup](inflect: true)", value: $coffeeAmount, in: 1...20)
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text("Desired amount of sleep")
+                            .font(.headline)
+                        
+                        Stepper("\(sleepAmount.formatted()) hours", value: $sleepAmount, in: 4...12, step: 0.25)
+                    }
+                    
+                    
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text("Daily coffee intake")
+                            .font(.headline)
+                        
+                        //                    Stepper(coffeeAmount == 1 ? "1 cup" : "\(coffeeAmount) cup(s)", value: $coffeeAmount, in: 1...20)
+                        
+                        // let swift handle the pluralization using markdown syntax
+                        Stepper("^[\(coffeeAmount) cup](inflect: true)", value: $coffeeAmount, in: 1...20)
+                    }
+                }
+                .navigationTitle("BetterRest")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    Button("Calculate", action: calculateBedtime)
+                }
+                .padding()
+                .alert(alertTitle, isPresented: $showingAlert) {
+                    Button("OK") { }
+                } message: {
+                    Text(alertMessage)
                 }
             }
-            .navigationTitle("BetterRest")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                Button("Calculate", action: calculateBedtime)
-            }
-            .padding()
-            .alert(alertTitle, isPresented: $showingAlert) {
-                Button("OK") { }
-            } message: {
-                Text(alertMessage)
-            }
-            
         }
+        
     }
     
     func calculateBedtime() {
@@ -711,7 +719,7 @@ struct ContentView: View {
         do {
             let config = MLModelConfiguration()
             let model = try SleepCalculator(configuration: config)
-
+            
             let components = Calendar.current.dateComponents([.hour, .minute], from: wakeUp)
             let hour = (components.hour ?? 0) * 60 * 60
             let minute = (components.minute ?? 0) * 60
@@ -722,7 +730,7 @@ struct ContentView: View {
             
             alertTitle = "Your ideal bedtime is…"
             alertMessage = sleepTime.formatted(date: .omitted, time: .shortened)
-
+            
             
         } catch {
             alertTitle = "Error"
@@ -732,4 +740,62 @@ struct ContentView: View {
         showingAlert = true
     }
 }
+```
+
+
+--------------------------- WordScramble-5 ---------------------
+
+
+### List (UIKit's UITableView):
+one thing List can do that Form can’t is to generate its rows entirely from dynamic content without needing a ForEach.
+```swift
+List(0..<5) {
+    Text("Dynamic row \($0)")
+}
+```
+
+* List with id
+```swift
+struct ContentView: View {
+    let people = ["Finn", "Leia", "Luke", "Rey"]
+
+    var body: some View {
+        List(people, id: \.self) {
+            Text($0)
+        }
+    }
+}
+```
+
+### URL and File Read/Write and Strings:
+`if let fileURL = Bundle.main.url(forResource: "some-file", withExtension: "txt"){}` is used to fetch the url.
+
+Once the file's url returned, `if let fileContents = try? String(contentsOf: fileURL) {}` is used to read the file
+
+Strings can be converted into array
+```swift
+let input = "a b c"
+let letters = input.components(separatedBy: " ") // ["a", "b", "c"]
+
+// or from line brakes
+let input = """
+            a
+            b
+            c
+            """
+let letters = input.components(separatedBy: "\n")
+```
+
+randomize array with the `let letter = letters.randomElement()`
+
+trimming strings -> `let trimmed = letter?.trimmingCharacters(in: .whitespacesAndNewlines)`
+
+`UITextChecker` is used to check for misspelled words. It's from UIKIt and built in Objective-C (Any class starting with UI..... in front are usually from UIKit, SwiftUI has UIKit's classes auto access)
+```swift
+// Text checker example
+let word = "swift"
+let checker = UITextChecker() // comes form UIKit and Objective-C
+
+// asking Swift to create an Objective-C string range using the entire length of all our characters
+let range = NSRange(location: 0, length: word.utf16.count)
 ```

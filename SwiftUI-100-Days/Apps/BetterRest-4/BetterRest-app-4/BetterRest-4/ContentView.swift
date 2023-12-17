@@ -73,8 +73,6 @@ struct ContentView: View {
                     Text(alertMessage)
                 }
             }
-//            .frame(maxHeight: .)
-//            .background(.gray)
         }
         
     }
