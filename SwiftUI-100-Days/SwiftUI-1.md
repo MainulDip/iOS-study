@@ -774,7 +774,6 @@ struct ContentView: View {
     }
 }
 ```
-
 ### URL and File Read/Write and Strings:
 `if let fileURL = Bundle.main.url(forResource: "some-file", withExtension: "txt"){}` is used to fetch the url.
 
@@ -800,7 +799,7 @@ trimming strings -> `let trimmed = letter?.trimmingCharacters(in: .whitespacesAn
 
 `UITextChecker` is used to check for misspelled words. It's from UIKIt and built in Objective-C (Any class starting with UI..... in front are usually from UIKit, SwiftUI has UIKit's classes auto access)
 ```swift
-// Text checker example
+// Text checker examples.
 let word = "swift"
 let checker = UITextChecker() // comes form UIKit and Objective-C
 

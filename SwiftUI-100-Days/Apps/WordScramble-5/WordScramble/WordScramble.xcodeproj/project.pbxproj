@@ -11,6 +11,7 @@
 		7237A1632B2E947D002F34B9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7237A1622B2E947D002F34B9 /* ContentView.swift */; };
 		7237A1652B2E947D002F34B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7237A1642B2E947D002F34B9 /* Assets.xcassets */; };
 		7237A1682B2E947D002F34B9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7237A1672B2E947D002F34B9 /* Preview Assets.xcassets */; };
+		72E8FA202B2EE3050031B1F3 /* start.txt in Resources */ = {isa = PBXBuildFile; fileRef = 72E8FA1F2B2EE3050031B1F3 /* start.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		7237A1622B2E947D002F34B9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7237A1642B2E947D002F34B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7237A1672B2E947D002F34B9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		72E8FA1F2B2EE3050031B1F3 /* start.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = start.txt; path = "../../project5-files/start.txt"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			children = (
 				7237A1602B2E947D002F34B9 /* WordScrambleApp.swift */,
 				7237A1622B2E947D002F34B9 /* ContentView.swift */,
+				72E8FA1F2B2EE3050031B1F3 /* start.txt */,
 				7237A1642B2E947D002F34B9 /* Assets.xcassets */,
 				7237A1662B2E947D002F34B9 /* Preview Content */,
 			);
@@ -126,6 +129,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7237A1682B2E947D002F34B9 /* Preview Assets.xcassets in Resources */,
+				72E8FA202B2EE3050031B1F3 /* start.txt in Resources */,
 				7237A1652B2E947D002F34B9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
