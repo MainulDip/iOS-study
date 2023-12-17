@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		72844E112B2E643000152450 /* SleepCalculator.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 72844E102B2E643000152450 /* SleepCalculator.mlmodel */; };
 		72EED47F2B2BE4A9008162A8 /* BetterRest_4App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EED47E2B2BE4A9008162A8 /* BetterRest_4App.swift */; };
 		72EED4812B2BE4A9008162A8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EED4802B2BE4A9008162A8 /* ContentView.swift */; };
 		72EED4832B2BE4AA008162A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72EED4822B2BE4AA008162A8 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		72844E102B2E643000152450 /* SleepCalculator.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = SleepCalculator.mlmodel; path = "../../project4-files/SleepCalculator.mlmodel"; sourceTree = "<group>"; };
 		72EED47B2B2BE4A9008162A8 /* BetterRest-4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BetterRest-4.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		72EED47E2B2BE4A9008162A8 /* BetterRest_4App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterRest_4App.swift; sourceTree = "<group>"; };
 		72EED4802B2BE4A9008162A8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 			children = (
 				72EED47E2B2BE4A9008162A8 /* BetterRest_4App.swift */,
 				72EED4802B2BE4A9008162A8 /* ContentView.swift */,
+				72844E102B2E643000152450 /* SleepCalculator.mlmodel */,
 				72EED4822B2BE4AA008162A8 /* Assets.xcassets */,
 				72EED4842B2BE4AA008162A8 /* Preview Content */,
 			);
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72EED4812B2BE4A9008162A8 /* ContentView.swift in Sources */,
+				72844E112B2E643000152450 /* SleepCalculator.mlmodel in Sources */,
 				72EED47F2B2BE4A9008162A8 /* BetterRest_4App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

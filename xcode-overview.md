@@ -61,6 +61,6 @@ L: Local Variable (also maybe passed when extending another class)
 ### Assets.xcassets vs Preview Assets
 Preview Assets as it is seen below just by default registered development time only catalog of resources.
 
-So you can store there any images, colors, files, ie any resources, which can be used in Preview Canvas only, for testing purpose. In example to not download one from internet, cloud, or fetch from database. Because Preview is for fast UI-only look & test, so data source is not important, so to test & tune UI you don't need to fetch external data but use locally stored test data.
+So you can store there any images, colors, files, ie any resources, which can be used in Preview Canvas only, for testing purpose. In example to not download one from internet, cloud, or fetch from database. Because Preview is for fast UI-only look & test, so data source is not important, so to test & tune UI you don't need to fetch external data but use locally stored test data
 
 You can add/name any other development time asset/folder in there as well

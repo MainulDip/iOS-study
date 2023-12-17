@@ -516,7 +516,9 @@ struct ContentView: View {
 --------------------------- Better-Rest-4 ---------------------
 
 ### Stepper & Slider View:
+
 <img src="./Images/slider-and-stepper-swiftui.png"/>
+
 ```swift
 struct ContentView: View {
     
@@ -534,6 +536,187 @@ struct ContentView: View {
                         Text("\(celsius, specifier: "%.1f") Celsius is \(celsius * 9 / 5 + 32, specifier: "%.1f") Fahrenheit")
         }
         .padding()
+    }
+}
+```
+
+### Date Handling (DateComponent) and Date Picker:
+As Date is a complicated topic (there are lot of factor, daylight saving, region, timezone, etc), Using users `Calender` with `DateComponent` and the `Date` in combination works good
+```swift
+struct ContentView: View {
+    
+    init() {
+        print("From inti")
+        dateCalculation()
+    }
+    
+    var body: some View {
+        VStack(){
+            Text("Testing Date, Date Component and Calender For Time Difference Calculation")
+        }
+        .padding()
+    }
+    
+    func dateCalculation() -> Void {
+        
+        /**
+         * Using Calender and Date to get tomorrows time
+         * Date component is used in 2nd example
+         */
+        
+        let calendar = Calendar.current
+        // Use the following line if you want midnight UTC instead of local time
+        //calendar.timeZone = TimeZone(secondsFromGMT: 0)
+        let timenow = Date()
+        print(timenow.formatted(date: .long, time: .shortened))
+        print(Date.now.formatted(date: .long, time: .shortened))
+        let startOfToday = calendar.startOfDay(for: timenow)
+        print(startOfToday.formatted(date: .long, time: .shortened))
+        let startOfTomorrow = calendar.date(byAdding: .day, value: 1, to: startOfToday)!
+
+        let todayStartEpoch = startOfToday.timeIntervalSince1970
+        let tomorrowStartEpoch = startOfTomorrow.timeIntervalSince1970
+        
+        print("midnightEpoch : \(todayStartEpoch) and tomorrowEpoch \(tomorrowStartEpoch)")
+        print("diff tomorrow - midnight = \((tomorrowStartEpoch-todayStartEpoch) / 3600) hours")
+        
+        
+        
+        /**
+         * Challenge : Get the time diff from now to tomorrow 7am
+         * and show the diff in year month day hour min format
+         * Date, Date Component and Calender is used
+         */
+        
+        let calenderTodayC = Calendar.current // get iser's current calender
+        let calenderToday : DateComponents = calenderTodayC.dateComponents(in: .current, from: Date.now)
+        
+        print("calenderToday props => hour : \(calenderToday.hour!), day:  \(calenderToday.day!), month :  \(calenderToday.month!), year : \(calenderToday.year!)")
+        
+        /***
+         * Building Date Component For Next Day Morning 7am
+         */
+        var dateCompTomorroMorning7 = DateComponents()
+        dateCompTomorroMorning7.hour = 7
+        dateCompTomorroMorning7.day = calenderToday.day! + 1
+        dateCompTomorroMorning7.minute = 0
+        dateCompTomorroMorning7.second = 0
+        dateCompTomorroMorning7.year = calenderToday.year
+        dateCompTomorroMorning7.month = calenderToday.month
+        
+        // inject date component into calender to build tomorrow's date at 7
+        let tomorrowMorning7: Date? = calenderTodayC.date(from: dateCompTomorroMorning7)
+        
+        if let tomorrow7 = tomorrowMorning7 {
+            print("tomorrowMorning7 : \(tomorrow7.formatted(date: .long, time: .shortened))")
+        }
+        
+        // calculate time diff from now to tomorrow 7, converted to Int to work easily with `%` reminder operator
+        let timeDiff = Int(tomorrowMorning7!.timeIntervalSince1970 - Date.now.timeIntervalSince1970)
+        let seconds = timeDiff % 60
+        let minutes = (timeDiff / 60) % 60
+        let hours = (timeDiff / 3600)
+        let day = timeDiff / (3600 * 24)
+        print("Tomorrow 7am is \(day) day,  \(hours) hours,  \(minutes) minutes, and  \(seconds) seconds away form now")
+    }
+}
+```
+note https://stackoverflow.com/questions/54084023/how-to-get-the-todays-and-tomorrows-date-in-swift-4
+
+### Working With CoreML and CreateML:
+Machine Learning Model Training can be done using CreateML `xcode -> open developers tool -> CreateML`, and a CoreML model training can be done through there. The generated file will be on `.mlmodel` format. The generated file need to be placed inside project directory (same level as `ContentView.swift`), not in xcassets. The xcode will generate required class automatically, which can be used by the `filename`.
+```swift
+// CoreML Demo
+import CoreML
+import SwiftUI
+
+struct ContentView: View {
+    
+    @State private var wakeUp = defaultWakeTime
+    @State private var sleepAmount = 8.0
+    @State private var coffeeAmount = 1
+    
+    // state for alerting
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
+    @State private var showingAlert = false
+    
+    // computed property for defaultWakeTime
+    static var defaultWakeTime: Date {
+        var components = DateComponents()
+        components.hour = 7
+        components.minute = 0
+        return Calendar.current.date(from: components) ?? .now
+    }
+    
+    var body: some View {
+        NavigationStack {
+            Form {
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("When do you want to wake up?")
+                        .font(.headline)
+
+                    DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
+                        .labelsHidden()
+                }
+
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("Desired amount of sleep")
+                        .font(.headline)
+
+                    Stepper("\(sleepAmount.formatted()) hours", value: $sleepAmount, in: 4...12, step: 0.25)
+                }
+                
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("Daily coffee intake")
+                        .font(.headline)
+
+//                    Stepper(coffeeAmount == 1 ? "1 cup" : "\(coffeeAmount) cup(s)", value: $coffeeAmount, in: 1...20)
+                    
+                    // let swift handle the pluralization using markdown syntax
+                    Stepper("^[\(coffeeAmount) cup](inflect: true)", value: $coffeeAmount, in: 1...20)
+                }
+            }
+            .navigationTitle("BetterRest")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                Button("Calculate", action: calculateBedtime)
+            }
+            .padding()
+            .alert(alertTitle, isPresented: $showingAlert) {
+                Button("OK") { }
+            } message: {
+                Text(alertMessage)
+            }
+            
+        }
+    }
+    
+    func calculateBedtime() {
+        // create coreml config and get the model
+        // the model will be generated based on the filename.mlmode
+        do {
+            let config = MLModelConfiguration()
+            let model = try SleepCalculator(configuration: config)
+
+            let components = Calendar.current.dateComponents([.hour, .minute], from: wakeUp)
+            let hour = (components.hour ?? 0) * 60 * 60
+            let minute = (components.minute ?? 0) * 60
+            
+            let prediction = try model.prediction(wake: Double(hour + minute), estimatedSleep: sleepAmount, coffee: Double(coffeeAmount))
+            
+            let sleepTime = wakeUp - prediction.actualSleep
+            
+            alertTitle = "Your ideal bedtime is…"
+            alertMessage = sleepTime.formatted(date: .omitted, time: .shortened)
+
+            
+        } catch {
+            alertTitle = "Error"
+            alertMessage = "Sorry, there was a problem calculating your bedtime."
+        }
+        
+        showingAlert = true
     }
 }
 ```
