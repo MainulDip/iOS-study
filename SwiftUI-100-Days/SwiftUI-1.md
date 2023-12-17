@@ -56,6 +56,14 @@ struct ContentView: View {
 }
 ```
 
+### TextInput View:
+This view is for input text
+```swift
+TextField("Enter your word", text: $newWord) // $newWord is 2 way binding with state. this will allow read/write from the same place and same time
+    .textInputAutocapitalization(.never) // disable auto Capitalization
+    .onSubmit(addNewWord) // run onSubmit
+```
+
 ### Picker and ForEach with id: KeyPath<T> as (\Class.PropertyName
 ):
 https://docs.swift.org/swift-book/documentation/the-swift-programming-language/expressions/#Key-Path-Expression
@@ -798,4 +806,9 @@ let checker = UITextChecker() // comes form UIKit and Objective-C
 
 // asking Swift to create an Objective-C string range using the entire length of all our characters
 let range = NSRange(location: 0, length: word.utf16.count)
+
+// misspellings in our word, if no error found, will return NSNotFound,
+// Objective-C has no Optional?, so we have to deal with that
+let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
+let allGood = misspelledRange.location == NSNotFound
 ```
