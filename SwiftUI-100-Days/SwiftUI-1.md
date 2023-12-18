@@ -817,3 +817,173 @@ let allGood = misspelledRange.location == NSNotFound
 
 
 ### Basic Animation:
+* Swift animates by observing a before state and an after state. 
+Usually animation is applied with the `.animation` modifier, including this and all the property bind with the @State will trigger animation when it (@State) changes.
+
+```swift
+// Defining a minimal Button, which will animate the scale and blur based on the @State change, and the effect will be applied based on the `.animation()` Modifier.
+struct ContentView: View {
+    
+    @State private var animationAmount = 1.0
+    
+    var body: some View {
+        VStack {
+            Button("Tap Me") {
+                if(animationAmount < 4) {
+                    animationAmount += 1
+                } else {
+                    animationAmount = 1
+                }
+            }
+            .padding(50)
+            .background(.red)
+            .foregroundStyle(.white)
+            .clipShape(Circle())
+            .scaleEffect(animationAmount) // will scale the Button 1x, 2x, 3x, etc
+            .blur(radius: (animationAmount - 1) * 3)
+            .animation(.default, value: animationAmount) // animate the value of `animationAmount`
+        }
+        .padding()
+    }
+}
+```
+
+`.animation(.linear, ...)`, `animation(.spring(duration, bounce), value: @State)` ect are also available
+```swift
+.animation(.linear, value: animationAmount)
+
+.animation(.spring(duration: 1, bounce: 0.9), value: animationAmount)
+
+.animation(
+    .easeInOut(duration: 2)
+        .delay(1),
+    value: animationAmount
+)
+
+.animation(
+    .easeInOut(duration: 1)
+        .repeatCount(3, autoreverses: true),
+    value: animationAmount
+)
+
+.animation(
+    .easeInOut(duration: 1)
+        .repeatForever(autoreverses: true),
+    value: animationAmount
+)
+```
+
+* We can use these `repeatForever()` animations in combination with `onAppear()` to make animations that start immediately and continue animating for the life of the view.
+
+`overlay()` modifier lets us create new views at the same size and position as the view we’re overlaying.
+```swift
+// Starting an overlay animation on Start using state change inside onAppear mod
+Button("Tap Me") {
+    // animationAmount += 1
+}
+.padding(50)
+.background(.red)
+.foregroundStyle(.white)
+.clipShape(.circle)
+.overlay(
+    Circle()
+        .stroke(.red)
+        .scaleEffect(animationAmount)
+        .opacity(2 - animationAmount)
+        .animation(
+            .easeInOut(duration: 1)
+                .repeatForever(autoreverses: false),
+            value: animationAmount
+        )
+)
+.onAppear {
+    animationAmount = 2
+}
+```
+
+### Using WithAnimation:
+```swift
+struct ContentView: View {
+    @State var scale = 1.0
+
+    var body: some View {
+        Circle()
+            .frame(width: 200, height: 200)
+            .scaleEffect(scale)
+            .onAppear {
+                let baseAnimation = Animation.easeInOut(duration: 1)
+                let repeated = baseAnimation.repeatForever(autoreverses: true)
+
+                withAnimation(repeated) {
+                    scale = 0.5
+                }
+            }
+    }
+}
+```
+### Two way Binding and Animation:
+2 Way Binding with animation() modifier, we don’t need to specify which value we’re watching for changes – it’s literally attached to the value it should watch!
+```swift
+struct ContentView: View {
+    @State private var animationAmount = 1.0
+
+    var body: some View {
+        VStack {
+            Stepper("Scale amount", value: $animationAmount.animation(), in: 1...10)
+
+            Spacer()
+
+            Button("Tap Me") {
+                animationAmount += 1
+            }
+            .padding(40)
+            .background(.red)
+            .foregroundStyle(.white)
+            .clipShape(.circle)
+            .scaleEffect(animationAmount)
+        }
+    }
+}
+```
+
+* animation with 2 way binding can take config as well
+```swift
+Stepper("Scale amount", value: $animationAmount.animation(
+    .easeInOut(duration: 1)
+        .repeatCount(3, autoreverses: true)
+), in: 1...10)
+```
+### Explicit Animation Using WithAnimation:
+```swift
+struct ContentView: View {
+    
+    @State private var animationAmount = 1.0
+    @State private var startAnim = false
+    
+    var body: some View {
+        VStack {
+            Button("Tap Me") {
+                
+//                withAnimation {
+//                    animationAmount += 360
+//                }
+                
+                withAnimation(.spring(response: 2, dampingFraction: 1)) {
+                    animationAmount += 360
+                }
+            }
+            .padding(50)
+            .background(.red)
+            .foregroundStyle(.white)
+            .clipShape(Circle())
+            .onAppear {
+//                withAnimation (.default.repeatCount(7)) {
+//                    animationAmount += 360
+//                }
+            }
+            .rotation3DEffect(.degrees(animationAmount), axis: (x: 0, y: 1, z: 0))
+        }
+        .padding()
+    }
+}
+```

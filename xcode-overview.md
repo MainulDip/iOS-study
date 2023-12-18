@@ -28,7 +28,7 @@
 - view to IBOutlet Connection : ctrl + drag the arrow
 - segue add : drag the top dot to another view, also give the segue an identifire
 - zoon in 100% storyboard editor : ctrl + cmd + =
-- zoom out : use the bottom zoom in/out button
+- zoom out : use the bottom zoom in/out button.
 
 ### Code Indentations and beautification
 To refactor the code indentation (beatify/pretty), xcode requires you to select the code block and then editor -> Structure -> Re-indent, or `ctrl + i`. Ctrl is `^` mac
