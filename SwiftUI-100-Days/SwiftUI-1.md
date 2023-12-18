@@ -987,3 +987,50 @@ struct ContentView: View {
     }
 }
 ```
+
+### Animation Stack (Controlling multiple animation effects):
+Because `modifier order matters`, we can attach multiple animations, those will affect differently/independently to the modifiers those comes before the declared `animation(...)` modifiers.
+```swift
+struct ContentView: View {
+
+    @State private var enabled = false
+    
+    var body: some View {
+        VStack {
+            Button("Tap Me") {
+                enabled.toggle()
+            }
+            .padding(50)
+            .background(enabled ? .red : .blue)
+            .foregroundStyle(.white)
+            .animation(.easeInOut(duration: 1), value: enabled)
+            .clipShape(RoundedRectangle(cornerRadius: enabled ? 60 : 0))
+            .animation(.spring(response: 1, dampingFraction: 1), value: enabled)
+        }
+        .padding()
+    }
+}
+```
+### Dragging Gesture:
+To make a view draggable, add a @State first (of type `CGSize`, like CGSize.zero for initial state) to store the position of the drag. Then attach the `offset(@State)` modifier to move the view and a `gesture(...)` modifier to track user gesture.
+```swift
+struct SecondView : View {
+    
+    @State private var dragAmount = CGSize.zero
+    
+    var body: some View {
+        VStack {
+            LinearGradient(colors: [.yellow, .red], startPoint: .topLeading, endPoint: .bottomTrailing)
+                .frame(width: 300, height: 200)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .offset(dragAmount)
+                .gesture(
+                    DragGesture()
+                        .onChanged { dragAmount = $0.translation }
+                        .onEnded { _ in dragAmount = .zero }
+                )
+        }
+    }
+}
+```
+### Animation on Drag Gestures:

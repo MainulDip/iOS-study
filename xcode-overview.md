@@ -23,6 +23,9 @@
 - esc: place the cursor on any function and press "esc" key to get the auto suggestions and quick look at the other options and params docs
 - alt + click : to see further docs of a function
 
+### Implementing Protocol Member:
+- After Attaching the protocol, from inside struct/class braces, press `esc` for suggestion. Then apply those members.
+
 ### task
 - clone view : alt/option drag
 - view to IBOutlet Connection : ctrl + drag the arrow

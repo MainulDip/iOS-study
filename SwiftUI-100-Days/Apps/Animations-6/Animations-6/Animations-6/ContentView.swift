@@ -11,6 +11,7 @@ struct ContentView: View {
     
     @State private var animationAmount = 1.0
     @State private var startAnim = false
+    @State private var enabled = false
     
     var body: some View {
         VStack {
@@ -25,23 +26,27 @@ struct ContentView: View {
 //                    animationAmount += 360
 //                }
                 
-                withAnimation(.spring(response: 2, dampingFraction: 1)) {
-                    animationAmount += 360
-                }
+//                withAnimation(.spring(response: 2, dampingFraction: 1)) {
+//                    animationAmount += 360
+//                }
+                enabled.toggle()
             }
             .padding(50)
-            .background(.red)
+            .background(enabled ? .red : .blue)
             .foregroundStyle(.white)
-            .clipShape(Circle())
+            .animation(.easeInOut(duration: 1), value: enabled)
+            .clipShape(RoundedRectangle(cornerRadius: enabled ? 60 : 0))
+            .animation(.spring(response: 1, dampingFraction: 1), value: enabled)
+//            .clipShape(Circle())
 //            .scaleEffect(animationAmount) // will scale the Button 1x, 2x, 3x, etc
 //            .blur(radius: (animationAmount - 1) * 3)
-            .onAppear {
+//            .onAppear {
 //                animationAmount = 2
 //                startAnim = true
 //                withAnimation (.default.repeatCount(7)) {
 //                    animationAmount += 360
 //                }
-            }
+//            }
 //            .overlay(
 //                Circle()
 //                    .stroke(.red)

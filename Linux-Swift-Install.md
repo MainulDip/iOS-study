@@ -4,7 +4,7 @@ This for only testing some swift code on the fly.
 -> Head over to the official Swift Open Source repo at https://www.swift.org/getting-started/
 -> Install the toolchain
 -> Download the exact swift package matching the linux distribution and architecture (x86)
--> Extract the downloaded tra.zip anywhere or same directory
+-> Extract the downloaded tra.zip anywhere or same directory.
 -> Move the extracted folder to -> usr/share/swift -> to keep everything clean and separate 
  - Terminal command to move
  - sudo mv theextracted-swift-package-file /usr/share/swift
