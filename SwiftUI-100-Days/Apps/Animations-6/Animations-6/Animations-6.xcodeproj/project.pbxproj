@@ -7,20 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		72699E942B3116960000B61F /* TextGestureAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72699E932B3116960000B61F /* TextGestureAnimation.swift */; };
+		72699E962B3118E20000B61F /* ConditionalViewToggleAnim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72699E952B3118E20000B61F /* ConditionalViewToggleAnim.swift */; };
 		7274153E2B2FADF400A6D6BE /* Animations_6App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7274153D2B2FADF400A6D6BE /* Animations_6App.swift */; };
 		727415402B2FADF400A6D6BE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7274153F2B2FADF400A6D6BE /* ContentView.swift */; };
 		727415422B2FADF500A6D6BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 727415412B2FADF500A6D6BE /* Assets.xcassets */; };
 		727415452B2FADF500A6D6BE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 727415442B2FADF500A6D6BE /* Preview Assets.xcassets */; };
-		7274154C2B30088400A6D6BE /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7274154B2B30088400A6D6BE /* SecondView.swift */; };
+		7274154C2B30088400A6D6BE /* GestureAnimaitonBoxDrag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7274154B2B30088400A6D6BE /* GestureAnimaitonBoxDrag.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		72699E932B3116960000B61F /* TextGestureAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextGestureAnimation.swift; sourceTree = "<group>"; };
+		72699E952B3118E20000B61F /* ConditionalViewToggleAnim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalViewToggleAnim.swift; sourceTree = "<group>"; };
 		7274153A2B2FADF400A6D6BE /* Animations-6.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Animations-6.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7274153D2B2FADF400A6D6BE /* Animations_6App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations_6App.swift; sourceTree = "<group>"; };
 		7274153F2B2FADF400A6D6BE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		727415412B2FADF500A6D6BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		727415442B2FADF500A6D6BE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		7274154B2B30088400A6D6BE /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
+		7274154B2B30088400A6D6BE /* GestureAnimaitonBoxDrag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureAnimaitonBoxDrag.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +61,9 @@
 				7274153F2B2FADF400A6D6BE /* ContentView.swift */,
 				727415412B2FADF500A6D6BE /* Assets.xcassets */,
 				727415432B2FADF500A6D6BE /* Preview Content */,
-				7274154B2B30088400A6D6BE /* SecondView.swift */,
+				7274154B2B30088400A6D6BE /* GestureAnimaitonBoxDrag.swift */,
+				72699E932B3116960000B61F /* TextGestureAnimation.swift */,
+				72699E952B3118E20000B61F /* ConditionalViewToggleAnim.swift */,
 			);
 			path = "Animations-6";
 			sourceTree = "<group>";
@@ -140,7 +146,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7274154C2B30088400A6D6BE /* SecondView.swift in Sources */,
+				72699E962B3118E20000B61F /* ConditionalViewToggleAnim.swift in Sources */,
+				7274154C2B30088400A6D6BE /* GestureAnimaitonBoxDrag.swift in Sources */,
+				72699E942B3116960000B61F /* TextGestureAnimation.swift in Sources */,
 				727415402B2FADF400A6D6BE /* ContentView.swift in Sources */,
 				7274153E2B2FADF400A6D6BE /* Animations_6App.swift in Sources */,
 			);

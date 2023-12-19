@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SecondView : View {
+struct GestureAnimaitonBoxDrag : View {
     
     @State private var dragAmount = CGSize.zero
     
@@ -20,14 +20,22 @@ struct SecondView : View {
                 .gesture(
                     DragGesture()
                         .onChanged { dragAmount = $0.translation }
-                        .onEnded { _ in dragAmount = .zero }
+                        .onEnded { _ in
+                            // this will allow to animate only the last part
+                            withAnimation(.spring()) {
+                                dragAmount = .zero
+                            }
+                            
+                        }
                 )
+                // .animation(.easeInOut, value: dragAmount)
+                // removing the both way animation with only onEnded part by withAnimation inside the callback
         }
     }
 }
 
-struct SecondView_Preview: PreviewProvider {
+struct GestureAnimaitonBoxDrag_Preview: PreviewProvider {
     static var previews: some View {
-        SecondView()
+        GestureAnimaitonBoxDrag()
     }
 }

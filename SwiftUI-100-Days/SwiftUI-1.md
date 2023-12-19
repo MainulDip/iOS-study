@@ -1034,3 +1034,99 @@ struct SecondView : View {
 }
 ```
 ### Animation on Drag Gestures:
+```swift
+struct GestureAnimaitonBoxDrag : View {
+    
+    @State private var dragAmount = CGSize.zero
+    
+    var body: some View {
+        VStack {
+            LinearGradient(colors: [.yellow, .red], startPoint: .topLeading, endPoint: .bottomTrailing)
+                .frame(width: 300, height: 200)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .offset(dragAmount)
+                .gesture(
+                    DragGesture()
+                        .onChanged { dragAmount = $0.translation }
+                        .onEnded { _ in
+                            // this will allow to animate only the last part
+                            withAnimation(.spring()) {
+                                dragAmount = .zero
+                            }
+                            
+                        }
+                )
+                // .animation(.easeInOut, value: dragAmount)
+                // removing the both way animation with only onEnded part by withAnimation inside the callback
+        }
+    }
+}
+```
+
+### Text Drag Gesture Animation (Snake Effect onDrag):
+```kotlin
+struct TextGestureAnimation: View {
+    let letters = Array("Hello SwiftUI")
+    @State private var enabled = false
+    @State private var dragAmount = CGSize.zero
+    
+    var body: some View {
+        HStack(spacing: 0) {
+            ForEach(0..<letters.count, id: \.self) { num in
+                Text(String(letters[num]))
+                    .padding(5)
+                    .font(.title)
+                    .background(enabled ? .blue : .red)
+                    .offset(dragAmount)
+                    .animation(.linear.delay(Double(num) / 20), value: dragAmount)
+            }
+        }
+        .gesture(
+            DragGesture()
+                .onChanged { dragAmount = $0.translation }
+                .onEnded { _ in
+                    dragAmount = .zero
+                    enabled.toggle()
+                }
+        )
+    }
+}
+```
+
+### `.transition` modifier and conditional View Toggle animation:
+```swift
+struct ConditionalViewToggleAnim: View {
+    
+    // @State var isShowingRed: Bool
+    @State var isShowingRed = false
+    
+    /*
+        init () {
+            /**
+             * if any member is not assigned with value and not a computed property then
+             * the property needs to either be assaign in init block or as constructor parameter while instantiating
+             */
+            isShowingRed = false
+        }
+    */
+    
+    var body: some View {
+        VStack {
+            Button("Tap Me") {
+                withAnimation {
+                    isShowingRed.toggle()
+                }
+            }
+            
+            if isShowingRed {
+                Rectangle()
+                    .fill(.red)
+                    .frame(width: 200, height: 200)
+                    // .transition(.scale)
+                    .transition(.asymmetric(insertion: .scale, removal: .opacity))
+            }
+        }
+        
+    }
+}
+```

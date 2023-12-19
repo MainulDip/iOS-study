@@ -24,7 +24,7 @@
 - alt + click : to see further docs of a function
 
 ### Implementing Protocol Member:
-- After Attaching the protocol, from inside struct/class braces, press `esc` for suggestion. Then apply those members.
+- After Attaching the protocol, from inside struct/class braces, press `esc` for suggestion. Then apply those members
 
 ### task
 - clone view : alt/option drag
