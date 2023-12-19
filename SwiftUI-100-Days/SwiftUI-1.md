@@ -1130,3 +1130,56 @@ struct ConditionalViewToggleAnim: View {
     }
 }
 ```
+### Custom transition with Custom Modifier:
+Custom transition animation is made possible by the .modifier transition, which accepts any view modifier we want. But we need to be able to instantiate the modifier, which means the `.modifier` needs to be one we create ourselves (custom modifier implementation).
+```swift
+struct CustomTransitionAnim: View {
+    
+    @State private var isShowingRed = false
+    
+    var body: some View {
+        VStack {
+            Rectangle()
+                .fill(.blue)
+                .frame(width: 200, height: 200)
+            
+            if isShowingRed {
+                Rectangle()
+                    .fill(.red)
+                    .frame(width: 200, height: 200)
+                    .transition(.pivot)
+            }
+        }
+        .onTapGesture {
+            withAnimation {
+                isShowingRed.toggle()
+            }
+        }
+    }
+}
+
+/* Define Custom Modifier */
+struct CornerRotateModifier: ViewModifier {
+    let amount: Double
+    let anchor: UnitPoint
+    
+    func body(content: Content) -> some View {
+        content
+            .rotationEffect(.degrees(amount), anchor: anchor)
+            .clipped()
+    }
+}
+
+/* Define extension on AnyTransition */
+extension AnyTransition {
+    static var pivot: AnyTransition {
+        .modifier(
+            active: CornerRotateModifier(amount: -90, anchor: .topLeading),
+            identity: CornerRotateModifier(amount: 0, anchor: .topLeading)
+        )
+    }
+}
+```
+
+### Combine transition:
+https://www.hackingwithswift.com/quick-start/swiftui/how-to-combine-transitions
