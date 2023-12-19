@@ -1183,3 +1183,9 @@ extension AnyTransition {
 
 ### Combine transition:
 https://www.hackingwithswift.com/quick-start/swiftui/how-to-combine-transitions
+
+### AnyTransition in SwiftUI:
+https://jacobko.info/swiftui/swiftui-26/#anytransition-in-swiftui
+
+### @escaping in Swift:
+https://docs.swift.org/swift-book/documentation/the-swift-programming-language/closures/#Escaping-Closures

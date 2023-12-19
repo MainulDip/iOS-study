@@ -44,7 +44,7 @@ All IB connections are there. Disconnected connections should be removed. Otherw
 Docs : https://www.swiftdevjournal.com/using-environment-variables-in-swift-apps/
 
 ### Creating Section In Xcode Overview
-//MARK: - Some Texts
+//MARK: - Some Text
 
 ### Custom Code Snippet:
 - select the code in xcode amd mark it as code snippet by right clicking
