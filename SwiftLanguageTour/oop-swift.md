@@ -9,12 +9,11 @@ when two different class instances have the same value for each of their stored 
 
 * Use structures by default.
 
-* Use classes when you need Objective-C interoperability
+* Use classes when you need Objective-C interoperability, and shared data in SwiftUI
 
 * Use classes when you need to control the identity of the data you’re modeling.
 
 * Use structures along with protocols to adopt behavior by sharing implementations.
-* Structures are for custom data type. Like Data class in kotlin
 
 ```swift
 struct PenPalRecord {

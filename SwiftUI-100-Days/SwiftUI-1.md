@@ -1189,3 +1189,41 @@ https://jacobko.info/swiftui/swiftui-26/#anytransition-in-swiftui
 
 ### @escaping in Swift:
 https://docs.swift.org/swift-book/documentation/the-swift-programming-language/closures/#Escaping-Closures
+
+
+--------------------------- iExpense-7 ---------------------
+
+
+### Class for shared data between Views:
+if we want two or more views to point to the same data so that when one changes they all get those changes – we need to use classes rather than structs.
+
+As structs are value base, so when assigned/shared a same instance of a struct, its different every case. But classes are reference based, assigning/sharing same instance with multiple variable reference the same instance, so if value is changed in a reference, it will change in other references too.
+
+```swift
+class StudentClass {
+   var name: String
+   init(name: String) {
+      self.name = name
+   }
+}
+
+let student1 = StudentClass(name: "X")
+let student2 = student1
+
+student2.name = "Y" // this will also make the student1 name "Y", as classes are references based
+
+print("student1 name: \(student1.name)") // Y
+print("student2 name: \(student2.name)") // Y
+
+struct StudentStruct {
+   var name: String
+}
+let student3 = StudentStruct(name: "X")
+var student4 = student3
+student4.name = "Y" // this will not change the student3 name, as Structures are value based
+print("student3 name: \(student3.name)") // X
+print("student4 name: \(student4.name)") // Y
+```
+
+
+### Using Class For Sharing @State:

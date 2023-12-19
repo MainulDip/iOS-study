@@ -43,7 +43,7 @@ All IB connections are there. Disconnected connections should be removed. Otherw
 ### Using Environmental Variables:
 Docs : https://www.swiftdevjournal.com/using-environment-variables-in-swift-apps/
 
-### Creating Section In Xcode Overview
+### Creating Section In Xcode Overviews
 //MARK: - Some Text
 
 ### Custom Code Snippet:
