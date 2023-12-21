@@ -4,6 +4,7 @@
 //
 //  Created by Mainul Dip on 12/18/23.
 //
+
 import SwiftUI
 
 struct ContentView: View {
@@ -20,8 +21,10 @@ struct ContentView: View {
         }
 }
 
+@Observable
 class User {
-    var firstName = "Bilbo"
+    var firstName  = "Bilbo"
+    
     var lastName = "Baggins"
 }
 

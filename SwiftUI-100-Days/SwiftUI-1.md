@@ -1227,3 +1227,23 @@ print("student4 name: \(student4.name)") // Y
 
 
 ### Using Class For Sharing @State:
+`Structs` always have unique owners, so if we have two SwiftUI views and we send them both the same struct to work with, they actually each have a unique copy of that struct, if one changes it, the other won’t see that change. On the other hand, if we create an instance of a class and send that to both views, they will share changes.
+
+- How @State works in struct and Class
+With Struct, every time we modified a property of that struct Swift was actually creating a new instance of the struct. @State was able to spot that change, and automatically reloaded our view. When we have a class, that behavior no longer happens: Swift can just modify the value directly.
+
+`mutating` keyword is prefixed with struct methods to modify properties. This is because if we create the struct’s properties as variable but the struct itself is constant (Unchangeable), we can’t change the properties – Swift needs to be able to destroy and recreate the whole struct when a property changes, and that isn’t possible for constant structs. Classes don’t need the mutating keyword, because even if the class instance is marked as constant Swift can still modify variable properties.
+
+* Also, for classes, if internal property changes, @State doesn't automatically observe those changes. To make track any changes, we need to mark the class with `@Observable`
+
+```swift 
+struct ContentView: View {
+    @State private var user = DataClass()
+    var body: some View { /* View def */ }
+}
+
+
+/* telling if any @State is pointing to this class should be observed for changes by annotating with the @Observable property wrapper */
+@Observable
+class DataClass {/* props and other definitions */}
+```
