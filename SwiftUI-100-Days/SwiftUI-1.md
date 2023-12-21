@@ -1247,3 +1247,50 @@ struct ContentView: View {
 @Observable
 class DataClass {/* props and other definitions */}
 ```
+
+### Macro , @Observable and Observation import:
+`Macro` -> adds extra functionality behind the scene to the annotated wrapper `@...` clode block. `@Observable` property-wrapper/annotation is a macro. It add more code to provide desired Observation functionality behind the scene.
+
+xcode can reveal what is happening by using the `@Observable` macro annotation with a class by using a `import Observation` declaration. Then right click on the @Observable and choose `Expand Macro` to see the details
+
+Example of the `@Observable` macro
+```swift
+// Original Block
+@Observable
+class User {
+    var firstName  = "Bilbo"
+    
+    var lastName = "Baggins"
+}
+
+
+// Expanded Macro
+import Observation
+
+@Observable
+class User {
+    @ObservationTracked  /* its a macro too */
+    var firstName  = "Bilbo"
+
+    @ObservationTracked  /* its a macro too */
+    var lastName = "Baggins"
+
+    @ObservationIgnored private let _$observationRegistrar = Observation.ObservationRegistrar()
+
+    internal nonisolated func access<Member>(
+        keyPath: KeyPath<User , Member>
+    ) {
+    _$observationRegistrar.access(self, keyPath: keyPath)
+    }
+
+    internal nonisolated func withMutation<Member, MutationResult>(
+    keyPath: KeyPath<User , Member>,
+    _ mutation: () throws -> MutationResult
+    ) rethrows -> MutationResult {
+    try _$observationRegistrar.withMutation(of: self, keyPath: keyPath, mutation)
+    }
+}
+extension User: Observation.Observable {
+}
+```
+
