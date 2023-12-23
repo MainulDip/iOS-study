@@ -1294,3 +1294,5 @@ extension User: Observation.Observable {
 }
 ```
 
+### Showing and Hiding View Using Sheets:
+Sheets work much like alerts, but instead of like `alert.present()`, we define the conditions under which a sheet should be shown.
