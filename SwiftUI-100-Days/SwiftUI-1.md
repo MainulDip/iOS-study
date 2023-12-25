@@ -1295,4 +1295,40 @@ extension User: Observation.Observable {
 ```
 
 ### Showing and Hiding View Using Sheets:
+Sheet are card-like presentation where the current view slides away into the distance a little and the new view animates in on top.
 Sheets work much like alerts, but instead of like `alert.present()`, we define the conditions under which a sheet should be shown.
+
+```swift
+struct SheetsConditional: View {
+    
+    @State private var showingSheet = false
+    
+    var body: some View {
+        Button("Show Sheet") {
+            showingSheet.toggle()
+        }
+        .sheet(isPresented: $showingSheet) {
+            SecondView(name: "@twostraws")
+        }
+    }
+}
+
+struct SecondView: View {
+    
+    // using @Environment wrapper for self destruction (this view)
+    @Environment(\.dismiss) var dismiss
+    
+    let name: String
+    
+    var body: some View {
+        VStack {
+            Text("Hello, \(name)!")
+            Button("Dismiss") {
+                dismiss()
+            }
+        }
+    }
+}
+```
+
+### @Environment and Dismiss a View:

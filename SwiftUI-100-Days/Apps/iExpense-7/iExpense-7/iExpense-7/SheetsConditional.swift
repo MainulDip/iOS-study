@@ -8,16 +8,33 @@
 import SwiftUI
 
 struct SheetsConditional: View {
+    
+    @State private var showingSheet = false
+    
     var body: some View {
         Button("Show Sheet") {
-            // show the sheet
+            showingSheet.toggle()
+        }
+        .sheet(isPresented: $showingSheet) {
+            SecondView(name: "@twostraws")
         }
     }
 }
 
 struct SecondView: View {
+    
+    // using @Environment wrapper for self destruction (this view)
+    @Environment(\.dismiss) var dismiss
+    
+    let name: String
+    
     var body: some View {
-        Text("Second View")
+        VStack {
+            Text("Hello, \(name)!")
+            Button("Dismiss") {
+                dismiss()
+            }
+        }
     }
 }
 
