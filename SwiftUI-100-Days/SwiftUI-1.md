@@ -1331,4 +1331,69 @@ struct SecondView: View {
 }
 ```
 
+### KeyPath and KeyPath Expression `\`:
+The most common way to make an instance of this type is by using a key-path expression like \SomeClass.someProperty. And the expression signature is `\<#type name#>.<#path#>`
+```swift
+struct SomeStructure {
+    var someValue: Int
+}
+
+
+let s = SomeStructure(someValue: 12)
+let pathToProperty = \SomeStructure.someValue
+
+/* Using keyPath Subscript which is available on all types */
+let value = s[keyPath: pathToProperty]
+// value is 12
+```
+
+Docs: https://developer.apple.com/documentation/swift/keypath
+* Docs: https://docs.swift.org/swift-book/documentation/the-swift-programming-language/expressions/#Key-Path-Expression
+
+
 ### @Environment and Dismiss a View:
+Use the Environment property wrapper to read a value (but cannot set) stored in a view’s environment. Indicate the value to read using an EnvironmentValues key path in the property declaration. Signature `@Environment(\EnvironmentValues.prop) var variableName: Type`
+
+```swift
+/**
+* Showing another view conditionally using Sheets
+* And also dismissing that using @Environment Property wrapper
+*/
+
+struct SheetsConditional: View {
+    
+    @State private var showingSheet = false
+    
+    var body: some View {
+        Button("Show Sheet") {
+            showingSheet.toggle()
+        }
+        .sheet(isPresented: $showingSheet) {
+            SecondView(name: "@twostraws")
+        }
+    }
+}
+
+struct SecondView: View {
+    
+    // using @Environment wrapper for self destruction (this view)
+    @Environment(\EnvironmentValues.dismiss) var dismiss
+    
+    // var dismissActionKeyPath: KeyPath<EnvironmentValues, DismissAction> = \EnvironmentValues.dismiss
+    
+    let name: String
+    
+    var body: some View {
+        VStack {
+            Text("Hello, \(name)!")
+            Button("Dismiss") {
+                dismiss()
+            }
+        }
+    }
+}
+```
+If the value changes, SwiftUI updates any parts of your view that depend on the value. 
+
+@Environment Docs: https://developer.apple.com/documentation/swiftui/environment
+EnvironmentValue Docs: https://developer.apple.com/documentation/swiftui/environmentvalues

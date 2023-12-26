@@ -24,7 +24,9 @@ struct SheetsConditional: View {
 struct SecondView: View {
     
     // using @Environment wrapper for self destruction (this view)
-    @Environment(\.dismiss) var dismiss
+    @Environment(\EnvironmentValues.dismiss) var dismiss
+    
+    // var dismissActionKeyPath: KeyPath<EnvironmentValues, DismissAction> = \EnvironmentValues.dismiss
     
     let name: String
     
