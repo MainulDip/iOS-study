@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7227DD5C2B3774890063D478 /* SheetsConditional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7227DD5B2B3774890063D478 /* SheetsConditional.swift */; };
+		727D62842B3E12E800909B02 /* DeletingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727D62832B3E12E800909B02 /* DeletingItem.swift */; };
 		72F216342B31478500D5AAEF /* iExpense_7App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F216332B31478500D5AAEF /* iExpense_7App.swift */; };
 		72F216362B31478500D5AAEF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F216352B31478500D5AAEF /* ContentView.swift */; };
 		72F216382B31478600D5AAEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72F216372B31478600D5AAEF /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 
 /* Begin PBXFileReference section */
 		7227DD5B2B3774890063D478 /* SheetsConditional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetsConditional.swift; sourceTree = "<group>"; };
+		727D62832B3E12E800909B02 /* DeletingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletingItem.swift; sourceTree = "<group>"; };
 		72F216302B31478500D5AAEF /* iExpense-7.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iExpense-7.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		72F216332B31478500D5AAEF /* iExpense_7App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iExpense_7App.swift; sourceTree = "<group>"; };
 		72F216352B31478500D5AAEF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 				72F216372B31478600D5AAEF /* Assets.xcassets */,
 				72F216392B31478600D5AAEF /* Preview Content */,
 				7227DD5B2B3774890063D478 /* SheetsConditional.swift */,
+				727D62832B3E12E800909B02 /* DeletingItem.swift */,
 			);
 			path = "iExpense-7";
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				727D62842B3E12E800909B02 /* DeletingItem.swift in Sources */,
 				72F216362B31478500D5AAEF /* ContentView.swift in Sources */,
 				7227DD5C2B3774890063D478 /* SheetsConditional.swift in Sources */,
 				72F216342B31478500D5AAEF /* iExpense_7App.swift in Sources */,

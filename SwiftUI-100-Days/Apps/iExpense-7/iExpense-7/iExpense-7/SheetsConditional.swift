@@ -15,7 +15,9 @@ struct SheetsConditional: View {
         Button("Show Sheet") {
             showingSheet.toggle()
         }
-        .sheet(isPresented: $showingSheet) {
+        .sheet(isPresented: $showingSheet){
+            print("Calling onDismiss")
+        } content : {
             SecondView(name: "@twostraws")
         }
     }

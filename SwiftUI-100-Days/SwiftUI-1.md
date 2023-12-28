@@ -1352,7 +1352,9 @@ Docs: https://developer.apple.com/documentation/swift/keypath
 
 
 ### @Environment and Dismiss a View:
-Use the Environment property wrapper to read a value (but cannot set) stored in a view’s environment. Indicate the value to read using an EnvironmentValues key path in the property declaration. Signature `@Environment(\EnvironmentValues.prop) var variableName: Type`
+Use the Environment property wrapper to read a value (but cannot set) stored in a view’s environment. Indicate the value to read using an `EnvironmentValues` key path in the property declaration. Signature `@Environment(\EnvironmentValues.prop) var variableName: Type`
+
+All the available keyPath for using in @Environment are here -> https://developer.apple.com/documentation/swiftui/environmentvalues
 
 ```swift
 /**
@@ -1397,3 +1399,37 @@ If the value changes, SwiftUI updates any parts of your view that depend on the 
 
 @Environment Docs: https://developer.apple.com/documentation/swiftui/environment
 EnvironmentValue Docs: https://developer.apple.com/documentation/swiftui/environmentvalues
+
+### Deleting Items Wid Swipe Delete and .toolbar:EditButton :
+SwiftUI provides some builtin Modifier and function to delete list items by swiping or select delete.
+
+This example creates a view where user can add numbers to the screen and delete it by swiping left or an Edit button on toolbar to select and delete multiple items at once.
+```swift
+struct DeletingItem: View {
+    @State private var numbers = [Int]()
+    @State private var currentNumber = 1
+    
+    var body: some View {
+       NavigationStack {
+            VStack {
+                List {
+                    ForEach(numbers, id: \.self) {
+                        Text("Row \($0)")
+                    }
+                    .onDelete(perform: { indexSet in
+                        numbers.remove(atOffsets: indexSet)
+                    })
+                }
+                
+                Button("Add Number") {
+                    numbers.append(currentNumber)
+                    currentNumber += 1
+                }
+            }
+            .toolbar(content: {
+                EditButton()
+            })
+        }
+    }
+}
+```
