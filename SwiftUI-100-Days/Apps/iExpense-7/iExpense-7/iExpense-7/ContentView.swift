@@ -6,27 +6,21 @@
 //
 
 import SwiftUI
-import Observation
 
 struct ContentView: View {
-    @State private var user = User()
-
-        var body: some View {
-            Form {
-                Text("Your name is \(user.firstName) \(user.lastName).")
-
-                TextField("First name", text: $user.firstName)
-                
-                TextField("Last name", text: $user.lastName)
-            }
-        }
-}
-
-@Observable
-class User {
-    var firstName  = "Bilbo"
+    /** Reading form UserDefaults
+     * if the key can’t be found on first run
+     *  it just sends back 0
+     */
+    @State private var tapCount = UserDefaults.standard.integer(forKey: "Tap")
     
-    var lastName = "Baggins"
+    var body: some View {
+        Button("Tap count: \(tapCount)") {
+            tapCount += 1
+            /* Setting UserDefault Value is a Key */
+            UserDefaults.standard.set(tapCount, forKey: "Tap")
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {

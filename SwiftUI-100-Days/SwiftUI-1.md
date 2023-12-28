@@ -1433,3 +1433,44 @@ struct DeletingItem: View {
     }
 }
 ```
+
+### UserDefaults for storing user setting/data and @AppStorage:
+UserDefault is suitable for storing small amount of data. There is no limit set, but as everything will loads while app opens, storing big data could slow app initialization. Best to be lower than 512KB.
+
+@AppStorage can Wrap-up the UserDefaults, which provide more simpler property storage option.
+
+```swift
+struct ContentView: View {
+    /** Reading form UserDefaults
+     * if the key can’t be found on first run
+     * it just sends back 0
+     * with boolean(forKey:) false will be returned initially
+     */
+    @State private var tapCount = UserDefaults.standard.integer(forKey: "Tap")
+    
+    var body: some View {
+        Button("Tap count: \(tapCount)") {
+            tapCount += 1
+            /* Setting UserDefault Value is a Key */
+            UserDefaults.standard.set(tapCount, forKey: "Tap")
+        }
+    }
+}
+```
+
+@AppStorage is even simpler, but it needs default value. Also it doesn't support storing Custom types.
+```swift
+struct ContentView: View {
+    @AppStorage("tapCount") private var tapCount = 0
+
+    var body: some View {
+        Button("Tap count: \(tapCount)") {
+            tapCount += 1
+        }
+    }
+}
+```
+
+* Note on AppStore Submission: Apple asks that you let them know why you're loading and saving data using UserDefaults. This also applies to the @AppStorage property wrapper. They just want to make sure developers aren't trying to identify users across apps.
+
+### Codable and Object Archiving:
