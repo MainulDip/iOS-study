@@ -1,5 +1,7 @@
-### KeyPath Expression:
-A key-path expression (`\<#type name#>.<#path#>`) refers to a property or subscript of a type. You use key-path expressions in dynamic programming tasks, such as key-value observing. The path consists of property names, subscripts, optional-chaining expressions, and forced unwrapping expressions.
+### KeyPath and KeyPath Expression:
+KeyPath is a reference to an actual property instead of a value. It is used as dynamic reference of a property in class/struct. printing a keypath will simply print `\Class.prop`. but when used with an instance using keyPath subscript like `instance[keyPath: \Class.prop]`, it will print the value.
+
+A key-path expression (`\<#type name#>.<#path#>`) refers to a property or subscript of a type/class/struct. You use key-path expressions in dynamic programming tasks, such as key-value observing.
 
 At compile time, a key-path expression is replaced by an instance of the KeyPath class.
 https://docs.swift.org/swift-book/documentation/the-swift-programming-language/expressions/#Key-Path-Expression
@@ -47,7 +49,8 @@ see: https://www.hackingwithswift.com/swift/5.3/multiple-trailing-closures
 
 
 ### More on KeyPath and KeyPath Expression `\`:
-The most common way to make an instance of this type is by using a key-path expression like \SomeClass.someProperty. And the expression signature is `\<#type name#>.<#path#>`
+The most common way to make an instance of this type is by using a key-path expression like \SomeClass.someProperty. And the 
+
 ```swift
 struct SomeStructure {
     var someValue: Int

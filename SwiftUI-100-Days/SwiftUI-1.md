@@ -1473,4 +1473,24 @@ struct ContentView: View {
 
 * Note on AppStore Submission: Apple asks that you let them know why you're loading and saving data using UserDefaults. This also applies to the @AppStorage property wrapper. They just want to make sure developers aren't trying to identify users across apps.
 
-### Codable and Object Archiving:
+### Codable and Object Archiving with JSONEncoder/Decoder:
+```swift
+struct User: Codable {
+    let firstName: String
+    let lastName: String
+}
+
+struct ContentView: View {
+    @State private var user = User(firstName: "Taylor", lastName: "Swift")
+
+    var body: some View {
+       Button("Save User") {
+            let encoder = JSONEncoder()
+
+            if let data = try? encoder.encode(user) {
+                UserDefaults.standard.set(data, forKey: "UserData")
+            }
+        }
+    }
+}
+```
