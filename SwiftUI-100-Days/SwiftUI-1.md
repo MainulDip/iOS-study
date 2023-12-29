@@ -1494,3 +1494,4 @@ struct ContentView: View {
     }
 }
 ```
+### List/ForEach KeyPath and Identifiable with UUID:
