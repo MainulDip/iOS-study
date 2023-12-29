@@ -34,7 +34,7 @@ class ViewController: UIViewController {
 }
 ```
 
-### imageLiteral is Deprecated:
+### imageLiteral is Deprecated
 it's a drag and drop interface to put images directly into variables. Instade use 
 ```swift
 diceImageView1.image =  UIImage(imageLiteralResourceName: "DiceSix")
