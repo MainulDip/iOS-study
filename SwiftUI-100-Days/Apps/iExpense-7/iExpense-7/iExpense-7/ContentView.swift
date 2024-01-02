@@ -8,17 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-    /** Reading form UserDefaults
-     * if the key can’t be found on first run
-     *  it just sends back 0
-     */
+    
     @State private var expenses = Expenses()
-    var sth = "Something"
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(expenses.items, id: \ExpenseItem.name) { item in
+                ForEach(expenses.items) { item in
                     Text(item.name)
                 }
                 .onDelete(perform: removeItems)
@@ -39,7 +35,8 @@ struct ContentView: View {
     }
 }
 
-struct ExpenseItem {
+struct ExpenseItem: Identifiable {
+    let id: UUID = UUID()
     let name: String
     let type: String
     let amount: Double

@@ -123,6 +123,14 @@ TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.
 .keyboardType(.decimalPad) // .numberPad and .decimalPad will make the popup keyboard number only mode
 ```
 
+### User's local data using @Environment:
+```swift
+@State private var amount = 0.0
+@Environment(\.locale) private var local
+
+TextField("Amount", value: $amount, format: .currency(code: local.currency?.identifier ?? "USD"))
+```
+
 ### @/PropertyWrappers/Annotations commonly used:
 `@AppStorage` reads and writes values from UserDefaults. This owns its data. More info.
 `@Binding` refers to value type data owned by a different view. Changing the binding locally changes the remote data too. This does not own its data. More info.
@@ -1495,3 +1503,24 @@ struct ContentView: View {
 }
 ```
 ### List/ForEach KeyPath and Identifiable with UUID:
+ForEach in SwiftUI require an id (a keyPath of that type) or the type (custom type/struct) must conform to `Identifiable` protocol. To make a struct successfully implement `Identifiable`, it should have a unique `id` property. We can use `UUID` easily to gen that.
+```swift
+struct ExpenseItem: Identifiable {
+    let id = UUID()
+    let name: String
+    let type: String
+    let amount: Int
+}
+
+// inside view implementing/conforming struct
+let expensesArray: Array<ExpenseItem> = [ExpenseItem(name: "Test", type: "Personal", amount: 5), ExpenseItem(name: "Test", type: "Personal", amount: 5)]
+/* swift's regular collection types are arrays, sets, and dictionaries, no list type*/
+
+var body: some View {
+    List {
+        ForEach(expensesArray) { item in
+            Text(item.name)
+        }
+    }
+}
+```
