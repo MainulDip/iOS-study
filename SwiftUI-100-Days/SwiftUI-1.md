@@ -1524,3 +1524,6 @@ var body: some View {
     }
 }
 ```
+
+### Class Type:
+`[SomeClass].self` -> referring to the type itself

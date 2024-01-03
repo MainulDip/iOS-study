@@ -7,15 +7,29 @@
 
 import SwiftUI
 
+let EXPENSES_USER_DEFAULT_KEY = "EXPENSES_USER_DEFAULT_KEY"
+
 struct ContentView: View {
     
     @State private var expenses = Expenses()
+    @State private var showingAddExpense = false
     
     var body: some View {
         NavigationStack {
             List {
                 ForEach(expenses.items) { item in
-                    Text(item.name)
+//                    Text(item.name)
+                    HStack {
+                            VStack(alignment: .leading) {
+                                Text(item.name)
+                                    .font(.headline)
+                                Text(item.type)
+                            }
+                        
+                        Spacer()
+                        Text(item.amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                        // also possible with @Environment(\.locale)
+                    }
                 }
                 .onDelete(perform: removeItems)
             }
@@ -23,10 +37,14 @@ struct ContentView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 Button("Add Expense", systemImage: "plus") {
-                    let expense = ExpenseItem(name: "Test", type: "Personal", amount: 5)
-                    expenses.items.append(expense)
+                    //                    let expense = ExpenseItem(name: "Test", type: "Personal", amount: 5)
+                    //                    expenses.items.append(expense)
+                    showingAddExpense = true
                 }
             }
+        }
+        .sheet(isPresented: $showingAddExpense) {
+            AddView(expenses: expenses)
         }
     }
     
@@ -35,8 +53,8 @@ struct ContentView: View {
     }
 }
 
-struct ExpenseItem: Identifiable {
-    let id: UUID = UUID()
+struct ExpenseItem: Identifiable, Codable {
+    var id: UUID = UUID()
     let name: String
     let type: String
     let amount: Double
@@ -44,7 +62,25 @@ struct ExpenseItem: Identifiable {
 
 @Observable
 class Expenses {
-    var items = [ExpenseItem]()
+    // empty array can also possible like -> items = [ExpenseItem](), type will be infered automatically
+    var items: [ExpenseItem] = [] {
+        didSet {
+            if let encoded = try? JSONEncoder().encode(items) {
+                UserDefaults.standard.set(encoded, forKey: EXPENSES_USER_DEFAULT_KEY)
+            }
+        }
+    }
+    
+    init() {
+        if let savedItems = UserDefaults.standard.data(forKey: EXPENSES_USER_DEFAULT_KEY) {
+            if let decodedItems = try? JSONDecoder().decode([ExpenseItem].self, from: savedItems) {
+                items = decodedItems
+                return
+            }
+            
+            items = []
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
