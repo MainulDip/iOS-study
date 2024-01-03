@@ -11,6 +11,7 @@
 		7200BA772B46066C008CC88A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200BA762B46066C008CC88A /* ContentView.swift */; };
 		7200BA792B46066D008CC88A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7200BA782B46066D008CC88A /* Assets.xcassets */; };
 		7200BA7C2B46066D008CC88A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7200BA7B2B46066D008CC88A /* Preview Assets.xcassets */; };
+		7200BA832B4614AC008CC88A /* Image-Sizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200BA822B4614AB008CC88A /* Image-Sizing.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		7200BA762B46066C008CC88A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7200BA782B46066D008CC88A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7200BA7B2B46066D008CC88A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7200BA822B4614AB008CC88A /* Image-Sizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image-Sizing.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			children = (
 				7200BA742B46066C008CC88A /* Moonshot_8App.swift */,
 				7200BA762B46066C008CC88A /* ContentView.swift */,
+				7200BA822B4614AB008CC88A /* Image-Sizing.swift */,
 				7200BA782B46066D008CC88A /* Assets.xcassets */,
 				7200BA7A2B46066D008CC88A /* Preview Content */,
 			);
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7200BA832B4614AC008CC88A /* Image-Sizing.swift in Sources */,
 				7200BA772B46066C008CC88A /* ContentView.swift in Sources */,
 				7200BA752B46066C008CC88A /* Moonshot_8App.swift in Sources */,
 			);

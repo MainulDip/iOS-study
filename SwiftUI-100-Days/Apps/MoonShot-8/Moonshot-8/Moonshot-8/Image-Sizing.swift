@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  Image-Sizing.swift
 //  Moonshot-8
 //
 //  Created by Mainul Dip on 1/3/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct Image_Sizing: View {
     var body: some View {
         ZStack {
             // let img = ImageResource.imgStreetFighter6
@@ -31,5 +31,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    Image_Sizing()
 }
