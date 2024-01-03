@@ -24,6 +24,7 @@
 - alt + click : to see further docs of a function
 
 - cmd + N for new file
+- alt + right/left arrow -> to jump cursor to next/prev word quickly (ctrl + arrow) for windows/linux. 
 
 ### Implementing Protocol Member:
 - After Attaching the protocol, from inside struct/class braces, press `esc` for suggestion. Then apply those members

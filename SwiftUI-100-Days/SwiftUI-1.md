@@ -1525,5 +1525,39 @@ var body: some View {
 }
 ```
 
-### Class Type:
+### Class Type and JSON Encoding/Decoding:
 `[SomeClass].self` -> referring to the type itself
+```swift
+struct ExpenseItem: Identifiable, Codable {
+    var id: UUID = UUID()
+    let name: String
+    let type: String
+    let amount: Double
+}
+
+@Observable
+class Expenses {
+    // empty array can also possible like -> items = [ExpenseItem](), type will be infered automatically
+    var items: [ExpenseItem] = [] {
+        didSet {
+            if let encoded = try? JSONEncoder().encode(items) {
+                UserDefaults.standard.set(encoded, forKey: EXPENSES_USER_DEFAULT_KEY)
+            }
+        }
+    }
+    
+    init() {
+        if let savedItems = UserDefaults.standard.data(forKey: EXPENSES_USER_DEFAULT_KEY) {
+            if let decodedItems = try? JSONDecoder().decode([ExpenseItem].self, from: savedItems) {
+                items = decodedItems
+                return
+            }
+            
+            items = []
+        }
+    }
+}
+```
+
+
+--------------------------- Moonshot-8 ---------------------
