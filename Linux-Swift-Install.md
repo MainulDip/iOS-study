@@ -1,7 +1,7 @@
 ### Linux Swift Install Guide:
 This for only testing some swift code on the fly.
 
--> Head over to the official Swift Open Source repo at https://www.swift.org/getting-started/
+-> Head over to the official Swift Open Source repo at https://www.swift.org/getting-started/.
 -> Install the toolchain
 -> Download the exact swift package matching the linux distribution and architecture (x86)
 -> Extract the downloaded tra.zip anywhere or same directory

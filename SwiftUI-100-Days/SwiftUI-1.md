@@ -1674,3 +1674,64 @@ NavigationStack {
 }
 ```
 
+### String to Data Conversion For Encoding/Decoding:
+A Data object represents a collection of bytes and is is commonly used to work with binary data. A String object represents a collection of characters, Character objects.
+
+The `string.data(using:)` can be used for String-to-Data Conversion. This method returns an optional Data object. If the conversion was successful, then the Data object contains a representation of the String object encoded using the encoding you defined, utf8 in this example.
+
+`Data(string.utf8)` can also be used. its not optional.
+
+`String(data: data, encoding: .utf8)` can be used for decoding. Note for same encoding to use.
+
+```swift
+let string = "Hello World"
+let data = string.data(using: .utf8)
+
+if let data, let string = String(data: data, encoding: .utf8) {
+    print(string)
+}
+```
+
+note: https://cocoacasts.com/swift-fundamentals-how-to-convert-a-data-to-a-string-in-swift
+
+### Complex/Multidimensional Codable JSON Encoding/Decoding:
+Complex JSON types like, an array inside another array, can be JSON encode/decode using Codable.
+
+To implement this, create separate types for each level and apply Codable Protocol. As long as the data matches the hierarchy, no further work is necessary.
+
+```swift
+struct CodableHierarchical: View {
+    var body: some View {
+        Button("Decode JSON") {
+            // let data = input.data(using: .utf8) // returns optional
+            let data = Data(input.utf8) // doesn't return optional
+            
+            let decoder = JSONDecoder()
+            
+            if let user = try? decoder.decode(User.self, from: data) {
+                print(user.address.street)
+            }
+        }
+    }
+}
+
+let input = """
+    {
+        "name": "Taylor Swift",
+        "address": {
+            "street": "555, Taylor Swift Avenue",
+            "city": "Nashville"
+        }
+    }
+    """
+
+struct User: Codable {
+    let name: String
+    let address: Address
+}
+
+struct Address: Codable {
+    let street: String
+    let city: String
+}
+```
