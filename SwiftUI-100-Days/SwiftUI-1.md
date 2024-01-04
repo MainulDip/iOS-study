@@ -1568,7 +1568,7 @@ struct Image_Sizing: View {
     var body: some View {
         ZStack {
             // let img = ImageResource.imgStreetFighter6
-            // any image placed inside Assets.xcassets folder can be accessable with ImageResource.imageName
+            // any image placed inside Assets.xcassets folder can be accessible with ImageResource.imageName
             Image(.imgStreetFighter6)
                 .resizable()
 //                .imageScale(.large)
@@ -1591,3 +1591,86 @@ struct Image_Sizing: View {
     Image_Sizing()
 }
 ```
+### ScrollView with LazyVStack/LazyHStack vs regular Stacks:
+ lazy's are initialized onDemand, and regulars are initialized all at once
+```swift
+struct ScrollViewWithLazyStacks: View {
+    var body: some View {
+        VStack {
+            ScrollView (showsIndicators: false) { // to hide scrollbar
+                LazyVStack(spacing: 10) {
+                    ForEach(0..<100) {
+                        CustomText("Item \($0)", $0)
+                            .font(.title)
+                    }
+                }
+                .frame(maxWidth: .infinity) // without this, drag on empty space will not scroll
+            }
+            
+            VStack{
+                Text("Some Text Under the ScrollView")
+                    .padding(.top, 20)
+            }
+        }
+    }
+}
+
+/**
+ * Checking How LazyVStack/LazyHStack vs regular Stack's initilization policy
+ * lazy's are initialized onDemand, and regulars are initialized all at once
+ */
+struct CustomText: View {
+    let text: String
+    let counter: Int
+
+    var body: some View {
+        Text(text)
+    }
+
+    // if init block is explicit, assignment instruction of  empty stored Properties are required inside of it. 
+    // for implicit case, swift will generate the init block behind the scene
+    init(_ text: String, _ counter: Int) {
+        print("Creating a new CustomText, counter: \(counter)")
+        self.text = text
+        self.counter = counter
+    }
+}
+```
+
+### Navigation Using NavigationLink in NavigationStack:
+both sheet() and NavigationLink allow us to show a new view from the current one, but the way they do it is different and you should choose them carefully:
+
+* NavigationLink is for showing details about the user’s selection, like you’re digging deeper into a topic.
+* sheet() is for showing unrelated content, such as settings or a compose window.
+
+```swift
+NavigationStack {
+    // single line label    
+    NavigationLink("Tap Me") {
+        Text("Detail View")
+    }
+    
+    // multiline and complex label
+    NavigationLink {
+        Text("Detail View")
+    } label: {
+        VStack {
+            Text("This is the label")
+            Text("So is this")
+            Image(systemName: "face.smiling")
+        }
+        .font(.largeTitle)
+    }
+    // .navigationTitle("Nav Detail")
+    
+    // NavigationLink inside List will show and right arrow to each item
+    List(0..<100) { row in
+        NavigationLink("Row \(row)") {
+            Text("Detail \(row)")
+        }
+    }
+    .navigationTitle("SwiftUI")
+    .navigationBarTitleDisplayMode(.inline)
+}
+```
+
