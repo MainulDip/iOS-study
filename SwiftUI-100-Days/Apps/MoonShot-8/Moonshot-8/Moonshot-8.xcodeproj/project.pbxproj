@@ -15,6 +15,7 @@
 		7200BA852B465739008CC88A /* ScrollViewWithLazyStacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200BA842B465739008CC88A /* ScrollViewWithLazyStacks.swift */; };
 		7200BA872B4675BA008CC88A /* NavigationStackAndLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200BA862B4675BA008CC88A /* NavigationStackAndLink.swift */; };
 		7200BA892B467D93008CC88A /* CodableHierarchical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200BA882B467D93008CC88A /* CodableHierarchical.swift */; };
+		72277E0A2B4774FD00DD807B /* GridExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72277E092B4774FD00DD807B /* GridExample.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		7200BA842B465739008CC88A /* ScrollViewWithLazyStacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewWithLazyStacks.swift; sourceTree = "<group>"; };
 		7200BA862B4675BA008CC88A /* NavigationStackAndLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationStackAndLink.swift; sourceTree = "<group>"; };
 		7200BA882B467D93008CC88A /* CodableHierarchical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableHierarchical.swift; sourceTree = "<group>"; };
+		72277E092B4774FD00DD807B /* GridExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridExample.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				7200BA842B465739008CC88A /* ScrollViewWithLazyStacks.swift */,
 				7200BA862B4675BA008CC88A /* NavigationStackAndLink.swift */,
 				7200BA882B467D93008CC88A /* CodableHierarchical.swift */,
+				72277E092B4774FD00DD807B /* GridExample.swift */,
 				7200BA782B46066D008CC88A /* Assets.xcassets */,
 				7200BA7A2B46066D008CC88A /* Preview Content */,
 			);
@@ -150,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7200BA852B465739008CC88A /* ScrollViewWithLazyStacks.swift in Sources */,
+				72277E0A2B4774FD00DD807B /* GridExample.swift in Sources */,
 				7200BA832B4614AC008CC88A /* Image-Sizing.swift in Sources */,
 				7200BA772B46066C008CC88A /* ContentView.swift in Sources */,
 				7200BA872B4675BA008CC88A /* NavigationStackAndLink.swift in Sources */,

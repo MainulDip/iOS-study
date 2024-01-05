@@ -5,6 +5,7 @@
 
 ### Major areas:
 - Left (cmd 0) | Right | Bottom (Debug Area) (shift + cmd + y).
+- right inspector panel (cmd + alt/option + 0)
 
 ### SwiftUI Preview Area (Canvas):
 - Show Preview -> alt/option + cmd + enter/return
@@ -60,7 +61,7 @@ Custom Location can be set to debug different things, like CoreLocations
 
 ### Printing/Debugging on Debug Panel
 - applying breakpoint will provide the interactive shell like interface. Use "print someVar" to print the values of the variable
-### Code Scenes
+### Code Scenes:
 L: Local Variable (also maybe passed when extending another class)
 
 
