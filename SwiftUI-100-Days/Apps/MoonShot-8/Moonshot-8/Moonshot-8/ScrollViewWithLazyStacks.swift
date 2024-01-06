@@ -2,7 +2,7 @@
 //  ScrollViewWithLazyStacks.swift
 //  Moonshot-8
 //
-//  Created by Mainul Dip on 1/3/24.
+//  Created by Mainul Dip on 1/5/24.
 //
 
 import SwiftUI
@@ -41,7 +41,7 @@ struct CustomText: View {
     }
 
     // if init block is explicit, assignment instruction of  empty stored Properties are required inside of it.
-    // for implicit case, swift will generate the init block behind the 
+    // for implicit case, swift will generate the init block behind the scene
     init(_ text: String, _ counter: Int) {
         print("Creating a new CustomText, counter: \(counter)")
         self.text = text

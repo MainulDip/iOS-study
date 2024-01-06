@@ -1616,7 +1616,7 @@ struct ScrollViewWithLazyStacks: View {
 }
 
 /**
- * Checking How LazyVStack/LazyHStack vs regular Stack's initilization policy
+ * Checking How LazyVStack/LazyHStack vs regular Stack's initilization policy.
  * lazy's are initialized onDemand, and regulars are initialized all at once
  */
 struct CustomText: View {
