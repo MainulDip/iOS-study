@@ -1798,3 +1798,41 @@ struct GridExample: View {
     }
 }
 ```
+
+### Bundle and creating a extension for loading and decoding a JSON file:
+Apple uses bundles to represent apps, frameworks, plug-ins, and many other specific types of content. By using a bundle object, you can access a bundle's resources without knowing the structure of the bundle in different platform. The bundle object provides a single interface for locating items, taking into account the bundle structure, user preferences, available localizations, and other relevant factors.
+
+Any executable can use a bundle object to locate resources, either inside an app’s bundle or in a known bundle located elsewhere. But not in a container directory or in other parts of the file system.
+
+The Bundle class has many constructors, but `main` is used most. The main bundle represents the bundle directory that contains the currently executing code. So for an app, the main bundle object gives you access to the resources that shipped with your app.
+
+```swift
+extension Bundle {
+    /**
+     * An extension function that accept a Stirng as fileName and return array of a Dictionary
+     */
+    func decode(_ file: String) -> [String: Astronaut] {
+        guard let url = self.url(forResource: file, withExtension: nil) else {
+            fatalError("Failed to locate \(file) in bundle.")
+        }
+        
+        guard let data = try? Data(contentsOf: url) else {
+            fatalError("Failed to load \(file) from bundle.")
+        }
+        
+        let decoder = JSONDecoder()
+        
+        guard let loaded = try? decoder.decode([String: Astronaut].self, from: data) else {
+            fatalError("Failed to decode \(file) from bundle.")
+        }
+        
+        return loaded
+    }
+}
+
+/**
+ * And call this from other places of the app to load a file using
+ * let astronauts = Bundle.main.decode("file-in-project-directory.extension")
+ */
+
+```
