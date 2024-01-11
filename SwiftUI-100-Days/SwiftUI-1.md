@@ -1695,7 +1695,7 @@ if let data, let string = String(data: data, encoding: .utf8) {
 note: https://cocoacasts.com/swift-fundamentals-how-to-convert-a-data-to-a-string-in-swift
 
 ### Complex/Multidimensional Codable JSON Encoding/Decoding:
-Complex JSON types like, an array inside another array, can be JSON encode/decode using Codable.
+Complex JSON types like, an array inside another array, can be JSON encode/decode using Codable. `Dictionary | [key:value]` sometimes work well when there is a JSON object of multiple named object. So the name becomes key and object becomes value (`[k1: v1, k2: v2, k3: v3, ...]`)
 
 To implement this, create separate types for each level and apply Codable Protocol. As long as the data matches the hierarchy, no further work is necessary.
 
@@ -1806,10 +1806,13 @@ Any executable can use a bundle object to locate resources, either inside an app
 
 The Bundle class has many constructors, but `main` is used most. The main bundle represents the bundle directory that contains the currently executing code. So for an app, the main bundle object gives you access to the resources that shipped with your app.
 
+* `Dictionary | [key:value]` sometimes work well when there is a JSON object of multiple named object. So the name becomes key and object becomes value (`[k1: v1, k2: v2, k3: v3, ...]`)
+
 ```swift
 extension Bundle {
     /**
-     * An extension function that accept a Stirng as fileName and return array of a Dictionary
+     * An extension function of Bundle, and is accessed byBundle.main.decode("filenames.extension")
+     * this fn accept a String as fileName and return a Dictionary
      */
     func decode(_ file: String) -> [String: Astronaut] {
         guard let url = self.url(forResource: file, withExtension: nil) else {
@@ -1835,4 +1838,31 @@ extension Bundle {
  * let astronauts = Bundle.main.decode("file-in-project-directory.extension")
  */
 
+```
+
+### Generic Conversion of the custom JSON Decoder above:
+```swift
+extension Bundle {
+    /**
+     * An extension function of Bundle, and is accessed by `let astronauts: [String: Astronaut] = Bundle.main.decode("astronauts.json")`
+     * this fn accept a String as fileName and return the generic type T
+     */
+    func decode<T: Codable>(_ file: String) -> T {
+        guard let url = self.url(forResource: file, withExtension: nil) else {
+            fatalError("Failed to locate \(file) in bundle.")
+        }
+        
+        guard let data = try? Data(contentsOf: url) else {
+            fatalError("Failed to load \(file) from bundle.")
+        }
+        
+        let decoder = JSONDecoder()
+        
+        guard let loaded = try? decoder.decode(T.self, from: data) else {
+            fatalError("Failed to decode \(file) from bundle.")
+        }
+        
+        return loaded
+    }
+}
 ```

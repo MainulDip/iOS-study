@@ -9,10 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     
-    let astronauts = Bundle.main.decode("astronauts.json")
+    // specifying dictionary type
+    let astronauts: [String: Astronaut] = Bundle.main.decode("astronauts.json")
     
     var body: some View {
-        Text("Total Astronauts is \(astronauts.count)")
+        Text("All the Astronust are \(astronauts.keys.joined(separator: ", ").capitalized)")
     }
 }
 
