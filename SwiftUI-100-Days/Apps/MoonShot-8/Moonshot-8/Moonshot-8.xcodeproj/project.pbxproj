@@ -78,12 +78,12 @@
 				7200BA862B4675BA008CC88A /* NavigationStackAndLink.swift */,
 				7200BA882B467D93008CC88A /* CodableHierarchical.swift */,
 				72277E092B4774FD00DD807B /* GridExample.swift */,
-				7200BA782B46066D008CC88A /* Assets.xcassets */,
 				7265DADA2B48E85F002892F6 /* astronauts.json */,
 				7265DADE2B48EC87002892F6 /* Astronaut.swift */,
 				7265DAE02B48ED69002892F6 /* Bundle-Decodable.swift */,
 				7265DADB2B48E85F002892F6 /* missions.json */,
 				72F1542D2B4F8C300047130E /* Mission.swift */,
+				7200BA782B46066D008CC88A /* Assets.xcassets */,
 				7200BA7A2B46066D008CC88A /* Preview Content */,
 			);
 			path = "Moonshot-8";

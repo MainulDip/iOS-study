@@ -1841,6 +1841,7 @@ extension Bundle {
 ```
 
 ### Generic Conversion of the custom JSON Decoder above:
+Note: when decoding, we're receiving a `dictionary`, not an array.
 ```swift
 extension Bundle {
     /**
@@ -1864,5 +1865,45 @@ extension Bundle {
         
         return loaded
     }
+}
+
+struct Astronaut: Codable, Identifiable {
+    let id: String
+    let name: String
+    let description: String
+}
+
+struct ContentView: View {
+    
+    // specifying dictionary type
+    let astronauts: [String: Astronaut] = Bundle.main.decode("astronauts.json")
+    
+    var body: some View {
+        Text("All the Astronust are \(astronauts.keys.joined(separator: ", ").capitalized)") // will show all the astronauts name
+    }
+}
+
+// JSON file `astronauts.json`
+{
+    "grissom": {
+        "id": "grissom",
+		"name": "Virgil I. \"Gus\" Grissom",
+		"description": "Virgil Ivan ...."
+	},
+    "white": {
+        "id": "white",
+		"name": "Edward H. White II",
+		"description": "Edward Higgins White II ..."
+	},
+	"chaffee": {
+        "id": "chaffee",
+		"name": "Roger B. Chaffee",
+		"description": "Roger Bruce Chaffee ..."
+	},
+    "schirra": {
+        "id": "schirra",
+		"name": "Walter M. Schirra",
+		"description": "Walter Marty Schirra ..."
+	}
 }
 ```

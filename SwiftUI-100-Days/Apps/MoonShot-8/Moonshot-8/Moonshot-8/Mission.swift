@@ -14,9 +14,21 @@ struct Mission: Codable, Identifiable {
     }
     
     let id: Int
-    let launchDate: String?
+    let launchDate: String? // its optional as sometimes we don't have this field in our missions.json file
     let crew: [CrewRole]
     let description: String
+    
+    // computed property for mission's display name
+    var displayName: String {
+        "Apollow \(id)"
+    }
+    
+    // computed propety to get mission's image
+    var image: String {
+        get {
+            "apollo\(id)"
+        }
+    }
 }
 
 
