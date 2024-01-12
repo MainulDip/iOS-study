@@ -14,19 +14,20 @@ struct ContentView: View {
     
     let missions: [Mission] = Bundle.main.decode("missions.json")
     
+    let columns = [
+        GridItem(.adaptive(minimum: 150))
+    ]
+    
     var body: some View {
-        VStack {
-            
-            Spacer()
+        VStack(spacing: 40) {
             
             Text("All the Astronust are \(astronauts.keys.joined(separator: ", ").capitalized)")
             
-            Spacer().frame(height: 40)
+//            Spacer()
             
             Text("Total mission count is \(missions.count)")
-            
-            Spacer()
         }
+        .frame(maxHeight: .infinity, alignment: .center)
         .padding(20)
     }
 }

@@ -201,6 +201,7 @@ struct ContentView: View {
 ```
 ### Alignments (leading/top | center | trailing/bottom):
 `HStack` has vertical alignment on it's constructor. To set Horizontal alignment, use `.frame(alignment: .leading)` or center/trailing for setting Vertical alignment. Same for VStack in opposite direction.
+* developer.apple alignment guide https://developer.apple.com/documentation/swiftui/aligning-views-across-stacks
 ```swift
  HStack(alignment: .center, spacing: 0) {
     Text("When do you want to wake up?")
