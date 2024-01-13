@@ -19,16 +19,34 @@ struct ContentView: View {
     ]
     
     var body: some View {
-        VStack(spacing: 40) {
-            
-            Text("All the Astronust are \(astronauts.keys.joined(separator: ", ").capitalized)")
-            
-//            Spacer()
-            
-            Text("Total mission count is \(missions.count)")
+        NavigationStack {
+            ScrollView {
+                LazyVGrid (columns: columns) {
+                    ForEach(missions) { mission in
+                        NavigationLink {
+                            Text("Detail View")
+                        } label: {
+                            VStack {
+                                Image(mission.image)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 100, height: 100)
+                                
+                                VStack {
+                                    Text(mission.displayName)
+                                        .font(.headline)
+                                    Text(mission.formattedLaunchDate)
+                                        .font(.caption)
+                                }
+                                .frame(maxWidth: .infinity)
+                            }
+                        }
+
+                    }
+                }
+            }
+            .navigationTitle("MoonShot").navigationBarTitleDisplayMode(.inline)
         }
-        .frame(maxHeight: .infinity, alignment: .center)
-        .padding(20)
     }
 }
 

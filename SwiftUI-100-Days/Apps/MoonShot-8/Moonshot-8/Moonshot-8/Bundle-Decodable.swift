@@ -23,6 +23,11 @@ extension Bundle {
         
         let decoder = JSONDecoder()
         
+        // adding date decode policy. if there is a date property in decoding struct, it will preceed, if not found, it will be ignored
+        let formatter = DateFormatter()
+        formatter.dateFormat = "y-MM-dd" // MM for month and mm for Minuites
+        decoder.dateDecodingStrategy = .formatted(formatter)
+        
         guard let loaded = try? decoder.decode(T.self, from: data) else {
             fatalError("Failed to decode \(file) from bundle.")
         }

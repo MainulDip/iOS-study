@@ -14,7 +14,7 @@ struct Mission: Codable, Identifiable {
     }
     
     let id: Int
-    let launchDate: String? // its optional as sometimes we don't have this field in our missions.json file
+    let launchDate: Date? // its optional as sometimes we don't have this field in our missions.json file
     let crew: [CrewRole]
     let description: String
     
@@ -28,6 +28,10 @@ struct Mission: Codable, Identifiable {
         get {
             "apollo\(id)"
         }
+    }
+    
+    var formattedLaunchDate: String {
+        launchDate?.formatted(date: .abbreviated, time: .omitted) ?? "N/A"
     }
 }
 

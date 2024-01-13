@@ -20,6 +20,7 @@
 		7265DADD2B48E85F002892F6 /* missions.json in Resources */ = {isa = PBXBuildFile; fileRef = 7265DADB2B48E85F002892F6 /* missions.json */; };
 		7265DADF2B48EC87002892F6 /* Astronaut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7265DADE2B48EC87002892F6 /* Astronaut.swift */; };
 		7265DAE12B48ED69002892F6 /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7265DAE02B48ED69002892F6 /* Bundle-Decodable.swift */; };
+		72C901382B52649A0099DD17 /* Color-Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C901372B52649A0099DD17 /* Color-Theme.swift */; };
 		72F1542E2B4F8C300047130E /* Mission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F1542D2B4F8C300047130E /* Mission.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		7265DADB2B48E85F002892F6 /* missions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = missions.json; sourceTree = "<group>"; };
 		7265DADE2B48EC87002892F6 /* Astronaut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Astronaut.swift; sourceTree = "<group>"; };
 		7265DAE02B48ED69002892F6 /* Bundle-Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
+		72C901372B52649A0099DD17 /* Color-Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color-Theme.swift"; sourceTree = "<group>"; };
 		72F1542D2B4F8C300047130E /* Mission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mission.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,6 +75,7 @@
 			children = (
 				7200BA742B46066C008CC88A /* Moonshot_8App.swift */,
 				7200BA762B46066C008CC88A /* ContentView.swift */,
+				72C901372B52649A0099DD17 /* Color-Theme.swift */,
 				7200BA822B4614AB008CC88A /* Image-Sizing.swift */,
 				7265DAD82B48DF87002892F6 /* ScrollViewWithLazyStacks.swift */,
 				7200BA862B4675BA008CC88A /* NavigationStackAndLink.swift */,
@@ -171,6 +174,7 @@
 			files = (
 				72277E0A2B4774FD00DD807B /* GridExample.swift in Sources */,
 				7200BA832B4614AC008CC88A /* Image-Sizing.swift in Sources */,
+				72C901382B52649A0099DD17 /* Color-Theme.swift in Sources */,
 				7200BA772B46066C008CC88A /* ContentView.swift in Sources */,
 				7265DADF2B48EC87002892F6 /* Astronaut.swift in Sources */,
 				7200BA872B4675BA008CC88A /* NavigationStackAndLink.swift in Sources */,
