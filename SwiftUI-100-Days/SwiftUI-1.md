@@ -1860,6 +1860,11 @@ extension Bundle {
         
         let decoder = JSONDecoder()
         
+         // adding date decode policy. if there is a date property in decoding struct, it will preceed, if not found, it will be ignored
+        let formatter = DateFormatter()
+        formatter.dateFormat = "y-MM-dd" // MM for month and mm for Minutes
+        decoder.dateDecodingStrategy = .formatted(formatter)
+        
         guard let loaded = try? decoder.decode(T.self, from: data) else {
             fatalError("Failed to decode \(file) from bundle.")
         }
@@ -1910,7 +1915,7 @@ struct ContentView: View {
 ```
 ### Light and Dark Theme Using ShapeStyle's Extension:
 Color conforms to a bigger protocol called ShapeStyle. This ShapeStyle protocol is what the background() modifier uses
-```swfit
+```swift
 extension ShapeStyle where Self == Color {
     static var darkBackground: Color {
         Color(red: 0.1, green: 0.1, blue: 0.2)
