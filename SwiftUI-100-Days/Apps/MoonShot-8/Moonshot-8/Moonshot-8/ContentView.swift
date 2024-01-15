@@ -20,7 +20,7 @@ struct ContentView: View {
     
     
     
-    init() { UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white] }
+//    init() { UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white] }
 
     
     var body: some View {
@@ -59,27 +59,29 @@ struct ContentView: View {
                 }
                 .padding([.horizontal, .bottom])
             }
+            .navigationTitle("MoonShot")
+            .navigationBarTitleDisplayMode(.inline)
+            .background(.darkBackground)
+            .preferredColorScheme(.dark) // this will also make destination scren use dark color Scheme
+            
+            /* Using toolbar modifire */
+            /*
             .toolbar {
-                    ToolbarItem(placement: .principal) {
-//                      VStack {
+                ToolbarItem(placement: .principal) {
+                    VStack {
                         Text("Navigation Title")
-                          .foregroundColor(.white)
-//                      }
+                            .foregroundColor(.white)
                     }
-                  }
-                  // .toolbarBackground(.visible, for: .navigationBar)
-                  // .toolbarBackground(.red, for: .navigationBar)
-                  .navigationBarTitleDisplayMode(.inline)
-                  .background(.darkBackground)
-                  .preferredColorScheme(.dark)
-            
-//            .navigationTitle(Text("MoonShot")).navigationBarTitleDisplayMode(.inline)
-////            .titleColor
-//            .background(.darkBackground)
-            
-//            .preferredColorScheme(Color())
-//            .preferredColorScheme(.dark)
+                }
+            }
+            // .toolbarBackground(.visible, for: .navigationBar)
+            // .toolbarBackground(.red, for: .navigationBar)
+            .navigationBarTitleDisplayMode(.inline)
+            .background(.darkBackground)
+            .preferredColorScheme(.dark)
+             */
         }
+        
     }
 }
 

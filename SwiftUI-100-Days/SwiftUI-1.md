@@ -1926,3 +1926,79 @@ extension ShapeStyle where Self == Color {
     }
 }
 ``` 
+
+Using the custom color scheme
+```swift
+NavigationStack {
+    Something {
+        // ....
+    }
+    .navigationTitle(Text("MoonShot"))
+    .navigationBarTitleDisplayMode(.inline)
+    .background(.darkBackground)
+    .preferredColorScheme(.dark) // this will also make destination scren use dark color Scheme
+}
+```
+
+### NavigationStack Toolbar Customization (Title Color):
+`.toolbar` modifier gives more control with the NavigationStack's ToolBar Customization.
+```swift
+NavigationStack {
+    Something {
+        // ....
+    }
+    .toolbar {
+        ToolbarItem(placement: .principal) {
+            VStack {
+                Text("Navigation Title")
+                    .foregroundColor(.white)
+            }
+        }
+    }
+    // .toolbarBackground(.visible, for: .navigationBar)
+    // .toolbarBackground(.red, for: .navigationBar)
+    .navigationBarTitleDisplayMode(.inline)
+    .background(.darkBackground)
+    .preferredColorScheme(.dark) // this will also make destination scren use dark color Scheme
+}
+``` 
+
+### NavigationBar Title Color Using UIKit:
+Toolbar's title color can also be set using some UIKit features
+```swift
+ init() {
+  // Large Navigation Title
+  UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.purple]
+  // Inline Navigation Title
+  UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.purple]
+}
+```
+
+### ColorScheme Using @Environment and Set App's ColorScheme:
+```swift
+struct ContentView: View {
+    @Environment(\.colorScheme) var colorScheme
+
+    var body: some View {
+        Text(colorScheme == .dark ? "In dark mode" : "In light mode")
+    }
+}
+```
+
+* App's color scheme can be set using `.preferredColorScheme(.dark)` 
+
+### containerRelativeFrame() modifier:
+make views have a size relative to their container layout
+```swift
+ScrollView(.horizontal, showsIndicators: false) {
+    HStack {
+        ForEach(0..<10) { i in
+            Text("Item \(i)")
+                .foregroundStyle(.white)
+                .containerRelativeFrame(.horizontal, count: 5, span: 2, spacing: 10)
+                .background(.blue)
+        }
+    }
+}
+```
+https://www.hackingwithswift.com/quick-start/swiftui/how-to-adjust-the-size-of-a-view-relative-to-its-container
