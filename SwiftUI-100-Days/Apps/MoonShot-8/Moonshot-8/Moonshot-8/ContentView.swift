@@ -18,6 +18,11 @@ struct ContentView: View {
         GridItem(.adaptive(minimum: 150))
     ]
     
+    
+    
+    init() { UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white] }
+
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -54,9 +59,26 @@ struct ContentView: View {
                 }
                 .padding([.horizontal, .bottom])
             }
-            .navigationTitle("MoonShot").navigationBarTitleDisplayMode(.inline)
-            .background(.darkBackground)
-            .preferredColorScheme(.dark)
+            .toolbar {
+                    ToolbarItem(placement: .principal) {
+//                      VStack {
+                        Text("Navigation Title")
+                          .foregroundColor(.white)
+//                      }
+                    }
+                  }
+                  // .toolbarBackground(.visible, for: .navigationBar)
+                  // .toolbarBackground(.red, for: .navigationBar)
+                  .navigationBarTitleDisplayMode(.inline)
+                  .background(.darkBackground)
+                  .preferredColorScheme(.dark)
+            
+//            .navigationTitle(Text("MoonShot")).navigationBarTitleDisplayMode(.inline)
+////            .titleColor
+//            .background(.darkBackground)
+            
+//            .preferredColorScheme(Color())
+//            .preferredColorScheme(.dark)
         }
     }
 }
