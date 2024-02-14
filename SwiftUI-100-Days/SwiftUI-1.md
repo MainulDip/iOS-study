@@ -1988,7 +1988,7 @@ struct ContentView: View {
 * App's color scheme can be set using `.preferredColorScheme(.dark)` 
 
 ### containerRelativeFrame() modifier:
-make views have a size relative to their container layout
+make views have a size relative to its container layout size. the container size depends on the size of other children of that container.
 ```swift
 ScrollView(.horizontal, showsIndicators: false) {
     HStack {
@@ -1996,6 +1996,15 @@ ScrollView(.horizontal, showsIndicators: false) {
             Text("Item \(i)")
                 .foregroundStyle(.white)
                 .containerRelativeFrame(.horizontal, count: 5, span: 2, spacing: 10)
+                // callback variant is also available, where params of the callback gets size and mentioned axis
+                /* 
+                .containerRelativeFrame(.horizontal) { length, axis in
+                        if axis == .vertical {
+                            return length / 3.0
+                        } else {
+                            return length / 5.0
+                        }
+                } */
                 .background(.blue)
         }
     }

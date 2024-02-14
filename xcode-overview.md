@@ -4,8 +4,11 @@
 - Integrated Docs : Unique Feature. All the developer's docs can be found of the "help" section of xcode.
 
 ### Major areas:
-- Left (cmd 0) | Right | Bottom (Debug Area) (shift + cmd + y).
+- Left (cmd 0) | Right | Bottom .
 - right inspector panel (cmd + alt/option + 0)
+- right preview area `cmd+alt+enter` to show/hide and `cmd+enter` to hide
+- Show/Hide Bottom App Launcher Panel `cmd+alt+d`
+- Debug Area (shift + cmd + y) [not alway work form remote desktop to mac form windows/linux]
 
 ### SwiftUI Preview Area (Canvas):
 - Show Preview -> alt/option + cmd + enter/return
