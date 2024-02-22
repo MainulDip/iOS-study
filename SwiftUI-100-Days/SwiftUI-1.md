@@ -1941,7 +1941,7 @@ NavigationStack {
 ```
 
 ### NavigationStack Toolbar Customization (Title Color):
-`.toolbar` modifier gives more control with the NavigationStack's ToolBar Customization.
+`.toolbar` modifier gives more control with the NavigationStack's ToolBar Customization
 ```swift
 NavigationStack {
     Something {

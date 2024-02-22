@@ -31,10 +31,19 @@ struct MissionView: View {
                 .padding(.horizontal)
             }
         }
+        .preferredColorScheme(.dark)
     }
 }
 
+struct CrewMember {
+    let role: String
+    let astronaut: Astronaut
+}
+
 #Preview {
-    MissionView(mission: Mission(id: 7, launchDate: nil, crew: [Mission.CrewRole(name: "Crew 7", role: "Role 7")], description: "Crew description"))
+    let missions: [Mission] = Bundle.main.decode("missions.json");
+    return MissionView(mission: missions[0]);
+    
+    // MissionView(mission: Mission(id: 7, launchDate: nil, crew: [Mission.CrewRole(name: "Crew 7", role: "Role 7")], description: "Crew description"))
     
 }

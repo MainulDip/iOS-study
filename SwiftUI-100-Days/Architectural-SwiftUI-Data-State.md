@@ -1,7 +1,7 @@
 ### State and Observable Class:
 Class can reference as @State with the @Observable wrapper. We instantiate the class in State declaration and share the same instance to get/set data easily with other areas.
 
-The code is from 100 days of swiftUI's project 7, iExpense (<a href="./Apps/./iExpense-7/">iExpense7</a>).
+The code is from 100 days of swiftUI's project 7, iExpense (<a href="./Apps/./iExpense-7/">iExpense7</a>)
 
 We're using AddView as .sheet view inside ContentView and Passed Expenses Instance to AddView from ContentView, which is used to append new item from the `AddView` Struct. Also `didSet` `property observer` defined in Expenses Class is used to to store the updated values in `User Defaults` Storage after the append operation inside AddView. Which we read back when the app first load (instantiation in @State definition of Expenses() in ContentView will call the init block of Expense Class).
 
