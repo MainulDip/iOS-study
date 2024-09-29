@@ -4,7 +4,7 @@ Jump starting guide on Local Storage and Persistance Storage etc
 - KeyChain
 - NSCoder/Codable
 - CoreData/Sqlite -> SwiftData
-- Realm (OpenSource/Trending)
+- Realm (OpenSource/Trending).
 
 ### AppDelegate lifecycle Methods and App Cache Lifecycle:
 - applicationDidEnterBackground :

@@ -12,7 +12,7 @@
 - Then to create a navigation direction a segue need to be created by holding ctrl and dragging a connection handle form Storyboard's view controller to view controller.
 - After creating the segue connection, the segue connection itself needs an identifier which will be used to perform navigation suing self.performSegue form a ViewController class (btn action event usually).
 - Sending Data form controller to controller : "override func prepare(for segue: UIStoryboardSegue, sender: Any?){}" is used. and segue.destination is used to get the destination controller object itself.
-- Back Navigaiton: 
+- Back Navigation: 
 ```swift
 override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
@@ -39,7 +39,7 @@ cutomViewController.props = newValue
 self.performSegue(...)
 ```
 ### Navigation Stack | Embedding in Navigation View Controller:
-To get the back button and navigation stacking feature, the "entry point" view can set (embed in Navigation View Controller) by selecting and going through "Editor -> Embed in -> Navigation Controller" 
+To get the back button and navigation stacking feature, the "entry point" view can set (embed in Navigation View Controller) by selecting and going through "Editor -> Embed in -> Navigation Controller" .
 ### Navigation Bar Button:
 - Bar Button Item : A specialized button for placement on a toolbar, navigation bar, or shortcuts bar.
 - Bar Button Item Group: Container form multiple Navigation Bar item
