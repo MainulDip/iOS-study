@@ -1,10 +1,11 @@
 ## Content Overview:
+Swift Language Quick Start.
 
 ### let, var, type, type conversion, optional type, string interpolation:
 ```swift
 print("Hello World!")
 
-// specifying let/var is mandatory but initial type assaignment is optional
+// specifying let/var is mandatory but initial type assignment is optional
 let myConstant: String = "CONSTANT"
 var myVariable = 42
 let typeConversion = String(myVariable)
@@ -43,19 +44,19 @@ print(quotation)
 
 To create an empty array or dictionary, use the initializer syntax
 ```swift
-var emptyArray: [String] = [] // rmpty array
+var emptyArray: [String] = [] // empty array
 var emptySet = Set<String>() // empty set
 var emptySet2: Set<String> = [] // empty set
 var emptyDictionary: [String: Float] = [:] // empty Dictionary, key : value
 
-// type inferration not working for collections
-var fruits: [String] = [] // if type is infreed, it will throw error
+// type inference not working for empty collections declaration
+var fruits: [String] = [] // if type is inferred, it will throw error
 fruits = ["Hello", "World!"]
 var occupations : [String: Float] = [:] // empty dictionary, have to provide type
 var favoriteGenres: Set = ["Rock", "Classical", "Hip hop"] // initializing set with Type: Set and array literal notation
-favoriteGenres = [] // deletes all the "set" elements using empty array notration, but it is still "set", not empty array
+favoriteGenres = [] // deletes all the "set" elements using empty array notation, but it is still "set", not empty array
 
-//If you need an array that is preinitialized with a fixed number of default values, use the Array(repeating:count:) initializer.
+//If you need an array that is pre-initialized with a fixed number of default values, use the Array(repeating:count:) initializer.
 var digitCounts = Array(repeating: 0, count: 10)
 print(digitCounts)
 // Prints "[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]"
@@ -244,7 +245,7 @@ print(m)
 
 ### range/closed-Range | 0..<4 | 0...4 | 0...4 in for loop:
 0..<4 : from 0 to lessthan 4 | Data type => Range<Int>
-0...4 : from 0 to equalt to 4 | Data type = ClosedRange<Int>
+0...4 : from 0 to equal to 4 | Data type = ClosedRange<Int>
 ```swift
 // range
 var total = 0
@@ -263,7 +264,7 @@ print(counter)
 ```
 
 ### Functions:
-- func to delcare function
+- func to declare function
 - -> to separate the parameter names and types from the function’s return type.
 ```swift
 func greet(person: String, day: String) -> String {
@@ -431,7 +432,7 @@ func calculation (old: Int, new: Int) -> Int {
 var getTheTotal = countTotal(list: numberList, math: calculation)
 print("Getting total from named closure: \(getTheTotal)")
 ```
-### closuer trailing, numbered agruments, multiple closure, lazy closure:
+### closure trailing, numbered arguments, multiple closure, lazy closure:
 
 * Multiple Closures: omit the argument label for the first trailing closure and provide label the remaining trailing closures.
 ```swift
@@ -483,4 +484,4 @@ incrementBySeven()
 Docs: https://docs.swift.org/swift-book/LanguageGuide/AutomaticReferenceCounting.html.......
 
 ### Attributes | @attributes | @attributes(params)
-https://docs.swift.org/swift-book/ReferenceManual/Attributes.html .....................
+https://docs.swift.org/swift-book/ReferenceManual/Attributes.html ......................
