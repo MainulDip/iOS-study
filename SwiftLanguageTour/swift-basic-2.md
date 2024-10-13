@@ -38,9 +38,9 @@ print("\nIf Statements and Forced Unwrapping Ends:\n")
 print("\nOptional Binding Starts:\n")
 
 if let convertedInt = Int(cNum) {
-    print ("The string \"\(cNum)\" is covertable to Integer : \(convertedInt) ")
+    print ("The string \"\(cNum)\" is convertible to Integer : \(convertedInt) ")
 } else {
-    print("\"\(cNum)\" is not covertable to Integer value")
+    print("\"\(cNum)\" is not convertible to Integer value")
 }
 
 print("\nOptional Bindings Ends:\n")
