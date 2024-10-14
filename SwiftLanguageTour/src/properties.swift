@@ -21,12 +21,12 @@ struct FixedLengthRange {
         sth = a + length
     }
 }
-var rangeOfThreeItems = FixedLengthRange(7)
-print("\(rangeOfThreeItems.firstValue) \(rangeOfThreeItems.length)")
+var rangeOfThreeItems = FixedLengthRange(7) // missing properties needs to map through contractor arg
+print("\(rangeOfThreeItems.firstValue) \(rangeOfThreeItems.length)") // prints 7 7 
 
-print(rangeOfThreeItems.callMeLater)
-rangeOfThreeItems.callMeLater = 77
-print(rangeOfThreeItems.callMeLater)
+print(rangeOfThreeItems.callMeLater) // prints 0 as the value is not yet assigned
+rangeOfThreeItems.callMeLater = 77 // assigning value to the lazy property
+print(rangeOfThreeItems.callMeLater) // prints 77
 print("rangeOfThreeItems.sthGet = \(rangeOfThreeItems.sthGet)")
 
 print("\nStored-Lazy-Properties-----------------------------Ends-----------------------------\n")
