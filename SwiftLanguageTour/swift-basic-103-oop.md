@@ -1,29 +1,13 @@
 ## Swift Object Oriented Programmings:
 Topics covered includes following ->
 
-### Struct (Data) vs Class:
-structs/structures are to represent common kinds of data. Structs are value based, not reference based like classes. local changes to a structure aren’t visible to the rest of your app unless you intentionally communicate those changes as part of the flow of your app. The Swift standard library and Foundation use structures for types you use frequently, such as numbers, strings, arrays, and dictionaries
+### Struct vs Class:
+structs/structures are to represent common kinds of data. Structs are `value based`, not reference based like classes. local changes to a structure aren’t visible to the rest of your app unless you intentionally communicate those changes as part of the flow of your app. The Swift standard library and Foundation use structures for types you use frequently, such as numbers, strings, arrays, and dictionaries
 
+if 2 or more variable is referencing to a same instance of a struct. Each of them can have a separate copy of that struct (hence value based). The values of each referenced instance can be different. None of them are aware if one instance has changed one of it's property's value. But classes (being referenced based) multiple variable referencing to that same class instance point to the class instance itself. Updating anything in one instance updates all other references.  
 
-when two different class instances have the same value for each of their stored properties, they’re still considered to be different by the identity operator (===). It also means that when you share a class instance across your app, changes you make to that instance are visible to every part of your code that holds a reference to that instance.
+But when two different class instances have the same value for each of their stored properties, they’re still considered to be different by the identity operator (===). It also means that when you share a class instance across your app, changes you make to that instance are visible to every part of your code that holds a reference to that instance.
 
-* Use structures by default.
-
-* Use classes when you need Objective-C interoperability, and shared data in SwiftUI
-
-* Use classes when you need to control the identity of the data you’re modeling.
-
-* Use structures along with protocols to adopt behavior by sharing implementations.
-
-```swift
-struct PenPalRecord {
-    let myID: Int
-    var myNickname: String
-    var recommendedPenPalID: Int
-}
-
-var myRecord = try JSONDecoder().decode(PenPalRecord.self, from: jsonResponse)
-```
 ### Class vs Structure Example :
 ```swift
 class StudentClass {
@@ -38,8 +22,8 @@ let student1 = StudentClass(name: "Ramesh Chandra", grade: 9)
 
 let student2 = student1
 student2.name = "Ramesh Kant" // this will also make the student1 name "Ramesh Kant", as classes are references based
-print("student1 name: \(student1.name)")
-print("student2 name: \(student2.name)")
+print("student1 name: \(student1.name)") // student1 name: Ramesh Kant
+print("student2 name: \(student2.name)") // student1 name: Ramesh Kant
 
 struct StudentStruct {
    var name: String
@@ -48,8 +32,8 @@ struct StudentStruct {
 let student3 = StudentStruct(name: "Anish Sharma", grade: 8)
 var student4 = student3
 student4.name = "Anish Gupta" // this will not change the student3 name, as Structures are value based
-print("student3 name: \(student3.name)")
-print("student4 name: \(student4.name)")
+print("student3 name: \(student3.name)") // student3 name: Anish Sharma
+print("student4 name: \(student4.name)") // student4 name: Anish Gupta
 ```
 Output:
 student1 name: Ramesh Kant
@@ -60,6 +44,27 @@ student4 name: Anish Gupta
 
 Note: changing value of a classes form a referenced class will also change the referenced class's value. Structure will keep the value separate from referenced structures.
 
+### When to use Struct and when Class:
+
+* Use structures by default.
+
+* Use classes when you need Objective-C interoperability, and shared data in SwiftUI
+
+* Use classes when you need to control the identity of the data you’re modeling.
+
+* Use structures along with protocols to adopt behavior by sharing implementations.
+
+### Using Struct as Data Class (in kotlin):
+
+```swift
+struct PenPalRecord {
+    let myID: Int
+    var myNickname: String
+    var recommendedPenPalID: Int
+}
+
+var myRecord = try JSONDecoder().decode(PenPalRecord.self, from: jsonResponse)
+```
 
 ### Object, Classes and Inheritances :
 * class / base-class : Swift classes don’t inherit from a universal base class (unlike kotlin, All classes in Kotlin have a common superclass, Any). Classes you define without specifying a superclass automatically become base classes for you to build upon on swift.

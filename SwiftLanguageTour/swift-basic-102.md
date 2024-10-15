@@ -164,8 +164,6 @@ assert(age >= 0, "A person's age can't be less than zero.")
 precondition(index > 0, "Index must be greater than zero.")
 ```
 
-
-
 ### Generics:
 ```swift
 

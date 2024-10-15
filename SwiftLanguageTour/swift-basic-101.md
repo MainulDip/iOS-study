@@ -264,7 +264,7 @@ print(counter)
 ```
 
 ### Functions:
-- func to declare function
+- `func` to declare a function
 - -> to separate the parameter names and types from the function’s return type.
 ```swift
 func greet(person: String, day: String) -> String {
