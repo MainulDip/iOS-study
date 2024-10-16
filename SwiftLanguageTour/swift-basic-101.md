@@ -289,7 +289,7 @@ https://www.programiz.com/swift-programming/tuples
 
 In Swift, a tuple is a group of different values. And, each value inside a tuple can be of different data types.
 
-tuple can be simple values or named values. also tuple can store another tuple or dictionary/ies. 
+tuple can be simple values or named values. also tuple can store another tuple or dictionary/ies
 
 - Only tuple's dictionary elements can be added or removed. Other than tuple's member size/count is fixed so new elements cannot be added or removed.
 - But value/member can be edited

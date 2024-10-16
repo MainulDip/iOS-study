@@ -1,4 +1,4 @@
-### Optionals:
+### Optionals | ? | ! | ?? (nil coalescing operator):
 ```swift
 let cNum = "1234"
 let cStr = "Something"
@@ -16,6 +16,7 @@ print(convertStrToInt) // nil
 
 print(convertNumToIntFoptional) // Optional(1234)
 print(convertNumToIntFoptional!) // 1234
+print(convertNumToIntUnwrapped ?? "convertNumToIntUnwrapped is nil") // 1234
 print(convertNumToIntUnwrapped) // 1234
 ```
 

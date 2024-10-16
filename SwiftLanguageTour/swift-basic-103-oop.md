@@ -197,7 +197,7 @@ struct Paramedic: AdvancedLifeSupport {
 
     // init binds the EmergencyCallHandler
     init(_ handler: EmergencyCallHandler) {
-        handler.delegate = self // this actually bind the object with EmergencyCallHandler's delegated property, (optional) nil delegated is not nil anymore after this
+        handler.delegate = self // assigning self to the optional `delegate` property of passed instance of the EmergencyCallHandler.
     }
 
     // performCPR method is required by AdvancedLifeSupport protocol
