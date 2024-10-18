@@ -1,5 +1,5 @@
 protocol baseProtocol {
-    // if protocol states the mutating keyword, inherited method does not need to be prefixed with mutating
+    // if protocol states the mutating keyword, inherited method does not need to be prefixed with mutating.
     mutating func getNextQuestion() -> Int
 }
 

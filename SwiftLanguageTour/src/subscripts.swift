@@ -69,5 +69,5 @@ print("\nSubscript Example 2 -------------------------------\n")
 9   10  11 
 
 3 * 3 - 1 = last slot of third row (0 indexing)
-2 * 3 = first slot of the third row (0 indexing)
+2 * 3 = first slot of the third row (0 indexing)...
 */

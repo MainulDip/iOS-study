@@ -23,4 +23,4 @@ class B {
 }
 
 let a = A() // sets color to Brown
-let b = B() // prints : From Class B:  Brown
+let b = B() // prints : From Class B: Brown
