@@ -40,3 +40,28 @@ unit4A = nil
 
 * unowned reference:
 In Depth: https://docs.swift.org/swift-book/LanguageGuide/AutomaticReferenceCounting.html ...
+
+### Closure Invocation:
+It's same as function invoker
+```swift
+let abc = {print("hi")}
+abc() // "hi"
+```
+
+### Swift Singleton:
+```swift
+class Singleton3 {
+    let count = 1;
+    static let sharedInstance: Singleton3 = {
+        let instance: Singleton3 = Singleton3();
+        return instance
+    }(); // needs to be invoked with `()` as property cannot be left nil
+    
+    init () {
+        print("print first time only")
+    }
+}
+
+let first = Singleton3.sharedInstance
+let second = Singleton3.sharedInstance // calling again will not trigger the init block again.
+```

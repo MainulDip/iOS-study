@@ -1,26 +1,29 @@
-class Car {
-    var color = "Red"
-
-    static let singletonCar = Car()
+class Singleton1 {
+    static let shared = Singleton1()
 }
 
-let myCar = Car.singletonCar
-myCar.color = "Blue"
+class Singleton2 {
+    static let shared: Singleton2 = {
+        let instance = Singleton2()
+        // setup code
+        return instance
+    }()
+}
 
-let yourCar = Car.singletonCar
-print("Your Car Color: ", yourCar.color) // prints : Your Car Color:  Blue
 
-class A {
-    init() {
-        Car.singletonCar.color = "Brown"
+// Working Example
+
+class Singleton3 {
+    let count = 1;
+    static let sharedInstance: Singleton3 = {
+        let instance: Singleton3 = Singleton3();
+        return instance
+    }();
+    
+    init () {
+        print("print first time only")
     }
 }
 
-class B {
-    init() {
-        print("From Class B: ", Car.singletonCar.color)
-    }
-}
-
-let a = A() // sets color to Brown
-let b = B() // prints : From Class B: Brown
+let first = Singleton3.sharedInstance
+let second = Singleton3.sharedInstance // calling again will not trigger the init block again.

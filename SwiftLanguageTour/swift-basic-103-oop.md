@@ -144,7 +144,7 @@ An enumeration defines a common type for a group of related values. By these enu
 
 
 ### Structure/Enumeration vs Class (value type vs reference type):
-* value type vs reference type
+* value type `struct` vs reference type `class`
 
 * structure needs "mutating" keyword before method name to change struct's property, but methods on a class can always modify the class so no need for mutating keyword.
 
