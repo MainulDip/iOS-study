@@ -230,6 +230,40 @@ if ((ECH.delegate! as! Paramedic).id == someParamedic.id) {
 // print(someParamedic.id)
 ```
 
+### Protocol and mutation:
+To change self property, protocol should specify `mutating`. Class doesn't need that, but struct is required. 
+
+```swift
+import Foundation // to use pow(), we need Foundation
+
+protocol Ex {
+    var a: Double {get};
+    var b: Double {get set};
+    mutating func res() -> Double;
+}
+
+struct S1: Ex {
+    var a = 7.0;
+    var b = 7.0;
+    mutating func res() -> Double {
+        // pow accepts only decimal, hence double
+        a = pow(a, 2); // or a = a * a;
+        b = pow(b, 2); // or b = b * b;
+        return a + b;
+    }
+}
+
+class C1: Ex {
+    var a = 7.0;
+    var b = 7.0;
+    func res() -> Double {
+        a = pow(a, 2); // or a = a * a;
+        b = pow(b, 2); // or b = b * b;
+        return a + b;
+    }
+}
+```
+
 ### Extensions:
 Extensions add new functionality to an existing class, structure, enumeration, or protocol type. This includes the ability to extend types for which you don’t have access to the original source code (known as retroactive modeling). Extensions are similar to categories in Objective-C. (Unlike Objective-C categories, Swift extensions don’t have names.)
 

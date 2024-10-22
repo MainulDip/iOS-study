@@ -8,6 +8,7 @@
 print("\nProtocol/Interface----------------------Starts----------------\n")
 
     protocol ExampleProtocol {
+        // property in protocol must have explicit { get } or { get set } specifier
         var simpleDescription: String { get }
         mutating func adjust()
     }
@@ -82,3 +83,35 @@ print("\nProtocol/Interface----------------------Starts----------------\n")
 
 
 print("\nProtocol/Interface----------------------Ends----------------\n")
+
+
+print("\n protocol with struct vs class ------------------- Example 3 -------------------------\n")
+
+import Foundation // to use pow(T,T)
+
+protocol Ex {
+    var a: Double {get};
+    var b: Double {get set};
+    mutating func res() -> Double;
+}
+
+struct S1: Ex {
+    var a = 7.0;
+    var b = 7.0;
+    mutating func res() -> Double {
+        // pow accepts only decimal, hence double
+        a = pow(a, 2); // or a = a * a;
+        b = pow(b, 2); // or b = b * b;
+        return a + b;
+    }
+}
+
+class C1: Ex {
+    var a = 7.0;
+    var b = 7.0;
+    func res() -> Double {
+        a = pow(a, 2); // or a = a * a;
+        b = pow(b, 2); // or b = b * b;
+        return a + b;
+    }
+}
