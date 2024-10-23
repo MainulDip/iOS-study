@@ -74,14 +74,19 @@ struct SmallNumber {
         set { number = min(newValue, maximum) }
     }
 
+    // just populating the initial properties
     init() {
         maximum = 12
         number = 0
     }
+    
+    // init(wrappedValue:) is required to deal with default properties in the applied properties
     init(wrappedValue: Int) {
         maximum = 12
         number = min(wrappedValue, maximum)
     }
+
+    // the 2nd param can be used to modify logic through @wrapper(T,T) contractor
     init(wrappedValue: Int, maximum: Int) {
         self.maximum = maximum
         number = min(wrappedValue, maximum)

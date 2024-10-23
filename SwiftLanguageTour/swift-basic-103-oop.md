@@ -359,7 +359,12 @@ print("\(storedPropEx.sthGet)") // prints 7
 
 
 ### Property Wrappers (@propertyWrapper):
-A property wrapper adds a layer of separation between code that manages how a property is stored and the code that defines a property. It helps to write the management code once (when defining the wrapper), and then reuse that management code by applying it to multiple properties. It's somewhat like delegated properties in kotlin
+A property wrapper adds a layer of separation between code that manages how a property is stored and the code that defines a property. It helps to write the management code once (when defining the wrapper), and then reuse that management code by applying it to multiple properties. Supports both struct and class.
+
+* Requirements
+- @propertyWrapper annotation
+- `wrappedValue` stored property, each property wrapper type should contain this stored property, which tells Swift which underlying value that’s being wrapped
+
 ```swift
 @propertyWrapper
 struct TwelveOrLess {
@@ -390,6 +395,38 @@ print(rectangle.height)
 ```
 
 Example: [property-wrappers.swift](./src/property-wrappers.swift)
+
+### Property Wrapper Example 2:
+To set default values in the wrapped property (on the applied props), init(wrappedValue:) is required
+
+```swift
+import Foundation // to use capitalized method
+
+@propertyWrapper 
+struct Capitalized {
+    var wrappedValue: String {
+        didSet { wrappedValue = wrappedValue.capitalized }
+    }
+
+    // init(wrappedValue:) is required to deal with default properties in the applied properties
+    init(wrappedValue: String) {
+        self.wrappedValue = wrappedValue.capitalized
+    }
+}
+
+struct User {
+    @Capitalized var firstName: String
+    @Capitalized var lastName: String = "abc" // this requires an init(wrappedValue:) block
+}
+
+// John Appleseed
+var user = User(firstName: "john")
+
+print("UserName = \(user.firstName) \(user.lastName)") // John Abc
+
+user.lastName = "yoo"
+print("UserName = \(user.firstName) \(user.lastName)") // John Yoo
+```
 
 
 ### Static / Type-Properties:

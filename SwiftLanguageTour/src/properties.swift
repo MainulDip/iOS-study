@@ -2,13 +2,13 @@
 * Stored Properties
 * every stored property should have value when initialized, nil is also a value, as docs specify
 * Classes and structures must set all of their stored properties to an appropriate initial value by the time an instance of that class or structure is created. Stored properties cannot be left in an indeterminate state.
-* lazy properties must have an initializer, this will only be called when accessed only, as it could be resoruce intensive
+* lazy properties must have an initializer, this will only be called when accessed only, as it could be resource intensive
 */
 
 struct FixedLengthRange {
-    var directAssaignment: Int = 1234 // stored property with direct assaignment with initial value
+    var directAssaignment: Int = 1234 // stored property with direct assignment with initial value
     var firstValue: Int // as it is not assigned, have to assigned value with init call
-    let length: Int = 7 // though it is const, if not set/assaigned with value, can be set using init block
+    let length: Int = 7 // though it is const, if not set/assigned with value, can be set using init block
     var someVar: Int? // possible nil type is also a initial value
     private var sth: Int
     // Getting the private property using public computed property
