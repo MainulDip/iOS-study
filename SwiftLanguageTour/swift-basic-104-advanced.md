@@ -65,3 +65,47 @@ class Singleton3 {
 let first = Singleton3.sharedInstance
 let second = Singleton3.sharedInstance // calling again will not trigger the init block again.
 ```
+
+### Strong & Weak References (Extra info):
+- A `strong` reference means that an object will not be deallocated as long as at least one strong reference to it exists.
+- A `weak` reference, on the other hand, doesn’t prevent an object from being deallocated. When an object has only weak references, it’ll be deallocated.
+
+```swift
+class Child {
+  var name: String
+  weak var parent: Parent?
+  init(name: String, parent: Parent) {
+    self.name = name
+    self.parent = parent
+  }
+  deinit {
+    print("Child \(name) is being deinitialized")
+  }
+}
+
+class Parent {
+  var name: String
+  var children: [Child] = []
+  init(name: String) {
+    self.name = name
+  }
+  func addChild(name: String) {
+    let child = Child(name: name, parent: self)
+    children.append(child)
+  }
+  deinit {
+    print("Parent \(name) is being deinitialized")
+  }
+}
+
+var parent: Parent? = Parent(name: "Sandy")
+parent!.addChild(name: "Patrick")
+parent!.addChild(name: "Emily")
+parent!.addChild(name: "Joanna")
+parent = nil
+
+// Output: Parent Sandy is being deinitialized
+//         Child Patrick is being deinitialized
+//         Child Emily is being deinitialized
+//         Child Joanna is being deinitialized
+```

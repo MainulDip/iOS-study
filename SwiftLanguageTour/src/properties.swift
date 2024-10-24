@@ -1,5 +1,5 @@
 /*
-* Stored Properties
+* Stored Properties (aka regular properties)
 * every stored property should have value when initialized, nil is also a value, as docs specify
 * Classes and structures must set all of their stored properties to an appropriate initial value by the time an instance of that class or structure is created. Stored properties cannot be left in an indeterminate state.
 * lazy properties must have an initializer, this will only be called when accessed only, as it could be resource intensive

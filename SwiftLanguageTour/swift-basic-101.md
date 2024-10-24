@@ -24,7 +24,7 @@ let (abc, bcd) = (4, 3)
 
 let apples = 4, oranges = 3
 
-print("let: \(myConstant) and concatination: \(myConstant + " " + typeConversion)")
+print("let: \(myConstant) and concatenation: \(myConstant + " " + typeConversion)")
 // 3 double quote for multi line string
 let quotation = """
 I said "I have \(apples) apples."

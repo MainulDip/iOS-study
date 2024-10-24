@@ -320,8 +320,8 @@ private func somePrivateFunction() {}
 ### Properties in depth:
 See ./src/properties.swift
 
-* Stored Properties:
-stored property is a constant or variable that’s stored as part of an instance of a particular class or structure.
+#### Stored Properties (regular properties):
+stored property is a constant or variable that’s stored as part of an instance of a particular class or structure. Every stored property should have value when initialized or optional.
 ```swift
 struct FixedLengthRange {
     var firstValue: Int
@@ -351,12 +351,96 @@ var storedPropEx = StoredPropEx(7);
 print("\(storedPropEx.sthGet)") // prints 7
 ```
 
-* lazy property:
+#### computed property:
+When a property is computed using other stored properties. Use signature like `var computedProp: T { get{return:} set{} }`.
 
-* computed property:
+* Note: computed property must have an explicit type
 
-* Read-Only Computed Properties:
+```swift
+struct S {
+  var prop1: Int = 1
+  var prop2: Int = 2
+  var comp: Int { prop1 + prop2 }
+  var comp2: Int {
+    get {
+      return prop1 + prop2 * 2
+    }
+    set {
+      print("newValue: \(newValue) is available here")
 
+      prop1 = prop1 * newValue
+      self.prop2 = prop2 * newValue // defining self is optional or `weak self` is allowed. explicit self is required inside lazy variables
+
+      // Note: `oldValue` is only available in `didSet` property observer.
+    }
+  }
+}
+
+var s = S()
+print("\(s.comp)") // 3
+s.comp2 = 2 // newValue: 2 is available here
+print("\(s.comp)") // 6
+```
+
+#### property observers:
+observers `willSet/didSet` can be applied to the stored properties (not in computed properties) as side effect triggers. `newValue` is available in `willSet` and `oldValue` is available in `didSet`.
+
+```swift
+struct Person {
+    var clothes: String {
+        willSet {
+            updateUI(msg: "I'm changing from \(clothes) to \(newValue)")
+        }
+
+
+        didSet {
+            updateUI(msg: "I just changed from \(oldValue) to \(clothes)")
+        }
+    }
+}
+
+func updateUI(msg: String) {
+    print(msg)
+}
+
+var taylor = Person(clothes: "T-shirts")
+taylor.clothes = "short skirts"
+
+// I'm changing from T-shirts to short skirts
+// I just changed from T-shirts to short skirts
+```
+
+#### Read-Only Computed Properties:
+Those computed properties with only `get` specified. Or just a return inside of `{}` curly braces (default getter). 
+
+#### lazy variables (properties):
+Lazy properties are only initialize/evaluated/calculated when accessed for the first time (to avoid unnecessary computation or nil pointer exception). Strong self is required to point properties.
+
+- signature `lazy var` (not `let`)
+- type should be explicit
+- define using `{}` lambda block and end with invoke sign `()`
+- Strong self is required to point properties.
+
+```swift
+struct Person {
+    var age = 16
+
+    lazy var fibonacciOfAge: Int = {
+        fibonacci(of: self.age)
+    }()
+
+    func fibonacci(of num: Int) -> Int {
+        if num < 2 {
+            return num
+        } else {
+            return fibonacci(of: num - 1) + fibonacci(of: num - 2)
+        }
+    }
+}
+
+var singer = Person()
+print(singer.fibonacciOfAge)
+```
 
 ### Property Wrappers (@propertyWrapper):
 A property wrapper adds a layer of separation between code that manages how a property is stored and the code that defines a property. It helps to write the management code once (when defining the wrapper), and then reuse that management code by applying it to multiple properties. Supports both struct and class.
