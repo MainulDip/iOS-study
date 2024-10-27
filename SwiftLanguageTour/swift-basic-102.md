@@ -71,7 +71,7 @@ let implicitString: String = assumedString // no need for an exclamation point
 print(implicitString) // Prints "An implicitly unwrapped optional string."
 ```
 
-Note: Constants and variables created with optional binding in an if statement are available only within the body of the if statement. But if created with "guard" statement, constants and variables are available in the lines of code that follow the guard statement.
+Note: Constants and variables created with optional binding in an if statement are available only within the body of the if statement. But if created with "guard" statement, constants and variables are available in the lines of code that follow the guard statement....
 
 * multiple optional bindings and boolean condition in a single if statement
 ```swift

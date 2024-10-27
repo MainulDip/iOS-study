@@ -87,7 +87,7 @@ let numberList = [21, 19, 7, 12]
 var totalMath = countTotal(list: numberList, math: { (old: Int, new: Int) -> Int in
     return old + new
 })
-print("totalMath: \(totalMath)")
+print("totalMath: \(totalMath)") // totalMath: 59
 
 // closure "named function" style | define the closure
 func calculation (old: Int, new: Int) -> Int {
