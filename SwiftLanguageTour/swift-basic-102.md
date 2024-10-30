@@ -134,7 +134,7 @@ greet(person: [:])
 ```
 
 ### Error Handling:
-A function indicates that it can throw an error by including the throws keyword in its declaration. When you call a function that can throw an error, you prepend the try keyword to the expression
+A function indicates that it can throw an error by including the throws keyword in its declaration. When you call a function that can throw an error, you prepend the try keyword to the expression....
 
 Swift automatically propagates errors out of their current scope until they’re handled by a catch clause.
 
