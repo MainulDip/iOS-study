@@ -337,7 +337,7 @@ extension Double {
 ### Access Modifiers `open | public | internal | fileprivate | private`:
 All entries have `internal` access level by default. 
 Note, swift doesn't have `protected` modifiers....
-docs: https://docs.swift.org/swift-book/documentation/the-swift-programming-language/accesscontrol/
+docs: https://docs.swift.org/swift-book/documentation/the-swift-programming-language/accesscontrol/....
 ```swift
 open class SomeOpenClass {}
 public class SomePublicClass {}

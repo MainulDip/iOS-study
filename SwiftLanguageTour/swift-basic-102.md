@@ -51,15 +51,11 @@ print("\nOptional Bindings Ends:\n")
 ```swift
 /**
  * Implicitly Unwrapped Optionals
- * it’s clear from a program’s structure that an optional will always have a value
- * to define place an exclamation point after the optional’s type when declared
+ * it’s way to make it clear from a program’s structure that an optional will always have a value 
+ * to define `place an exclamation` point after the optional’s type when declared
  * The primary use of implicitly unwrapped optionals in Swift is during class initialization
 */
     
-let possibleString: String? = "An optional string."
-let forcedString: String = possibleString! // requires an exclamation point
-print("forcedString: \(forcedString)") // Prints "forcedString: An optional string."
-
 var assumedString: String!
 print(assumedString)// Prints "none"
 print("assumedString == nil : \(assumedString == nil)") // Prints "assumedString == nil : true"
@@ -69,6 +65,12 @@ print(assumedString!) // Prints "An implicitly unwrapped optional string."
 
 let implicitString: String = assumedString // no need for an exclamation point
 print(implicitString) // Prints "An implicitly unwrapped optional string."
+
+
+// Regular Optional Unwrapping
+let possibleString: String? = "An optional string."
+let forcedString: String = possibleString! // requires an exclamation point
+print("forcedString: \(forcedString)") // Prints "forcedString: An optional string."
 ```
 
 Note: Constants and variables created with optional binding in an if statement are available only within the body of the if statement. But if created with "guard" statement, constants and variables are available in the lines of code that follow the guard statement....
@@ -100,9 +102,11 @@ https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html#ID334
 /**
  * guard Statement
  * like an if statement, executes statements depending on the Boolean value of an expression.
- * requires "esle" clause unlike if (where "else" is optional)
+ * requires "else" clause unlike if (where "else" is optional)
 */
 func greet(person: [String: String]) {
+    // if the dictionary passed in the argument contains `name` property, store that in the variable, otherwise store the else block.
+    // so we know the name property will never be empty when used
     guard let name = person["name"] else {
         print("No name is applied, nothing will be called after this return underneth")
         return

@@ -1,5 +1,5 @@
 ### NavigationLink as Button:
-note https://stackoverflow.com/questions/57130866/how-to-show-navigationlink-as-a-button-in-swiftui
+note https://stackoverflow.com/questions/57130866/how-to-show-navigationlink-as-a-button-in-swiftui....
 ```swift
 NavigationLink(destination: WorkoutDetail(workout: workout)) {
   WorkoutRow(workout: workout)
