@@ -1,7 +1,4 @@
-## Content Overview:
-Swift Language Quick Start.
-
-### let, var, type, type conversion, optional type, string interpolation:
+### let/var, type conversion, optional & string interpolation:
 ```swift
 print("Hello World!")
 
@@ -14,7 +11,7 @@ let floatN = 3.1416;
 let twoDecimalPointFloat = String(format: "%.1f", floatN)
 
 
-// Multiple assaignment
+// Multiple assignment
 var red, green, blue: Double
 var x = 0.0, y = 0.0, z = 0.0
 let a = "a", b = "b", c = "c"
@@ -39,8 +36,8 @@ print(quotation)
  2. Sets are unordered collections of unique values. 
  3. Dictionaries are unordered collections of key-value associations (JSON in JS)
 
-* - Mutable Collection: Defiened with var (variable)
-* - Immutable Collection: Defiened with let (constant)
+* - Mutable Collection: Defined with var (variable)
+* - Immutable Collection: Defined with let (constant)
 
 To create an empty array or dictionary, use the initializer syntax
 ```swift
@@ -63,7 +60,7 @@ print(digitCounts)
 ```
 
 ### Control Flow, conditionals, loop and nil:
-- conditionals : if | switch
+- conditionals : if/else | switch | ternary `Condition ? "" : ""`
 - loop: for-in | while | repeat-while
 - Braces around the body are required.
 - Parentheses around the condition or loop variable are optional. 
@@ -406,10 +403,10 @@ var numbers = [20, 19, 7, 12]
 hasAnyMatches(list: numbers, condition: lessThanTen)
 ```
 
-### Closure {} braces/anomymous and named function style:
+### Closure {} braces/anonymous and named function style:
 Closure can be written without a name by surrounding code with braces ({}). Use "in"to separate the arguments and return type from the body.
 ```swift
-// Clouser using {} braces/anonymous and "named function" both style
+// Closure using {} braces/anonymous and "named function" both style
 func countTotal(list: [Int], math: (Int, Int) -> Int) -> Int {
     var total = 0;
     for item in list {
@@ -419,7 +416,8 @@ func countTotal(list: [Int], math: (Int, Int) -> Int) -> Int {
 }
 let numberList = [21, 19, 7, 12]
 
-// closure {} braces/anonymous style | "in" is used to separate the arguments and return type from body
+// closure {} braces/anonymous style
+// "in" is used to separate the arguments and return type from body
 var totalMath = countTotal(list: numberList, math: { (old: Int, new: Int) -> Int in
     return old + new
 })

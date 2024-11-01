@@ -1,10 +1,10 @@
 ## Swift Object Oriented Programmings:
 Topics covered includes following ->
 
-### Struct vs Class:
+### Struct vs Class | Value vs Reference:
 structs/structures are to represent common kinds of data. Structs are `value based`, not reference based like classes. local changes to a structure aren’t visible to the rest of your app unless you intentionally communicate those changes as part of the flow of your app. The Swift standard library and Foundation use structures for types you use frequently, such as numbers, strings, arrays, and dictionaries
 
-if 2 or more variable is referencing to a same instance of a struct. Each of them can have a separate copy of that struct (hence value based). The values of each referenced instance can be different. None of them are aware if one instance has changed one of it's property's value. But classes (being referenced based) multiple variable referencing to that same class instance point to the class instance itself. Updating anything in one instance updates all other references.  
+if 2 or more variable is referencing to a same instance of a struct. Each of them can have a separate copy of that struct (hence value based). The values/states of each referenced instance can be different. None of them are aware if one instance has changed one of it's property's value. But classes (being referenced based) multiple variable referencing to that same class instance point to the class instance itself. Updating anything in one instance updates all other references.  
 
 But when two different class instances have the same value for each of their stored properties, they’re still considered to be different by the identity operator (===). It also means that when you share a class instance across your app, changes you make to that instance are visible to every part of your code that holds a reference to that instance.
 
@@ -301,7 +301,7 @@ class C1: Ex {
 ```
 
 ### Extensions:
-Extensions add new functionality to an existing class, structure, enumeration, or protocol type. This includes the ability to extend types for which you don’t have access to the original source code (known as retroactive modeling). Extensions are similar to categories in Objective-C. (Unlike Objective-C categories, Swift extensions don’t have names.)
+Extensions add new functionalities to an existing class, structure, enumeration, or protocol type. This includes the ability to extend types for which you don’t have access to the original source code (known as retroactive modeling). Extensions are similar to categories in Objective-C. (Unlike Objective-C categories, Swift extensions don’t have names.)
 
 Extensions in Swift can:
 

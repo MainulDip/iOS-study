@@ -5,9 +5,9 @@ let cStr = "Something"
 let convertNumToInt = Int(cNum) // implicit type is "Int?"
 let convertStrToInt = Int(cStr)
 
-// Int(value) will return the number if conversion is successful, or nil if faild. Hence the type "Int?"
+// Int(value) will return the number if conversion is successful, or nil if failed. Hence the type "Int?"
 
-let convertNumToIntFoptional: Int? = Int(cNum) // explicit type is redundaunt here, because Int(v) will implicitly cast to "Int?"
+let convertNumToIntFoptional: Int? = Int(cNum) // explicit type is redundant here, because Int(v) will implicitly cast to "Int?"
 let convertNumToIntUnwrapped = Int(cNum)! // but throw error if forced unwrapped is applied to "nil" or conversion is not successful 
 
 print(convertNumToInt) // Optional(1234)
