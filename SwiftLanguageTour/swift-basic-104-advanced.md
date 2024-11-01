@@ -39,7 +39,7 @@ unit4A = nil
 * strong to weak conversion:
 
 * unowned reference:
-In Depth: https://docs.swift.org/swift-book/LanguageGuide/AutomaticReferenceCounting.html ...
+In Depth: https://docs.swift.org/swift-book/LanguageGuide/AutomaticReferenceCounting.html ....
 
 ### Closure Invocation:
 It's same as function invoker
@@ -67,8 +67,8 @@ let second = Singleton3.sharedInstance // calling again will not trigger the ini
 ```
 
 ### Strong & Weak References (Extra info):
-- A `strong` reference means that an object will not be deallocated as long as at least one strong reference to it exists.
-- A `weak` reference, on the other hand, doesn’t prevent an object from being deallocated. When an object has only weak references, it’ll be deallocated.
+- A `strong` reference means that an object will not be de-allocated as long as at least one strong reference to it exists.
+- A `weak` reference, on the other hand, doesn’t prevent an object from being de-allocated. When an object has only weak references, it’ll be de-allocated....
 
 ```swift
 class Child {
@@ -79,7 +79,7 @@ class Child {
     self.parent = parent
   }
   deinit {
-    print("Child \(name) is being deinitialized")
+    print("Child \(name) is being de-initialized")
   }
 }
 
@@ -94,7 +94,7 @@ class Parent {
     children.append(child)
   }
   deinit {
-    print("Parent \(name) is being deinitialized")
+    print("Parent \(name) is being de-initialized")
   }
 }
 
@@ -104,8 +104,8 @@ parent!.addChild(name: "Emily")
 parent!.addChild(name: "Joanna")
 parent = nil
 
-// Output: Parent Sandy is being deinitialized
-//         Child Patrick is being deinitialized
-//         Child Emily is being deinitialized
-//         Child Joanna is being deinitialized
+//         Parent Sandy is being de-initialized
+//         Child Patrick is being de-initialized
+//         Child Emily is being de-initialized
+//         Child Joanna is being de-initialized
 ```

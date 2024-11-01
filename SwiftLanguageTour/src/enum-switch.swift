@@ -1,7 +1,7 @@
 // first class citizen and adopts many traditional class features
 // supports computedProperties, instance methods, init, supports inheritance and protocol conformation 
 // values defined in enum's are called its `enumeration case` (defined by case keyword)
-// enumeration case can have it own constructor
+// enumeration case can have it's own constructor
 // if type is already known (variable initialization), type can be dropped in the subsequent use.
 // like `.result` and `.failure` are dropping `ServerResponse` type 
 

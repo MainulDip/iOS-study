@@ -12,6 +12,7 @@ let twoDecimalPointFloat = String(format: "%.1f", floatN)
 
 
 // Multiple assignment
+// Multiple assignment
 var red, green, blue: Double
 var x = 0.0, y = 0.0, z = 0.0
 let a = "a", b = "b", c = "c"
@@ -31,11 +32,13 @@ And then I said "I have \(apples + oranges) pieces of fruit."
 print(quotation)
 ```
 
-### Collections || Array, Set and Dictionary || Mutability & Immutability:
+### Collections `Array`, `Set` and `Dictionary` || Mutability & Immutability:
  1. Arrays are ordered collections of values. Array<Element>, shorthand [Element]
  2. Sets are unordered collections of unique values. 
  3. Dictionaries are unordered collections of key-value associations (JSON in JS)
 
+* - Mutable Collection: Defined with var (variable)
+* - Immutable Collection: Defined with let (constant)
 * - Mutable Collection: Defined with var (variable)
 * - Immutable Collection: Defined with let (constant)
 
@@ -78,76 +81,8 @@ for score in individualScores {
 print(teamScore)
 // Prints "11"
 ```
-
-### Condition | Comparison Operators | nil | Bool : Boolean || true, false || numeric (0,1) boolean is not allowed:
-
-In an if statement, the conditional must be a Boolean expression—this means that code such as if score { ... } is an error, not an implicit comparison to zero.
-
-* comparison should be of same type String/String, Int/Int, etc.
-* comparison operators: == | != | > | < | >= | <=
-
-```swift
-// Bool : Boolean || true, false || numeric (0,1) boolean is not allowed
-let boolTrue :Bool? = true
-var boolOne : Bool? = true
-if(boolTrue == boolOne) {
-    print("Both are same")
-} else {
-    print("they are different")
-}
-```
-
-* nil:
-```swift
-
-```
-You can use if and let together to work with values that might be missing.
-
-var/let can be initialized inside if/else conditions to work with values that might be missing. These values are represented as optionals. An optional value either contains a value or contains nil to indicate that a value is missing. Write a question mark (?) after the type of a value to mark the value as optional. if not the error will be -> initializer for conditional binding must have Optional type
-
-### String Interpolation & Ternary & Optionals:
-There is no "''" single quote in swift. All is double quote. To declare a character, Character type should be used explicitly. Like let a: Character = "a"
-
-```swift
-let title: String? = "MD"
-let firstname : String? = nil
-let lastName : String = "Smith"
-let fullN = "\n\( title != nil ? title : "") \(firstname ?? "(No FirstName)") \(lastName ?? "No Lastname")"
-print(fullN)
-
-// optional type casting is for later conditional let/var initialization
-print(title) // Optional("MD")
-print(title ?? "Something Else") // MD
-
-// string interpolation using optional check with ternary and nil check
-let fullN2 = "\n\(title ?? "(No Title)")\(title != nil ? "." : "") \(firstname ?? "(No FirstName)") \(lastName ?? "No Lastname")"
-print(fullN2)
-// ternary: let sth = Boolean ? "return if true" : "false" 
-```
-
-### Switch:
-Switches support any kind of data and a wide variety of comparison operations—they aren’t limited to integers and tests for equality.
-
-```swift
-// switch statement
-import Foundation
-
-let vegetable = "red pepper"
-switch vegetable {
-    case "celery":
-    print("Add some raisins and make ant on a log.")
-    case "cucumber", "watercress":
-    print("That would make a good tea sandwich.")
-    case let x where x.hasSuffix("pepper"):
-    print("Is it a spicy \(x)")
-    default:
-    print("Everything tastes good in soup")
-}
-// Is it a spicy red pepper
-```
-
 ### Dictionary(key:value) Iteration:
-for-in to iterate over items in a dictionary by providing a pair of names to use for each key-value pair. Dictionaries are an unordered collection, so their keys and values are iterated over in an arbitrary order.
+`for-in` to iterate over items in a dictionary by providing a pair of names to use for each key-value pair. Dictionaries are an unordered collection, so their keys and values are iterated over in an arbitrary order.
 ```swift
 // Dictionary Iteration
 let interestingNumbers = [
@@ -189,6 +124,74 @@ print("Smallest Number is : \(smallestV)")
 for (key, value) in interestingNumbers {
     print("\(key) : \(value)")
 }
+```
+
+### Condition | Comparison Operators | nil | Bool : Boolean || true, false || numeric (0,1) boolean is not allowed:
+
+In an if statement, the conditional must be a Boolean expression—this means that code such as if score { ... } is an error, not an implicit comparison to zero.
+
+* comparison should be of same type String/String, Int/Int, etc.
+* comparison operators: == | != | > | < | >= | <=
+
+```swift
+// Bool : Boolean || true, false || numeric (0,1) boolean is not allowed
+let boolTrue :Bool? = true
+var boolOne : Bool? = true
+if(boolTrue == boolOne) {
+    print("Both are same")
+} else {
+    print("they are different")
+}
+```
+
+* nil: swift use `nil` (not `null`)
+```swift
+var someOptional: String = nil;
+```
+You can use if and let together to work with values that might be missing.
+
+var/let can be initialized inside if/else conditions to work with values that might be missing. These values are represented as optionals. An optional value either contains a value or contains nil to indicate that a value is missing. Write a question mark (?) after the type of a value to mark the value as optional. if not the error will be -> initializer for conditional binding must have Optional type
+
+### String Interpolation & Ternary & Optionals & nil coalescing operator `??`:
+There is no "''" single quote in swift. All is double quote. To declare a character, Character type should be used explicitly. Like let a: Character = "a"
+
+```swift
+let title: String? = "MD"
+let firstname : String? = nil
+let lastName : String = "Smith"
+let fullN = "\n\( title != nil ? title : "") \(firstname ?? "(No FirstName)") \(lastName ?? "No Lastname")" // nil coalescing `??`
+print(fullN)
+
+// optional type casting is for later conditional let/var initialization
+print(title) // Optional("MD")
+// nil coalescing operator `??`
+print(title ?? "Something Else") // MD
+
+// string interpolation using optional check with ternary, nil check & nil coalescing operator
+let fullN2 = "\n\(title ?? "(No Title)")\(title != nil ? "." : "") \(firstname ?? "(No FirstName)") \(lastName ?? "No Lastname")"
+print(fullN2)
+// ternary: let sth = Boolean ? "return if true" : "false" 
+```
+
+### Switch:
+Switches support any kind of data and a wide variety of comparison operations—they aren’t limited to integers and tests for equality.
+
+```swift
+// switch statement
+import Foundation
+
+let vegetable = "red pepper"
+switch vegetable {
+    case "celery":
+    print("Add some raisins and make ant on a log.")
+    case "cucumber", "watercress":
+    print("That would make a good tea sandwich.")
+    case let x where x.hasSuffix("pepper"):
+    print("Is it a spicy \(x)")
+    default:
+    print("Everything tastes good in soup")
+}
+// Is it a spicy red pepper
 ```
 
 ### Swift Optionals:
@@ -262,7 +265,7 @@ print(counter)
 
 ### Functions:
 - `func` to declare a function
-- -> to separate the parameter names and types from the function’s return type.
+- `->` to separate the parameter names and types from the function’s return type.
 ```swift
 func greet(person: String, day: String) -> String {
     return "Hello \(person), today is \(day)."
@@ -272,7 +275,7 @@ greet(person: "Bob", day: "Tuesday")
 ### Functions parameter labeling:
 By default, functions use their parameter names as labels for their arguments. provide something before parameter names to make it label. Use "_" to declare no label. 
 
-If lebel is specified, it is required to provide "label : parameter-value" when called.
+If label is specified, it is required to provide "label : parameter-value" while calling.
 ```swift
 // function parameter labeling
 func hellotest(_ firstname: String, ln lastname: String) -> String {
@@ -318,6 +321,7 @@ print(tupleNestedDictionary.productsDictionary["Mojave"]!) // 10.14
 
 ### Function returning compound values as Tuple | list/array as argument:
 ```swift
+// array arguments and `tuple` returning
 func calculateStatistics(scores: [Int]) -> (min: Int, max: Int, sum: Int) {
     var min = scores[0]
     var max = scores[0]

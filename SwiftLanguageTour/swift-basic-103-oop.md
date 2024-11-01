@@ -145,7 +145,7 @@ An enumeration defines a common type for a group of related values. By these enu
 - first class citizen and adopts many traditional class features
 - supports computedProperties, instance methods, init, supports inheritance and protocol conformation 
 - values defined in enum's are called its `enumeration case` (defined by case keyword)
-- enumeration case can have it own constructor
+- enumeration case can have it's own constructor
 - if type is already known (variable initialization), type can be dropped in the subsequent use.
 - like `.result` and `.failure` are dropping `ServerResponse` type 
 ```swift
@@ -336,8 +336,8 @@ extension Double {
 
 ### Access Modifiers `open | public | internal | fileprivate | private`:
 All entries have `internal` access level by default. 
-Note, swift doesn't have `protected` modifiers.
-docs: https://docs.swift.org/swift-book/documentation/the-swift-programming-language/accesscontrol/
+Note, swift doesn't have `protected` modifiers....
+docs: https://docs.swift.org/swift-book/documentation/the-swift-programming-language/accesscontrol/....
 ```swift
 open class SomeOpenClass {}
 public class SomePublicClass {}

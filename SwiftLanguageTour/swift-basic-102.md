@@ -51,15 +51,11 @@ print("\nOptional Bindings Ends:\n")
 ```swift
 /**
  * Implicitly Unwrapped Optionals
- * it’s clear from a program’s structure that an optional will always have a value
- * to define place an exclamation point after the optional’s type when declared
+ * it’s way to make it clear from a program’s structure that an optional will always have a value 
+ * to define `place an exclamation` point after the optional’s type when declared
  * The primary use of implicitly unwrapped optionals in Swift is during class initialization
 */
     
-let possibleString: String? = "An optional string."
-let forcedString: String = possibleString! // requires an exclamation point
-print("forcedString: \(forcedString)") // Prints "forcedString: An optional string."
-
 var assumedString: String!
 print(assumedString)// Prints "none"
 print("assumedString == nil : \(assumedString == nil)") // Prints "assumedString == nil : true"
@@ -69,6 +65,12 @@ print(assumedString!) // Prints "An implicitly unwrapped optional string."
 
 let implicitString: String = assumedString // no need for an exclamation point
 print(implicitString) // Prints "An implicitly unwrapped optional string."
+
+
+// Regular Optional Unwrapping
+let possibleString: String? = "An optional string."
+let forcedString: String = possibleString! // requires an exclamation point
+print("forcedString: \(forcedString)") // Prints "forcedString: An optional string."
 ```
 
 Note: Constants and variables created with optional binding in an if statement are available only within the body of the if statement. But if created with "guard" statement, constants and variables are available in the lines of code that follow the guard statement....
@@ -100,9 +102,11 @@ https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html#ID334
 /**
  * guard Statement
  * like an if statement, executes statements depending on the Boolean value of an expression.
- * requires "esle" clause unlike if (where "else" is optional)
+ * requires "else" clause unlike if (where "else" is optional)
 */
 func greet(person: [String: String]) {
+    // if the dictionary passed in the argument contains `name` property, store that in the variable, otherwise store the else block.
+    // so we know the name property will never be empty when used
     guard let name = person["name"] else {
         print("No name is applied, nothing will be called after this return underneth")
         return
@@ -134,7 +138,7 @@ greet(person: [:])
 ```
 
 ### Error Handling:
-A function indicates that it can throw an error by including the throws keyword in its declaration. When you call a function that can throw an error, you prepend the try keyword to the expression
+A function indicates that it can throw an error by including the throws keyword in its declaration. When you call a function that can throw an error, you prepend the try keyword to the expression....
 
 Swift automatically propagates errors out of their current scope until they’re handled by a catch clause.
 
@@ -210,4 +214,38 @@ func decodeItemDataGenerics<T: Decodable> (filePath: URL) -> [T] {
     
     return storedItemArray
 }
+```
+### Asynchronous Operations | async/await:
+- `async` before function definition
+- `await` before function evocation
+- Use `async let` to call an asynchronous function, letting it run in parallel with other asynchronous code. When you use the value it returns, write await.
+- Use `Task{}` to call asynchronous functions from synchronous code, without waiting for them to return
+```swift
+func fetchUserID(from server: String) async -> Int {
+    if server == "primary" {
+        return 97
+    }
+    return 501
+}
+
+func fetchUsername(from server: String) async -> String {
+    let userID = await fetchUserID(from: server)
+    if userID == 501 {
+        return "John Appleseed"
+    }
+    return "Guest"
+}
+
+func connectUser(to server: String) async {
+    async let userID = fetchUserID(from: server)
+    async let username = fetchUsername(from: server)
+    let greeting = await "Hello \(username), user ID \(userID)"
+    print(greeting)
+}
+
+Task {
+    await connectUser(to: "primary")
+}
+// Prints "Hello Guest, user ID 97"
+
 ```
