@@ -97,7 +97,8 @@ Implicitly Unwrapped Optionals:
 https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html#ID334
 
 
-### guard Statement | another kind of if:
+### guard Statement | `guard let x = y else {z}`:
+like an if statement, guard statement will populate the constant with the value. Guard requires "else" clause unlike if (where "else" is optional)
 ```swift
 /**
  * guard Statement
@@ -170,6 +171,7 @@ precondition(index > 0, "Index must be greater than zero.")
 ```
 
 ### Generics:
+Generic Function `func fnName<T: Decodable> (param: URL) -> [T] {}` here the `T` will accept anything that confronts to Decodable protocol and the fn will return array of T as `[T]`
 ```swift
 
 let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Item.plist")

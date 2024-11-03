@@ -418,7 +418,7 @@ s.comp2 = 2 // newValue: 2 is available here
 print("\(s.comp)") // 6
 ```
 
-#### property observers:
+#### property observers | `willSet` & `didSet`:
 observers `willSet/didSet` can be applied to the stored properties (not in computed properties) as side effect triggers. `newValue` is available in `willSet` and `oldValue` is available in `didSet`.
 
 ```swift
@@ -449,7 +449,7 @@ taylor.clothes = "short skirts"
 #### Read-Only Computed Properties:
 Those computed properties with only `get` specified. Or just a return inside of `{}` curly braces (default getter). 
 
-#### lazy variables (properties):
+#### lazy properties | `lazy var`:
 Lazy properties are only initialize/evaluated/calculated when accessed for the first time (to avoid unnecessary computation or nil pointer exception). Strong self is required to point properties.
 
 - signature `lazy var` (not `let`)
@@ -478,7 +478,7 @@ var singer = Person()
 print(singer.fibonacciOfAge)
 ```
 
-### Property Wrappers (@propertyWrapper):
+### Property Wrappers (@propertyWrapper) | requires `wrappedValue` computed properties:
 A property wrapper adds a layer of separation between code that manages how a property is stored and the code that defines a property. It helps to write the management code once (when defining the wrapper), and then reuse that management code by applying it to multiple properties. Supports both struct and class.
 
 * Requirements

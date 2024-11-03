@@ -320,6 +320,7 @@ print(tupleNestedDictionary.productsDictionary["Mojave"]!) // 10.14
 ```
 
 ### Function returning compound values as Tuple | list/array as argument:
+Function can return tuple `(x: Type, y: Type, z: Type)`and also take array as arguments like `[Type]`
 ```swift
 // array arguments and `tuple` returning
 func calculateStatistics(scores: [Int]) -> (min: Int, max: Int, sum: Int) {

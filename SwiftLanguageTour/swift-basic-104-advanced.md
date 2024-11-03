@@ -39,7 +39,7 @@ unit4A = nil
 * strong to weak conversion:
 
 * unowned reference:
-In Depth: https://docs.swift.org/swift-book/LanguageGuide/AutomaticReferenceCounting.html ....
+In Depth: https://docs.swift.org/swift-book/LanguageGuide/AutomaticReferenceCounting.html .......
 
 ### Closure Invocation:
 It's same as function invoker
