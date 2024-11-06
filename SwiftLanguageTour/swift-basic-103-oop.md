@@ -54,16 +54,16 @@ Note: changing value of a classes form a referenced class will also change the r
 
 * Use structures along with protocols to adopt behavior by sharing implementations.
 
-### Using Struct as Data Class (in kotlin):
+### Using Struct as Data Class (like data class in kotlin):
 
 ```swift
-struct PenPalRecord {
+struct PeyPalRecord {
     let myID: Int
     var myNickname: String
     var recommendedPenPalID: Int
 }
 
-var myRecord = try JSONDecoder().decode(PenPalRecord.self, from: jsonResponse)
+var myRecord = try JSONDecoder().decode(PeyPalRecord.self, from: jsonResponse)
 ```
 
 ### Object, Classes and Inheritances :

@@ -109,7 +109,7 @@ func greet(person: [String: String]) {
     // if the dictionary passed in the argument contains `name` property, store that in the variable, otherwise store the else block.
     // so we know the name property will never be empty when used
     guard let name = person["name"] else {
-        print("No name is applied, nothing will be called after this return underneth")
+        print("No name is applied, nothing will be called after this return underneath")
         return
     }
 
@@ -128,14 +128,14 @@ greet(person: ["name": "John"])
 // Prints "I hope the weather is nice near you."
 
 greet(person: ["location": "Cupertino"])
-// Prints "No name is applied, nothing will be called after this return underneth"
+// Prints "No name is applied, nothing will be called after this return underneath"
 
 greet(person: ["name": "Jane", "location": "Cupertino"])
 // Prints "Hello Jane!"
 // Prints "I hope the weather is nice in Cupertino."
 
 greet(person: [:])
-// Print "No name is applied, nothing will be called after this return underneth"
+// Print "No name is applied, nothing will be called after this return underneath"
 ```
 
 ### Error Handling:

@@ -33,16 +33,14 @@ print(quotation)
 ```
 
 ### Collections `Array`, `Set` and `Dictionary` || Mutability & Immutability:
- 1. Arrays are ordered collections of values. Array<Element>, shorthand [Element]
- 2. Sets are unordered collections of unique values. 
- 3. Dictionaries are unordered collections of key-value associations (JSON in JS)
+ 1. `Arrays` are ordered collections of values. Array<Element>, shorthand [Element]
+ 2. `Sets` are unordered collections of unique values. 
+ 3. `Dictionaries` are unordered collections of `key-value` associations (JSON in JS)
 
 * - Mutable Collection: Defined with var (variable)
 * - Immutable Collection: Defined with let (constant)
-* - Mutable Collection: Defined with var (variable)
-* - Immutable Collection: Defined with let (constant)
 
-To create an empty array or dictionary, use the initializer syntax
+To create an empty array or dictionary, use the initializer syntax, ie `[]`, `[:]`
 ```swift
 var emptyArray: [String] = [] // empty array
 var emptySet = Set<String>() // empty set
@@ -63,8 +61,8 @@ print(digitCounts)
 ```
 
 ### Control Flow, conditionals, loop and nil:
-- conditionals : if/else | switch | ternary `Condition ? "" : ""`
-- loop: for-in | while | repeat-while
+- conditionals : `if/else` | `switch` | ternary `Condition ? "" : ""`
+- loop: `for-in` | `while` | `repeat-while`
 - Braces around the body are required.
 - Parentheses around the condition or loop variable are optional. 
 
@@ -148,12 +146,12 @@ if(boolTrue == boolOne) {
 ```swift
 var someOptional: String = nil;
 ```
-You can use if and let together to work with values that might be missing.
+You can use if and let together to work with values that might be missing
 
 var/let can be initialized inside if/else conditions to work with values that might be missing. These values are represented as optionals. An optional value either contains a value or contains nil to indicate that a value is missing. Write a question mark (?) after the type of a value to mark the value as optional. if not the error will be -> initializer for conditional binding must have Optional type
 
 ### String Interpolation & Ternary & Optionals & nil coalescing operator `??`:
-There is no "''" single quote in swift. All is double quote. To declare a character, Character type should be used explicitly. Like let a: Character = "a"
+There is no `'` single quote in swift. All is double quote. To declare a character, Character type should be used explicitly. Like let a: Character = "a"
 
 ```swift
 let title: String? = "MD"
