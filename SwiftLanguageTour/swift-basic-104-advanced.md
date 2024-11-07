@@ -1,5 +1,5 @@
 ## Overview:
-Deeper dive into swift in some advanced topic. All are from https://docs.swift.org/swift-book/....
+Deeper dive into swift in some advanced topic. All are from https://docs.swift.org/swift-book/.......
 
 ### ARC (Automatic Reference Counting) | strong/week/unowned References:
 To make sure that instances don't disappear while they're still needed, ARC tracks how many properties, constants, and variables are currently referring to each class instance. ARC will not de-allocate an instance as long as at least one active reference to that instance still exists.

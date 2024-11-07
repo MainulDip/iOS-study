@@ -172,7 +172,7 @@ print(fullN2)
 ```
 
 ### Switch:
-Switches support any kind of data and a wide variety of comparison operations—they aren’t limited to integers and tests for equality.
+Switches support any kind of data and a wide variety of comparison operations—they aren't limited to integers and tests for equality.
 
 ```swift
 // switch statement
@@ -223,7 +223,7 @@ castingOptional = 7777
 var castingOptionalSecond = castingOptional!
 print(castingOptionalSecond) // 7777
 ```
-### while(){} | repeat{} while(){} Loop
+### `while(){}` | `repeat{} while(){}` | Loop
 NB: condition parenthesis is optional, body braces is required.
 ```swift
 var n = 2
@@ -241,7 +241,7 @@ print(m)
 // Prints "128"
 ```
 
-### range/closed-Range | 0..<4 | 0...4 | 0...4 in for loop:
+### range & closed-Range | 0..<4 | 0...4 | 0...4 in for loop:
 0..<4 : from 0 to lessthan 4 | Data type => Range<Int>
 0...4 : from 0 to equal to 4 | Data type = ClosedRange<Int>
 ```swift
@@ -263,7 +263,7 @@ print(counter)
 
 ### Functions:
 - `func` to declare a function
-- `->` to separate the parameter names and types from the function’s return type.
+- `->` to separate the parameter names and types from the function's return type.
 ```swift
 func greet(person: String, day: String) -> String {
     return "Hello \(person), today is \(day)."
@@ -407,7 +407,7 @@ hasAnyMatches(list: numbers, condition: lessThanTen)
 ```
 
 ### Closure {} braces/anonymous and named function style:
-Closure can be written without a name by surrounding code with braces ({}). Use "in"to separate the arguments and return type from the body.
+Closure can be written without a name by surrounding code with braces `{}`. Use "in"to separate the arguments and return type from the body.
 ```swift
 // Closure using {} braces/anonymous and "named function" both style
 func countTotal(list: [Int], math: (Int, Int) -> Int) -> Int {
@@ -433,9 +433,9 @@ func calculation (old: Int, new: Int) -> Int {
 var getTheTotal = countTotal(list: numberList, math: calculation)
 print("Getting total from named closure: \(getTheTotal)")
 ```
-### closure trailing, numbered arguments, multiple closure, lazy closure:
-
-* Multiple Closures: omit the argument label for the first trailing closure and provide label the remaining trailing closures.
+### closure `trailing`, numbered arguments `$0` `$1`, multiple closure labeling, `lazy/non var closure` call:
+Multiple Closures labeling: omit the argument label for the first trailing closure and provide label the remaining trailing closures.
+`lazy/non var closure` call: when a closure are stored in a lazy (or no-lazy) variable, it needs to be called/invoked in definition like `{}()`
 ```swift
 func loadPicture(from server: Server, completion: (Picture) -> Void, onFailure: () -> Void) {
     if let picture = download("photo.jpg", from: server) {
@@ -449,6 +449,12 @@ loadPicture(from: someServer) { picture in
     someView.currentPicture = picture
 } onFailure: {
     print("Couldn't download the next picture.")
+}
+
+// lazy/non var closure | closure storage
+struct L {
+    lazy var a: Int = { print("Setting A"); return 5}(); // will be called when first accessed
+    var b: Int = { print("Setting B"); return 5 }() // will be called immediately when the struct will be initialized
 }
 ```
 

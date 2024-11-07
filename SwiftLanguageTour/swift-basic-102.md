@@ -171,7 +171,7 @@ precondition(index > 0, "Index must be greater than zero.")
 ```
 
 ### Generics:
-Generic Function `func fnName<T: Decodable> (param: URL) -> [T] {}` here the `T` will accept anything that confronts to Decodable protocol and the fn will return array of T as `[T]`
+Generic Function `func fnName<T: Decodable> (param: URL) -> [T] {}` here the `T` will accept anything that confronts to Decodable protocol and the fn will return array of T as `[T]`....
 ```swift
 
 let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Item.plist")
@@ -217,7 +217,7 @@ func decodeItemDataGenerics<T: Decodable> (filePath: URL) -> [T] {
     return storedItemArray
 }
 ```
-### Asynchronous Operations | async/await:
+### Asynchronous Operations | `async fun` & `await`:
 - `async` before function definition
 - `await` before function evocation
 - Use `async let` to call an asynchronous function, letting it run in parallel with other asynchronous code. When you use the value it returns, write await.

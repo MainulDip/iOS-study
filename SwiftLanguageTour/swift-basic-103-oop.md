@@ -388,7 +388,7 @@ print("\(storedPropEx.sthGet)") // prints 7
 ```
 
 #### computed property:
-When a property is computed using other stored properties. Use signature like `var computedProp: T { get{return:} set{} }`.
+When a property is computed using other stored properties. Use signature like `var computedProp: T { get{return:} set{} }`....
 
 * Note: computed property must have an explicit type
 
