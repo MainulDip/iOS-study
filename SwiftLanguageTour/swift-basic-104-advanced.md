@@ -68,7 +68,7 @@ let second = Singleton3.sharedInstance // calling again will not trigger the ini
 
 ### Strong & Weak References (Extra info):
 - A `strong` reference means that an object will not be de-allocated as long as at least one strong reference to it exists.
-- A `weak` reference, on the other hand, doesn’t prevent an object from being de-allocated. When an object has only weak references, it’ll be de-allocated....
+- A `weak` reference, on the other hand, doesn’t prevent an object from being de-allocated. When an object has only weak references, it’ll be de-allocated.......
 
 ```swift
 class Child {

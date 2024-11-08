@@ -1,6 +1,11 @@
-## Swift Object Oriented Programmings:
-Topics covered includes following ->
+### `self` | no `this`:
+`self` is same as `this` in other languages. It's only required when to call a property or method from a closure or to differentiate property names with the argument name.
 
+```swift
+init(name: String){
+    self.name = name
+}
+```
 ### Struct vs Class | Value vs Reference:
 structs/structures are to represent common kinds of data. Structs are `value based`, not reference based like classes. local changes to a structure aren’t visible to the rest of your app unless you intentionally communicate those changes as part of the flow of your app. The Swift standard library and Foundation use structures for types you use frequently, such as numbers, strings, arrays, and dictionaries
 
@@ -131,13 +136,32 @@ test.numberOfSides = 7 // Accessing Super Classes's Property
 print("test.numberOfSides : \(test.numberOfSides)")
 ```
 
+
+### init & multiple init & convenience init | constructors:
+`init(...){}` called designated initializer, it fully initializes all props of that class and calls superclass initializer (if any).
+
+https://docs.swift.org/swift-book/documentation/the-swift-programming-language/initialization/
+
+
+`convenience init` are secondary initializer, to call a designated/primary initializer with default values. 
+
+
+```swift
+init(param1, param2, param3, ... , paramN) {
+     // code
+}
+
+// can call this initializer and only enter one parameter,
+// set the rest as defaults
+convenience init(myParamN) {
+     self.init(defaultParam1, defaultParam2, defaultParam3, ... , myParamN)
+}
+```
+
 ### Setter, Getter, willset and didset:
 * get/set (getter/setter):
 * set implicit param: set { backingField = newValue} || set (value) { backingField = value }
 * willset and didset methods to run before and after setting new values to class properties. These will not work togather with get/set
-
-
-### Structures:
 
 ### Enumerations:
 An enumeration defines a common type for a group of related values. By these enumeration cases can specify associated values of any type to be stored along with each different case value.
@@ -396,7 +420,9 @@ When a property is computed using other stored properties. Use signature like `v
 struct S {
   var prop1: Int = 1
   var prop2: Int = 2
-  var comp: Int { prop1 + prop2 }
+  var comp: Int { prop1 + prop2 } // only implicit get{} is supplied
+
+  // both get/set are supplied
   var comp2: Int {
     get {
       return prop1 + prop2 * 2
@@ -405,7 +431,7 @@ struct S {
       print("newValue: \(newValue) is available here")
 
       prop1 = prop1 * newValue
-      self.prop2 = prop2 * newValue // defining self is optional or `weak self` is allowed. explicit self is required inside lazy variables
+      self.prop2 = prop2 * newValue // defining self is optional or `weak self` is allowed. explicit self is required inside lazy variables. no `this` in swift
 
       // Note: `oldValue` is only available in `didSet` property observer.
     }
@@ -421,14 +447,20 @@ print("\(s.comp)") // 6
 #### property observers | `willSet` & `didSet`:
 observers `willSet/didSet` can be applied to the stored properties (not in computed properties) as side effect triggers. `newValue` is available in `willSet` and `oldValue` is available in `didSet`.
 
+* willSet is called just before the value is stored.
+* didSet is called immediately after the new value is stored.
+* those will only trigger when their property changes after initialization, so changing property in `init` block will not trigger observers.
+* usually used to change other stored properties as side-effect
+
 ```swift
 struct Person {
+    // no default value, so this value needs to be supplied when the struct will be initialized
     var clothes: String {
+        // willSet will run first before setting the value
         willSet {
             updateUI(msg: "I'm changing from \(clothes) to \(newValue)")
         }
-
-
+        // didSet will run last after the value is set
         didSet {
             updateUI(msg: "I just changed from \(oldValue) to \(clothes)")
         }
@@ -439,11 +471,40 @@ func updateUI(msg: String) {
     print(msg)
 }
 
-var taylor = Person(clothes: "T-shirts")
-taylor.clothes = "short skirts"
+var p = Person(clothes: "T-shirts")
+p.clothes = "short skirts"
 
 // I'm changing from T-shirts to short skirts
 // I just changed from T-shirts to short skirts
+```
+
+* Property Observer 2nd Example, when prop has default value
+```swift
+struct Person2 {
+    var clothes: String = "Default-Value" {
+        willSet {
+            print("1st run => newValue = \(newValue) and before is = \(clothes)")
+        }
+        didSet {
+             print("2nd run => currentValue is clothes = \(clothes) and oldValue = \(oldValue)")
+        }
+    }
+    
+    init() {} // empty init is required for initialization with no-param while there is another parameterized init is existing 
+    init(_ d: String) {
+        self.clothes = d // self can be omitted as d and clothes are clearly different
+    }
+}
+
+var p1 = Person2()
+p1.clothes = "Pajama"
+var p2 = Person2("Hat")
+p2.clothes = "short skirts"
+
+// 1st run => newValue = Pajama and before is = Default-Value
+// 2nd run => currentValue is clothes = Pajama and oldValue = Default-Value
+// 1st run => newValue = short skirts and before is = Hat
+// 2nd run => currentValue is clothes = short skirts and oldValue = Hat
 ```
 
 #### Read-Only Computed Properties:
