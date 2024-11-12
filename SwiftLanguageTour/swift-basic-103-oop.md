@@ -163,7 +163,7 @@ convenience init(myParamN) {
 * set implicit param: set { backingField = newValue} || set (value) { backingField = value }
 * willset and didset methods to run before and after setting new values to class properties. These will not work togather with get/set
 
-### Enumerations:
+### Enumerations | uses `case` like switch:
 An enumeration defines a common type for a group of related values. By these enumeration cases can specify associated values of any type to be stored along with each different case value.
 
 - first class citizen and adopts many traditional class features

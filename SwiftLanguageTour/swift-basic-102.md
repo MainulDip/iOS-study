@@ -218,7 +218,7 @@ func decodeItemDataGenerics<T: Decodable> (filePath: URL) -> [T] {
 }
 ```
 ### Asynchronous Operations | `async fun` & `await`:
-- `async` before function definition
+- declare`async` before function's body and return type when defining
 - `await` before function evocation
 - Use `async let` to call an asynchronous function, letting it run in parallel with other asynchronous code. When you use the value it returns, write await.
 - Use `Task{}` to call asynchronous functions from synchronous code, without waiting for them to return
