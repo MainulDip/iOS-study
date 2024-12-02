@@ -295,8 +295,3 @@ struct MainView: View {
     }
 }
 ```
-
-### Swift Language Checklists:
-- Delegation: var body: some View {}
-- Lambda Syntax
-- Generics

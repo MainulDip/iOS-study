@@ -141,7 +141,7 @@ var backingProperty = "Hello World" // a stored property to use as backingField
 var propGetSet: String {
     get {
         return "Swift \(backingProperty)"
-        // return can be ommited as
+        // return can be omitted as
         // If the entire body of the function is a single expression, the function implicitly returns that expression
     }
     

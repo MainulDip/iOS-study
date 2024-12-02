@@ -9,6 +9,7 @@
 - right preview area `cmd+alt+enter` to show/hide and `cmd+enter` to hide
 - Show/Hide Bottom App Launcher Panel `cmd+alt+d`
 - Debug Area (shift + cmd + y) [not alway work form remote desktop to mac form windows/linux]
+- `cmd + enter` to show editor only. select inline comparison for comparing old and new code using version control's 
 
 ### SwiftUI Preview Area (Canvas):
 - Show Preview -> alt/option + cmd + enter/return
@@ -21,11 +22,11 @@
 ### Shortcuts
 - Indent/Re-Indent Code : Ctrl + i 
 - Build : cmd + r
-- Code Suggestion : put the cursor inside a function and press "Esc"
+- Code Suggestion : put the cursor inside a function and press "Esc" or `option + esc`
 - code indentation : ctrl + i 
 - action center: cmd + alt + click || to embed, extract-subview (convert to reusable component), etc
 - esc: place the cursor on any function and press "esc" key to get the auto suggestions and quick look at the other options and params docs
-- alt + click : to see further docs of a function
+- option + click : to see further docs of a function
 
 - cmd + N for new file
 - alt + right/left arrow -> to jump cursor to next/prev word quickly (ctrl + arrow) for windows/linux. 

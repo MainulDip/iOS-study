@@ -1,5 +1,25 @@
-### Overview:
-Personalized quick start guide for SwiftUI.
+### App entry point and `body` computed prop:
+The `App` protocol confronting structure is the entry point of a swiftui app. This struct also usages `@main` attribute/annotation to declare the entry point. `App` protocol confrontation requires the `body: some Scene` computed property.
+
+`WindowGroup` confronts to `Scene` protocol, and required an `init` block of callback/lambda
+```swift
+struct WindowGroup<Content> where Content : View
+init(content: () -> Content)
+```
+The View protocol has only one requirement, a computed property called `body` that returns some `View`
+
+```swift
+import SwiftUI
+
+@main
+struct WeSplitApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+```
 
 --------------------------- WeSplit-1 ---------------------
 ### Stop content from scrolling beyond top Safe Ares:
