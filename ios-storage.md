@@ -233,7 +233,7 @@ let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", se
 import RealmSwift
 
 class Data: Object {
-    // dynamic is a "declaration" keyword which makes it a dynamic dispatch instade of a static dispatch
+    // dynamic is a "declaration" keyword which makes it a dynamic dispatch instead of a static dispatch
     // allows the marked property beign monitord for change wihile on runtime (app running)
     // @objc denotes merkes it clear that this "dynamic" keyword is comming form the Ojective C API
     @objc dynamic var name: String = ""

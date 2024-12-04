@@ -8,7 +8,7 @@
 
 ### Navigation Storyboard, Cocoa Touch, Segue and Storybiard Segye Identifier :
 - To perform Navigation based on storyboard design, Cocoa Touch Template can be used to make the view controller for it. 
-- The newly created viewcontroller class name needs to be supplied inside storyboard's targeted scene's identity inspectory's class properties name.
+- The newly created viewcontroller class name needs to be supplied inside storyboard's targeted scene's identity inspector's class properties name.
 - Then to create a navigation direction a segue need to be created by holding ctrl and dragging a connection handle form Storyboard's view controller to view controller.
 - After creating the segue connection, the segue connection itself needs an identifier which will be used to perform navigation suing self.performSegue form a ViewController class (btn action event usually).
 - Sending Data form controller to controller : "override func prepare(for segue: UIStoryboardSegue, sender: Any?){}" is used. and segue.destination is used to get the destination controller object itself.
