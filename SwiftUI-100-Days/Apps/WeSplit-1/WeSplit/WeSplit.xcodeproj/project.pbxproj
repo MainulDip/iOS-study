@@ -11,7 +11,9 @@
 		7203547B2B28359400861C21 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7203547A2B28359400861C21 /* ContentView.swift */; };
 		7203547D2B28359600861C21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7203547C2B28359600861C21 /* Assets.xcassets */; };
 		720354802B28359600861C21 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7203547F2B28359600861C21 /* Preview Assets.xcassets */; };
-		723FBC142D00131D00E9DD70 /* Practice-01.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723FBC132D00131D00E9DD70 /* Practice-01.swift */; };
+		72311DC72D025AED00AD17B9 /* State-Basic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72311DC62D025AED00AD17B9 /* State-Basic.swift */; };
+		72311DC92D025E3E00AD17B9 /* TextField-State-Two-Way-Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72311DC82D025E3E00AD17B9 /* TextField-State-Two-Way-Binding.swift */; };
+		723FBC142D00131D00E9DD70 /* State-Two-Way-Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723FBC132D00131D00E9DD70 /* State-Two-Way-Binding.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,7 +22,9 @@
 		7203547A2B28359400861C21 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7203547C2B28359600861C21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7203547F2B28359600861C21 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		723FBC132D00131D00E9DD70 /* Practice-01.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Practice-01.swift"; sourceTree = "<group>"; };
+		72311DC62D025AED00AD17B9 /* State-Basic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "State-Basic.swift"; sourceTree = "<group>"; };
+		72311DC82D025E3E00AD17B9 /* TextField-State-Two-Way-Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField-State-Two-Way-Binding.swift"; sourceTree = "<group>"; };
+		723FBC132D00131D00E9DD70 /* State-Two-Way-Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "State-Two-Way-Binding.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,11 +57,13 @@
 		720354772B28359400861C21 /* WeSplit */ = {
 			isa = PBXGroup;
 			children = (
-				723FBC132D00131D00E9DD70 /* Practice-01.swift */,
+				723FBC132D00131D00E9DD70 /* State-Two-Way-Binding.swift */,
 				720354782B28359400861C21 /* WeSplitApp.swift */,
 				7203547A2B28359400861C21 /* ContentView.swift */,
 				7203547C2B28359600861C21 /* Assets.xcassets */,
 				7203547E2B28359600861C21 /* Preview Content */,
+				72311DC62D025AED00AD17B9 /* State-Basic.swift */,
+				72311DC82D025E3E00AD17B9 /* TextField-State-Two-Way-Binding.swift */,
 			);
 			path = WeSplit;
 			sourceTree = "<group>";
@@ -140,8 +146,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				723FBC142D00131D00E9DD70 /* Practice-01.swift in Sources */,
+				72311DC72D025AED00AD17B9 /* State-Basic.swift in Sources */,
+				723FBC142D00131D00E9DD70 /* State-Two-Way-Binding.swift in Sources */,
 				7203547B2B28359400861C21 /* ContentView.swift in Sources */,
+				72311DC92D025E3E00AD17B9 /* TextField-State-Two-Way-Binding.swift in Sources */,
 				720354792B28359400861C21 /* WeSplitApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
