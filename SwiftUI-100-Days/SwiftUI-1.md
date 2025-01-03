@@ -1,7 +1,8 @@
 ### App entry point and `body` computed prop:
-The `App` protocol confronting structure is the entry point of a swiftui app. This struct also usages `@main` attribute/annotation to declare the entry point. `App` protocol confrontation requires the `body: some Scene` computed property.
+The `App` protocol confronting structure is the entry point of a swift-ui app. This struct also usages `@main` attribute/annotation to declare the entry point. `App` protocol confrontation requires the `body: some Scene` computed property.
 
-`WindowGroup` confronts to `Scene` protocol, and required an `init` block of callback/lambda
+`WindowGroup` confronts to `Scene` protocol, and required an `init` block as callback/lambda
+
 ```swift
 struct WindowGroup<Content> where Content : View
 init(content: () -> Content)

@@ -1,5 +1,5 @@
 ## Overview:
-Jump starting guide on Local Storage and Persistance Storage etc
+Jump starting guide on Local Storage and Persistence Storage etc
 - UserDefaults
 - KeyChain
 - NSCoder/Codable

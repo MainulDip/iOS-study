@@ -2,7 +2,7 @@
 ```swift
 print("Hello World!")
 
-// specifying let/var is mandatory but initial type assignment is optional
+// specifying let/var is mandatory but initial type assignment is optional if can be inferred
 let myConstant: String = "CONSTANT"
 var myVariable = 42
 let typeConversion = String(myVariable)
@@ -193,6 +193,7 @@ switch vegetable {
 ```
 
 ### Swift Optionals:
+Optionals are always initialized with `var`
 https://www.programiz.com/swift-programming/optionals
 
 ```swift
@@ -282,7 +283,7 @@ func hellotest(_ firstname: String, ln lastname: String) -> String {
 print(hellotest("FirstN", ln: "LastN"))
 ```
 
-### Tuple:
+### Tuple || immutable but dictionary is changeable || fixed size:
 https://www.programiz.com/swift-programming/tuples
 
 In Swift, a tuple is a group of different values. And, each value inside a tuple can be of different data types.
