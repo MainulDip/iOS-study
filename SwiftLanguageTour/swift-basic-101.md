@@ -1,4 +1,5 @@
 ### let/var, type conversion, optional & string interpolation:
+`let` as constant and `var` as variable storage
 ```swift
 print("Hello World!")
 

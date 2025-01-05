@@ -1,4 +1,4 @@
-### Optionals | ? | ! | ?? (nil coalescing operator):
+### Type conversion and Optionals | `if let` | ? | ! | ?? (nil coalescing operator):
 ```swift
 let cNum = "1234"
 let cStr = "Something"
@@ -138,8 +138,8 @@ greet(person: [:])
 // Print "No name is applied, nothing will be called after this return underneath"
 ```
 
-### Error Handling:
-A function indicates that it can throw an error by including the throws keyword in its declaration. When you call a function that can throw an error, you prepend the try keyword to the expression.......
+### Error Handling | `do {try fn()} catch {}`:
+A function indicates that it can throw an error by including the throws keyword in its declaration. When you call a function that can throw an error, you prepend the `try` keyword to the expression.......
 
 Swift automatically propagates errors out of their current scope until they’re handled by a catch clause.
 

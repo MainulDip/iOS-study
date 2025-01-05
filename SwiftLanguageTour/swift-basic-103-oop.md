@@ -96,7 +96,7 @@ class NamedShape {
     }
 }
 
-// to utilize deinit, class instantiation should be keept inside optional variable. If deinitialization is not necessary, then could be referenced with regular variable like -> var shape = NameeShape(name: "SomeNames")
+// to utilize deinit, class instantiation should be keept inside optional variable. If de-initialization is not necessary, then could be referenced with regular variable like -> var shape = NameeShape(name: "SomeNames")
 var shape: NamedShape? = NamedShape(name : "Some Names")
 shape?.numberOfSides = 7
 
