@@ -75,3 +75,7 @@ Preview Assets as it is seen below just by default registered development time o
 So you can store there any images, colors, files, ie any resources, which can be used in Preview Canvas only, for testing purpose. In example to not download one from internet, cloud, or fetch from database. Because Preview is for fast UI-only look & test, so data source is not important, so to test & tune UI you don't need to fetch external data but use locally stored test data
 
 You can add/name any other development time asset/folder in there as well
+
+### Xcode not deleting code:
+
+https://stackoverflow.com/questions/69352823/xcode-13-unable-to-remove-code-lines-after-deleting-derived-data

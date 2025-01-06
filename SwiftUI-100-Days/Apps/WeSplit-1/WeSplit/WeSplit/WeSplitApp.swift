@@ -12,6 +12,7 @@ struct WeSplitApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+            // TextField_State_Two_Way_Binding()
         }
     }
 }
