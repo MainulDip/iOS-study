@@ -62,7 +62,7 @@ struct LoginIntroApp: App { // inherit App protocol
 }
 ```
 - Scene : protocol Scene acts as a container for a view hierarchy. It's lifecycle is managed by the system.
-- WindowGroup: It's a Scene that represents a group of identically structured windows or view hierarchy. It behaves differently on ios, macos and ipados. Each window created form this maintains independent state. 
+- WindowGroup: It's a Scene that represents a group of identically structured windows or view hierarchy. It behaves differently on ios, macos and ipad-os. Each window created form this maintains independent state. 
 - Views : Views are placed inside body. ie: var body: some View { //views are placed here }
     - Layout Views: VStack, HStack, ZStack, Lazy V/H Stacks, Spacer, etc.
     - Control Views: Text, Label, Button, TabView, NavigationView/NavigationLink, Label, etc
@@ -80,7 +80,7 @@ ZStack {
 ```
 ### Custom Font Integration:
 - Download the font file (.ttf) and place into project (make a new group/dir named "fonts" and paste the ttf file) 
-- check the forn form launchscreen
+- check the from form launchscreen
 - add info.plist (on swiftui & xcode14 it's the info of the target) entry on "Fonts provided by application" category, and add the fontName.ttf in the value param. Multiple fonts can be added there, as the category accept array.
 - use font as : View(...).font(Font.custom("Font-Name", size: Int))
 
@@ -198,7 +198,7 @@ struct ContentView: View {
 }
 ```
 ### UIKit (WebKit) into SwiftUI:
-Using WebKit (form UIKit) into SwiftUI, we need to implement the UIViewRepresentable protocol to our custom merging struct
+Using WebKit (form UIKit) into SwiftUI, we need to implement the UIViewRepresentable protocol to our custom merging struct.
 ```swift
 import WebKit
 

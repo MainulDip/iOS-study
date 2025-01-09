@@ -257,15 +257,15 @@ Apple only provide system color with dark/light mode variant. For custo color, "
 
 ### task
 - set the search field: 
-    - set IBOutlet and IBAction for search btn (get and print the search input text)
+    - set `IBOutlet` and `IBAction` for search btn (get and print the search input text)
     - set the keyboard (soft) enter button bind with the text field search button
-    - UITextFieldDelegate: Implement from the viewController and add textFieldCustom.delegate = self (the view controller will be notified on text field event)
-    - textFielShouldReturn : this will bind the soft keyboard's return/go btn with the text field's search
-    - textFieldCustom.endEditing(true) : this will dismiss the soft keyboard upon the search button pressed
-    - textFieldDidEndEditing : its a delegated method, it will triggered when the soft keyboard's enter btn is pressed. can be used to clear the search's text
-    - textFieldShouldEndEditing : will trigger if user touche else where, or during the typing. can be used to validate the input text. true will dismiss the kyboard and the textFieldDidEndEditing method will be called
+    - `UITextFieldDelegate`: Implement from the viewController and add textFieldCustom.delegate = self (the view controller will be notified on text field event)
+    - `textFielShouldReturn` : this will bind the soft keyboard's return/go btn with the text field's search
+    - `textFieldCustom.endEditing(true)` : this will dismiss the soft keyboard upon the search button pressed
+    - `textFieldDidEndEditing` : its a delegated method, it will triggered when the soft keyboard's enter btn is pressed. can be used to clear the search's text
+    - `textFieldShouldEndEditing` : will trigger if user touche else where, or during the typing. can be used to validate the input text. true will dismiss the kyboard and the textFieldDidEndEditing method will be called
 
-    - touchesBegan : to track if user touched/clicked somewhere else other than the soft keyboard or desired places.
+    - `touchesBegan` : to track if user touched/clicked somewhere else other than the soft keyboard or desired places.
     - 
 
 ### Lifecycle method's naming and functions:
@@ -281,7 +281,7 @@ It's the interface in other programming language. Both class and struct can impl
 
 ### Flash-Chat App:
 A chatting app, it's inside the apps dir
-### Table View (android's LitView):
+### Table View (android's ListView):
 It is a vertical scrolling component, it stacks elements one after another vertically (ie: chatting interface) 
 
 ### Animation | Basing Using For Loop:
@@ -316,27 +316,31 @@ Docs : https://cocoapods.org/
 - sudo gem install cocoapods
 - pod setup --verbose
 * Setting Up and Intalling 3rd party project
-- navigate to the app's directory (same lavel as .xcodeproj) and run "pod init" to initialize the "Podfile"
+- navigate to the app's directory (same level as .xcodeproj) and run `pod init` to initialize the "Podfile"
 - Setup the newly generated "Podfile" (a ruby file), customize the platform version, and other things
 - inside the "target '' do" (ruby function) append the 3rd party library to add, ex: pod 'CLTypingLabel'
 - then run "pod install"
-- after the install, close any running xcode project, and open current project into xcode using newly generated ...xcworkspace file (as of cocoapod instruction)
+- after the install, close any running xcode project, and open current project into xcode using newly generated `...xcworkspace` file (as of cocoapod instruction)
 * Updating Packages/Library:
 - updating a specific pod: add version number after the pod name inside the Podfile, ex: pod 'podname', '~> 0.4.0'  then close xcode and run 'pod install' again. 
 - updating all pods: also, running "pod update" will also update all the pods
 * Uninstalling / Removing Pods :
 - remove the pod name form the "Podfile" -> Close xcode and run "pod install", that will update the current state of the Podfile (remove the pod in this case)
+
 ### CocaPod Alternatives:
 - Carthage:
-- Swift Package Manager: Does not integrate with cocapod at the same time. (Note: if the package contain ...podspec file, it has support cocapod, if Pakage.swift is there, it support "swift package manager")
-### Adding Package Using Swift Package Manager:
+- `Swift Package Manager`: Does not integrate with cocapod at the same time. (Note: if the package contain ...podspec file, it has support cocapod, if Pakage.swift is there, it support "swift package manager")
+
+### Adding Package Using `Swift Package Manager`:
 It a package is eligible for swift package manager, the root directory of the package must have "Package.swift" file. If so, then we can add the package through xcode -> file -> add packages -> paste the github package url (top right corner of the box)
+
 ### Firebase Integration:
 - add the firebase "GoogleService-Info.plist" file to the root of the project
 - add the cocapod entries for specific firebase api's 
-   -  pod 'FirebaseAuth'
-    - pod 'FirebaseFirestore'
+   -  pod 'FirebaseAuth' 
+   -  pod 'FirebaseFirestore'
 - pod install
+
 ### Adding New User To firebase store:
 - First enable the authentication user by email and password form firebase console.
 - Then Follow instruction of the firebase docs
@@ -387,7 +391,7 @@ struct K {
 ```
 
 ### Instance vs Type Property:
-Struct, Class, Emum can have instance property and type (static property) also methods.
+Struct, Class, Enum can have instance property and type (static property) also methods.
 Type property does not require an Instance (Like other programming languages, Java, Kotlin)
 Docs: https://docs.swift.org/swift-book/documentation/the-swift-programming-language/properties/
 ```swift
@@ -458,11 +462,11 @@ override func awakeFromNib() {
 ### Any || AnyObject || NSObject:
 - Any : Anything Class of Struct
 - AnyObject : Anything that is a object of any class (not struct)
-- NSObject : Anything thst is a object of Apple's Foundation Library
+- NSObject : Anything that is an object of Apple's Foundation Library
 ```swift
 let mixedList: [Any] = ["Sth", 7, 7.4] // String, Int & Float on same list by casting to Any
 let classObje: [AnyObject] = [objectOfClass1, objectOfClass2] // object created form any class is supported here
-let fuoundationList: [NSObject] = [NSString(""abc), NSNumber(123)] // object form apple's foundation library can go here
+let fuoundationList: [NSObject] = [NSString("abc"), NSNumber(123)] // object form apple's foundation library can go here
 ```
 ### Fetching FireStore Data and Merging With Structure:
 ```swift
