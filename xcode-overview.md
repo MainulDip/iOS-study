@@ -3,6 +3,9 @@
 
 - Integrated Docs : Unique Feature. All the developer's docs can be found of the "help" section of xcode.
 
+### Turn on/off AI code prediction:
+Xcode > Preference/Setting > Text Editing > Editing
+
 ### Major areas:
 - Left (cmd 0) | Right | Bottom .
 - right inspector panel (cmd + alt/option + 0)
@@ -16,10 +19,12 @@
 - Hide Preview -> cmd + enter/return
 - Refresh/Build Preview -> cmd + alt/option + p
 
-### Codings
+### Code/Braces Tracking:
 - Find the end of a block (closing braces): 
  1st click to select the beginning of braces (first brace), then double click to highlight the entire block
+
 ### Shortcuts
+- `cmd + shift + l` (gui `view > show library`) import (drag/drop) image, UIComponents/View etc 
 - Indent/Re-Indent Code : Ctrl + i 
 - Build : cmd + r
 - Code Suggestion : put the cursor inside a function and press "Esc" or `option + esc`
@@ -29,7 +34,7 @@
 - option + click : to see further docs of a function
 
 - cmd + N for new file
-- alt + right/left arrow -> to jump cursor to next/prev word quickly (ctrl + arrow) for windows/linux. 
+- alt + right/left arrow -> to jump cursor to next/prev word quickly (ctrl + arrow) for windows/linux (Remote Desktop). 
 
 ### Implementing Protocol Member:
 - After Attaching the protocol, from inside struct/class braces, press `esc` for suggestion. Then apply those members
@@ -79,3 +84,46 @@ You can add/name any other development time asset/folder in there as well
 ### Xcode not deleting code:
 
 https://stackoverflow.com/questions/69352823/xcode-13-unable-to-remove-code-lines-after-deleting-derived-data
+
+
+### xcode shortcut:
+- `Opt + Cmd + N` — New Group
+- `Cmd + Shift + O` — Open Quickly, to go to - `particular line of file, type - `filename:line-number
+- `Ctrl + Cmd + Opt + F` — to auto fix issues
+- `Cmd + Shift + J`— Select file in navigator
+- `Cmd + Shift + D`— Select file in debug view
+- `Ctrl + Shift + Left arrow Key` — select word one by one towards left [divides camel case word and then select]
+- `Ctrl + Shift + Right arrow Key` — select word one by one towards right
+- `Opt + Shift + Left arrow Key` — select word one - by one towards left
+- `Opt + Shift + Right arrow Key` — select word one - by one towards right
+- `Cmd + Shift + Left/Right arrow Key` — goes to - the end of line
+- `Cmd + Shift + L` — Open code snippets
+- `Ctrl + 6` — To open jump menu
+- `Cmd + Shift + Y` — Show/hide Debug region
+- `Cmd + Ctrl + E` — Edit all within scope
+- `Ctrl + space` — Show completions
+- `Ctrl + .` — Show next suggestion
+- `Cmd + /` — Comment Selection
+- `Cmd + \` — Add breakpoint
+- `Cmd + Y` — Activate/deactivate breakpoint
+- `Cmd + K` -clear console
+- `Cmd + Shift + K` — clean
+- `Ctrl + K` — delete current line
+- `Cmd + J` — Move Focus
+- `Cmd + Shift + 0` — documentation
+- `Cmd + U` — Run all tests
+- `Cmd + Shift + U` — Run tests in current test suite
+- `Cmd + Opt + Ctrl + G` — Test again
+- `Cmd + Opt + Ctrl + U` — Run current test
+- `Cmd + .` — detach simulator from Xcode
+- `Ctrl + Shift + Up/Down` — MultiCursor editing
+- `Cmd + ,` —> Open Preferences
+- `Ctrl + L` — Center the current line to adjust screen position
+- `Cmd + Opt + [ ]` — Move line up/down
+- `Cmd + +` —> Make text bigger in editor
+- `Cmd + —` ->Make text smaller in editor
+- `Cmd + Ctrl + 0` — Reset text size
+- `Ctrl + Cmd + ‘` — auto fix next error
+- `Ctrl + Cmd + “` — auto fix prev error
+- `Cmd + Opt + U` — Open scheme’s test settings
+- `Cmd + Opt + R`— Open scheme’s run settings

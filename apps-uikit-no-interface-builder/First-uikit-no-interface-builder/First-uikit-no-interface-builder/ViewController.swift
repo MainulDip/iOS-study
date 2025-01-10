@@ -13,6 +13,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         print("From Viewcontroller");
         // Do any additional setup after loading the view.
+        view.backgroundColor = .yellow
+        
+//        let imageView = UIImageView(image: UIImage(named: "yummy-food-logo"))
+        
+        
+        
     }
 
 

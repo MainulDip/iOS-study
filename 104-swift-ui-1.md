@@ -198,7 +198,7 @@ struct ContentView: View {
 }
 ```
 ### UIKit (WebKit) into SwiftUI:
-Using WebKit (form UIKit) into SwiftUI, we need to implement the UIViewRepresentable protocol to our custom merging struct.
+Using WebKit (form UIKit) into SwiftUI, we need to implement the UIViewRepresentable protocol to our custom merging structs
 ```swift
 import WebKit
 
