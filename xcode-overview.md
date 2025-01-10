@@ -36,6 +36,11 @@ Xcode > Preference/Setting > Text Editing > Editing
 - cmd + N for new file
 - alt + right/left arrow -> to jump cursor to next/prev word quickly (ctrl + arrow) for windows/linux (Remote Desktop). 
 
+`⌥ ⌘ E` or `opt + cmd + e` to select next occurrence of currently selected
+`⌥ ⇧ ⌘ E` or `opt + shift + cmd + e` to select previous occurrence of currently selected
+`⌥ ⌘ G` or `opt + cmd + g` to find and select next
+`⌥ ⇧ ⌘ G` or `opt + shift + cmd + g` to find and select previous
+
 ### Implementing Protocol Member:
 - After Attaching the protocol, from inside struct/class braces, press `esc` for suggestion. Then apply those members
 
@@ -127,3 +132,10 @@ https://stackoverflow.com/questions/69352823/xcode-13-unable-to-remove-code-line
 - `Ctrl + Cmd + “` — auto fix prev error
 - `Cmd + Opt + U` — Open scheme’s test settings
 - `Cmd + Opt + R`— Open scheme’s run settings
+
+### Mac Shortcut:
+- `cmd + ctrl + f` Full-Screen Enter/Exit
+
+### Simulator management:
+Keep simulator on top : Simulator > Window > Stay on top
+Simulator rotate : left `cmd + left-arrow` & right `cmd + right-arrow`
