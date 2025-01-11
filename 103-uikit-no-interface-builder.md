@@ -148,6 +148,94 @@ Note: leading/trailing vs right/left anchor : some language are left to right (l
 
 ### Auto layout 2nd steep | child anchoring with the container's anchor:
 
+### UITextView's AttributedText for more control:
+```swift
+let descriptionTextView: UITextView = {
+    let textView = UITextView()
+    // enable auto layout for this textView
+    textView.translatesAutoresizingMaskIntoConstraints = false
+    
+    // textView.text = "Hello World!"
+    // textView.font = .boldSystemFont(ofSize: 19)
+    
+    // using farther configuration using `UITextView().attributedText`
+    let attributedText = NSMutableAttributedString(string: "Hello World", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), NSAttributedString.Key.foregroundColor: UIColor.gray])
+    
+    attributedText.append(NSAttributedString(string: "\n\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)]))
+    
+    textView.attributedText = attributedText
+    
+    textView.textAlignment = .center
+    textView.isEditable = false // stop allowing text editing
+    textView.isScrollEnabled = false
+    return textView
+}()
+```
+### Padding left/right using `constant`:
+```swift
+descriptionTextView.topAnchor.constraint(equalTo: topImageContainerView.bottomAnchor, constant: 12).isActive = true // constant will behave like padding
+descriptionTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true // constant will behave like left padding here
+descriptionTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true // negative constant will behave like right padding here
+descriptionTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+```
+
+### UIButton, Alternate way of auto layout constraints activation and `SafeArea` with `view.safeAreaLayoutGuide.topAnchor`:
+```swift
+ let button = UIButton(type: .system)
+button.setTitle("Prev", for: .normal)
+button.translatesAutoresizingMaskIntoConstraints = false
+// activating auto layout's constraint using NSLayoutConstraint.activate([])
+NSLayoutConstraint.activate([
+//previousButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+previousButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+previousButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+previousButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+previousButton.heightAnchor.constraint(equalToConstant: 50)
+])
+```
+
+### UIStackView:
+```swift
+let yellowView = UIView()
+yellowView.backgroundColor = .yellow
+
+let greenView = UIView()
+greenView.backgroundColor = .green
+
+let blueView = UIView()
+blueView.backgroundColor = .blue
+
+let bottomControlStackView = UIStackView(arrangedSubviews: [yellowView, greenView, blueView])
+bottomControlStackView.distribution = .fillEqually
+// bottomControlStackView.axis = .vertical
+
+bottomControlStackView.translatesAutoresizingMaskIntoConstraints = false
+view.addSubview(bottomControlStackView)
+
+// alternate way of activating auto layout contraints
+NSLayoutConstraint.activate([
+    //previousButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+    bottomControlStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+    bottomControlStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+    bottomControlStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+    bottomControlStackView.heightAnchor.constraint(equalToConstant: 50)
+])
+```
+
+
+### UIPageControlView:
+
+```swift
+private let pageControl: UIPageControl = {
+    let pc = UIPageControl()
+    pc.currentPage = 0
+    pc.numberOfPages = 4
+    pc.currentPageIndicatorTintColor = UIColor.mainPink
+    pc.pageIndicatorTintColor = UIColor(red: 249/255, green: 202/255, blue: 224/255, alpha: 1)
+    return pc
+}()
+```
+
 ### Get device orientation change event:
 Orientation events
 https://medium.com/codewords/orientation-responsive-ui-in-ios-beea7644b3c

@@ -46,8 +46,8 @@ Xcode > Preference/Setting > Text Editing > Editing
 
 ### task
 - clone view : alt/option drag
-- view to IBOutlet Connection : ctrl + drag the arrow
-- segue add : drag the top dot to another view, also give the segue an identifire
+- view to IBOutlet Connection : ctrl + drag the arrow.
+- segue add : drag the top dot to another view, also give the segue an identifier
 - zoon in 100% storyboard editor : ctrl + cmd + =
 - zoom out : use the bottom zoom in/out button.
 
@@ -137,5 +137,5 @@ https://stackoverflow.com/questions/69352823/xcode-13-unable-to-remove-code-line
 - `cmd + ctrl + f` Full-Screen Enter/Exit
 
 ### Simulator management:
-Keep simulator on top : Simulator > Window > Stay on top
+Keep simulator on top : Simulator > Window > Stay on top and use `cmd + h` to hide
 Simulator rotate : left `cmd + left-arrow` & right `cmd + right-arrow`
