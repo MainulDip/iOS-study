@@ -116,4 +116,4 @@ struct SecondView: View {
 If the value changes, SwiftUI updates any parts of your view that depend on the value. 
 
 @Environment Docs: https://developer.apple.com/documentation/swiftui/environment
-EnvironmentValue Docs: https://developer.apple.com/documentation/swiftui/environmentvalues
+EnvironmentValue Docs: https://developer.apple.com/documentation/swiftui/environmentvalues.......

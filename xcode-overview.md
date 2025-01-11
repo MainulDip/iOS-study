@@ -11,7 +11,7 @@ Xcode > Preference/Setting > Text Editing > Editing
 - right inspector panel (cmd + alt/option + 0)
 - right preview area `cmd+alt+enter` to show/hide and `cmd+enter` to hide
 - Show/Hide Bottom App Launcher Panel `cmd+alt+d`
-- Debug Area (shift + cmd + y) [not alway work form remote desktop to mac form windows/linux]
+- Debug Area (shift + cmd + y) [form remote desktop to mac form windows/linux]
 - `cmd + enter` to show editor only. select inline comparison for comparing old and new code using version control's 
 
 ### SwiftUI Preview Area (Canvas):
