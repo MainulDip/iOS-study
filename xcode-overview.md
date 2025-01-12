@@ -6,6 +6,10 @@
 ### Turn on/off AI code prediction:
 Xcode > Preference/Setting > Text Editing > Editing
 
+### Tips:
+When writing code, keep open the `Inspector's quick help ?` (top right corner), it will give instant overview of any method/prop when cursor is placed into the code.
+- `cmd + opt + 0` to toggle the inspector and `opt + cmd + left/right arrow` to navigate between inspector's options
+
 ### Major areas:
 - Left (cmd 0) | Right | Bottom .
 - right inspector panel (cmd + alt/option + 0)
@@ -32,9 +36,16 @@ Xcode > Preference/Setting > Text Editing > Editing
 - action center: cmd + alt + click || to embed, extract-subview (convert to reusable component), etc
 - esc: place the cursor on any function and press "esc" key to get the auto suggestions and quick look at the other options and params docs
 - option + click : to see further docs of a function
+- function override : no dedicated shortcut, use `ctrl+space` or `esc` or `opt+esc`. After overriden, from func block, press `ctrl+space` or `esc` to apply `super.func()` or else
 
 - cmd + N for new file
 - alt + right/left arrow -> to jump cursor to next/prev word quickly (ctrl + arrow) for windows/linux (Remote Desktop). 
+
+- `cmd + shift + o` to open file in xcode editor and `cmd + shift + {/}` to select next previous tab
+
+- `cmd + {/}` to indent (tab) code but placing the cursor at the end of line
+
+- `opt + right/left arrow` to expand and collapse project directory.
 
 `⌥ ⌘ E` or `opt + cmd + e` to select next occurrence of currently selected
 `⌥ ⇧ ⌘ E` or `opt + shift + cmd + e` to select previous occurrence of currently selected

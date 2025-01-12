@@ -236,6 +236,22 @@ private let pageControl: UIPageControl = {
 }()
 ```
 
+### Programmatic ViewController Creation & `UICollectionViewController`:
+`AppDelegate.swift` used prior to ios 12 to set entry window. With ios 13 it's the `SceneDelegate` to be used
+
+inside SceneDelegate's `scene` function, set the entry ViewController
+
+```swift
+// adding custom viewController as main entry point
+window = UIWindow(windowScene: scene as! UIWindowScene)
+window?.makeKeyAndVisible()
+let demoViewController = UIViewController()
+demoViewController.view.backgroundColor = .red
+window?.rootViewController = demoViewController
+```
+
+
+
 ### Get device orientation change event:
 Orientation events
 https://medium.com/codewords/orientation-responsive-ui-in-ios-beea7644b3c
