@@ -12,8 +12,13 @@ extension UIColor {
 }
 
 class ViewController: UIViewController {
+    var descriptionLeadingConstraint = NSLayoutConstraint()
+    var descriptionTrailingConstraint = NSLayoutConstraint()
+
+    let viewModel = ViewModel(modelDidChange: {
+        //Update your view model with new data
+    })
     
-        
     let logoImageView: UIImageView = {
         let imageView = UIImageView(image: .yummyFoodLogo)
         // auto layout enableing
@@ -89,6 +94,13 @@ class ViewController: UIViewController {
         setupLayout()
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator) {
+        let isLandscape = size.width > size.height
+        self.descriptionLeadingConstraint.constant = !isLandscape ? 80 : 160
+        self.descriptionTrailingConstraint.constant = !isLandscape ? -80 : -160
+        self.view.layoutIfNeeded()
+    }
+    
     private func setupBottomControls() {
         // view.addSubview(previousButton)
         // previousButton.backgroundColor = .red
@@ -118,6 +130,7 @@ class ViewController: UIViewController {
             bottomControlStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             bottomControlStackView.heightAnchor.constraint(equalToConstant: 50)
         ])
+        
     }
     
     private func setupLayout() {
@@ -147,17 +160,26 @@ class ViewController: UIViewController {
         // // auto layout tuning for descriptionTextView
         // 4 constran is necessay for non-intrinsic-size view, like text
         // the auto layout needs at least two constraints for views having an intrinsic size (image) and at least four for views with no intrinsic size (text>
-        
+        let isLandscape = self.view.frame.width > self.view.frame.height
         descriptionTextView.topAnchor.constraint(equalTo: topImageContainerView.bottomAnchor, constant: 12).isActive = true // constant will behave like padding
-        descriptionTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true // constant will behave like left padding here
-        descriptionTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true // negative constant will behave like right padding here
+        
+        descriptionLeadingConstraint = descriptionTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: !isLandscape ? 80 : 160)
+        descriptionLeadingConstraint.isActive = true // constant will behave like left padding here
+        descriptionTrailingConstraint = descriptionTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: !isLandscape ? -80 : -160)
+        descriptionTrailingConstraint.isActive = true // negative constant will behave like right padding here
         descriptionTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         print(UIDevice.current.orientation.rawValue)
         // get device orientation
         NotificationCenter.default.addObserver(self, selector: #selector(orientationChanged), name: UIDevice.orientationDidChangeNotification, object: nil)
         
+        nextButton.addTarget(self, action: #selector(ViewController.didSelectNext(_:)), for: .touchDown)
     }
+    
+    @objc func didSelectNext(_ sender: UIButton) {
+//        self.viewModel.didSelectAdd()
+    }
+    
     
     @objc func orientationChanged() {
         print(UIDevice.current.orientation.rawValue)

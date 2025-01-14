@@ -236,7 +236,7 @@ private let pageControl: UIPageControl = {
 }()
 ```
 
-### Programmatic ViewController Creation & `UICollectionViewController`:
+### Programmatic ViewController Creation:
 `AppDelegate.swift` used prior to ios 12 to set entry window. With ios 13 it's the `SceneDelegate` to be used
 
 inside SceneDelegate's `scene` function, set the entry ViewController
@@ -250,7 +250,22 @@ demoViewController.view.backgroundColor = .red
 window?.rootViewController = demoViewController
 ```
 
+### `UICollectionViewController`:
+We need at least 2 function to override
 
+To initialize a UICollectionViewController 
+```swift
+// from scenedelegate.swift
+let collectionViewLayout = UICollectionViewFlowLayout()
+let swippingController = SwipingController(collectionViewLayout: collectionViewLayout)
+window?.rootViewController = swippingController
+```
+
+### Change properties on orientation change:
+
+
+### Docs Reading:
+From xcode, `cmd + shift + 0/zero` to open developer documents. And each section containing `Essentials` will provide a good walk through and introductory guide. ie, for auto layout guide `UIKit > Essential > About App Development with UIkit` will provide a good overview about the framework and inside there is a link for auto layout guide. 
 
 ### Get device orientation change event:
 Orientation events

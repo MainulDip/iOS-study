@@ -18,12 +18,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
         // adding custom viewController as main entry point
-        window = UIWindow(windowScene: scene as! UIWindowScene)
-        window?.makeKeyAndVisible()
-        
-        let collectionViewLayout = UICollectionViewLayout()
-        let swippingController = SwipingController(collectionViewLayout: collectionViewLayout)
-        window?.rootViewController = swippingController
+//        window = UIWindow(windowScene: scene as! UIWindowScene)
+//        window?.makeKeyAndVisible()
+//        
+//        let collectionViewLayout = UICollectionViewFlowLayout()
+//        let swippingController = SwipingController(collectionViewLayout: collectionViewLayout)
+//        window?.rootViewController = swippingController
         
         print("From SceneDelegate")
 

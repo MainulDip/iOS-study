@@ -11,7 +11,7 @@ Jump starting guide on Local Storage and Persistence Storage etc
 - applicationWillTerminate: call last when cleared by os or manually form background. All cached app data will be destroyed.
 ### UserDefaults (Persistent Local Data Storage) [Todo App]:
 - UserDefaults save data as "plist" file.
-- Not good for big data (Slow because ios need to search and load all the local plist file), so better Only store small data (few KBs)
+- Not good for big data (Slow because ios need to search and load all the local plist file), so better Only store small data (few KBs).......
 - Its not a database replacement
 ```swift
 var itemArray = ["Yoo", "World", "BlaBla"]
