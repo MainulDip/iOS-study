@@ -461,7 +461,7 @@ override func awakeFromNib() {
 
 ### Any || AnyObject || NSObject:
 - Any : Anything Class of Struct
-- AnyObject : Anything that is a object of any class (not struct)
+- AnyObject : Anything that is a object of any class (not struct).......
 - NSObject : Anything that is an object of Apple's Foundation Library
 ```swift
 let mixedList: [Any] = ["Sth", 7, 7.4] // String, Int & Float on same list by casting to Any

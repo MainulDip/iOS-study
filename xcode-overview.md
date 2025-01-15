@@ -52,7 +52,7 @@ When writing code, keep open the `Inspector's quick help ?` (top right corner), 
 `⌥ ⌘ G` or `opt + cmd + g` to find and select next
 `⌥ ⇧ ⌘ G` or `opt + shift + cmd + g` to find and select previous
 
-### Implementing Protocol Member:
+### Implementing Protocol Member or overriding inheritance member:
 - After Attaching the protocol, from inside struct/class braces, press `esc` for suggestion. Then apply those members
 
 ### task

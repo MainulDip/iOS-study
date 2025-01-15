@@ -147,6 +147,58 @@ Note: leading/trailing vs right/left anchor : some language are left to right (l
 
 
 ### Auto layout 2nd steep | child anchoring with the container's anchor:
+Used to control layout across landscape and portrait orientation. A container usually contain child views, and those child views are constraint to parent/container anchors.
+
+Note: Container view (or any other view) needs to be added as `self.view`'s subView. No view should be left tangled situation.
+
+```swift
+let logoImageView: UIImageView = {
+    let imageView = UIImageView(image: .yummyFoodLogo)
+    // auto layout enableing
+    // adding border with round corner styling
+    imageView.layer.masksToBounds = true
+    imageView.layer.borderWidth = 4
+    imageView.layer.borderColor = UIColor(.red).cgColor
+    imageView.layer.cornerRadius = 20
+    // enable auto layout
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+
+    return imageView
+}()
+
+override func viewDidLoad() {
+    super.viewDidLoad()
+    // view.addSubview(logoImageView)
+    setupLayout()
+}
+
+private func setupContainerLayout() {
+    let topImageContainerView = UIView()
+    topImageContainerView.backgroundColor = .blue
+    view.addSubview(topImageContainerView)
+    // topImageContainerView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+    // for testing this 'll place the image at the top-left x:0 y:0 cordinate with 50x50 height
+
+    topImageContainerView.translatesAutoresizingMaskIntoConstraints = false
+    topImageContainerView.addSubview(logoImageView)
+
+    topImageContainerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+    topImageContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+    topImageContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    topImageContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
+
+
+    // auto layout tuning for logoImageView
+    logoImageView.centerXAnchor.constraint(equalTo: topImageContainerView.centerXAnchor).isActive = true
+    logoImageView.centerYAnchor.constraint(equalTo: topImageContainerView.centerYAnchor).isActive = true
+    // logoImageView.topAnchor.constraint(equalTo: topImageContainerView.topAnchor, constant: 100).isActive = true
+    logoImageView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+    logoImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+}
+
+
+```
 
 ### UITextView's AttributedText for more control:
 ```swift
@@ -171,7 +223,7 @@ let descriptionTextView: UITextView = {
     return textView
 }()
 ```
-### Padding left/right using `constant`:
+### Padding left/right using `constant:`:
 ```swift
 descriptionTextView.topAnchor.constraint(equalTo: topImageContainerView.bottomAnchor, constant: 12).isActive = true // constant will behave like padding
 descriptionTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true // constant will behave like left padding here
@@ -262,6 +314,91 @@ window?.rootViewController = swippingController
 ```
 
 ### Change properties on orientation change:
+There are `willTransition` and `viewWillTransition` controller methods, which will be called when device orientation changes. From there, the properties should be changed based on `landscape` or `portrait` mode and lastly `self.view.layoutIfNeeded()` needs to be called to repaint the layout. 
+To programmatically create constraints, use `Layout Anchors NSLayoutAnchor` or `NSLayoutConstraint` class or `Visual Format Language`. 
+
+
+```swift
+class ViewController: UIViewController {
+    var descriptionLeadingConstraint = NSLayoutConstraint()
+    var descriptionTrailingConstraint = NSLayoutConstraint()
+    // other code
+
+    let descriptionTextView: UITextView = {
+        let textView = UITextView()textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.text = "Hello World!"
+        textView.font = .boldSystemFont(ofSize: 19)
+        return textView
+    }()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let isLandscape = self.view.frame.width > self.view.frame.height
+        descriptionTextView.topAnchor.constraint(equalTo: topImageContainerView.bottomAnchor, constant: 12).isActive = true // constant will behave like padding
+        
+        descriptionLeadingConstraint = descriptionTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: !isLandscape ? 80 : 160)
+        descriptionLeadingConstraint.isActive = true // constant will behave like left padding here
+        descriptionTrailingConstraint = descriptionTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: !isLandscape ? -80 : -160)
+        descriptionTrailingConstraint.isActive = true // negative constant will behave like right padding here
+        descriptionTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator) {
+        let isLandscape = size.width > size.height
+        self.descriptionLeadingConstraint.constant = !isLandscape ? 80 : 160
+        self.descriptionTrailingConstraint.constant = !isLandscape ? -80 : -160
+        self.view.layoutIfNeeded()
+    }
+}
+```
+
+programmatic constraint creation https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/ProgrammaticallyCreatingConstraints.html#//apple_ref/doc/uid/TP40010853-CH16-SW1
+
+Different UI repainting functions, `layoutIfNeeded`, `setNeedDisplay`, `layoutSubViews`, `setNeedLayout`
+https://stackoverflow.com/questions/42158203/ios-uiview-setneedlayout-setneeddisplay-layoutsubviews-and-layoutifneeded
+
+### ViewModel implementation:
+```swift
+// ViewModel.swift file
+import Foundation
+
+class ViewModel {
+    struct Model {
+        var result: String = ""
+    }
+    
+    var model: Model = Model()
+    
+    var modelDidChange: () -> Void
+    
+    init(modelDidChange: @escaping () -> Void) {
+        self.modelDidChange = modelDidChange
+    }
+    
+    func didSelectAdd() {
+        //update the data
+        modelDidChange()
+    }
+    
+    func didSelectSubtract() {
+        
+    }
+}
+
+// ViewController.swift file
+class ViewController: UIViewController {
+
+    let viewModel = ViewModel(modelDidChange: {
+        //Update your view model with new data
+    })
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // other code
+    }
+}
+```
 
 
 ### Docs Reading:
