@@ -2,17 +2,19 @@
 //  ViewController.swift
 //  First-uikit-no-interface-builder
 //
-//  Created by Mainul Dip on 1/15/25.
+//  Created by Mainul Dip on 1/7/25.
 //
 
 import UIKit
 
-extension UIColor {
-    static var mainPink = UIColor(red: 255/255, green: 102/255, blue: 153/255, alpha: 1)
-}
+class ViewControllerBlakeEdited: UIViewController {
+    var descriptionLeadingConstraint = NSLayoutConstraint()
+    var descriptionTrailingConstraint = NSLayoutConstraint()
 
-class ViewController: UIViewController {
-
+    let viewModel = ViewModel(modelDidChange: {
+        //Update your view model with new data
+    })
+    
     let logoImageView: UIImageView = {
         let imageView = UIImageView(image: .yummyFoodLogo)
         // auto layout enableing
@@ -88,6 +90,13 @@ class ViewController: UIViewController {
         setupLayout()
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator) {
+        let isLandscape = size.width > size.height
+        self.descriptionLeadingConstraint.constant = !isLandscape ? 80 : 160
+        self.descriptionTrailingConstraint.constant = !isLandscape ? -80 : -160
+        self.view.layoutIfNeeded()
+    }
+    
     private func setupBottomControls() {
         // view.addSubview(previousButton)
         // previousButton.backgroundColor = .red
@@ -96,8 +105,8 @@ class ViewController: UIViewController {
 //        let yellowView = UIView()
 //        yellowView.backgroundColor = .yellow
         
-//        let greenView = UIView()
-//        greenView.backgroundColor = .green
+        let greenView = UIView()
+        greenView.backgroundColor = .green
         
 //        let blueView = UIView()
 //        blueView.backgroundColor = .blue
@@ -150,8 +159,10 @@ class ViewController: UIViewController {
         let isLandscape = self.view.frame.width > self.view.frame.height
         descriptionTextView.topAnchor.constraint(equalTo: topImageContainerView.bottomAnchor, constant: 12).isActive = true // constant will behave like padding
         
-        descriptionTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: !isLandscape ? 80 : 160).isActive = true // constant will behave like left padding here
-        descriptionTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: !isLandscape ? -80 : -160).isActive = true // negative constant will behave like right padding here
+        descriptionLeadingConstraint = descriptionTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: !isLandscape ? 80 : 160)
+        descriptionLeadingConstraint.isActive = true // constant will behave like left padding here
+        descriptionTrailingConstraint = descriptionTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: !isLandscape ? -80 : -160)
+        descriptionTrailingConstraint.isActive = true // negative constant will behave like right padding here
         descriptionTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         print(UIDevice.current.orientation.rawValue)

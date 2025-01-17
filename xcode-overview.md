@@ -41,7 +41,9 @@ When writing code, keep open the `Inspector's quick help ?` (top right corner), 
 - cmd + N for new file
 - alt + right/left arrow -> to jump cursor to next/prev word quickly (ctrl + arrow) for windows/linux (Remote Desktop). 
 
-- `cmd + shift + o` to open file in xcode editor and `cmd + shift + {/}` to select next previous tab
+- `cmd + shift + o` to open file in xcode editor 
+
+- `cmd + shift + {/}` to select next previous tab
 
 - `cmd + {/}` to indent (tab) code but placing the cursor at the end of line
 
@@ -96,6 +98,18 @@ Preview Assets as it is seen below just by default registered development time o
 So you can store there any images, colors, files, ie any resources, which can be used in Preview Canvas only, for testing purpose. In example to not download one from internet, cloud, or fetch from database. Because Preview is for fast UI-only look & test, so data source is not important, so to test & tune UI you don't need to fetch external data but use locally stored test data
 
 You can add/name any other development time asset/folder in there as well
+
+### Importing and using assets/images:
+From `Assets.xcassets` Images can be imported or dragged into. Each entry can support multiple (usually 3) variants for different device resolution. When dragging multiple images together, images suffixed with `@1..3x` will be sorted automatically, like `imagename@1x.jpeg` (`name@Nx.ext`)
+
+After importing into xcassets, images can be imported predictable way where parameter accepts `UIImage?`
+```swift
+// once image is imported/dragged into Assets.xcassets 
+let imageView2 = UIImageView(image: UIImage(named: "yummy-food-logo"))
+let imageView = UIImageView(image: .yummyFoodLogo) // predictable way
+```
+
+Also `cmd + shift + l` (gui `view > show library`) import (drag/drop) image, UIComponents/View etc 
 
 ### Xcode not deleting code:
 
