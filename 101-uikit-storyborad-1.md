@@ -424,7 +424,7 @@ class SomeClass {
 - table view cells || prototype cell/view : blueprint of the list element
     * important attribute:
     - identifier : String to identify the cell blueprint form code
-- table view controller : it's little limited compared to the "table view", so stick with that
+- table view controller : it's little limited compared to the "`table view`", so stick with that
 ### TableView DataSource vs Delegate:
 - DataSource : forward data to the controller. It populate the tableView
 - Delegate : 

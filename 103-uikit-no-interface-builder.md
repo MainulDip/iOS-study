@@ -401,6 +401,22 @@ class ViewController: UIViewController {
 }
 ```
 
+### `self` inside closure prop | `private lazy var`:
+When self is used inside of a closure prop, IDE will issue an warning, as while the class starting initializing, the `self` will not be ready at that point. So always use `private lazy var` to initialize this kind of property.
+
+```swift
+private lazy var nextButton: UIButton = {
+    let button = UIButton(type: .system)
+    button.setTitle("NEXT", for: .normal)
+    button.titleLabel?.font = .boldSystemFont(ofSize: 14)
+    // let pinkColor = UIColor(red: 255/255, green: 102/255, blue: 153/255, alpha: 1)
+    button.setTitleColor(UIColor.mainPink, for: .normal)
+    button.addTarget(self, action: #selector(handleNext), for: .touchUpInside)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    return button
+}()
+```
+
 
 ### Docs Reading:
 From xcode, `cmd + shift + 0/zero` to open developer documents. And each section containing `Essentials` will provide a good walk through and introductory guide. ie, for auto layout guide `UIKit > Essential > About App Development with UIkit` will provide a good overview about the framework and inside there is a link for auto layout guide. 

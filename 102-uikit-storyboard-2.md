@@ -38,5 +38,5 @@ _ = Try Realm()
 ```
 ### Task
 => SwipeCellKit (Delete feature for todo realm app)
-=> In App Purchase | Not Now
+=> In App Purchase | Not Now.
 => Swift Deep Diving.......
