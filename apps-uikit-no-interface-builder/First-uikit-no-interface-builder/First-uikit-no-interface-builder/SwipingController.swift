@@ -17,13 +17,66 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
         Page(imageName: "girl-art", headerText: "Welcome to First UIKit Second"),
     ]
     
+    private let previousButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("PREV", for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 14)
+        button.setTitleColor(.gray, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var nextButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("NEXT", for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 14)
+        // let pinkColor = UIColor(red: 255/255, green: 102/255, blue: 153/255, alpha: 1)
+        button.setTitleColor(UIColor.mainPink, for: .normal)
+        button.addTarget(self, action: #selector(handleNext), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    @objc private func handleNext() {
+        print("Next button Tap")
+    }
+    
+    private let pageControl: UIPageControl = {
+        let pc = UIPageControl()
+        pc.currentPage = 0
+        pc.numberOfPages = 4
+        pc.currentPageIndicatorTintColor = UIColor.mainPink
+        pc.pageIndicatorTintColor = UIColor(red: 249/255, green: 202/255, blue: 224/255, alpha: 1)
+        return pc
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBottomControls()
         
 //        collectionView?.backgroundColor = .green
 //        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellid")
         collectionView?.register(PageCell.self, forCellWithReuseIdentifier: "cellid")
         collectionView.isPagingEnabled = true
+    }
+    
+    private func setupBottomControls() {
+        let bottomControlStackView = UIStackView(arrangedSubviews: [previousButton, pageControl, nextButton])
+        bottomControlStackView.distribution = .fillEqually
+        // bottomControlStackView.axis = .vertical
+        
+        bottomControlStackView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bottomControlStackView)
+        
+        // alternate way of activating auto layout contraints
+        NSLayoutConstraint.activate([
+            //previousButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            bottomControlStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bottomControlStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            bottomControlStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            bottomControlStackView.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

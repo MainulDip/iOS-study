@@ -43,6 +43,8 @@ When writing code, keep open the `Inspector's quick help ?` (top right corner), 
 
 - `cmd + shift + o` to open file in xcode editor 
 
+- `Cmd + Shift + 0` — open docs and `cmd + w` to close docs (when focused)
+
 - `cmd + shift + {/}` to select next previous tab
 
 - `cmd + {/}` to indent (tab) code but placing the cursor at the end of line
@@ -118,7 +120,7 @@ https://stackoverflow.com/questions/69352823/xcode-13-unable-to-remove-code-line
 
 ### xcode shortcut:
 - `Opt + Cmd + N` — New Group
-- `Cmd + Shift + O` — Open Quickly, to go to - `particular line of file, type - `filename:line-number
+- `Cmd + Shift + o` — Open Quickly, to go to - `particular line of file, type - `filename:line-number
 - `Ctrl + Cmd + Opt + F` — to auto fix issues
 - `Cmd + Shift + J`— Select file in navigator
 - `Cmd + Shift + D`— Select file in debug view

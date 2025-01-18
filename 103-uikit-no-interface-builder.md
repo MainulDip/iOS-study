@@ -405,6 +405,14 @@ class ViewController: UIViewController {
 ### Docs Reading:
 From xcode, `cmd + shift + 0/zero` to open developer documents. And each section containing `Essentials` will provide a good walk through and introductory guide. ie, for auto layout guide `UIKit > Essential > About App Development with UIkit` will provide a good overview about the framework and inside there is a link for auto layout guide. 
 
+`UIKit > Views and Controls > UIView` for good overviews about `Views` in general. Some important view related guide is also there, like `Auto Layout`, `View Programming Guide`
+
+
+### Must reading:
+`View Programming Guide` for ios > https://developer.apple.com/library/archive/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009503
+
+`Auto Layout Guide` > https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/index.html#//apple_ref/doc/uid/TP40010853
+
 ### Get device orientation change event:
 Orientation events
 https://medium.com/codewords/orientation-responsive-ui-in-ios-beea7644b3c
@@ -419,3 +427,5 @@ func callFromViewDidLoad() {
     print(UIDevice.current.orientation.rawValue)
 }
 ```
+
+### CoreData and SwiftData:

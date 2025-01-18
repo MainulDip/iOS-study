@@ -14,7 +14,10 @@ class PageCell: UICollectionViewCell {
 //            print(page!.imageName)
             guard let page = page else { return }
             logoImageView.image = UIImage(named: page.imageName)
-            descriptionTextView.text = page.headerText
+            let attributedText = NSMutableAttributedString(string: page.headerText, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), NSAttributedString.Key.foregroundColor: UIColor.gray])
+            
+            attributedText.append(NSAttributedString(string: "\n\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)]))
+            descriptionTextView.attributedText = attributedText
         }
     }
     
@@ -42,11 +45,9 @@ class PageCell: UICollectionViewCell {
         // textView.font = .boldSystemFont(ofSize: 19)
         
         // using farther configuration using `UITextView().attributedText`
-        let attributedText = NSMutableAttributedString(string: "Hello World", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), NSAttributedString.Key.foregroundColor: UIColor.gray])
         
-        attributedText.append(NSAttributedString(string: "\n\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)]))
         
-        textView.attributedText = attributedText
+        // textView.attributedText = attributedText
         
         textView.textAlignment = .center
         textView.isEditable = false // stop allowing text editing
