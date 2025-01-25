@@ -72,7 +72,8 @@ struct LoginIntroApp: App { // inherit App protocol
 
 ### Background Color:
 Background color works with ZStack (depth stack). So everything needs to be inserted into
-```swuft
+
+```swift
 ZStack {
     Color(.lightGray)
         .edgesIgnoringSafeArea(.all)

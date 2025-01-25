@@ -424,6 +424,22 @@ From xcode, `cmd + shift + 0/zero` to open developer documents. And each section
 `UIKit > Views and Controls > UIView` for good overviews about `Views` in general. Some important view related guide is also there, like `Auto Layout`, `View Programming Guide`
 
 
+### CHCR (Content Hugging and Compression Resistance):
+Auto Layout represents a view’s intrinsic content size using a pair of constraints for each dimension. The content hugging pulls the view inward so that it fits snugly around the content. The compression resistance pushes the view outward so that it does not clip the content.
+
+
+```swift
+view.setContentHuggingPriority(.required, for: .horizontal)
+view.setContentCompressionResistancePriority(.required, for: .horizontal)
+```
+
+### Left/Right vs Leading/Trailing & Opt-out by `semanticContentAttribute`:
+For supporting both left-to-right and right-to-left language, Apple suggest to always use Leading/Trailing instead of Left/Right when anchoring.
+
+Some ui elements requires exact view (no flipping for ltr/rtl) like, buttons that are based on physical directions (up, down, left, and right) should always stay same. 
+
+The view’s `semanticContentAttribute` property determines whether the view’s content should flip when switching between left-to-right and right-to-left languages.1
+
 ### Must reading:
 `View Programming Guide` for ios > https://developer.apple.com/library/archive/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009503
 

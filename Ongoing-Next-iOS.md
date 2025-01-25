@@ -7,3 +7,7 @@ https://www.hackingwithswift.com/books/ios-swiftui/adding-a-segmented-control-fo
 - 
 
 phase10 game using uno card
+
+---------------
+
+- any way to use percent based value instead of CGFloat
