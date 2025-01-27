@@ -231,6 +231,11 @@ descriptionTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40
 descriptionTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true // negative constant will behave like right padding here
 descriptionTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 ```
+### UIStackView Padding/Margin without constraints:
+```swift
+stackView.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+stackView.isLayoutMarginsRelativeArrangement = true
+```
 
 ### UIButton, Alternate way of auto layout constraints activation and `SafeArea` with `view.safeAreaLayoutGuide.topAnchor`:
 ```swift

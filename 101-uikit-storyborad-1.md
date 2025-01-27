@@ -12,9 +12,9 @@ uikit quick guide.
     - 
 
 ### Assets and Icons Generator:
-https://www.appicon.co is a good place to generate all the Image Sets and icons for both ios and Android.
+https://www.appicon.co is a good place to generate all the Image Sets and icons for both ios and Android
 
-* To actually add the assets to xcode, it requires to drag the files separately/exclusively into the Assets.xcassets folder within xcode. Otherwise the assets will not be visible inside xcode.
+* To actually add the assets to xcode, it requires to drag the files separately/exclusively into the `Assets.xcassets` folder within xcode. Otherwise the assets will not be visible inside xcode.
 ### IB Outlet (Interface Builder Outlet) | IBAction | linking view with the ViewContrllers:
 From main.storyboard open the Assistance (it will bring the ViewContrller and main.swift file side by sede to do drag and drop operation)
 Then drag the targeted view to the controller while pressing 'ctrl', give it a name and insert. Then it will insert the IB outlet.
