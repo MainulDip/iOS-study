@@ -38,7 +38,7 @@ When writing code, keep open the `Inspector's quick help ?` (top right corner), 
 - option + click : to see further docs of a function
 - function override : no dedicated shortcut, use `ctrl+space` or `esc` or `opt+esc`. After overriden, from func block, press `ctrl+space` or `esc` to apply `super.func()` or else
 
-- cmd + N for new file
+- `cmd + N` for new file and `opt + cmd + n` for new folder/group/directory
 - alt + right/left arrow -> to jump cursor to next/prev word quickly (ctrl + arrow) for windows/linux (Remote Desktop). 
 
 - `cmd + shift + o` to open file in xcode editor 
@@ -119,7 +119,8 @@ https://stackoverflow.com/questions/69352823/xcode-13-unable-to-remove-code-line
 
 
 ### xcode shortcut:
-- `Opt + Cmd + N` — New Group
+- `Opt + Cmd + N` — New Group or New Folder
+- `cmd + n` - New File
 - `Cmd + Shift + o` — Open Quickly, to go to - `particular line of file, type - `filename:line-number
 - `Ctrl + Cmd + Opt + F` — to auto fix issues
 - `Cmd + Shift + J`— Select file in navigator

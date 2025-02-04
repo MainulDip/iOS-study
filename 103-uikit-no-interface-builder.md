@@ -464,5 +464,16 @@ func callFromViewDidLoad() {
     print(UIDevice.current.orientation.rawValue)
 }
 ```
+### Get if device is in landscape:
+To get info if the device is in landscape, the appropriate option is to use `self.view.bound.width > self.view.bound.height` as these are available when first load and will be changed whenever orientation triggered. The `view.frame.width/height` is populated lately after the transition has been done. So when working with `viewWillTransition`, the bound will be already in changed state, where frame will not.
+```swift
+ var isLandscape: Bool {
+        self.view.bounds.width > self.view.bounds.height
+    }
 
+override func viewWillTransition(to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator) {
+    print("self.isLandscape = \(isLandscape)") // true when triggered landscape
+    print("self.view.frame.width > self.view.frame.height = \(self.view.frame.width > self.view.frame.height)") // it's not yet changed, so will be false even-if the device orientation had been triggered
+}
+```
 ### CoreData and SwiftData:
