@@ -28,6 +28,7 @@ When writing code, keep open the `Inspector's quick help ?` (top right corner), 
  1st click to select the beginning of braces (first brace), then double click to highlight the entire block
 
 ### Shortcuts
+- `crl + shift + click` for multi cursor, selecting multiple line 
 - `cmd + shift + l` (gui `view > show library`) import (drag/drop) image, UIComponents/View etc 
 - Indent/Re-Indent Code : Ctrl + i 
 - Build : cmd + r
