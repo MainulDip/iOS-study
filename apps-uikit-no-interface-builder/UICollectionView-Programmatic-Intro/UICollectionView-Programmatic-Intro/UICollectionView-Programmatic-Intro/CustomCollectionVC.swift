@@ -7,9 +7,13 @@
 
 import UIKit
 
-class CustomViewController: UIViewController {
+class CustomCollectionVC: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .orange
+        collectionView.backgroundColor = .orange
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
+    
 }
