@@ -55,3 +55,9 @@ print("\(String(describing: type(of: view)))")
 This class already extends the `UIViewController` and confronts to the `UICollectionViewDelegate` and `UICollectionViewDataSource` protocols.
 
 Behind the scene, `view` property form the UIViewController is the parent of the `collectionView` property of the UICollectionViewController. So changing background will be visible when done on `collectionView.backgroundColor`
+
+### ...Layout vs ...FlowLayout:
+The `UICollectionViewLayout` is for implementing custom collection view that requires some advanced functionality ie, both way of scrolling (X and Y axis). 
+
+And `UICollectionViewFlow` layout provide some default structure already implemented. 
+
