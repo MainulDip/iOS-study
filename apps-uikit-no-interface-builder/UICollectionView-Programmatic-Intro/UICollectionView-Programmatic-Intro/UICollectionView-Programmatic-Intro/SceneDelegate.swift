@@ -18,7 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = CustomCollectionVC(collectionViewLayout: UICollectionViewFlowLayout())
+        let uiColFlowLayout = UICollectionViewFlowLayout()
+        uiColFlowLayout.itemSize = CGSize(width: 100, height: 100)
+        window?.rootViewController = CustomCollectionVC(collectionViewLayout: uiColFlowLayout)
         window?.makeKeyAndVisible()
     }
 

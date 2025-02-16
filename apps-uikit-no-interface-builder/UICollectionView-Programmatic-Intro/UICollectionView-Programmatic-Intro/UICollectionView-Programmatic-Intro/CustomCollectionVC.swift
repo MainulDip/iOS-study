@@ -26,12 +26,11 @@ class CustomCollectionVC: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 10000
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let customCell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.customCell, for: indexPath)
-        print("hello4")
         return customCell
     }
 }
@@ -39,14 +38,29 @@ class CustomCollectionVC: UICollectionViewController {
 class CustomCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        print("hello")
-//        setupFrame()
+        setupFrame()
+    }
+    
+    func nameLabel(_ superView: UIView) -> UILabel {
+        let label = UILabel()
+        superView.addSubview(label)
+        label.textAlignment = .center
+        label.text = "Hello"
+        
+        // setup aluto layout
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.centerXAnchor.constraint(equalTo: superView.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: superView.centerYAnchor).isActive = true
+        label.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        return label
     }
     
     func setupFrame() {
         contentView.backgroundColor = .yellow
-        print("hello2")
-        print("\(String(describing: type(of: contentView)))")
+        let _ = nameLabel(self.contentView)
+        
+//        print("\(String(describing: type(of: contentView)))")
     }
     
     required init?(coder: NSCoder) {
