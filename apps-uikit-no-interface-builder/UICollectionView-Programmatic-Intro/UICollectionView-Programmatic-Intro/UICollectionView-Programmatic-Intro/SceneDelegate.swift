@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         let uiColFlowLayout = UICollectionViewFlowLayout()
-        uiColFlowLayout.itemSize = CGSize(width: 100, height: 100)
+//        uiColFlowLayout.itemSize = CGSize(width: 100, height: 100)
         window?.rootViewController = CustomCollectionVC(collectionViewLayout: uiColFlowLayout)
         window?.makeKeyAndVisible()
     }

@@ -138,6 +138,8 @@ print("test.numberOfSides : \(test.numberOfSides)")
 
 
 ### init & multiple init & convenience init | constructors:
+Swift has automatic initializer creation on the fly and they are called default initializer. Primary initializer is that which is explicitly mentioned.
+
 `init(...){}` called designated initializer, it fully initializes all props of that class and calls superclass initializer (if any).
 
 https://docs.swift.org/swift-book/documentation/the-swift-programming-language/initialization/
@@ -326,6 +328,8 @@ class C1: Ex {
 
 ### Extensions:
 Extensions add new functionalities to an existing class, structure, enumeration, or protocol type. This includes the ability to extend types for which you don’t have access to the original source code (known as retroactive modeling). Extensions are similar to categories in Objective-C. (Unlike Objective-C categories, Swift extensions don’t have names.)
+
+NB: Extension cannot contain stored property, ie, `var classProp = "Some Val"`, only main class can
 
 Extensions in Swift can:
 
