@@ -221,6 +221,33 @@ extension CustomCell {
 ```
 
 ### `view.systemLayoutSizeFitting` vs `view.intrinsicContentSize`:
+The `intrinsic` content size is a property that some interface objects implement (such as UILabel and UIButton) so that you do not have give them height and width constraints. For UIView alone, there is no `intrinsic` content size.
+
+`view.systemLayoutSizeFitting` Returns the optimal size of the view based on its current constraints. It's different that intrinsic size and returns the actual size of the view
+
+```swift
+setNeedsLayout() // only this will not work
+layoutIfNeeded() // only this will work though
+
+// use injected superview
+attribute.size = CGSize(width: ultimateSuperViewWidth! - 1, height: contentView.systemLayoutSizeFitting(cellLabel!.frame.size).height) // -1 is a bug
+```
 
 
-### `setNeedsLayout` vs `layoutIfNeeded` :
+### `setNeedsLayout` vs `layoutIfNeeded`:
+- `layoutIfNeeded` is a synchronous call that will let- the system update the views and force the layout engine to redraw the views.
+- `setNeedsLayout` is a deferred call and asynchronous- call that will mark the layout has changed but it will call `layoutSubViews()` in the next cycle.
+- Both `layoutIfNeeded` and `setNeedsLayout` call `layoutSubViews()`
+- Better to have `setNeedsLayout` before calling `layoutIfNeeded` for the safer side. But it is not required in all cases. Because `layoutIfNeeded`- requires a signal to update.
+- For animations, using `layoutIfNeeded` is a better option than calling setNeedsLayout. It ensures any pending layout updates are applied before the animation, resulting in smoother performance.
+- The same logic applies to the `setNeedsUpdateConstraints` and `updateConstraintsIfNeeded`.
+
+### bound vs frame of the view's:
+At its simplest, a view’s `bounds` refers to its coordinates relative to its own space (as if the rest of your view hierarchy didn’t exist), whereas its `frame` refers to its coordinates relative to its parent’s space.
+
+
+   - If you create a view at X:0, Y:0, width:100, height:100, its frame and bounds are the same.
+
+   - If you move that view to X:100, its frame will reflect that change but its bounds will not. Remember, the bounds is relative to the view’s own space, and internally to the view nothing has changed.
+
+   - If you transform the view, e.g. rotating it or scaling it up, the frame will change to reflect that, but the bounds still won’t – as far as the view is concerned internally, it hasn’t changed.

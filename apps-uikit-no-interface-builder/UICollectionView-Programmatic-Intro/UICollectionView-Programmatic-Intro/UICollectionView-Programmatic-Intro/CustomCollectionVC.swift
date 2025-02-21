@@ -29,6 +29,15 @@ class CustomCollectionVC: UICollectionViewController {
         setupDelegation()
     }
     
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator) {
+//        collectionView.collectionViewLayout.invalidateLayout() // not working, but reloadData() work
+
+        collectionView.reloadData()
+        collectionView.setNeedsLayout()
+//        collectionView.layoutIfNeeded() // causes layout issues when orientation changes
+    }
+    
     func setupDelegation() {
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -43,20 +52,26 @@ class CustomCollectionVC: UICollectionViewController {
         
         // set dynamic label for the text view inside cell
         customCell.cellLabel?.text = DataSource.names[indexPath.item]
-        customCell.ultimateSuperViewWidth = self.view.frame.width
+        customCell.ultimateSuperViewWidth = self.view.frame.width - view.safeAreaInsets.left - view.safeAreaInsets.right
+        // print(self.view.safeAreaInsets)
         
         return customCell
     }
 }
 
 // MARK: delegation extension for setting static width and height (CGSize)
-//extension CustomCollectionVC: UICollectionViewDelegateFlowLayout {
-//    
+extension CustomCollectionVC: UICollectionViewDelegateFlowLayout {
+    
+    // this should not be used when using automaticSize for the cell item
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        view.layoutIfNeeded()
-//        return CGSize(width: view.frame.width, height: view.systemLayoutSizeFitting(collectionViewLayout.collectionViewContentSize).height)
+//        return CGSize(width: view.bounds.width, height: 200)
 //    }
-//}
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        UICollectionViewFlowLayout.automaticSize
+//    }
+}
 
 // data extension
 extension CustomCollectionVC {
@@ -84,15 +99,24 @@ extension CustomCell {
     func nameLabel(_ superView: UIView) -> UILabel {
         let label = UILabel()
         superView.addSubview(label)
+//        print("superView.systemLayoutSizeFitting \(superView.systemLayoutSizeFitting(label.bounds.size)) and label.intrin \(label.intrinsicContentSize)")
         label.textAlignment = .center
         label.text = "Hello"
         label.numberOfLines = 0
         
         // setup aluto layout
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.centerXAnchor.constraint(equalTo: superView.centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: superView.centerYAnchor).isActive = true
-        label.widthAnchor.constraint(equalTo: superView.widthAnchor).isActive = true
+        let leftAnchor = label.leadingAnchor.constraint(equalTo: superView.leadingAnchor)
+        
+        leftAnchor.isActive = true
+        
+        let rightanchor = label.trailingAnchor.constraint(equalTo: superView.trailingAnchor)
+        
+        rightanchor.isActive = true
+        
+        let topAnchor = label.topAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.topAnchor)
+        
+        topAnchor.isActive = true
         
         return label
     }
@@ -102,7 +126,7 @@ extension CustomCell {
         let cl = nameLabel(self.contentView)
         cellLabel = cl
         
-//        print("\(String(describing: type(of: contentView)))")
+        // print("\(String(describing: type(of: contentView)))")
     }
 }
 
@@ -110,18 +134,14 @@ extension CustomCell {
 // Custom Cell Dynamic Height
 extension CustomCell {
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        let attribute = super.preferredLayoutAttributesFitting(layoutAttributes)
         
         setNeedsLayout() // only this will not work
         layoutIfNeeded() // only this will work though
         
-        // this will also work
-        // layoutAttributes.frame.size = CGSize(width: contentView.superview?.superview?.frame.width ?? 0, height: cellLabel?.intrinsicContentSize.height ?? 0)
-        
-        // layoutAttributes.frame.size = CGSize(width: contentView.superview?.superview?.systemLayoutSizeFitting(cellLabel!.frame.size).width ?? 0, height: contentView.systemLayoutSizeFitting(cellLabel!.frame.size).height)
-        
         // use injected superview
-        layoutAttributes.frame.size = CGSize(width: ultimateSuperViewWidth!, height: contentView.systemLayoutSizeFitting(cellLabel!.frame.size).height)
+        attribute.size = CGSize(width: ultimateSuperViewWidth! - 1, height: contentView.systemLayoutSizeFitting(cellLabel!.frame.size).height) // -1 is a bug
         
-        return layoutAttributes
+        return attribute
     }
 }
