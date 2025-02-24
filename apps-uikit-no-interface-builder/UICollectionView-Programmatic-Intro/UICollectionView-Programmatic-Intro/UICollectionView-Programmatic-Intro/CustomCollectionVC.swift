@@ -140,8 +140,12 @@ extension CustomCell {
         layoutIfNeeded() // only this will work though
         
         // use injected superview
-        attribute.size = CGSize(width: ultimateSuperViewWidth! - 1, height: contentView.systemLayoutSizeFitting(cellLabel!.frame.size).height) // -1 is a bug
-        
+        if let width = ultimateSuperViewWidth {
+            print(width)
+            attribute.size = CGSize(width: ultimateSuperViewWidth! - 1, height: contentView.systemLayoutSizeFitting(cellLabel!.frame.size).height) // -1 is a bug
+        } else {
+            print("did not find ulimate width")
+        }
         return attribute
     }
 }

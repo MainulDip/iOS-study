@@ -9,6 +9,9 @@ Changing the background of the first screen.
 
 But can be clean the project little more for exact use case
 
+### `static func` vs `class func`:
+https://stackoverflow.com/questions/25156377/what-is-the-difference-between-static-func-and-class-func-in-swift
+
 ### intro into programmatic view:
 - `view.backgroundColor = .yellow` after `super.viewDidLoad()` of `ViewController` will change the background color
 
@@ -476,4 +479,67 @@ override func viewWillTransition(to size: CGSize, with coordinator: any UIViewCo
     print("self.view.frame.width > self.view.frame.height = \(self.view.frame.width > self.view.frame.height)") // it's not yet changed, so will be false even-if the device orientation had been triggered
 }
 ```
+### Manual ViewModel:
+```swift
+// controller
+var viewModel = ViewModel()
+
+ private func stateCallBack(_ state: ViewModelState) {
+    let equation = state.equation
+    equationView.textView.text = equation
+}
+
+@objc func didSelectCalcButton(_ sender: UIButton) {
+    viewModel.didSelectButton(type: sender.title(for: .normal) ?? "", callBack : stateCallBack)
+}
+
+// full ViewModel
+struct ViewModelState {
+    var equation: String
+    var result: String
+    
+}
+
+class ViewModel {
+    var state: ViewModelState
+    
+    init(state: ViewModelState = .init(equation: "", result: "")) {
+        self.state = state
+    }
+
+    func didSelectButton(type: String, callBack: @escaping (ViewModelState) -> Void) {
+        switch type {
+        case "C", "()", "%", "/":
+            //Update equation based on input
+            state.equation = "Hello world"
+            break
+        case "7", "8", "9", "X":
+            //Update equation based on input
+            state.equation = "Hello world"
+            break
+        case "4", "5", "6", "-":
+            //Update equation based on input
+            state.equation = "Hello world"
+            break
+        case "1", "2", "3", "4":
+            //Update equation based on input
+            state.equation = "Hello world"
+            break
+            
+        case "+/-", "0", ".", "=":
+            //Update equation based on input
+            state.equation = "Hello world"
+            break
+        default:
+            break
+        }
+        //update the state
+        
+        // call the call back for the view supplying the state as argument
+        // the view will be updated from inside the callback body
+        callBack(state)
+    }
+}
+```
+
 ### CoreData and SwiftData:

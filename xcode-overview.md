@@ -30,8 +30,8 @@ When writing code, keep open the `Inspector's quick help ?` (top right corner), 
 
 ### Shortcuts
 - `crl + shift + click` for multi cursor, selecting multiple line 
-- `cmd + shift + l` (gui `view > show library`) import (drag/drop) image, UIComponents/View etc 
-- Indent/Re-Indent Code : Ctrl + i 
+- `cmd + shift + l` (gui `view > show library`) import media (drag/drop) image, UIComponents/View etc 
+- Indent/Re-Indent/Format Code : Ctrl + i 
 - Build : cmd + r
 - Code Suggestion : put the cursor inside a function and press "Esc" or `option + esc`
 - code indentation : ctrl + i 
