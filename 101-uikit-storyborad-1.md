@@ -318,7 +318,7 @@ Docs : https://cocoapods.org/
 * Setting Up and Intalling 3rd party project
 - navigate to the app's directory (same level as .xcodeproj) and run `pod init` to initialize the "Podfile"
 - Setup the newly generated "Podfile" (a ruby file), customize the platform version, and other things
-- inside the "target '' do" (ruby function) append the 3rd party library to add, ex: pod 'CLTypingLabel'
+- inside the "target '' do" (ruby function) append the 3rd party library to add, ex: pod 'CLTypingLabel'.......
 - then run "pod install"
 - after the install, close any running xcode project, and open current project into xcode using newly generated `...xcworkspace` file (as of cocoapod instruction)
 * Updating Packages/Library:

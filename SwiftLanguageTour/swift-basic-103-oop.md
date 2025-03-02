@@ -329,11 +329,30 @@ class C1: Ex {
 ### Extensions:
 Extensions add new functionalities to an existing class, structure, enumeration, or protocol type. This includes the ability to extend types for which you don’t have access to the original source code (known as retroactive modeling). Extensions are similar to categories in Objective-C. (Unlike Objective-C categories, Swift extensions don’t have names.)
 
-NB: Extension cannot contain stored property, ie, `var classProp = "Some Val"`, only main class can
+NB: Extension cannot contain stored property and property observers, ie, `var classProp = "Some Val"`, only main class can
 
 Extensions in Swift can:
 
-* Add computed instance properties and computed type properties
+* Add computed properties and type (`static`) properties
+
+```swift
+// note : no stored properties and property observers are allowed in
+extension CustomClass {
+        // computed prop | get
+    var sth: Int {
+        return 12
+    }
+    
+    // class prop
+    static var sthStatic = 12
+    
+    struct Sth {
+        var value: Int = 12
+        static let sthStatic = 12
+        static var sthStatic2 = 12
+    }
+}
+```
 
 *  Define instance methods and type methods
 
@@ -348,18 +367,18 @@ Extensions in Swift can:
 In Swift, you can even extend a protocol to provide implementations of its requirements or add additional functionality that conforming types can take advantage of.
 ```swift
 extension Double {
-        var km: Double { return self * 1_000.0 }
-        var m: Double { return self }
-        var cm: Double { return self / 100.0 }
-        var mm: Double { return self / 1_000.0 }
-        var ft: Double { return self / 3.28084 }
-    }
-    let oneInch = 25.4.mm
-    print("One inch is \(oneInch) meters")
-    // Prints "One inch is 0.0254 meters"
-    let threeFeet = 3.ft
-    print("Three feet is \(threeFeet) meters")
-    // Prints "Three feet is 0.914399970739201 meters"
+    var km: Double { return self * 1_000.0 }
+    var m: Double { return self }
+    var cm: Double { return self / 100.0 }
+    var mm: Double { return self / 1_000.0 }
+    var ft: Double { return self / 3.28084 }
+}
+let oneInch = 25.4.mm
+print("One inch is \(oneInch) meters")
+// Prints "One inch is 0.0254 meters"
+let threeFeet = 3.ft
+print("Three feet is \(threeFeet) meters")
+// Prints "Three feet is 0.914399970739201 meters"
 ```
 
 ### Access Modifiers `open | public | internal | fileprivate | private`:
