@@ -269,3 +269,6 @@ parent = nil
 //         Child Emily is being de-initialized
 //         Child Joanna is being de-initialized
 ```
+
+### `operator` functions:
+https://blog.logrocket.com/creating-custom-operators-in-swift/

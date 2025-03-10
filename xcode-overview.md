@@ -164,7 +164,7 @@ https://stackoverflow.com/questions/69352823/xcode-13-unable-to-remove-code-line
 - `Ctrl + Cmd + “` — auto fix prev error
 - `Cmd + Opt + U` — Open scheme’s test settings
 - `Cmd + Opt + R`— Open scheme’s run settings
-
+- selected func + `ctrl + 1` will show context menu to select `callers` to see usages, also `ctrl + click`
 ### Mac Shortcut:
 - `cmd + ctrl + f` Full-Screen Enter/Exit
 
