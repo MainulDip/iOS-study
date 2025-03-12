@@ -6,7 +6,7 @@
 // initialize the controller and call self.present with the controller as one of its parameter.
 ```
 
-### Navigation Storyboard, Cocoa Touch, Segue and Storybiard Segye Identifier :
+### Navigation Storyboard, Cocoa Touch, Segue and Storybiard Segue Identifier :
 - To perform Navigation based on storyboard design, Cocoa Touch Template can be used to make the view controller for it. 
 - The newly created viewcontroller class name needs to be supplied inside storyboard's targeted scene's identity inspector's class properties name.
 - Then to create a navigation direction a segue need to be created by holding ctrl and dragging a connection handle form Storyboard's view controller to view controller.

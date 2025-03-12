@@ -1,5 +1,7 @@
 /*
 * Generics
+* Here the `Item` is used as generics type
+* generics definition are marked with `<>`, Usually `<T>`
 */
 
 func makeArray<Item>(repeating item: Item, numberOfTimes: Int) -> [Item] {
