@@ -294,3 +294,176 @@ let computeResult: Void = complexCompute(a: &x, b: &y, c: z)
 print("x = \(x), y = \(y) and unchanged z = \(z)")
 
 ```
+
+
+### `switch` | value binding | `where` conditions:
+`break` statement is optional but can be used to match and ignore a particular case or to break out of a matched case before that case has completed its execution. 
+- The body of each case must contain at least one executable statement 
+- and they need to cover all possibility (exhaustive). If not enum, there must be `default` statement. 
+
+* switch case's value binding
+A switch case can name the value or values it matches to temporary constants or variables, for use in the body of the case. This behavior is known as value binding, because the values are bound to temporary constants or variables within the case’s body.
+
+* Where
+- A switch case can use a where clause to check for additional conditions.
+
+```swift
+let anotherCharacter: Character = "a"
+let message = switch anotherCharacter {
+case "a":
+    "The first letter of the Latin alphabet" // break is optional
+case "b", "c": // combined case
+    "Second and Third letter"
+default: // as the `anotherCharacter` is not a enum, stating `default` is required
+    "Some other character"
+}
+
+print(message) // Prints "The first letter of the Latin alphabet"
+
+// interval or `range` matching
+case 1...7:
+    givenNumber = "between 1 to 7"
+
+// matching `tuple` | `_` underscore can be used to match any character
+let somePoint = (1, 1)
+switch somePoint {
+case (0, 0):
+    print("\(somePoint) is at the origin")
+case (_, 0):
+    print("\(somePoint) is on the x-axis")
+case (0, _):
+    print("\(somePoint) is on the y-axis")
+case (-2...2, -2...2):
+    print("\(somePoint) is inside the box")
+default:
+    print("\(somePoint) is outside of the box")
+}
+// Prints "(1, 1) is inside the box"
+
+// value binding | temporary constant/variable of the matched value in `case`
+let anotherPoint = (2, 0)
+switch anotherPoint {
+case (let x, 0):
+    print("on the x-axis with an x value of \(x)")
+case (0, let y):
+    print("on the y-axis with a y value of \(y)")
+case let (x, y):
+    print("somewhere else at (\(x), \(y))")
+}
+// Prints "on the x-axis with an x value of 2"
+
+// switch case and where conditional
+let yetAnotherPoint = (1, -1)
+switch yetAnotherPoint {
+case let (x, y) where x == y:
+    print("(\(x), \(y)) is on the line x == y")
+case let (x, y) where x == -y:
+    print("(\(x), \(y)) is on the line x == -y")
+case let (x, y):
+    print("(\(x), \(y)) is just some arbitrary point")
+}
+// Prints "(1, -1) is on the line x == -y"
+```
+
+
+### `enum` | Raw Value | Constant | CaseIterable | Associated Values:
+
+
+### Generics:
+are defined using `func fName<T>()` signature. 
+
+Naming: 
+
+Type Constraint: Specifying a type to be protocol/class constraint.
+`func someFunction<T: SomeClass, U: SomeProtocol>(someT: T, someU: U) {}`
+
+### Generics Associated Type in Protocol:
+An associated type gives a placeholder name to a type that’s used as part of the protocol. The actual type to use for that associated type isn’t specified until the protocol is adopted. Associated types are specified with the `associatedtype` keyword. Constraint/s can also be applied `associatedtype T: Constraint-Class-Or-Protocol`
+
+```swift
+protocol Container {
+    associatedtype Item
+    mutating func append(_ item: Item)
+    var count: Int { get }
+    subscript(i: Int) -> Item { get }
+}
+
+// Container protocol adaptation
+struct IntStack: Container {
+    // original IntStack implementation
+    var items: [Int] = []
+    mutating func push(_ item: Int) {
+        items.append(item)
+    }
+    mutating func pop() -> Int {
+        return items.removeLast()
+    }
+    // conformance to the Container protocol
+    typealias Item = Int
+    mutating func append(_ item: Int) {
+        self.push(item)
+    }
+    var count: Int {
+        return items.count
+    }
+    subscript(i: Int) -> Int {
+        return items[i]
+    }
+}
+
+// Container protocol adaptation using Generics Type
+struct Stack<Element>: Container {
+    // original Stack<Element> implementation
+    var items: [Element] = []
+    mutating func push(_ item: Element) {
+        items.append(item)
+    }
+    mutating func pop() -> Element {
+        return items.removeLast()
+    }
+    // conformance to the Container protocol
+    mutating func append(_ item: Element) {
+        self.push(item)
+    }
+    var count: Int {
+        return items.count
+    }
+    subscript(i: Int) -> Element {
+        return items[i]
+    }
+}
+```
+
+### Protocol's `associatedtype` with type `constraints`:
+```swift
+protocol Container {
+    associatedtype Item: Equatable // Equatable is the type constraint
+    mutating func append(_ item: Item)
+    var count: Int { get }
+    subscript(i: Int) -> Item { get }
+}
+```
+
+### Generic Where Clause | Extensions | Contextual | associated type
+
+
+### Generic Subscripts:
+
+### Generics type's Equatable Conformation:
+The Swift standard library defines a protocol called Equatable, which requires any conforming type to implement the equal to operator (==) and the not equal to operator (!=) to compare any two values of that type. All of Swift’s standard types automatically support the Equatable protocol.  
+
+```swift
+func findIndex<T: Equatable>(of valueToFind: T, in array:[T]) -> Int? {
+    for (index, value) in array.enumerated() {
+        if value == valueToFind {
+            return index
+        }
+    }
+    return nil
+}
+let doubleIndex = findIndex(of: 9.3, in: [3.14159, 0.1, 0.25])
+// doubleIndex is an optional Int with no value, because 9.3 isn't in the array
+let stringIndex = findIndex(of: "Andrea", in: ["Mike", "Malcolm", "Andrea"])
+// stringIndex is an optional Int containing a value of 2
+
+```
