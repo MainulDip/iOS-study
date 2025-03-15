@@ -144,8 +144,7 @@ Swift has automatic initializer creation on the fly and they are called default 
 
 https://docs.swift.org/swift-book/documentation/the-swift-programming-language/initialization/
 
-
-`convenience init` are secondary initializer, to call a designated/primary initializer with default values. 
+`convenience init` are secondary initializer, to call a designated/primary initializer with default values.......
 
 
 ```swift

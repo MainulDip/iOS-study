@@ -381,10 +381,13 @@ print(mars)
 ```
 
 
-### Generics:
-are defined using `func fName<T>()` signature. 
+### Generic-`function`, Generic-`type` and Generic-Type-Parameter:
+- The placeholder type/s are called generic `type-parameter`, usually are surrounded by `<` and `>`, ie, `<T>`
+- Generic functions are defined using `func fName<T>()` signature. 
+- Generic types (custom generic classes/structures/enumerations, ie, Array/Dictionary) are defined using `class/struct/enum<T>{}` structure. 
+- To set a constraint of the `type-parameter` use `<T: SomeConstraint>` 
 
-Naming: 
+Naming: When its meaningful, best to give the type-parameter a name that describe relationship, ie Key and Value in Dictionary<Key, Value> and Element in Array<Element> . If not, practices are to use `T`, `U`, `V` ect letters. 
 
 Type Constraint: Specifying a type to be protocol/class constraint.
 `func someFunction<T: SomeClass, U: SomeProtocol>(someT: T, someU: U) {}`
@@ -447,6 +450,19 @@ struct Stack<Element>: Container {
 ```
 
 ### Protocol's `associatedtype` with type `constraints`:
+- protocol can utilize `associatedtype` to use that as placeholder generic type. An associated type gives a placeholder name to a type that’s used as part of the protocol. The actual type to use for that associated type isn’t specified until the protocol is adopted. Associated types are specified with the associatedtype keyword.
+
+```swift
+protocol Container {
+    associatedtype Item
+    mutating func append(_ item: Item)
+    var count: Int { get }
+    subscript(i: Int) -> Item { get }
+}
+```
+
+- Constraint for an associatedtype is written `associatedtype T: Anothertype`. `where` clause can also be use to define further requirements on the type parameter. 
+
 ```swift
 protocol Container {
     associatedtype Item: Equatable // Equatable is the type constraint
@@ -456,10 +472,93 @@ protocol Container {
 }
 ```
 
-### Generic Where Clause | Extensions | Contextual | associated type
+### Generic Where Clause | Extensions
+generic `where` clause are used to define requirements for `type-parameters` or protocol's `associatedtype`. `where` clause are written right before the opening curly brace of a type or function’s body. For protocol's `associatedtype`, where clause are written after it's constraint. For extension, where clause are written before braces/body `{}`
 
+```swift
+protocol sth {
+    associatedtype Element: Hashable, Decodable where Element: Equatable, Element: Actor
+    associatedtype Item: Equatable where Item == String
+}
+```
+
+- generic type extension: type parameter list from the original type definition is available within the body of the extension and can be used directly.
+
+- in case of where clause in extension, it's also written right before the braces/body
+
+```swift
+extension Stack where Element: Equatable {
+    func isTop(_ item: Element) -> Bool {
+        guard let topItem = items.last else {
+            return false
+        }
+        return topItem == item
+    }
+}
+```
+
+### Contextual where clause:
+This make defined function available when it matches where condition/s. It's a way to define `Contextual Constraint`. Without this, we may need to break the extension in multipart using top level where clause.
+
+* utilizing contextual where clause constraints
+
+```swift
+// utilizing contextual where clause constraints
+extension Container {
+    func average() -> Double where Item == Int {
+        var sum = 0.0
+        for index in 0..<count {
+            sum += Double(self[index])
+        }
+        return sum / Double(count)
+    }
+    func endsWith(_ item: Item) -> Bool where Item: Equatable {
+        return count >= 1 && self[count-1] == item
+    }
+}
+
+stack1.append(37)
+print(stack1.average())
+// Prints "22.333333333333332"
+print(stack1.endsWith(37))
+// Prints "true"
+```
+
+* without contextual where clause constraints
+
+```swift
+// without contextual where clause constraints
+extension Container where Item == Int {
+    func average() -> Double {
+        var sum = 0.0
+        for index in 0..<count {
+            sum += Double(self[index])
+        }
+        return sum / Double(count)
+    }
+}
+extension Container where Item: Equatable {
+    func endsWith(_ item: Item) -> Bool {
+        return count >= 1 && self[count-1] == item
+    }
+}
+```
 
 ### Generic Subscripts:
+Subscripts can be generic, and they can include generic where clauses. You write the placeholder type name inside angle brackets after subscript, and you write a generic where clause right before the opening curly brace of the subscript’s body
+
+```swift
+extension Container {
+    subscript<Indices: Sequence>(indices: Indices) -> [Item]
+            where Indices.Iterator.Element == Int {
+        var result: [Item] = []
+        for index in indices {
+            result.append(self[index])
+        }
+        return result
+    }
+}
+```
 
 ### Generics type's Equatable Conformation:
 The Swift standard library defines a protocol called Equatable, which requires any conforming type to implement the equal to operator (==) and the not equal to operator (!=) to compare any two values of that type. All of Swift’s standard types automatically support the Equatable protocol.  
