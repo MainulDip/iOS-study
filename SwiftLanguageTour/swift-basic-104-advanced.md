@@ -578,3 +578,25 @@ let stringIndex = findIndex(of: "Andrea", in: ["Mike", "Malcolm", "Andrea"])
 // stringIndex is an optional Int containing a value of 2
 
 ```
+
+### Protocol in depth:
+
+- initializer requirements | enforce `required init` when adopting 
+
+- protocol's failable (`init?`) initializer requirements
+
+- protocol conditional conformation | `where` clause
+
+- protocol as Types & collection of protocols type
+
+- protocol inheritance | protocol inheriting another protocol
+
+- class-only protocol | `AnyObject` protocol
+
+- protocol composition | multiple protocol 
+
+- `is` and `as` for checking protocol conformance
+
+- protocol extension and constraints
+
+- protocol optional requirement (aka, optional protocol requirement)
