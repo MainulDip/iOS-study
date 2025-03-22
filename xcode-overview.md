@@ -29,6 +29,7 @@ When writing code, keep open the `Inspector's quick help ?` (top right corner), 
  1st click to select the beginning of braces (first brace), then double click to highlight the entire block
 
 ### Shortcuts
+- `ctrl + cmd + <` to go back (when error happens and xcode been navigated to the error trigging file)
 - `crl + shift + click` for multi cursor, selecting multiple line 
 - `cmd + shift + l` (gui `view > show library`) import media (drag/drop) image, UIComponents/View etc 
 - Indent/Re-Indent/Format Code : Ctrl + i 
