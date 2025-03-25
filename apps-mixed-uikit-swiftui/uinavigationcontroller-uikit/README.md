@@ -21,7 +21,7 @@ Upon embedding into navigation controller and setting up segue, there will be a 
 
 NB: When setting a title or any test in storyboard, it requires pressing the `Enter` key to actually save that. Without pressing the `Enter` key, the changes are not applied
 
-- Note: the back button customization option of a controller relies on back's destination `navigation item`  
+- Note: the back button customization option of a controller relies on back's destination `navigation item`  .......
 
 ### UINavigationController programmatic:
 There is no segue in programmatic UI building.

@@ -547,3 +547,6 @@ class ViewModel {
 
 ### Must Check:
 Recursion Technic https://www.geeksforgeeks.org/recursive-functions/
+
+### Enum and Namespace:
+https://stackoverflow.com/questions/7000729/where-should-enums-live-in-an-mvc-project-structure

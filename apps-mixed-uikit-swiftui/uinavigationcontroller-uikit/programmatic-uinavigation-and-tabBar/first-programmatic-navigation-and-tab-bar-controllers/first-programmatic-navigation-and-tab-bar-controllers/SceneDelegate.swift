@@ -22,8 +22,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         window.makeKeyAndVisible()
-        window.rootViewController = ViewController()
+        window.rootViewController = GuestTabBarVC()
+        // window.rootViewController = UserTabBarVC()
         self.window = window
+    }
+    
+    func navigateTo(vc: UIViewController) {
+        guard let window = window else { return }
+        window.rootViewController = vc
+        UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
