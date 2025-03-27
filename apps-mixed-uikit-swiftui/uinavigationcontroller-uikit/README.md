@@ -24,4 +24,13 @@ NB: When setting a title or any test in storyboard, it requires pressing the `En
 - Note: the back button customization option of a controller relies on back's destination `navigation item`  .......
 
 ### UINavigationController programmatic:
-There is no segue in programmatic UI building.
+There is no segue in programmatic UI building. 
+But when a VC is initialized using `window.rootViewContrller = UINavigationController(rootViewController: VC())` from SceneDelegate, that VC's `navigationController` prop get populated.
+
+`pushViewController(:VC)` can be called on it
+After pushing, the pushed VC gets mounted into the previous VC's UiNavigationController's container (Stack Algorithm) 
+```swift
+@objc func goToAnotherVC() {
+    navigationController?.pushViewController(AnotherVC(), animated: true)
+}
+```

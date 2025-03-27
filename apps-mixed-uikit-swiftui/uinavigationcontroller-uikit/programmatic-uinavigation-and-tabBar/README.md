@@ -2,8 +2,16 @@
 - set window.rootViewContrller = UINavigationController(rootViewController: VC()) inside SceneDelegate
 - make a button on the VC's view (auto layout)
 - Make another VC
-- and on button press, `present that controller`
+- and on button press, `push that controller`
 - self.navigationController?.pushViewController(destinationVC(), animated: true)
+
+```swift
+extension HomeVC {
+    @objc func goToProfile() {
+        navigationController?.pushViewController(DetailVC(), animated: true)
+    }
+}
+```
 
 
 ### UITabBarController Programmatic:
