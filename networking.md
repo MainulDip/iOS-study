@@ -62,3 +62,18 @@ struct Post: Decodable, Identifiable {
     let url: String?
 }
 ```
+
+### URLSession In Depth:
+URLSession the goto API to Fetch/Download/Upload (+ WebSocket Communication) data to/from the server. Can perform background downloads when the app isn't running. 
+
+### URLRequest In Depth:
+
+### URLRequest with Session:
+URLRequest only represents information about the request. Use URLSession classes (), to send the request to a server
+
+### User's internet/online status/strength detection and API call:
+
+### Networking Reading List:
+1. https://developer.apple.com/documentation/foundation/url_loading_system ( contains guide on everything Networking + caching + lots of thing)
+
+2. https://developer.apple.com/documentation/foundation/urlsession

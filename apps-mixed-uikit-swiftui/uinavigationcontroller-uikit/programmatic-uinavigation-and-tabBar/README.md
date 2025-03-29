@@ -23,7 +23,7 @@ extension HomeVC {
 
 ### Load Different TabBar based on User LoggedIn/Out:
 - create a new class conforming to UITabBarController, naming GuestTabBarVC
-- create a func in SceneDelegate `func(VC)` that will set the self.window.rootViewController = pass-down-vc and call SceneDelegate's UIView.transition(window, ..,..) to perform flip transition animation
+- create a func in SceneDelegate `func(VC)` that will set the self.window.rootViewController = pass-down-vc and call SceneDelegate's UIView.transition(window, ..,..) to perform flip transition animation.......
 
 ```swift
 func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {        

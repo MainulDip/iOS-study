@@ -1,7 +1,7 @@
 ### Initial Setup Storyboard:
 Embedding a ViewController in `Tab Bar` will do the magic. To further add new controller as one of the `Tab Bar` item, `ctrl + drag` and select `relationship segue`.
 
-To set a UINavigation Controller as one of the Tab-Bar's item > First embed a (separate) ViewController into UINavigationController > then the same `ctrl + drag` from the `Tab Bar` Controller to `UINavigationController`. 
+To set a UINavigation Controller as one of the Tab-Bar's item > First embed a (separate) ViewController into UINavigationController > then the same `ctrl + drag` from the `Tab Bar` Controller to `UINavigationController`.......
 
 ### Connection Storyboard ViewControllers to Code Controllers:
 Inside Story Board, every ViewController has option in `Identity Inspector` > `Custom Class` section to bind with a `ViewController.swift` file.
