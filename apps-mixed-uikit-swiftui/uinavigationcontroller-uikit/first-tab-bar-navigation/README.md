@@ -1,5 +1,5 @@
 ### Initial Setup Storyboard:
-Embedding a ViewController in `Tab Bar` will do the magic. To further add new controller as one of the `Tab Bar` item, `ctrl + drag` and select `relationship segue`.
+Embedding a ViewController in `Tab Bar` will do the magic. To further add new controller as one of the `Tab Bar` item, `ctrl + drag` and select `relationship segue`.......
 
 To set a UINavigation Controller as one of the Tab-Bar's item > First embed a (separate) ViewController into UINavigationController > then the same `ctrl + drag` from the `Tab Bar` Controller to `UINavigationController`.......
 

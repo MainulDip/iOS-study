@@ -1,5 +1,5 @@
 ### UINavigationController Programmatic:
-- set window.rootViewContrller = UINavigationController(rootViewController: VC()) inside SceneDelegate
+- set window.rootViewController = UINavigationController(rootViewController: VC()) inside SceneDelegate
 - make a button on the VC's view (auto layout)
 - Make another VC
 - and on button press, `push that controller`
