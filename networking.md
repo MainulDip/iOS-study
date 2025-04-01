@@ -99,6 +99,39 @@ Memory Leak: The session object keeps a strong reference to the delegate until t
 
 `URLSessionTaskDelegate` method and `delegate` prop
 
+```swift
+import Foundation
+
+class NetworkDelegateClass: NSObject, URLSessionDelegate, URLSessionDataDelegate {
+    
+    // URLSessionDataDelegate method to handle response data
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        // Process the received data
+        print("Received data: \(data)")
+    }
+    
+    // URLSessionDataDelegate method to handle completion
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        if let error = error {
+            // Handle error
+            print("Task completed with error: \(error)")
+        } else {
+            // Task completed successfully
+            print("Task completed successfully")
+        }
+    }
+}
+
+// Example of using delegates
+let delegateClass = NetworkDelegateClass()
+let delegateSession = URLSession(configuration: .default, delegate: delegateClass, delegateQueue: nil)
+
+if let url = URL(string: "<https://example.com/api>") {
+    let delegateTask = delegateSession.dataTask(with: url)
+    delegateTask.resume()
+}
+```
+
 
 ### Asynchronous URLSession:
 Like most networking APIs, the URLSession API is highly asynchronous. Depending on the method call, it returns data three ways
@@ -121,7 +154,7 @@ The URL session API is thread-safe. You can freely create sessions and tasks in 
 URLRequest only represents information about the request. Use URLSession classes (), to send the request to a server
 
 ### User's internet/online status/strength detection and API call:
-
+User Friendly Network Access https://www.hackingwithswift.com/plus/networking/user-friendly-network-access
 
 ### Legacy API (Needs to migrated into URLSession API):
 All classes and protocols starting with `NSURL...` are legacy API and should be replaced with `URLSession`.
@@ -138,3 +171,6 @@ All classes and protocols starting with `NSURL...` are legacy API and should be 
 1. https://developer.apple.com/documentation/foundation/url_loading_system ( contains guide on everything Networking + caching + lots of thing)
 
 2. https://developer.apple.com/documentation/foundation/urlsession
+
+
+### Networking with combine

@@ -173,3 +173,7 @@ https://stackoverflow.com/questions/69352823/xcode-13-unable-to-remove-code-line
 ### Simulator management:
 Keep simulator on top : Simulator > Window > Stay on top and use `cmd + h` to hide
 Simulator rotate : left `cmd + left-arrow` & right `cmd + right-arrow`
+
+### Multiple window work:
+
+Video aspect ratio 12:17 (IINA player in mac)
