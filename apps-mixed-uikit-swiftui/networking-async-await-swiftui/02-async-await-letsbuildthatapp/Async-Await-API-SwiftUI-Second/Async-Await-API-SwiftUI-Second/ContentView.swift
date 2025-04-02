@@ -21,7 +21,11 @@ struct CourseModel: Codable, Identifiable {
     let numberOfLessons: Int
 }
 
-class ContentViewModel: ObservableObject, Sendable {
+// @MainActor
+class ContentViewModel: ObservableObject, @unchecked Sendable {
+    /* @unchecked Sendable https://stackoverflow.com/questions/74450039/how-come-a-mainactor-isolated-mutable-stored-property-gives-a-sendable-error
+     */
+    
     @Published var isFetching = false
     @Published var courses: [CourseModel] = []
     
@@ -32,6 +36,7 @@ class ContentViewModel: ObservableObject, Sendable {
         }
     }
     
+    // @MainActor
     func fetchData() async throws {
         // build url using guard let
         guard let url = URL(string: K.endpoint) else { throw NetworkError.invalidURLError }
@@ -49,21 +54,24 @@ class ContentViewModel: ObservableObject, Sendable {
         
         // creace JSONDecoder() instance and guard and decode the api reponse based on model and populate this class prop which is published
         let jsonDecoder = JSONDecoder()
+        // cusomize decoding policy if necessary
         
-//        do {
-            let courses = try jsonDecoder.decode([CourseModel].self, from: data)
-            
-            // DispatchQuequ requires `Sendable` protocol conformation
-            DispatchQueue.main.async {
-                self.courses = courses
-            }
-            
-            // @MainActor will also work, anotate the ViewModel class with @MainActor
-            //
-            
-//        } catch {
-//            throw NetworkError.decodingError
-//        }
+        //        do {
+        let courses = try jsonDecoder.decode([CourseModel].self, from: data)
+        
+        // DispatchQuequ requires `Sendable` protocol conformation
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.courses = courses
+            print("Data Updates")
+        }
+        
+        // @MainActor will also work, anotate the ViewModel class or `the function that updates the UI `with @MainActor
+        // So we don't need the `@unchecked Sendable` + `DispatchQueue.main` block
+        
+        //        } catch {
+        //            throw NetworkError.decodingError
+        //        }
         
     }
     
@@ -83,25 +91,53 @@ struct ContentView: View {
                 Text("All available courses")
                 
                 ForEach(viewModel.courses) { course in
+                    AsyncImage(url: URL(string: course.imageUrl)) { image in
+                        image.resizable()
+                            .scaledToFill()
+                    } placeholder: {
+                        ProgressView()
+                    }
+
                     Text(course.name)
                 }
             }
             .navigationTitle("Courses")
+            .navigationBarItems(trailing: refreshButton)
+            
         }
         .task {
-            do {
-                try await viewModel.fetchData()
-            } catch {
-                switch error as! NetworkError {
-                    
-                case .invalidURLError:
-                    print("InvalidURL Error")
-                case .serverError:
-                    print("Server Error, not 200")
-                case .decodingError:
-                    print("JSON to Model Decoding Error")
-                }
+            await fetchData()
+        }
+        
+    }
+    
+    private var refreshButton: some View {
+        Button {
+            Task {
+                viewModel.courses.removeAll()
+                await fetchData()
             }
+        } label: {
+            Text("Refresh")
+        }
+    }
+    
+    private func fetchData() async {
+        do {
+            try await viewModel.fetchData()
+        } catch {
+            consoleNetworkError(err: error as! NetworkError)
+        }
+    }
+    
+    private func consoleNetworkError(err: NetworkError) {
+        switch err {
+        case .invalidURLError:
+            print("InvalidURL Error")
+        case .serverError:
+            print("Server Error, not 200")
+        case .decodingError:
+            print("JSON to Model Decoding Error")
         }
     }
 }
