@@ -182,3 +182,10 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
     // Additional functions here
 }
 ```
+
+### When to use UICollection vs TableView:
+- For multi column content, UICollectionView
+- For Draggable, UICollectionView
+- 
+
+- auto sizing in UICollectionView is little tricky, it's easy in TableView using `UItableView.automaticDimension`.  

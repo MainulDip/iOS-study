@@ -79,6 +79,11 @@ extension ViewController :  UITableViewDataSource, UITableViewDelegate {
         return  currentHeight
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // proceed when a row is tapped
+        print("The row \(indexPath.row) was selected")
+    }
+    
 }
 
 
