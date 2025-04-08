@@ -176,11 +176,71 @@ for _ in 0...100 {
 // 100 of command trying to update a prop at a nearly same time
 ```
 
-### GCD Groups:
+### GCD Groups | Notify callback after task finishes:
+Dispatch Groups is to track multiple tasks and trigger a callback when they're all finished using. The workflow is
+    - create the group : `let group = dispatchGroup()`
+    - mark entering by `group.enter()`
+    - mark leaving by `group.leave()`
+    - finishing callback by `group.notify(queue: <Queue>){}`
 
-### GCD Semaphore:
+Note: There should be the pair of `enter` and `leave` call. If mismatched. Too many `leave` will crash the app, less will put on a hanging state.
 
-### GCD Barriers:
+
+Example: Loading 3 API endpoints before updating app's dashboard
+
+```swift
+func loadDashboardData() {  
+    let group = DispatchGroup()  
+
+    // Task 1: Fetch user profile 
+    // mark `entering` usually from outer-scope and just before of a task completion function call
+    group.enter()  
+    fetchUserProfile {  
+        // call `leave` after the task, usually last call of a functions inner-scope
+        group.leave()  
+    }  
+
+    // Task 2: Fetch latest posts  
+    group.enter()  
+    fetchPosts {  
+        group.leave()  
+    }  
+
+    // Task 3: Fetch notifications  
+    group.enter()  
+    fetchNotifications {  
+        group.leave()  
+    }  
+
+    // Notify when all tasks are done  
+    group.notify(queue: .main) {  
+        self.showDashboard()  
+    }  
+}
+```
+
+### GCD Semaphore | Limit control for concurrent task by limiting number of thread use:
+Semaphores control access to shared resources by limiting how many threads can use them at the same time.
+
+
+Note: Need more in-depth understanding
+
+
+Example: Prevent 100 simultaneous network calls from overwhelming your server.
+
+```swift
+let semaphore = DispatchSemaphore(value: 3) // Allow 3 concurrent tasks  
+
+func downloadVideo(url: URL) {  
+    semaphore.wait() // ⛔️ “Wait if there are already 3 tasks”  
+    DispatchQueue.global().async {  
+        defer { semaphore.signal() } // ✅ “I’m done! Next in line!”  
+        // Perform the video download  
+    }  
+}
+```
+
+### GCD Barriers | works on custom concurrent queues:
 
 ### GCD Timers:
 
@@ -213,3 +273,7 @@ DispatchQueue.main.async {
     self.tableView.reloadData()
 }
 ```
+
+### Todo:
+=> Find way like `thread sleep` to emulate concurrent behavior
+=> Find what available for like `thread sleep` on both sync and async 
