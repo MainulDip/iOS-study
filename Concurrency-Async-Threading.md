@@ -458,6 +458,29 @@ DispatchQueue.global(qos: .userInitiated).async {
 }
 ```
 
+### Data Race and `Thread Sanitizer, aka TSan`:
+Thread Sanitizer is an LLVM (low level virtual machine) based tool to audit threading issues in Swift and C language written code, introduced in xcode 8
+
+* Data Race Condition: When same memory is accessed from multiple threads without synchronization, and at least one access is a write. 
+
+```swift
+private var name: String = ""
+
+func updateName() {
+    DispatchQueue.global().async {
+        // executed on the background thread
+        self.name.append("NewName") // (1) write access
+    }
+
+    // Executed on the main thread
+    print(self.name) // (2) read access
+}
+
+/*
+As the Dispatch callback here is async and is also mutating a prop in the callback (* at least one write access), and printing from main thread afterward outside of Dispatch's scope, It's unpredictable if the write happens before read
+*/
+```
+
 ### Actor in-depth:
 
 ### GCD Checklist:

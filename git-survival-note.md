@@ -74,6 +74,6 @@ Reset vs Revert:
 
 `git diff --staged` 
 
-`git log` & `git reflog` (reference log). Reflog will display any change which updated the `HEAD` and checking out the desired reflog entry will set the `HEAD` back to this commit. Every time the HEAD is modified/moved there will be a new entry in the **`reflog`.** 
+`git log` & `git reflog` (reference log). Reflog (reads `Ref Log`) will display any change which updated the `HEAD` and checking out the desired reflog entry will set the `HEAD` back to this commit. Every time the HEAD is modified/moved there will be a new entry in the **`reflog`.** 
 
 - workflow : `git reflog` > `git checkout HEAD{<number>}`.......
