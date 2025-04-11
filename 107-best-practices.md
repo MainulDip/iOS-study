@@ -21,4 +21,4 @@ For client do - `obfuscation`
 https://www.massicotte.org/concurrency-glossary
 
 ### Indi app developer case study:
-https://swiftrocks.com/things-that-did-and-didnt-contribute-to-burnout-buddys-success
+https://swiftrocks.com/things-that-did-and-didnt-contribute-to-burnout-buddys-success.......

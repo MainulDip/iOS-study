@@ -1,3 +1,11 @@
+### GCD Topics:
+- DispatchGroup
+- Semaphore
+- Dispatch Barrier
+- DispatchIO
+- DispatchWorkItem (Cancellable Tasks)
+- DispatchSource.makeTimerSource(:queue) for Dispatch Timers (NSTimer Upgrade)
+
 ### Asynchronous Tasks and Threading Overview:
 Start with 
 - GCD (Grand Central Dispatch) > Semaphore
@@ -55,7 +63,7 @@ Global queues and Quality of Service
  - As global queues are concurrent, if we need some task to execute in serial queue at the same time not blocking Main queue, we have to create our own custom/private serial dispatch queue.
     - but creating custom/private dispatch queue will increase `thread` consumption. To avoid this, we can create this by delegating the task to a global queue and still utilize the serial queue features.
 
-### GCD | usages of QoS:
+### GCD | usages of QoS (Quality of Service):
 When not specified, The default QoS is .default, which sits between .utility and .userInitiated.
 ```swift
 // 1. Main Queue (Serial) – For UI updates  
@@ -219,11 +227,11 @@ func loadDashboardData() {
 }
 ```
 
-### GCD Semaphore | Limit control for concurrent task by limiting number of thread use:
+### (* need more) GCD Semaphore | Limit control for concurrent task by limiting number of thread use:
 Semaphores control access to shared resources by limiting how many threads can use them at the same time.
 
 
-Note: Need more in-depth understanding
+Note: Need more in-depth understanding along with note
 
 
 Example: Prevent 100 simultaneous network calls from overwhelming your server.
@@ -240,13 +248,217 @@ func downloadVideo(url: URL) {
 }
 ```
 
-### GCD Barriers | works on custom concurrent queues:
+### (* need more) GCD Barriers | task's exclusive access | works on custom concurrent queues:
+Barriers act as checkpoints in a concurrent queue. They ensure that a specific task gets exclusive access, with no other tasks running at the same time. Usually called by `<customConcurrentQueue>.async(flags: .barrier)` 
 
-### GCD Timers:
+Used for `Thread safe data caching`
 
-### GCD File Watchers:
+```swift
+let concurrentQueue = DispatchQueue(label: "com.you.cacheQueue", attributes: .concurrent)  
+private var cache: [String: Data] = [:]  
+
+func safeWrite(_ data: Data, for key: String) {  
+    // Exclusive write access 🔒  
+    concurrentQueue.async(flags: .barrier) {  
+        cache[key] = data  
+    }  
+}  
+
+func safeRead(for key: String) -> Data? {  
+    // Concurrent read access 🔓  
+    var data: Data?  
+    concurrentQueue.sync {  
+        data = cache[key]  
+    }  
+    return data  
+}
+```
+
+Note: Need more in-depth understanding along with note
+
+### (* need more) GCD DispatchIO | Efficient file read instead of the main thread:
+Reading large files on the main thread? That’s a performance killer. Dispatch I/O allows chunked reading, preventing memory bloat and UI freezes.
+
+```swift
+func readLargeFile(url: URL) {  
+    let channel = DispatchIO(
+        type: .stream,  
+        fileDescriptor: open(url.path, O_RDONLY),  
+        queue: DispatchQueue.global(),  
+        cleanupHandler: { error in
+            if error != 0 { print("Error reading file") }  
+        }  
+    )  
+
+    var data = Data()  
+    channel.read(offset: 0, length: Int.max, queue: DispatchQueue.global()) { done, chunk, error in  
+        guard let chunk else { return }  
+        data.append(chunk)  
+        if done {  
+            DispatchQueue.main.async {
+                print("File read successfully")
+            }
+        }  
+    }  
+}
+```
+
+### DispatchWorkItem and DispatchSource
+
+
+### GCD DispatchWorkItem for Cancellable Tasks:
+Background tasks can now be cancelled mid-execution. This is particularly useful for debouncing user input, like in a search bar.
+
+```swift
+var searchWorkItem: DispatchWorkItem?  
+
+func searchTextChanged(_ text: String) {  
+    searchWorkItem?.cancel()  
+
+    let newWorkItem = DispatchWorkItem {  
+        fetchSearchResults(text)  
+    }  
+
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: newWorkItem)  
+    searchWorkItem = newWorkItem  
+}
+```
+
+### GCD Timers | Scheduling :
+GCD timer are lightweight, thread-safe, amd more flexible than NStimer. They don't depend on run loops, making them perfect for background scheduling. 
+
+```swift
+func startCountdown (from  seconds: Int) {
+    let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global())
+    val count = seconds
+
+    timer.schedule(deadline: .now(), repeating: 1.0) // will fire on every second from now after resume() is called
+
+    timer.setEventHandler {
+        DispatchQueue.main.async {
+            print("Time left: \(count) seconds")
+        }
+        count -= 1
+        if count < 0 {
+            timer.cancel()
+        }
+    }
+
+    timer.resume()
+}
+```
+
+### GCD to Async/Await Ex 1:
+`DispatchQueue.main.async` in GCD is kinda same as `MainActor.run` in the Async/Await
+```swift
+func loadUserDataGCD() {  
+    DispatchQueue.global().async {  
+        fetchUser { user in  
+            DispatchQueue.main.async {  
+                self.updateUI(user)  
+                DispatchQueue.global().async {  
+                    fetchPosts(user.id) { posts in  
+                        DispatchQueue.main.async {  
+                            self.showPosts(posts)  
+                        }  
+                    }  
+                }  
+            }  
+        }  
+    }  
+}
+
+func loadUserDataAsyncAwait() async {  
+    // 1. Fetch user (background thread)  
+    let user = await fetchUser()  
+
+    // 2. Update UI (main thread)  
+    await MainActor.run {  
+        self.updateUI(user)  
+    }  
+
+    // 3. Fetch posts (background thread)  
+    let posts = await fetchPosts(user.id)  
+
+    // 4. Show posts (main thread)  
+    await MainActor.run {  
+        self.showPosts(posts)  
+    }  
+}
+```
+
+### GCD vs Async/Await And Actor:
+Actors eliminate race conditions without locks, semaphores, or barriers. Let’s compare
+
+Note: Usages of `Actor` replaces `lock/barriers`
+
+* GCD to Async/Await Conversion
+
+```swift
+// Using GCD
+class CacheGCD {  
+    private var storage = [String: Data]()  
+    private let queue = DispatchQueue(label: "cache.queue", attributes: .concurrent)  
+
+    func set(_ data: Data, for key: String) {  
+        queue.async(flags: .barrier) {  
+            self.storage[key] = data  
+        }  
+    }  
+}
+
+// Using Actor and Async/Await
+actor Cache {  
+    private var storage = [String: Data]()  
+
+    func set(_ data: Data, for key: String) {  
+        storage[key] = data  
+    }  
+
+    func get(for key: String) -> Data? {  
+        storage[key]  
+    }  
+}
+```
 
 ### GCD + Async/Await:
+`await withCheckedContinuation {}` is for calling GCD based function inside Async/Await as a callback.
+
+using `Task {}`, Async/Await functions can be run from inside of a GCD based function
+
+ex: 1 | `await withCheckedContinuation {}` usages
+
+```swift
+// Old GCD function  
+func fetchUserGCD(completion: @escaping (User) -> Void) {  
+    DispatchQueue.global().async {  
+        let user = // ...  
+        completion(user)  
+    }  
+}  
+
+// Modern async wrapper  
+func fetchUserAsync() async -> User {  
+    await withCheckedContinuation { continuation in  
+        fetchUserGCD { user in  
+            continuation.resume(returning: user)  
+        }  
+    }  
+}
+```
+
+* Ex: 2 | Async Code Inside GCD Queues using `Task {}`
+
+```swift
+DispatchQueue.global(qos: .userInitiated).async {  
+    Task {  
+        let data = await fetchData()  
+        await MainActor.run { self.label.text = data }  
+    }  
+}
+```
+
+### Actor in-depth:
 
 ### GCD Checklist:
 Working with dispatch queue and task
