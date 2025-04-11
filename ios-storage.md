@@ -126,7 +126,7 @@ class TodoListViewController: UITableViewController {
 - access the lazy persistentContainer using : rootVC.container = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
 
  - add new file, select CoreData Section's Data Model
- - add all the AppDelegate persistentContainer lazy initialization prop and saveContext function, NSPersistentContainer name should match with the newly created DataModel filename. (Don't forget to add/import the CoreData package)
+ - add all the AppDelegate persistentContainer lazy initialization prop and saveContext function, NSPersistentContainer name should match with the newly created DataModel filename. (Don't forget to add/import the CoreData package).......
 
 
 ### CoreData Terms and CodeGen Options:

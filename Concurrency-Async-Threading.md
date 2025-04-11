@@ -59,9 +59,11 @@ Global queues and Quality of Service
  5. .background | task that doesn't require immediate feedback, ie, backups to the cloud
  6. .unspecified | don't use this QoS, its for legacy support 
 
- Custom/Private dispatch queue
- - As global queues are concurrent, if we need some task to execute in serial queue at the same time not blocking Main queue, we have to create our own custom/private serial dispatch queue.
+ Custom/Private dispatch queue (only way to make a serial queue)
+ - As global queues are concurrent, if we need some task to execute in `serial` queue at the same time not blocking Main queue, we have to create our own custom/private serial dispatch queue.
     - but creating custom/private dispatch queue will increase `thread` consumption. To avoid this, we can create this by delegating the task to a global queue and still utilize the serial queue features.
+
+* Note: `serial` queue (custom) is to eliminate `data race` by executing write and read on the same `serial` queue
 
 ### GCD | usages of QoS (Quality of Service):
 When not specified, The default QoS is .default, which sits between .utility and .userInitiated.
@@ -424,7 +426,7 @@ actor Cache {
 ### GCD + Async/Await:
 `await withCheckedContinuation {}` is for calling GCD based function inside Async/Await as a callback.
 
-using `Task {}`, Async/Await functions can be run from inside of a GCD based function
+using `Task {}`, Async/Await functions can be run from inside of a GCD based function .......
 
 ex: 1 | `await withCheckedContinuation {}` usages
 
@@ -479,6 +481,76 @@ func updateName() {
 /*
 As the Dispatch callback here is async and is also mutating a prop in the callback (* at least one write access), and printing from main thread afterward outside of Dispatch's scope, It's unpredictable if the write happens before read
 */
+```
+### Thread Sanitizer | TSan | Data Race Checking:
+Enable Thread Sanitizer From `Product` > `Scheme` > `Edit Scheme` and From there `Run` > `Diagnostic` 
+
+The compiler will add some code to check `data race` safety
+
+```swift
+func updateName() {
+    DispatchQueue.global().async {
+        self.recordAndCheckWrite(self.name) // Added by the compiler
+        self.name.append("NewName")
+    }
+
+    // Executed on the Main Thread
+    self.recordAndCheckWrite(self.name) // Added by the compiler
+    print(self.name)
+}
+```
+
+More on thread sanitizer : https://www.avanderlee.com/swift/thread-sanitizer-data-races/#using-the-thread-sanitizer-to-detect-data-races
+
+### Solving `Data Race` Using GCD:
+Using `serial` queue, and assign both write/read to it will ensure the sequentiality of those tasks (first gets executed and completed first before seconds starts), hence eliminating `data race`
+
+```swift
+// creating a custom queue to use as serial queue (default)
+private let lockQueue = DispatchQueue(label: "name.lock.queue")
+private var name: String = ""
+
+func updateNameSync() {
+    DispatchQueue.global().async {
+        self.lockQueue.async {
+            // Executed on the lock queue (serial queue)
+            self.name.append("NewName")
+        }
+    }
+
+    // Executed on the Main Thread
+    lockQueue.async {
+        // Executed on the lock queue (serial queue)
+        print(self.name)
+    }
+}
+
+// Prints:
+// Antoine van der Lee
+// Antoine van der Lee
+```
+
+### Solving `Data Race` Using Actor and Async/Await:
+
+```swift
+actor NameController {
+    private(set) var name: String = "My name is: "
+    
+    func updateName(to name: String) {
+        self.name = name
+    }
+}
+
+func updateName() async {
+    DispatchQueue.global(qos: .userInitiated).async {
+        Task {
+            await self.nameController.updateName(to: "Antoine van der Lee")
+        }
+    }
+    
+    // Executed on the Main Thread
+    print(await nameController.name)
+}
 ```
 
 ### Actor in-depth:
