@@ -579,6 +579,20 @@ let stringIndex = findIndex(of: "Andrea", in: ["Mike", "Malcolm", "Andrea"])
 
 ```
 
+### static func vs class func:
+`static` and `class` both associate a method with a class, rather than an instance of a class. The difference is that subclasses can override class methods; they cannot override `static` methods.
+
+```swift
+class AClass {
+    class func classFunction(){
+        print("It's a static/type function and can be overridden")
+    }
+    static func staticFunction(){
+        print("It's a static/type function but cannot be overridden")
+    }
+}
+```
+
 ### Protocol in depth:
 
 - initializer requirements | enforce `required init` when adopting 

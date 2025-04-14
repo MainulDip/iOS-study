@@ -553,7 +553,67 @@ func updateName() async {
 }
 ```
 
-### Actor in-depth:
+### Actor in-depth ( eliminate data race ):
+Actor is like a `class` (reference type) in swift, but doesn't support inheriting other actor/s, can be used with protocol and generics. 
+
+All properties (`var/mutable`) and methods inside of an Actor is `isolated` by default. `Methods` and `Computed` properties can be marked with `nonisolated var/func` when they are accessing/reading only immutable prop/s. Constant (`let`)  properties are `nonisolated` (prefixing is redundant for let)
+
+* To access a property/method on actor's instance, `await` is required to write before the call. This ensure's the read/write synchronization chain, so nothing gets access to the prop at the same time, eliminating `data race`. 
+
+* Class using the DispatchQueue (not using Actor/Async/Await)
+
+```swift
+final class ChickenFeederWithQueue {
+    let food = "worms"
+    
+    /// A combination of a private backing property and a computed property allows for synchronized access.
+    private var _numberOfEatingChickens: Int = 0
+    var numberOfEatingChickens: Int {
+        queue.sync {
+            _numberOfEatingChickens
+        }
+    }
+    
+    /// A concurrent queue to allow multiple reads at once.
+    private var queue = DispatchQueue(label: "chicken.feeder.queue", attributes: .concurrent)
+    
+    func chickenStartsEating() {
+        /// Using a barrier to stop reads while writing
+        queue.sync(flags: .barrier) {
+            _numberOfEatingChickens += 1
+        }
+    }
+    
+    func chickenStopsEating() {
+        /// Using a barrier to stop reads while writing
+        queue.sync(flags: .barrier) {
+            _numberOfEatingChickens -= 1
+        }
+    }
+
+}
+```
+
+* Actor usages instead of DispatchQueue and Barrier
+
+```swift
+actor ChickenFeeder {
+    let food = "worms"
+    var numberOfEatingChickens: Int = 0
+    
+    func chickenStartsEating() {
+        numberOfEatingChickens += 1
+    }
+    
+    func chickenStopsEating() {
+        numberOfEatingChickens -= 1
+    }
+}
+
+let feeder = ChickenFeeder()
+await feeder.chickenStartsEating
+await feeder.numberOfEatingChickens
+```
 
 ### GCD Checklist:
 Working with dispatch queue and task
@@ -580,6 +640,13 @@ DispatchQueue.main.async {
     self.tableView.reloadData()
 }
 ```
+
+### Concurrency Helper Function:
+`Task.sleep()`
+`Task.yield()`
+
+Thread sleep, not for suspending 
+`sleep()`
 
 ### Todo:
 => Find way like `thread sleep` to emulate concurrent behavior
