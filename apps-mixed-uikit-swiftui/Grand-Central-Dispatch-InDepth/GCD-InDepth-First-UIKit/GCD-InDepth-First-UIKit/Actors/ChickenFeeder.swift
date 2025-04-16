@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 actor ChickenFeeder {
     
     // static let shared: ChickenFeeder = ChickenFeeder() // singleton, guaranteed to be lazily initialized only once
@@ -38,5 +39,18 @@ actor ChickenFeeder {
         try? await Task.sleep(for: .seconds(1))
         numberOfEatingChickens -= 1
         print("numberOfEatingChickens: \(numberOfEatingChickens)")
+    }
+    
+    // as all methods and mutalble props are isolated by default
+    // accessing immutable constants doesn't require `await`
+    // `nonisolated` ensures, this method can be called without `await`, hence there will be no suspension
+    nonisolated func chickenFood() -> String {
+        return self.food
+    }
+    
+    func chickeFinishEatingAfterDelay() {
+        Thread.sleep(forTimeInterval: 2)
+        numberOfEatingChickens -= 1
+        print("After 2 seconds chicken/s finished eating, is current thread main = \(Thread.isMainThread)")
     }
 }

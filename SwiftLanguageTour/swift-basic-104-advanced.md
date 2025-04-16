@@ -461,7 +461,7 @@ protocol Container {
 }
 ```
 
-- Constraint for an associatedtype is written `associatedtype T: Anothertype`. `where` clause can also be use to define further requirements on the type parameter. 
+- Constraint for an associatedtype is written like `associatedtype T: Anothertype`. `where` clause can also be use to define further requirements on the type parameter. 
 
 ```swift
 protocol Container {

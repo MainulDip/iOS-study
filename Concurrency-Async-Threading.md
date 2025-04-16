@@ -615,6 +615,34 @@ await feeder.chickenStartsEating
 await feeder.numberOfEatingChickens
 ```
 
+
+### Preventing unnecessary `Suspension`:
+calling `await` on each isolated prop/method creates a suspension point to wait for access (like serial queue). So when there are some chain of work, that can be done form inside the actor minimizing `await` call from outside, it will be more performant. 
+
+```swift
+actor ChickenFeeder {
+    let food = "worms"
+    var numberOfEatingChickens: Int = 0
+    
+    func chickenStartsEating() {
+        numberOfEatingChickens += 1
+        notifyObservers()
+    }
+    
+    func notifyObservers() {
+        NotificationCenter.default.post(name: NSNotification.Name("chicken.started.eating"), object: numberOfEatingChickens)
+    }
+}
+
+// Instead of 2 await call for 2 different functions
+// include the both related function to one and call by single await
+let feeder = ChickenFeeder()
+await feeder.chickenStartsEating()
+```
+
+### MainActor:
+
+
 ### GCD Checklist:
 Working with dispatch queue and task
     - Dispatch Queue
@@ -645,8 +673,12 @@ DispatchQueue.main.async {
 `Task.sleep()`
 `Task.yield()`
 
-Thread sleep, not for suspending 
-`sleep()`
+Thread sleep, Blocking (not for suspending) 
+`sleep()` and `Thread.sleep()`
+
+Non blocking
+`Timer.scheduledTimer(:withTimeInterval:repeats)`
+`DispatchQueue.main.asyncAfter()`
 
 ### Todo:
 => Find way like `thread sleep` to emulate concurrent behavior

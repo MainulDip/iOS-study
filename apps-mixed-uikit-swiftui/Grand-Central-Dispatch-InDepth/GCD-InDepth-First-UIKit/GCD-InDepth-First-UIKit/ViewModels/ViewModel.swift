@@ -16,12 +16,17 @@ class ViewModel {
             guard let chickenFeeder = self?.chickenFeeder else { return }
             await chickenFeeder.chickenStartsEating()
 //            try await Task.sleep(for: .seconds(1))
+            
+            await chickenFeeder.chickeFinishEatingAfterDelay()
+            
             await chickenFeeder.chickenStopsEating()
             
         }
         
         // sleep(2)
+        print("accessing nonisolated func from ChickenFeeder Actor \(chickenFeeder?.chickenFood() ?? "nil")")
          print("work.value:\(await work.value)")
+        
         // await Task.yield()
         // ChickenFeeder.shared = nil // when the singleton in nullable
         // self.chickenFeeder = nil
