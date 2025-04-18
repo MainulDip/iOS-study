@@ -7,7 +7,6 @@
 
 import Foundation
 
-@MainActor
 actor ChickenFeeder {
     
     // static let shared: ChickenFeeder = ChickenFeeder() // singleton, guaranteed to be lazily initialized only once

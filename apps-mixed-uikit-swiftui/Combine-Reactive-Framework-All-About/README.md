@@ -1,3 +1,47 @@
+### Why Combine (Reactive):
+Without reactive, Fetching data from network and updating the UI is more like `lots of callback and nested callback`. Using callback, dealing with All `success` and `failure` cases will be difficult. 
+
+```swift
+// Example: Calling only 2 API, dealing with callback become much difficult when codebase grows
+func fetchUserId(_ completionHandler: @escaping(Result<Int, Error>) -> Void) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        let id = 47
+        completionHandler(.success(id))
+    }
+}
+
+func fetchName(for userId: Int, _ completionHandler: @escaping(Result<String, Error>) -> Void) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        let res = "Data for user \(userId)"
+        completionHandler(.success(res))
+    }
+}
+
+func run() {
+    fetchUserId { idResult in
+        switch idResult {
+        case .success(let id):
+            fetchName(for: id) { nameResult in
+                switch nameResult {
+                case .success(let name):
+                    print(name)
+                case .failure(let failure):
+                    print("\(failure) in fetchName")
+                }
+            }
+        case .failure(let failure):
+            print("\(failure) in fetchUserId")
+            // Dealing with failure will introduce more callback
+        }
+    }
+} 
+```
+
+### Combine Intro:
+`Publishers` and `Subscribers` -> A Publisher exposes values that can change on which a subscriber subscribes to receive all those updates. 
+    - Publishers are the same as Observables (props those can be observed for changes by subscribers)
+    - Subscribers are the same as Observers (props those listen for any changes on the publishers)
+
 ### Combine Setup Initial:
 Note: all `.sink` callers needs to be stored, either separately or using set of AnyCancellable `[AnyCancellable]`. Otherwise observation will not work
 ```swift

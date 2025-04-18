@@ -640,8 +640,16 @@ let feeder = ChickenFeeder()
 await feeder.chickenStartsEating()
 ```
 
-### MainActor:
+### MainActor and Global Actors:
+Global Actors are `named` actor that is accessible globally. If you define your own global actor, you can access that particular actor by that name globally throughout your app.
 
+`MainActor` is a special kind of (named) global actor already available, will run on the `Main Thread`. 
+
+
+* Note: Only the `@MainActor` is guaranteed to be run on the main thread. For all other actors, its the non-main thread.
+
+By annotating an Actor with `@globalActor` and providing a singleton with a `shared` property, ie `static let shared = CustomGlobalActor()`, will make it available to use globally.
+Any actor annotated with `@globalActor` attribute automatically conform to the `GlobalActor` protocol. 
 
 ### GCD Checklist:
 Working with dispatch queue and task

@@ -29,6 +29,8 @@ When writing code, keep open the `Inspector's quick help ?` (top right corner), 
  1st click to select the beginning of braces (first brace), then double click to highlight the entire block
 
 ### Shortcuts
+Some important shortcuts https://medium.com/@otufekci/xcode-shortcuts-that-makes-developers-life-easier-1740794a1d26
+
 - `cmd + \` to create/delete a breakpoint to the active line of xcode
 - `ctrl + cmd + <` to go back (when error happens and xcode been navigated to the error trigging file)
 - `crl + shift + click` for multi cursor, selecting multiple line 
