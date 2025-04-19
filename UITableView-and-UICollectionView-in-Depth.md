@@ -188,4 +188,4 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 - For Draggable, UICollectionView
 - 
 
-- auto sizing in UICollectionView is little tricky, it's easy in TableView using `UItableView.automaticDimension`.  
+- auto sizing in UICollectionView is little tricky, it's easy in TableView using `UItableView.automaticDimension`.......

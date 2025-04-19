@@ -37,10 +37,30 @@ func run() {
 } 
 ```
 
-### Combine Intro:
+### Combine Intro | Publisher, Subscriber, Operators, Subjects:
 `Publishers` and `Subscribers` -> A Publisher exposes values that can change on which a subscriber subscribes to receive all those updates. 
-    - Publishers are the same as Observables (props those can be observed for changes by subscribers)
-    - Subscribers are the same as Observers (props those listen for any changes on the publishers)
+    - `Publishers` are the same as Observables (props those can be observed for changes by subscribers)
+        - Ex: `Just`, `Future`, `Deferred`, `Empty`, `Sequence`, `Fail`, `Record`, `Share`, `Multicast`
+        - For SwiftUI: `@ObservableObject`, `@Published`
+    - `Subscribers` are the same as Observers (props those listen for any changes on the publishers)
+        - unless a Subscriber is attached, the Publisher will not emit data
+        - All Subscribers conform to the `Cancellable` protocol
+        - Ex: `sink` and `assign`
+    - `Operators` are prebuilt functions included under Publisher, are used for business logic, encoding/decoding, error handling, retry logic, buffering and prefetch, and supporting debugging
+        - Mapping Operators: `scan`, `map`, `tryScan`, `setFailureType`, `tryMap`, `flatMap`
+        - Filtering: `filter`, `tryFilter`, `removeDuplicate`
+        - Reducing: `collect`, `reduce`, `tryReduce`
+        - Mathematic: `max`, `min`, `count`
+        - Matching criteria: `allSatisfy`, `contains`, `containsWhere`
+        - Sequence Operators: `first`, `firstWhere`, `prepend`, `drop`, `dropWhile`, `tryDropWhile`, `output`
+        - Multiple Publisher Combining Operators: `combineLatest`, `merge`, `zip`
+        - Handling Error: `catch`, `tryCatch`, `retry`, `assertNotFailure`
+    - `Subjects` are publisher conforming to the `Subject` protocol, it requires to have a `.send(_:)` method to send specific values to a single or multiple subscribers
+        - Ex: `CurrentValueSubject` (requires initial state) and `PassthroughSubject` (doesn't require initial state). Both will emit updates when `.send()` is invoked
+        - Both are also useful for creating publisher for object conforming to `ObservableObject` protocol in SwiftUI
+
+* If we imagine a `Combine` workflow as a pipeline, the `Publisher` and `Subjects` (Special king of Publisher) are entry point, the Subscribers are the end of the pipeline, and `Operator` lives in the middle of the pipeline.
+    
 
 ### Combine Setup Initial:
 Note: all `.sink` callers needs to be stored, either separately or using set of AnyCancellable `[AnyCancellable]`. Otherwise observation will not work

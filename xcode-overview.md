@@ -45,7 +45,8 @@ Some important shortcuts https://medium.com/@otufekci/xcode-shortcuts-that-makes
 - function override : no dedicated shortcut, use `ctrl+space` or `esc` or `opt+esc`. After overriden, from func block, press `ctrl+space` or `esc` to apply `super.func()` or else
 
 - `cmd + N` for new file and `opt + cmd + n` for new folder/group/directory
-- alt + right/left arrow -> to jump cursor to next/prev word quickly (ctrl + arrow) for windows/linux (Remote Desktop). 
+
+- alt + right/left arrow -> to jump cursor to next/prev word quickly (ctrl + arrow) for windows/linux (Remote Desktop)
 
 - `cmd + shift + o` to open file in xcode editor 
 
