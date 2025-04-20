@@ -6,7 +6,16 @@
 //
 
 import Foundation
+import Combine
 
+// Combine/Reactive Way of doing things
+func run() {
+    Just(42)
+        .delay(for: 1, scheduler: DispatchQueue.main)
+}
+
+
+// Manual way of doing things without combine/reactive approach
 func fetchUserId(_ completionHandler: @escaping(Result<Int, Error>) -> Void) {
     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
         let id = 47
@@ -21,7 +30,7 @@ func fetchName(for userId: Int, _ completionHandler: @escaping(Result<String, Er
     }
 }
 
-func run() {
+func run2() {
     fetchUserId { idResult in
         switch idResult {
         case .success(let id):

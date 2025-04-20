@@ -14,6 +14,7 @@ struct Combine_Basics_2ndApp: App {
             ContentView()
                 .onAppear {
                     run()
+                    reducing()
                 }
         }
     }
