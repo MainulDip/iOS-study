@@ -643,7 +643,7 @@ await feeder.chickenStartsEating()
 ### MainActor and Global Actors:
 Global Actors are `named` actor that is accessible globally. If you define your own global actor, you can access that particular actor by that name globally throughout your app.
 
-`MainActor` is a special kind of (named) global actor already available, will run on the `Main Thread`. 
+`MainActor` is a special kind of (named) global actor already available, will run on the `Main Thread`.......
 
 
 * Note: Only the `@MainActor` is guaranteed to be run on the main thread. For all other actors, its the non-main thread.

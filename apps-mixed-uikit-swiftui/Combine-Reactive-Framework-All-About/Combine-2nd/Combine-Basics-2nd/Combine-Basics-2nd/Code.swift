@@ -9,9 +9,35 @@ import Foundation
 import Combine
 
 // Combine/Reactive Way of doing things
+
+var cancellables: Set<AnyCancellable> = []
+
 func run() {
     Just(42)
+        .delay(for: 2, scheduler: DispatchQueue.main)
+        .sink { value in
+            print(value)
+        }
+        .store(in: &cancellables)
+    
+    [1, 2, 3, 4, 5, 6, 7]
+        .publisher
         .delay(for: 1, scheduler: DispatchQueue.main)
+        .sink { value in
+            print(value)
+        }
+        .store(in: &cancellables)
+    
+    [1, 2, 3, 4, 5, 6, 7]
+        .publisher
+        .filter { value -> Bool in value.isMultiple(of: 2) == false}
+        .print()
+        .map { $0 * $0 }
+        .delay(for: 1, scheduler: DispatchQueue.main)
+        .sink { value in
+            print(value)
+        }
+        .store(in: &cancellables)
 }
 
 

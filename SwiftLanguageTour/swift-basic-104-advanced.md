@@ -613,7 +613,7 @@ class AClass {
 
 - protocol extension and constraints
 
-- protocol optional requirement (aka, optional protocol requirement)
+- protocol optional requirement (aka, optional protocol requirement).......
 
 
 ### Higher Order Function `reduce`:
