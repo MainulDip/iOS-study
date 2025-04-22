@@ -60,6 +60,45 @@ func run() {
         - Both are also useful for creating publisher for object conforming to `ObservableObject` protocol in SwiftUI
 
 * If we imagine a `Combine` workflow as a pipeline, the `Publisher` and `Subjects` (Special king of Publisher) are entry point, the Subscribers are the end of the pipeline, and `Operator` lives in the middle of the pipeline.
+
+### Combine basic usages (intro 1):
+```swift
+// storage for `sink` (sink and assign all returns AnyCancellable
+var cancellables: Set<AnyCancellable> = []
+
+func run() {
+    // Just is the simpliest built-in publisher
+    Just(42)
+        .delay(for: 2, scheduler: DispatchQueue.main)
+        .sink { value in // receiving value by a sink subscriber
+            print(value)
+        }
+        .store(in: &cancellables) // storing sikns's return (AnyCancellable)
+    
+    [1, 2, 3, 4, 5, 6, 7]
+        .publisher // built-in publisher for sequence
+        .delay(for: 1, scheduler: DispatchQueue.main)
+        .sink { value in
+            print(value)
+        }
+        .store(in: &cancellables)
+    
+    [1, 2, 3, 4, 5, 6, 7]
+        .publisher
+        .filter { value -> Bool in value.isMultiple(of: 2) == false}
+        .print() // built-in debugging operator
+        .map { $0 * $0 } // map, filter's all are operator for publishers
+        .delay(for: 1, scheduler: DispatchQueue.main)
+        .sink { value in
+            print(value)
+        }
+        .store(in: &cancellables)
+}
+/*
+As everything in Combine is Async
+The code above that has longer delays will be print last
+*/
+```
     
 
 ### Combine Setup Initial:

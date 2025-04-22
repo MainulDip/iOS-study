@@ -26,12 +26,24 @@ func reducing() {
         return (left,right)
     }
     
+    let reducedUsingIntoParameter = arrTuple.reduce(into: (0, 0)) { result, element in
+        let left = result.0 + element.0
+        let right = result.1 + element.1
+        result = (left, right)
+    }
+    
+    
+    let _ = arr.reduce(0, +) // return 10 // using shorthand syntax
+    // here the `+` is an function and it matches perfectly with the `updateAccumulatingResult` param's function signature
+    
     print(reduced)
     print(reducedTuple)
     print(reducedTupleNoParamName)
+    print("reducedUsingIntoParameter: \(reducedUsingIntoParameter)")
     /*
      10
      (leftP: 6, rightP: 60)
      (6, 60)
+     reducedUsingIntoParameter: (6, 60)
      */
 }
