@@ -663,3 +663,186 @@ func reducing() {
      */
 }
 ```
+
+### Swift Statements All:
+
+Loop Statements: `for-in`, `while`, `repeat-while`
+
+Branch Statements: `if`, `guard`, `switch`
+    - guard supports multiple binding `guard let a = "", b = a else { fatalError() }
+    - switch has `case <match> where <condition> :`, `case let (x,y) where x == y:`
+    - for `nonfrozen` enum, switch's last default case can be `@unknown default :`
+
+Labeled Statement: 
+    - label: loop `<label>: while <condition> { break/continue <label> }`
+    - label: if
+    - label: switch
+    - label: do
+
+Control Transfer Statement:
+    - break, continue, fallthrough, return, throw
+
+Defer Statement: defer block will run last, local defer will run before it's upper scope defer. (defer = make late)
+    - defer { <code>}
+
+```swift
+func f(x: Int) {
+  defer { print("First defer") }
+
+
+  if x < 10 {
+    defer { print("Second defer") }
+    defer { print("Third defer") }
+    print("End of if")
+  }
+
+
+  print("End of function")
+}
+f(x: 5)
+// Prints "End of if"
+// Prints "Third defer" // reverse order, last executes first
+// Prints "Second defer"
+// Prints "End of function"
+// Prints "First defer"
+```
+
+Do statement: 
+    - do { try } catch { }
+    - do { try } catch <pattern 1>, <pattern 2> where <condition> {}
+    - do throw(<type>) {} catch <pattern> {} catch {}
+
+
+Compiler Control Statement: allows the program to change aspects of the compiler's behavior. 3 types
+    - conditional-compilation-block `#if`, `#elseif`, `#else`, `#endif`
+    - line-control-statement: `sourceLocation()` for debugging in build directory
+    - diagnostic-statement: `#available()` or `#unavailable()` followed by #if/#elseif
+
+```swift
+// conditional compilation block examples
+#if <#compilation condition#>
+    <#statements#>
+#elseif <#condition>
+    <statements>
+#else 
+    <statement>
+#endif
+
+// Applied
+#if compiler(>=5)
+print("Compiled with the Swift 5 compiler or later")
+#endif
+#if compiler(>=5) && swift(<5)
+print("Compiled with the Swift 5 compiler or later in a Swift mode earlier than 5")
+#endif
+
+
+// Conditions
+/*
+os() : macOS, iOS, watchOS, tvOS, visionOS, Linux, Windows
+
+arch(): i386, x86_64, arm, arm64
+
+swift(): >= or < followed by a version number
+
+compiler(): >= or < followed by a version number
+
+canImport(): A module name, that may not for all platform (iOS, watchOS)
+
+targetEnvironment(): simulator, macCatalyst
+*/
+```
+
+Line control statement example
+
+```swift
+#sourceLocation(file: <#file path#>, line: <#line number#>)
+#sourceLocation()
+// line-number → A decimal integer greater than zero
+// file-path → static-string-literal
+```
+
+Availability Condition Example
+
+```swift
+if #available(<#platform name#> <#version#>, <#...#>, *) {
+    <#statements to execute if the APIs are available#>
+} else {
+    <#fallback statements to execute if the APIs are unavailable#>
+}
+
+// And
+
+if #unavailable(<#platform name#> <#version#>, <#...#>) {
+    <#fallback statements to execute if the APIs are unavailable#>
+} else {
+    <#statements to execute if the APIs are available#>
+}
+```
+
+Compile-Time Diagnostic Statement:
+To emit diagnostic during compilation use `#warning(_:)` and `#error(_:)` macros
+
+### Macros:
+Macros are used minimize repetitive code by wrapping them (in source code) to be reused on several places and unwrapping/revealing (in build code) during compilation. 
+
+* Macros add new code, but they never delete or modify existing code (non related)
+
+2 kinds: they are called differently (`#` vs `@`)
+ - `Freestanding` macros appear on their own, without being attached to a declaration. Starts with `#` like `#function` or `#warning("")`, signature `#macro(:)`
+ - `Attached` macros modify the declaration that they’re attached to. Starts with `@` like `@Observable, @OptionSet<Int>` (signature `@macro<?>(??)`)
+
+```swift
+// Freestanding Macro
+func myFunction() {
+    print("Currently running \(#function)") // #function returns currently running function's name
+    #warning("Something's wrong") // gives a compile-time warning
+}
+```
+
+```swift
+// Attached Macro and Expansion
+// Without using macro
+struct SundaeToppings: OptionSet {
+    let rawValue: Int
+    static let nuts = SundaeToppings(rawValue: 1 << 0)
+    static let cherry = SundaeToppings(rawValue: 1 << 1)
+    static let fudge = SundaeToppings(rawValue: 1 << 2)
+}
+
+// Using Macro to minimize repetitive code
+@OptionSet<Int>
+struct SundaeToppings {
+    private enum Options: Int {
+        case nuts
+        case cherry
+        case fudge
+    }
+}
+
+// Expanded code of the @OptionSet<Int> macro
+struct SundaeToppings {
+    private enum Options: Int {
+        case nuts
+        case cherry
+        case fudge
+    }
+
+
+    typealias RawValue = Int
+    var rawValue: RawValue
+    init() { self.rawValue = 0 }
+    init(rawValue: RawValue) { self.rawValue = rawValue }
+    static let nuts: Self = Self(rawValue: 1 << Options.nuts.rawValue)
+    static let cherry: Self = Self(rawValue: 1 << Options.cherry.rawValue)
+    static let fudge: Self = Self(rawValue: 1 << Options.fudge.rawValue)
+}
+extension SundaeToppings: OptionSet { }
+```
+
+
+Docs : https://docs.swift.org/swift-book/documentation/the-swift-programming-language/macros/
+
+### Macro vs Property wrapper:
+Macros expands in compile time and Property wrapper are on run-time
+Macros can be used on properties, functions, structs, classes and more, but property wrappers are only for single class/struct property.

@@ -99,6 +99,13 @@ As everything in Combine is Async
 The code above that has longer delays will be print last
 */
 ```
+
+### `AnyPublisher<Output, Failure>` and Building Publisher:
+Importance of Generic type Erasure : When publishers are built, it usually has simple generic signature (`Publisher<T,E>`), but while building the pipeline by adding `operators`, it creates a complex types to include all later operation (`<First<Second<T,E>,E>,E`). `AnyPublisher<Output, Failure>` helps to erase all those overwhelming nested types and expose a simple type so when the `subscriber` are calling, gets a simple signature to define.
+
+```swift
+
+```
     
 
 ### Combine Setup Initial:
