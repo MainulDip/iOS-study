@@ -81,7 +81,7 @@ ZStack {
 ```
 ### Custom Font Integration:
 - Download the font file (.ttf) and place into project (make a new group/dir named "fonts" and paste the ttf file) 
-- check the from form launchscreen
+- check the font from launchscreen
 - add info.plist (on swiftui & xcode14 it's the info of the target) entry on "Fonts provided by application" category, and add the fontName.ttf in the value param. Multiple fonts can be added there, as the category accept array.
 - use font as : View(...).font(Font.custom("Font-Name", size: Int))
 
@@ -223,7 +223,7 @@ struct WebView: UIViewRepresentable {
 }
 ```
 
-### Navigations:
+### Navigation:
 
 ```swift
 

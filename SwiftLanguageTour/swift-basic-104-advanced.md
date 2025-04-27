@@ -846,3 +846,44 @@ Docs : https://docs.swift.org/swift-book/documentation/the-swift-programming-lan
 ### Macro vs Property wrapper:
 Macros expands in compile time and Property wrapper are on run-time
 Macros can be used on properties, functions, structs, classes and more, but property wrappers are only for single class/struct property.
+
+
+### init override:
+If a class has same init signature as super/base class, it's required to specify override.
+If the superclass has stored prop with
+
+
+```swift
+class A {
+    var aDictionary: [String: String]
+    
+    init() {
+        print("hi from super A")
+        self.aDictionary = [:]
+    }
+    
+    init(a: String){
+        self.aDictionary = [:]
+        print("a is \(a)")
+    }
+}
+
+
+class B: A {
+    // if child class specify same init signature as super, it needs to override
+    override init() {
+        super.init()
+    }
+}
+
+class C: A {
+    // if child class different (designated) init signature, no override is required
+    init(x: String) {
+        super.init(a: "Bismillah")
+    }
+    
+    func sayHii() {
+        print("hi from child C")
+    }
+}
+```

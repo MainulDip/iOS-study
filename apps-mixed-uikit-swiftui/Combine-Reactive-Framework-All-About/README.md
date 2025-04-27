@@ -1,5 +1,5 @@
 ### Why Combine (Reactive):
-Without reactive, Fetching data from network and updating the UI is more like `lots of callback and nested callback`. Using callback, dealing with All `success` and `failure` cases will be difficult. 
+Without reactive, Fetching data from network and updating the UI is more like `lots of callback and nested callback`. Using callback, dealing with All `success` and `failure` cases will be difficult.......
 
 ```swift
 // Example: Calling only 2 API, dealing with callback become much difficult when codebase grows

@@ -12,8 +12,19 @@ struct Combine_Networking_Basics_3ndApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onAppear {
+                    print(ENV.API_Key)
+                }
         }
     }
+}
+
+var ENV: APIKeyable {
+    #if DEBUG
+    return DebugEnv()
+    #else
+    return ProdEnv()
+    #endif
 }
 
 
@@ -33,16 +44,25 @@ class BaseEnv {
 
 protocol APIKeyable {
     // write all required API keys property
+    var API_Key: String { get }
 }
 
 class DebugEnv: BaseEnv, APIKeyable {
-    override init(resourceName: String) {
-        super.init(resourceName: "Debug-keyS")
+    var API_Key: String {
+        dict.object(forKey: "TMDB_API_Key") as! String
+    }
+    
+    init() {
+        super.init(resourceName: "Debug-keys")
     }
 }
 
 class ProdEnv: BaseEnv, APIKeyable {
-    override init(resourceName: String) {
-        super.init(resourceName: "Prod-keyS")
+    var API_Key: String {
+        dict.object(forKey: "TMDB_API_Key") as! String
+    }
+    
+    init() {
+        super.init(resourceName: "Prod-keys")
     }
 }
