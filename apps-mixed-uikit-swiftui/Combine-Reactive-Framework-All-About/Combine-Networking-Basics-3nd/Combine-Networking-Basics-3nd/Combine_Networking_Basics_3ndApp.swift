@@ -66,3 +66,16 @@ class ProdEnv: BaseEnv, APIKeyable {
         super.init(resourceName: "Prod-keys")
     }
 }
+
+class A {
+    var sA: [String]
+    init(a: String) {
+        sA = []
+    }
+}
+
+class B : A {
+    init() {
+        
+    }
+}

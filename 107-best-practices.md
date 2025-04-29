@@ -34,6 +34,7 @@ For iOS, create a property file `.plist` in xcode, add `.gitignore` entry for th
 
 
 Structured Way: Same approach can be used for `secret key` management for publishing app store apps
+* From `Product` > `Scheme` > `Edit Scheme` changing the build configuration to `Release` will make the compiler argument `DEBUG` to false.
 
 ```swift
 @main

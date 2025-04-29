@@ -850,21 +850,24 @@ Macros can be used on properties, functions, structs, classes and more, but prop
 
 ### init override:
 If a class has same init signature as super/base class, it's required to specify override.
-If the superclass has stored prop with
+
+If the superclass has initializer with argument, the base class is required to call the initializer with argument supplied `super.init(_:)` form inside child class's init, unless override
 
 
 ```swift
 class A {
     var aDictionary: [String: String]
     
+    // designated initializer 1
     init() {
         print("hi from super A")
         self.aDictionary = [:]
     }
     
+    // designated initializer 2
     init(a: String){
         self.aDictionary = [:]
-        print("a is \(a)")
+        print("from super: a is \(a)")
     }
 }
 
@@ -878,6 +881,7 @@ class B: A {
 
 class C: A {
     // if child class different (designated) init signature, no override is required
+    // here argument label `x` makes the difference
     init(x: String) {
         super.init(a: "Bismillah")
     }
@@ -887,3 +891,6 @@ class C: A {
     }
 }
 ```
+
+
+Docs : https://docs.swift.org/swift-book/documentation/the-swift-programming-language/initialization#Automatic-Initializer-Inheritance
