@@ -166,12 +166,12 @@ TextField("Amount", value: $amount, format: .currency(code: local.currency?.iden
 `@GestureState` stores values associated with a gesture that is currently in progress, such as how far you have swiped, except it will be reset to its default value when the gesture stops. This owns its data. More info.
 `@Namespace` creates an animation namespace to allow matched geometry effects, which can be shared by other views. This owns its data.
 `@NSApplicationDelegateAdaptor` is used to create and register a class as the app delegate for a macOS app. This owns its data.
-@ObservedObject refers to an instance of an external class that conforms to the ObservableObject protocol. This does not own its data. More info.
-`@Published `is attached to properties inside an ObservableObject, and tells SwiftUI that it should refresh any views that use this property when it is changed. This owns its data. More info.
-`@ScaledMetric `reads the user’s Dynamic Type setting and scales numbers up or down based on an original value you provide. This owns its data. More info.
-`@SceneStorage `lets us save and restore small amounts of data for state restoration. This owns its data. More info.
-`@State` lets us manipulate small amounts of value type data locally to a view. This owns its data. More info.
-`@StateObject` is used to store new instances of reference type data that conforms to the ObservableObject protocol. This owns its data. More info.
+@ObservedObject refers to an instance of an external class that conforms to the ObservableObject protocol. This does not own its data
+`@Published `is attached to properties inside an ObservableObject, and tells SwiftUI that it should refresh any views that use this property when it is changed. This owns its data
+`@ScaledMetric `reads the user’s Dynamic Type setting and scales numbers up or down based on an original value you provide. This owns its data
+`@SceneStorage `lets us save and restore small amounts of data for state restoration. This owns its data
+`@State` lets us manipulate small amounts of value type data locally to a view. This owns its data
+`@StateObject` is used to store new instances of reference type data that conforms to the ObservableObject protocol. This owns its data
 `@UIApplicationDelegateAdaptor` is used to create and register a class as the app delegate for an iOS app. This owns its data. 
 
 From : https://www.hackingwithswift.com/quick-start/swiftui/all-swiftui-property-wrappers-explained-and-compared

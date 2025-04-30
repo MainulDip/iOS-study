@@ -106,6 +106,16 @@ Usually publishers are 2 types, but can be mixed (using operators)
     - one-shot: emit single value and completes
     - multi-shot / continuous: emit multiple values over time
 
+- URLSession.dataTaskPublisher
+- Future (one-shot publisher)
+- Just
+
+### Scheduler | Threads:
+Publishers and Operators can run on different dispatchQueue and runloops, So, a subscriber needs to specify a `scheduler`. For uiUpdates, scheduler should be the `main thread` (RunLoop.main)
+    - receive(on: RunLoop.main) and subscribe are 2 function
+        that need to specify scheduler
+    - some operators, like, `delay`, `debounce` and `throttle` needs to specify scheduler.
+
 ### `AnyPublisher<Output, Failure>` and `some Publisher` | Building Publisher:
 Importance of Generic type Erasure : When publishers are built, it usually has simple generic signature (`Publisher<T,E>`), but while building the pipeline by adding `operators`, it creates a complex types to include all later operation (`<First<Second<T,E>,E>,E`). `AnyPublisher<Output, Failure>` helps to erase all those overwhelming nested types and expose a simple type so when the `subscriber` are calling, gets a simple signature to define.
 
@@ -273,4 +283,34 @@ let (average, failureRate) = monitor.summary()
 print("Average value: \(average), failure rate: \(failureRate * 100.0)%.")
 // Prints values such as: "Average value: 47.95, failure rate: 48.69%."
 
+```
+
+### SwiftUI Property Wrappers, combine and non-combine:
+Combine related:  `@ObservedObject`, `@EnvironmentObject`, and `@Published`. SwiftUI uses these property wrappers to create a publisher that will inform SwiftUI when those models have changed, creating a objectWillChange publisher. Having an object conform to `ObservableObject` will also get a default objectWillChange publisher.
+
+```swift
+class UserProgress: ObservableObject {
+    @Published var score = 0
+}
+
+struct InnerView: View {
+    @ObservedObject var progress: UserProgress
+
+    var body: some View {
+        Button("Increase Score") {
+            progress.score += 1
+        }
+    }
+}
+
+struct ContentView: View {
+    @StateObject var progress = UserProgress()
+
+    var body: some View {
+        VStack {
+            Text("Your score is \(progress.score)")
+            InnerView(progress: progress)
+        }
+    }
+}
 ```

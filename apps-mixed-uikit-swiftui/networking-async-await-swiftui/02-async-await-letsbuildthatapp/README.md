@@ -34,7 +34,7 @@ struct ContentView: View {
 2. create session
 3. call session with the url and get (data, urlResponse)
 4. guard the urlResponse and if the reponsecode is 200
-5. creace JSONDecoder() instance and guard and decode the api reponse based on model and populate this class prop which is published
+5. creace JSONDecoder() instance and guard and decode the api response based on model and populate this class prop which is published
 6. Create an `enum NetworkError: Error {}` and throw each on different guard's else block
 
 ```swift
