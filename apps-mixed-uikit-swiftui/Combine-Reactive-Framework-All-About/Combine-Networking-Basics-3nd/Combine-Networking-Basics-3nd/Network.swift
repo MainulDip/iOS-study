@@ -8,18 +8,30 @@
 import Foundation
 import Combine
 
-func fetchMovies() -> AnyPublisher<MovieResponse, Error> {
+// intead of AnyPublisher<MovieResponse, Error> use some some Publisher<MovieResponse, Error>
+// using `some` version, we don't need eraseToAnyPublisher() steep
+func fetchMovies() -> some Publisher<MovieResponse, Error> {
     // TODO : Add Api Key From Movie Database
-    let url = URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=YOUR_API_KEY&language=en-US&page=1")!
+    let url = URL(string: "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=\(ENV.API_Key)")!
     
-    [1,2]
-        .publisher
-        .sink { _ in print("Request Sent") }
+    // "https://api.themoviedb.org/3/movie/popular?api_key=e0caebe93478b4082d595c82f9d4dc68&language=en-US&page=1"
     
-    return URLSession
+    let publisher = URLSession
         .shared
         .dataTaskPublisher(for: url)
-        .map(\.data)
-        .decode(type: MovieResponse.self, decoder: JSONDecoder())
-        .eraseToAnyPublisher()
+    let chainPublisherOperators = publisher.map { (output) in output.data }
+    let decodeOutput = chainPublisherOperators.decode(type: MovieResponse.self, decoder: jsonDecoder)
+    
+    return decodeOutput
+    
+//    let anyPublisher = decodeOutput.eraseToAnyPublisher()
+//    
+//    return anyPublisher
+    
+//    return URLSession
+//        .shared
+//        .dataTaskPublisher(for: url)
+//        .map {(output) in output.data}
+//        .decode(type: MovieResponse.self, decoder: jsonDecoder)
+//        .eraseToAnyPublisher()
 }

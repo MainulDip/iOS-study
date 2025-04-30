@@ -7,6 +7,14 @@
 
 import SwiftUI
 
+var ENV: APIKeyable {
+    #if DEBUG
+    return DebugEnv()
+    #else
+    return ProdEnv()
+    #endif
+}
+
 @main
 struct Combine_Networking_Basics_3ndApp: App {
     var body: some Scene {
@@ -19,13 +27,6 @@ struct Combine_Networking_Basics_3ndApp: App {
     }
 }
 
-var ENV: APIKeyable {
-    #if DEBUG
-    return DebugEnv()
-    #else
-    return ProdEnv()
-    #endif
-}
 
 
 // MARK: - Storing API Keys Systemetic
@@ -67,15 +68,3 @@ class ProdEnv: BaseEnv, APIKeyable {
     }
 }
 
-class A {
-    var sA: [String]
-    init(a: String) {
-        sA = []
-    }
-}
-
-class B : A {
-    init() {
-        
-    }
-}

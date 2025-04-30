@@ -45,7 +45,8 @@ func run() {
     - `Subscribers` are the same as Observers (props those listen for any changes on the publishers)
         - unless a Subscriber is attached, the Publisher will not emit data
         - All Subscribers conform to the `Cancellable` protocol
-        - Ex: `sink` and `assign`
+        - Ex: `sink` and `assign`, and `onReceive` specifically for SwiftUI
+        - `onReceive` takes a closure like `sink`, that can mutate `@State` or `@Bindings`
     - `Operators` are prebuilt functions included under Publisher, are used for business logic, encoding/decoding, error handling, retry logic, buffering and prefetch, and supporting debugging
         - Mapping Operators: `scan`, `map`, `tryScan`, `setFailureType`, `tryMap`, `flatMap`
         - Filtering: `filter`, `tryFilter`, `removeDuplicate`
@@ -55,7 +56,7 @@ func run() {
         - Sequence Operators: `first`, `firstWhere`, `prepend`, `drop`, `dropWhile`, `tryDropWhile`, `output`
         - Multiple Publisher Combining Operators: `combineLatest`, `merge`, `zip`
         - Handling Error: `catch`, `tryCatch`, `retry`, `assertNotFailure`
-    - `Subjects` are publisher conforming to the `Subject` protocol, it requires to have a `.send(_:)` method to send specific values to a single or multiple subscribers
+    - `Subjects` are publisher conforming to the `Subject` protocol, used to inject values into data stream using a `.send(_:)` method to send/emit specific values to a single or multiple subscribers
         - Ex: `CurrentValueSubject` (requires initial state) and `PassthroughSubject` (doesn't require initial state). Both will emit updates when `.send()` is invoked
         - Both are also useful for creating publisher for object conforming to `ObservableObject` protocol in SwiftUI
 
@@ -100,7 +101,12 @@ The code above that has longer delays will be print last
 */
 ```
 
-### `AnyPublisher<Output, Failure>` and Building Publisher:
+### Building `Publisher`:
+Usually publishers are 2 types, but can be mixed (using operators)
+    - one-shot: emit single value and completes
+    - multi-shot / continuous: emit multiple values over time
+
+### `AnyPublisher<Output, Failure>` and `some Publisher` | Building Publisher:
 Importance of Generic type Erasure : When publishers are built, it usually has simple generic signature (`Publisher<T,E>`), but while building the pipeline by adding `operators`, it creates a complex types to include all later operation (`<First<Second<T,E>,E>,E`). `AnyPublisher<Output, Failure>` helps to erase all those overwhelming nested types and expose a simple type so when the `subscriber` are calling, gets a simple signature to define.
 
 ```swift
@@ -108,7 +114,21 @@ Importance of Generic type Erasure : When publishers are built, it usually has s
 ```
     
 
-### Combine Setup Initial:
+### `onReceive` subscriber in SwiftUI:
+```swift
+struct MyView : View {
+
+    @State private var currentStatusValue = "ok"
+    var body: some View {
+        Text("Current status: \(currentStatusValue)")
+            .onReceive(MyPublisher.currentStatusPublisher) { newStatus in
+                self.currentStatusValue = newStatus
+            }
+    }
+}
+```
+
+### Combine `.sink` subscriber usages in UIKit:
 Note: all `.sink` callers needs to be stored, either separately or using set of AnyCancellable `[AnyCancellable]`. Otherwise observation will not work
 ```swift
 import UIKit
