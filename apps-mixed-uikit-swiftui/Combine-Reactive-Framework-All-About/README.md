@@ -291,6 +291,12 @@ Combine related:  `@ObservedObject`, `@EnvironmentObject`, and `@Published`. Swi
 ```swift
 class UserProgress: ObservableObject {
     @Published var score = 0
+
+    var count = 0 // without using @Published Property wrapper
+    func incrementCounter() {
+        count += 1
+        objectWillChange.send()
+    }
 }
 
 struct InnerView: View {
@@ -314,3 +320,20 @@ struct ContentView: View {
     }
 }
 ```
+
+
+### `@StateObject` vs `@ObservableObject` (SwiftUI only):
+`@StateObject` persist when the containing View struct redraws upon state change, but `@ObservableObject` get destroyed and re-initialized. 
+
+Usually, when a container view calls a child view component, the viewModel is referenced in the child using `@ObservedObject` (not instantiated), and from container view, the viewModel is instantiated and marked with `@StateObject` property wrapper. 
+
+
+https://www.avanderlee.com/swiftui/stateobject-observedobject-differences/
+
+
+### SwiftUI States used with Combine (but not Combine feature):
+`@State`
+`@Binding`
+`@EnvironmentObject`
+`@Environment`
+https://www.swiftbysundell.com/articles/swiftui-state-management-guide/
