@@ -9,7 +9,7 @@ Inside Story Board, every ViewController has option in `Identity Inspector` > `C
 `Identity Inspector` and `Attribute Inspector` are the mostly visited place in story board.
 
 ### Setting Icons Storyboard:
-As all VCs are mapped into `Tab Bar` Controller, each VC (Scene) will get an new entry (same level as `view`) to set it's `Tab Bar Item` section inside `Identity Inspector`. 
+As all VCs are mapped into `Tab Bar` Controller, each VC (Scene) will get an new entry (same level as `view`) to set it's `Tab Bar Item` section inside `Identity Inspector`.......
 
 ### Position Rearrangement:
 Storyboard : Zoom into the `Tab Bar Controller` Scene's items and Drag left/right item to reposition.

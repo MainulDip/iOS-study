@@ -289,7 +289,7 @@ print("Average value: \(average), failure rate: \(failureRate * 100.0)%.")
 Combine related:  `@ObservedObject`, `@EnvironmentObject`, and `@Published`. SwiftUI uses these property wrappers to create a publisher that will inform SwiftUI when those models have changed, creating a objectWillChange publisher. Having an object conform to `ObservableObject` will also get a default objectWillChange publisher.
 
 ```swift
-class UserProgress: ObservableObject {
+class UserProgressVM: ObservableObject {
     @Published var score = 0
 
     var count = 0 // without using @Published Property wrapper
@@ -300,7 +300,7 @@ class UserProgress: ObservableObject {
 }
 
 struct InnerView: View {
-    @ObservedObject var progress: UserProgress
+    @ObservedObject var progress: UserProgressVM
 
     var body: some View {
         Button("Increase Score") {
@@ -310,7 +310,7 @@ struct InnerView: View {
 }
 
 struct ContentView: View {
-    @StateObject var progress = UserProgress()
+    @StateObject var progress = UserProgressVM()
 
     var body: some View {
         VStack {
@@ -332,8 +332,79 @@ https://www.avanderlee.com/swiftui/stateobject-observedobject-differences/
 
 
 ### SwiftUI States used with Combine (but not Combine feature):
+All these are managed by SwiftUI Views, ViewModel will not use these. For viewModel, we have `@Published` wrapper as publisher.
 `@State`
+    - top level (used in container or standalone)
+    - cannot left uninitialized, usually have the default value 
 `@Binding`
+    - can read and write a value owned by a source (other than itself) of truth stored in other places 
+    - used in child component (without instantiated), the container passed the instance referenced by `@State` to the child component
 `@EnvironmentObject`
+    - property wrapper to pass various state information (theme) between views that are not connected to each other (no hierarchy) `@EnvironmentObject var theme: Theme`
+    - can be inject by `view.environmentObject(observedObjectForTheme)`, see example 
 `@Environment`
+    - another way to use SwiftUI environment system, by defining custom EnvironmentKey (protocol conformance) and an `extension EnvironmentValues` with computed get/set property
+    - the custom Environment is then accessed by key-path `@Environment(\.propInExtension) var localProp: Type`
+
 https://www.swiftbysundell.com/articles/swiftui-state-management-guide/
+
+```swift
+/* @EnvironmentObject */
+
+struct ArticleView: View {
+    @EnvironmentObject var theme: Theme
+    var article: Article
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(article.title)
+                .foregroundColor(theme.titleTextColor)
+            Text(article.body)
+                .foregroundColor(theme.bodyTextColor)
+        }
+    }
+}
+
+struct RootView: View {
+    @ObservedObject var theme: Theme
+    @ObservedObject var articleLibrary: ArticleLibrary
+
+    var body: some View {
+        ArticleListView(articles: articleLibrary.articles)
+            .environmentObject(theme)
+    }
+}
+```
+
+```swift
+/* @Environment */
+
+struct ThemeEnvironmentKey: EnvironmentKey {
+    static var defaultValue = Theme.default
+}
+
+extension EnvironmentValues {
+    var theme: Theme {
+        get { self[ThemeEnvironmentKey.self] }
+        set { self[ThemeEnvironmentKey.self] = newValue }
+    }
+}
+
+struct ArticleView: View {
+    @Environment(\.theme) var theme: Theme
+    var article: Article
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(article.title)
+                .foregroundColor(theme.titleTextColor)
+            Text(article.body)
+                .foregroundColor(theme.bodyTextColor)
+        }
+    }
+}
+
+```
+
+
+### SwiftUI preferences system:
