@@ -335,10 +335,10 @@ https://www.avanderlee.com/swiftui/stateobject-observedobject-differences/
 All these are managed by SwiftUI Views, ViewModel will not use these. For viewModel, we have `@Published` wrapper as publisher.
 `@State`
     - top level (used in container or standalone)
-    - cannot left uninitialized, usually have the default value 
 `@Binding`
     - can read and write a value owned by a source (other than itself) of truth stored in other places 
     - used in child component (without instantiated), the container passed the instance referenced by `@State` to the child component
+    - used to sent data back to parent view's `@State`
 `@EnvironmentObject`
     - property wrapper to pass various state information (theme) between views that are not connected to each other (no hierarchy) `@EnvironmentObject var theme: Theme`
     - can be inject by `view.environmentObject(observedObjectForTheme)`, see example 
@@ -406,5 +406,127 @@ struct ArticleView: View {
 
 ```
 
+* SwiftUI Backward Data Flow Using `@Binding`, 2 way data flow
 
-### SwiftUI preferences system:
+```swift
+struct ParentView: View {
+  @State private var selectedItem: Item?
+
+  var body: some View {
+    VStack {
+      // Other views...
+
+      ChildView(selectedItem: $selectedItem)
+    }
+  }
+}
+
+struct ChildView: View {
+  @Binding var selectedItem: Item?
+
+  var body: some View {
+    List {
+      // List of items...
+
+      Button(action: {
+        self.selectedItem = item
+      }) {
+        Text(item.name)
+      }
+    }
+  }
+}
+```
+
+
+### SwiftUI preferences system | `.preference` & `.onPreferenceChange`:
+It's a way to to send data only reverse direction, from child to parent (`@Binding` is 2 directional).  
+
+```swift
+import SwiftUI
+
+/*
+ here preference key is used to update parents state
+ from the child
+ the .preference modifier call on the child's text view
+ will setup the observation on the text @State
+ and updating that will be listen on the parent using .onPreferenceChange
+ */
+
+struct MyPreferenceKey: PreferenceKey {
+    static var defaultValue: String = ""
+    
+    static func reduce(value: inout String, nextValue: () -> String) {
+        value = nextValue()
+    }
+}
+
+struct PreferenceOnButtonPress: View {
+    @State private var topLevelText: String = "Initial Text Top Level"
+    
+    var body: some View {
+        VStack {
+            Text("topLevelText: \(topLevelText)")
+            ChildView(text: "Old Text For Child")
+        }
+        .onPreferenceChange(MyPreferenceKey.self) { newValue in
+            print("Preference updated: \(newValue)")
+            topLevelText += newValue // adding all text
+            // topLevelText = newValue
+        }
+    }
+}
+
+struct ChildView: View {
+    @State var text: String
+    var body: some View {
+        VStack {
+            Text(text)
+             .preference(key: MyPreferenceKey.self, value: text)
+            // multiple preference can be used for final equation for each View
+            Button("Update Preference") {
+                text = "\(Int.random(in: 1..<100))"
+                print("Updating from child")
+            }
+        }
+    }
+}
+
+#Preview {
+    PreferenceOnButtonPress()
+}
+```
+
+https://medium.com/@fatihcyln/what-is-preferencekey-in-swiftui-3a3f0056b147
+
+### `some View` opaque type:
+`some` will enforce the return type of a function must be a single concrete type. Like Int and String both are `Equatable`, but when a function's expected return type is `some Equatable`, all conditional return must be a same type.
+
+https://stackoverflow.com/questions/56433665/what-is-the-some-keyword-in-swiftui
+
+```swift
+struct TestSome {
+    func foo(_ x: Int) -> some Equatable {
+        if (x > 10) {
+            return x
+        } else {
+            return 0
+            // return ""
+            // returning different type (Int or String) is not allowed when return type is prefixed with `some`
+            // though both Int and Stirng are equatable
+            // `some` will enforce all the return must be of same type
+        }
+    }
+    
+    func foo(_ x: Int) -> any Equatable {
+        if (x > 10) {
+            return x
+        } else {
+             return "" // allowed with `any` prefixed but can introduce bugs
+        }
+    }
+}
+```
+
+### `.self`, `.type` | Swift Meta-types:
+https://swiftrocks.com/whats-type-and-self-swift-metatypes

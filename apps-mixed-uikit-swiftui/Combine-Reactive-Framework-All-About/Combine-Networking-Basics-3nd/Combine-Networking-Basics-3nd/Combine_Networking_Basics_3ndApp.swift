@@ -19,10 +19,12 @@ var ENV: APIKeyable {
 struct Combine_Networking_Basics_3ndApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .onAppear {
-                    print(ENV.API_Key)
-                }
+//            ContentView()
+//                .onAppear {
+//                    print(ENV.API_Key)
+//                }
+//            PreferenceKeyEg()
+            PreferenceOnButtonPress()
         }
     }
 }
