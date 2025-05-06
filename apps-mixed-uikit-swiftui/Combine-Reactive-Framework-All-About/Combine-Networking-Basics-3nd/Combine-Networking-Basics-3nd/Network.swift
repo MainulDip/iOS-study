@@ -19,7 +19,14 @@ func fetchMovies() -> some Publisher<MovieResponse, Error> {
     let publisher = URLSession
         .shared
         .dataTaskPublisher(for: url)
-    let chainPublisherOperators = publisher.map { (output) in output.data }
+//    let chainPublisherOperators = publisher.map { (output) in output.data }
+    // response handling
+    let _ = publisher.map(\.response).print("publisher mapped response: ")
+    let _ = publisher.map { output in
+        let res = output.response as! HTTPURLResponse
+        print("HTTPURLResponse statusCode: \(res.statusCode)")
+    }
+    let chainPublisherOperators = publisher.map(\.data)
     let decodeOutput = chainPublisherOperators.decode(type: MovieResponse.self, decoder: jsonDecoder)
     
     return decodeOutput

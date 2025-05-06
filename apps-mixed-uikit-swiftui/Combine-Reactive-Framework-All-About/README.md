@@ -116,6 +116,22 @@ Publishers and Operators can run on different dispatchQueue and runloops, So, a 
         that need to specify scheduler
     - some operators, like, `delay`, `debounce` and `throttle` needs to specify scheduler.
 
+```swift
+// Assuming the code is on a ViewModel, and for creating subscriber
+APublisherReturningNetworkFunction()
+    .subscribe(on: backgroundQueue) // perform upstream operations on backgroundQueue
+    .receive(on: RunLoop.main) // receive the result on Main queue
+```
+
+### `RunLoop.main` vs `DispatchQueue.main`:
+The scheduler `DispatchQueue.main` will be executed immediately, but `RunLoop.main` is not guaranteed for immediate execution.
+
+RunLoop manage input operations for the user, such as touches or scrolling for an application.The RunLoop.main uses several modes and switches to a non-default mode when user interaction occurs. However, RunLoop.main as a Combine scheduler only executes when the default mode is active. 
+
+So if user is doing some interaction with the app, (ie, scrolling), the combine pipeline containing the `receive(on: RunLoop.main)` will be paused and will execute after the interaction.
+
+https://www.avanderlee.com/combine/runloop-main-vs-dispatchqueue-main/
+
 ### `AnyPublisher<Output, Failure>` and `some Publisher` | Building Publisher:
 Importance of Generic type Erasure : When publishers are built, it usually has simple generic signature (`Publisher<T,E>`), but while building the pipeline by adding `operators`, it creates a complex types to include all later operation (`<First<Second<T,E>,E>,E`). `AnyPublisher<Output, Failure>` helps to erase all those overwhelming nested types and expose a simple type so when the `subscriber` are calling, gets a simple signature to define.
 
