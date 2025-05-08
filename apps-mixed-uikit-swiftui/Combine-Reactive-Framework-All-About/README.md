@@ -124,7 +124,7 @@ APublisherReturningNetworkFunction()
 ```
 
 ### `RunLoop.main` vs `DispatchQueue.main`:
-The scheduler `DispatchQueue.main` will be executed immediately, but `RunLoop.main` is not guaranteed for immediate execution.
+The scheduler `DispatchQueue.main` will be executed immediately, but `RunLoop.main` is not guaranteed for immediate execution (usually after user-interaction finished, ie, scrolling).
 
 RunLoop manage input operations for the user, such as touches or scrolling for an application.The RunLoop.main uses several modes and switches to a non-default mode when user interaction occurs. However, RunLoop.main as a Combine scheduler only executes when the default mode is active. 
 
@@ -138,7 +138,83 @@ Importance of Generic type Erasure : When publishers are built, it usually has s
 ```swift
 
 ```
+
+### Subscribers `sink` & `assign`:
+Subscriber is need to be chained with a publisher, usually after specifying a scheduler with `receive(on:)` on the pipeline.
+
+`.sink` handles both success and error case
+`.assign` only handle (output) success, so for handling error, `.catch` needs to be chained before.
+
+```swift
+// ViewModel
+final class MovieViewModel: ObservableObject {
+    @Published var movies: [Movie] = []
+    var cancellables: Set<AnyCancellable> = []
     
+    func fetchInitialData() {
+        fetchMovies()
+            .map(\.results)
+            .receive(on: DispatchQueue.main)
+            .catch { error in
+                print("Error: \(error)")
+                return Empty<[Movie], Never>()
+            }
+            .assign(to: \.movies, on: self)
+//            .sink(receiveCompletion: { completion in
+//                switch completion {
+//                case .finished:
+//                    print("Network Fetching Success and Completes")
+//                case .failure(let failure):
+//                    print("Network Request Failed: \(failure)")
+//                }
+//            }, receiveValue: { [weak self] movies in
+//                self?.movies = movies
+//            })
+            .store(in: &cancellables)
+    }
+}
+```
+
+### `ViewModel` Integration and code spiting:
+ViewModel class conforms to `ObservableObject`, and properties are marked with `@Published` wrapper. VM functions will update the `@Published` properties and will be called from the View. 
+
+A property marked with `@StateObject` will get the ViewModel instance. `.onAppear` call back will call the VM function when that view is finished rendered.
+
+Usually subscriber will be attached inside viewModel function.  
+
+```swift
+struct MoviesView: View {
+    
+    @StateObject var viewModel = MovieViewModel()
+    
+    var body: some View {
+        List(viewModel.movies) { movie in
+            HStack {
+                AsyncImage(url: movie.posterURL) { poster in
+                    poster.resizable().aspectRatio(contentMode: .fill)
+                        .frame(width: 100)
+                } placeholder: {
+                    ProgressView()
+                        .frame(width: 100)
+                }
+                
+                VStack(alignment: .leading) {
+                    Text(movie.title)
+                        .font(.headline)
+                    Text(movie.overview)
+                        .font(.caption)
+                        .lineLimit(3)
+                }
+            }
+        }
+        .onAppear {
+            /* call VM function, which will update the @Published VM property */
+            viewModel.fetchInitialData()
+        }
+    }
+}
+```
+
 
 ### `onReceive` subscriber in SwiftUI:
 ```swift

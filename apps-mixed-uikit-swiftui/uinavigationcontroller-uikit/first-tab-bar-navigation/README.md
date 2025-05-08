@@ -4,7 +4,7 @@ Embedding a ViewController in `Tab Bar` will do the magic. To further add new co
 To set a UINavigation Controller as one of the Tab-Bar's item > First embed a (separate) ViewController into UINavigationController > then the same `ctrl + drag` from the `Tab Bar` Controller to `UINavigationController`.......
 
 ### Connection Storyboard ViewControllers to Code Controllers:
-Inside Story Board, every ViewController has option in `Identity Inspector` > `Custom Class` section to bind with a `ViewController.swift` file.
+Inside Story Board, every ViewController has option in `Identity Inspector` > `Custom Class` section to bind with a `ViewController.swift` file
 
 `Identity Inspector` and `Attribute Inspector` are the mostly visited place in story board.
 
@@ -18,7 +18,7 @@ Storyboard : Zoom into the `Tab Bar Controller` Scene's items and Drag left/righ
 Storyboard > [Tab Bar Controller] Scene > [Tab Bar Controller] > Tab Bar > `identity inspector` > `User Defined Runtime Attribute` > add new values
 
 
-- Color for selected item > KeyPath: `tintColor` | (Type) Color | (Value) ...
+- Color for selected item > KeyPath: `tintColor` | (Type) Color | (Value) .......
 - Color For UnSelected Item > KeyPath: `tintColor` | (Type) Color | (Value) ...
 
 For changing colors programmatically, go to AppDelegate.swift and set desired color

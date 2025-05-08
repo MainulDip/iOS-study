@@ -48,7 +48,9 @@ Some important shortcuts https://medium.com/@otufekci/xcode-shortcuts-that-makes
 
 - alt + right/left arrow -> to jump cursor to next/prev word quickly (ctrl + arrow) for windows/linux (Remote Desktop)
 
-- `cmd + shift + o` to open file in xcode editor 
+- `cmd + shift + o` to open file source (class,struct,protocol,enum, ect) in xcode editor 
+
+- `cmd + shift + l` (gui `view > show library`) import media (drag/drop) image, UIComponents/View etc 
 
 - `Cmd + Shift + 0` — open docs and `cmd + w` to close docs (when focused)
 
