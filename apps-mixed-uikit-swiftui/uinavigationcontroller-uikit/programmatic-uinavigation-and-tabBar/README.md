@@ -3,7 +3,7 @@
 - make a button on the VC's view (auto layout)
 - Make another VC
 - and on button press, `push that controller`
-- self.navigationController?.pushViewController(destinationVC(), animated: true)
+- self.navigationController?.pushViewController(destinationVC(), animated: true).......
 
 ```swift
 extension HomeVC {

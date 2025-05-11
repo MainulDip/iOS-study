@@ -188,4 +188,30 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 - For Draggable, UICollectionView
 - 
 
-- auto sizing in UICollectionView is little tricky, it's easy in TableView using `UItableView.automaticDimension`
+- auto sizing in UICollectionView is little tricky, it's easy in TableView using `UItableView.automaticDimension`.......
+
+
+```txt
+
+
+let x = PassthroughSubject<String, Never>()
+    .flatMap { name in
+        return Future<String, Error> { promise in
+            promise(.success(""))
+            }.catch { _ in
+                Just("No user found")
+            }.map { result in
+                return "\(result) foo"
+        }
+}
+
+
+type of x is =
+Publishers.FlatMap<
+    Publishers.Map<
+    Publishers.Catch<Future<String, Error>, Just<String>>, 
+    String>, 
+PassthroughSubject<String, Never>>
+```
+
+

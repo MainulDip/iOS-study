@@ -108,7 +108,8 @@ Usually publishers are 2 types, but can be mixed (using operators)
 
 - URLSession.dataTaskPublisher
 - Future (one-shot publisher)
-- Just
+- Just (one-shot)
+- PassThroughSubject and CurrentValueSubject (multi-shot)
 
 ### Scheduler | Threads:
 Publishers and Operators can run on different dispatchQueue and runloops, So, a subscriber needs to specify a `scheduler`. For uiUpdates, scheduler should be the `main thread` (RunLoop.main)
@@ -139,11 +140,150 @@ Importance of Generic type Erasure : When publishers are built, it usually has s
 
 ```
 
+### Publisher's `map` and `flatMat`:
+https://www.donnywals.com/using-map-flatmap-and-compactmap-in-combine/
+
+https://www.vadimbulavin.com/map-flatmap-switchtolatest-in-combine-framework/
+
+### `PassthroughSubject` and `CurrentValueSubject` and Subject's Lifecycle:
+PassthroughSubject has no default value, doesn't capture state, it only pass-through the emitted values to the subscriber. and drop emitting when there is no subscriber attached.
+
+```swift
+struct ChatRoom {
+    enum Error: Swift.Error {
+        case missingConnection
+    }
+    let subject = PassthroughSubject<String, Error>()
+    
+    func simulateMessage() {
+        subject.send("Hello!")
+    }
+    
+    func simulateNetworkError() {
+        subject.send(completion: .failure(.missingConnection))
+    }
+    
+    func closeRoom() {
+        subject.send("Chat room closed")
+        subject.send(completion: .finished)
+    }
+}
+
+let chatRoom = ChatRoom()
+chatRoom.subject.sink { completion in
+    switch completion {
+    case .finished:
+        print("Received finished")
+    case .failure(let error):
+        print("Received error: \(error)")
+    }
+} receiveValue: { message in
+    print("Received message: \(message)")
+}
+
+chatRoom.simulateMessage()
+chatRoom.closeRoom()
+// after calling closeRoom or simulateNetworkError, the pipeline is closed and the publisher will not emit any value, unless a new subscriber is attached. 
+
+// Received message: Hello!
+// Received message: Chat room closed
+// Received finished 
+```
+
+CurrentValueSubject has default value, subscribers will receive this initial value upon subscribing
+
+
+```swift
+struct Uploader {
+    enum State {
+        case pending, uploading, finished
+    }
+    
+    enum Error: Swift.Error {
+        case uploadFailed
+    }
+    
+    let subject = CurrentValueSubject<State, Error>(.pending)
+    
+    func startUpload() {
+        subject.send(.uploading)
+    }
+    
+    func finishUpload() {
+        subject.value = .finished
+        subject.send(completion: .finished)
+    }
+    
+    func failUpload() {
+        subject.send(completion: .failure(.uploadFailed))
+    }
+}
+
+let uploader = Uploader()
+uploader.subject.sink { completion in
+    switch completion {
+    case .finished:
+        print("Received finished")
+    case .failure(let error):
+        print("Received error: \(error)")
+    }
+} receiveValue: { message in
+    print("Received message: \(message)")
+}
+
+uploader.startUpload()
+uploader.finishUpload()
+
+// Received message: pending
+// Received message: uploading
+// Received message: finished
+// Received finished
+```
+
+Subject's Lifecycle: Whenever a finished (finished or failure) event is received, the subject's subscription is done, it will not emit any value upon the `.send` method call.
+Note: Check sink and assign behavior with subject
+
+https://www.avanderlee.com/combine/passthroughsubject-currentvaluesubject-explained/
+
+### Republishing of Subject:
+```swift
+class MyViewController : UIViewController {
+    let initialPublisher: PassthroughSubject = PassthroughSubject<Void, Never>()
+    var rePublisher: AnyPublisher<Void, Never> {
+        initialPublisher.eraseToAnyPublisher()
+    }
+    private var cancellableSubscriber = Set<AnyCancellable>()
+
+    override func loadView() {
+        super.loadView()
+        let button: UIButton = {
+            let result = UIButton(type: .system)
+            result.frame = CGRect(x: 100, y: 100, width: 200, height: 20)
+            result.setTitle("Button", for: .normal)
+            result.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+            return result
+        }()
+        view.backgroundColor = .white
+        view.addSubview(button)
+        
+        rePublisher
+            .sink {
+                print("Received!") // works!
+            }
+            .store(in: &cancellableSubscriber)
+    }
+
+    @objc private func buttonAction() {
+        initialPublisher.send()
+    }
+}
+```
+
 ### Subscribers `sink` & `assign`:
 Subscriber is need to be chained with a publisher, usually after specifying a scheduler with `receive(on:)` on the pipeline.
 
 `.sink` handles both success and error case
-`.assign` only handle (output) success, so for handling error, `.catch` needs to be chained before.
+`.assign` only handle (output) success, so for handling error, `.catch` needs to be chained before. Using `.replaceError(with:[])` is also possible.
 
 ```swift
 // ViewModel
@@ -155,11 +295,13 @@ final class MovieViewModel: ObservableObject {
         fetchMovies()
             .map(\.results)
             .receive(on: DispatchQueue.main)
+            // .replaceError(with: []) // instead of using `.catch` block, this can also be used
             .catch { error in
                 print("Error: \(error)")
                 return Empty<[Movie], Never>()
             }
-            .assign(to: \.movies, on: self)
+            // .assign(to: \.movies, on: self)
+            .assign(to: &$movies) // better version than previous assign version with 2 parameters
 //            .sink(receiveCompletion: { completion in
 //                switch completion {
 //                case .finished:

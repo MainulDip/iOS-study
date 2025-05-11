@@ -8,23 +8,25 @@
 import SwiftUI
 
 var ENV: APIKeyable {
-    #if DEBUG
+#if DEBUG
     return DebugEnv()
-    #else
+#else
     return ProdEnv()
-    #endif
+#endif
 }
 
 @main
 struct Combine_Networking_Basics_3ndApp: App {
     var body: some Scene {
         WindowGroup {
-            MoviesView()
-                .onAppear {
-                    print(ENV.API_Key)
-                }
-//            PreferenceKeyEg()
-//            PreferenceOnButtonPress()
+            NavigationView {
+                MoviesView()
+                    .onAppear {
+                        print(ENV.API_Key)
+                    }
+                //            PreferenceKeyEg()
+                //            PreferenceOnButtonPress()
+            }
         }
     }
 }
@@ -38,7 +40,7 @@ class BaseEnv {
     
     init(resourceName: String){
         guard let filePath = Bundle.main.path(forResource: resourceName, ofType: "plist"),
-        let plist = NSDictionary(contentsOfFile: filePath) else {
+              let plist = NSDictionary(contentsOfFile: filePath) else {
             fatalError("Couldn't find resource file as \(resourceName).plist")
         }
         self.dict = plist
