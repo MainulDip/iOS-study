@@ -894,3 +894,90 @@ class C: A {
 
 
 Docs : https://docs.swift.org/swift-book/documentation/the-swift-programming-language/initialization#Automatic-Initializer-Inheritance
+
+
+### Property wrapper's ProjectedValue:
+A property wrapper can have a `ProjectedValue` along with its wrappedValue. A property annotated with a property wrapper can access to its projectedValue using the `$` prefix (if that wrapper supports it). This is the mechanism of SwiftUI Binding under the hood.
+
+```swift
+import Foundation
+
+@propertyWrapper
+struct Email {
+  var wrappedValue: String
+  var projectedValue: Bool {
+    get {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: wrappedValue)
+     }
+    set {
+        print("Setting something")
+    }
+  }
+}
+
+struct Person {
+    let name: String
+    @Email var email: String
+}
+
+
+var p = Person(name: "ProjectedValue1", email: "gmail.com")
+print(p.name)
+print(p.email)
+print(p.$email) // false, as gmail.com is not a valid email address
+p.$email = true // as the projectedValue supplies a set along with get
+// but it will not change the output as the setter is only printing in the console
+p.email = "g@gmail.com"
+print(p.$email) // true, changed g@gmail.com is a valid email address
+```
+
+### Dynamic Member Lookup `@dynamicMemberLookup`:
+Its a way to access a class's/struct's member dynamically. Making the swift type system a little flexible. 
+
+These are implemented by annotating a class/struct with the `dynamicMemberLookup` attribute and specifying one or multiple `subscript(dynamicMember member: T) -> T {}` entry.
+
+```swift
+import Foundation
+
+@dynamicMemberLookup
+struct Person {
+    subscript(dynamicMember member: String) -> String {
+        let properties = ["name": "Hello", "city": "World"]
+        return properties[member, default: ""]
+    }
+}
+
+let p1 = Person()
+// even though, `name`, `city` doesn't exists as Person's member property
+// this can be accessed 
+print(p1.name) // Hello
+print(p1.city) // World
+print(p1.favoriteIceCream) // returns empty string
+
+
+@dynamicMemberLookup
+struct Person2 {
+    subscript(dynamicMember member: String) -> String {
+        let properties = ["name": "Hello", "city": "World"]
+        return properties[member, default: ""]
+    }
+
+    subscript(dynamicMember member: String) -> Int {
+        let properties = ["age": 26, "height": 178]
+        return properties[member, default: 0]
+    }
+}
+
+let p2 = Person2()
+let name: String = p2.name
+let age: Int = p2.age
+print("name = \(name) age = \(age)") // name = Hello age = 26
+print("Casting name: \(p2.name as String) and age: \(p2.age as Int)") // Casting name: Hello and age: 26
+```
+
+### Void vs Never:
+When a function returns `Void`, it's actual return is an empty tuple `()`. But a function returning a Never, return nothing. Never is used to crash the app.
+
+When there is a combine operator's error type (second Generics Parameter) is Never. It means, we don't need to handle the error anymore, only the output is needs to be handled. Usually the error is handled before this steep in the pipeline. 

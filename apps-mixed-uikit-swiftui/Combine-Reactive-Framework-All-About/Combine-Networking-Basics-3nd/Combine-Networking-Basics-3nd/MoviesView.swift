@@ -35,6 +35,7 @@ struct MoviesView: View {
         .searchable(text: $viewModel.searchQuery)
         .onAppear {
             viewModel.fetchInitialData()
+            $viewModel.searchQuery = Binding()
         }
     }
 }
