@@ -62,6 +62,64 @@ func run() {
 
 * If we imagine a `Combine` workflow as a pipeline, the `Publisher` and `Subjects` (Special king of Publisher) are entry point, the Subscribers are the end of the pipeline, and `Operator` lives in the middle of the pipeline.
 
+
+### Combine TLDR | Frequently Used `Publishers`, `Subscriber` and Built-in + Custom Publisher/Subscriber:
+Built-in Publishers:
+- `Just`
+- `Future`
+- `PassthroughSubject` & `CurrentValueSubject`
+- `Empty`
+- `Deferred`
+- `Timer`
+
+System Provided Publishers:
+- NotificationCenter Publisher
+- KeyPath Binding Publisher
+- Combine's SwiftUI Publisher `@Published` for `ViewModel: ObservableObject`
+
+
+Operators as publisher: 
+`CombineLatest`, `Map`, and `FlatMap` can create new publishers by transforming or combining existing ones
+
+Built-in Subscriber:
+- `sink`
+- `assign`
+
+Custom Publisher:
+```swift
+struct MyPublisher: Publisher {
+    typealias Output = Int
+    typealias Failure = Never
+
+    func receive<S>(subscriber: S) where S : Subscriber, MyPublisher.Failure == S.Failure, MyPublisher.Output == S.Input {
+        subscriber.receive(subscription: Subscriptions.empty)
+    }
+}
+```
+
+Custom Subscriber:
+```swift
+struct MySubscriber: Subscriber {
+    typealias Input = String
+    typealias Failure = Never
+
+    func receive(subscription: Subscription) {
+        subscription.request(.unlimited)
+    }
+
+    func receive(_ input: String) -> Subscribers.Demand {
+        print("Received value: \(input)")
+        return .none
+    }
+
+    func receive(completion: Subscribers.Completion<Never>) {
+        print("Completed")
+    }
+}
+```
+
+https://medium.com/@amitaswal87/combine-in-swift-third-part-types-of-publishers-and-subscribers-40175524b601
+
 ### Combine basic usages (intro 1):
 ```swift
 // storage for `sink` (sink and assign all returns AnyCancellable
@@ -140,7 +198,72 @@ Importance of Generic type Erasure : When publishers are built, it usually has s
 
 ```
 
-### Publisher's `map` and `flatMat`:
+### Single and Multi Dimensional `Publisher of Publisher`:
+Publisher can be single dimensional
+```swift
+[1, 2, 3]
+   .publisher
+   .map { $0 * 2 }
+   .sink { print($0) }
+```
+
+Multi dimensional publisher (publisher of publisher)
+```swift
+struct User {
+   let name: CurrentValueSubject<String, Never>
+}
+
+let userSubject = PassthroughSubject<User, Never>()
+```
+
+### Understanding Publisher's Operator (`.map`) Signature | Generics Type:
+All operators are defined inside of `extension Publisher {}`, so they are meant to be chained with a `Upstream` publisher instance.
+
+`map` operator returns a `Publisher.Map<Self, T>` where `Self` is the Upstream Publisher and `T` is the output Publisher, as Map's signature is `Map<Upstream, Output>`. Using map, the upstream publisher can be converted into new kind of publisher. Like, handling the error case and make the new publisher's error to a `Never` type.
+
+* We don't need to handle the `Never` type. When a Publisher is `<Output, Never>`, only output is need to be processed.
+
+```swift
+struct User {
+    let name: CurrentValueSubject<String, Never>
+}
+
+func publisherOfPublisher() {
+    let passThroughUserSubject = PassthroughSubject<User, Never>()
+    /*
+    => if we ignore the upstream as .map's output and pass a Just publisher, like
+    : passThroughUserSubject.map { _ in Just(1) }
+    => the return type
+    :   Publisher.Map<PassthroughSubject<User, Never>, Just<Int>>
+    => where the upstream type was
+    :    PassthroughSubject<User, Never>
+    */
+    
+    let m = passThroughUserSubject
+        // .map { $0.name } // changing the upstream publisher into a publisher of User's property
+        .map { $0 } // changing the upstream publisher into a full User type
+    // let s = m.sink { print(" User.name: \($0.value)") } // if the publisher is a User's property (name), we can print using $0.value
+    // here m: Publishers.Map<PassthroughSubject<User, Never>, User>
+    let s = m.sink { print(" User.name: \($0.name.value)") } // if the publisher is a whole User type, we have to drill down to get the actual value.
+    s.store(in: &cancleable)
+    
+    let user = User(name: .init("Mainul"))
+    passThroughUserSubject.send(user)
+    // prints `User.name: Mainul`
+}
+```
+
+### Publisher's `map`, `flatMat` and `switchToLatest`:
+These are the frequently used combine's publisher's operator.
+
+All these operators are defined inside of `extension Publisher {}`, so they are meant to be chained with a `Upstream` publisher instance.
+
+`map` operator returns a `Publisher.Map<Self, T>` where `Self` is the Upstream Publisher and `T` is the output Publisher, as Map's signature is `Map<Upstream, Output>`. Using map, the upstream publisher can be converted into new kind of publisher. Like, handling the error case and make the new publisher's error to a `Never` type.
+
+* We don't need to handle the `Never` type. When a Publisher is `<Output, Never>`, only output is need to be processed.
+
+
+
 https://www.donnywals.com/using-map-flatmap-and-compactmap-in-combine/
 
 https://www.vadimbulavin.com/map-flatmap-switchtolatest-in-combine-framework/
@@ -190,7 +313,7 @@ chatRoom.closeRoom()
 // Received finished 
 ```
 
-CurrentValueSubject has default value, subscribers will receive this initial value upon subscribing
+CurrentValueSubject has default value (state), subscribers will receive this initial value upon subscribing
 
 
 ```swift

@@ -11,7 +11,7 @@ import Combine
 // intead of AnyPublisher<MovieResponse, Error> use some some Publisher<MovieResponse, Error>
 // using `some` version, we don't need eraseToAnyPublisher() steep
 func fetchMovies() -> some Publisher<MovieResponse, Error> {
-    // TODO : Add Api Key From Movie Database
+    // TODO : Add Api Key From Movie Database | Done
     let url = URL(string: "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=\(ENV.API_Key)")!
     
     // "https://api.themoviedb.org/3/movie/popular?api_key=e0caebe93478b4082d595c82f9d4dc68&language=en-US&page=1"

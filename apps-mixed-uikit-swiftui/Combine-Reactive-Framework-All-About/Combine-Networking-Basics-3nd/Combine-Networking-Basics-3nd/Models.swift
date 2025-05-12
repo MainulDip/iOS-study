@@ -41,7 +41,7 @@ struct MovieCreditsResponse: Decodable {
     let cast: [MovieCastMember]
 }
 
-// MARK: - Reviews
+// MARK: - Reviews Models
 
 struct MovieReview: Identifiable, Equatable, Decodable {
     let id: Int

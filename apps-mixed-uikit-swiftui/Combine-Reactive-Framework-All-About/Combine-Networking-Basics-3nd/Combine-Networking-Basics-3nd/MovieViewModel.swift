@@ -31,10 +31,10 @@ final class MovieViewModel: ObservableObject {
          .switchToLatest
          Available when Failure is Never, Output conforms to Publisher, and Output.Failure is Never.
          */
-//        let _ = b.switchToLatest()
-            b.map(\.results)
+        let _ = b.switchToLatest()
+            .map(\.results)
             .receive(on: DispatchQueue.main)
-            .assign(to: &$movies)
+            .assign(to: &$searchResult)
     }
     
     func fetchInitialData() {

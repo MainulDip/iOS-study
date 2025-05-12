@@ -23,6 +23,8 @@ struct Combine_Networking_Basics_3ndApp: App {
                 MoviesView()
                     .onAppear {
                         print(ENV.API_Key)
+                        // publisherOfPublisher()
+                        publisherOfPublisherWithFlatMap()
                     }
                 //            PreferenceKeyEg()
                 //            PreferenceOnButtonPress()
