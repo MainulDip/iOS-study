@@ -8,14 +8,14 @@
 import Foundation
 import Combine
 
-var cancleable: [AnyCancellable] = []
+var cancelable: [AnyCancellable] = []
 
 func singleDimentionalPublisher() {
     [1,2,3]
         .publisher
         .map { $0 * $0 }
         .sink { print($0) }
-        .store(in: &cancleable)
+        .store(in: &cancelable)
 }
 
 // MARK: Multi Diemsional Publisher, aka, Publisher of Publisher
@@ -40,7 +40,7 @@ func publisherOfPublisher() {
     // let s = m.sink { print(" User.name: \($0.value)") } // if the publisher is a User's property (name), we can print using $0.value
     // here m: Publishers.Map<PassthroughSubject<User, Never>, User>
     let s = m.sink { print(" User.name: \($0.name.value)") } // if the publisher is a whole User type, we have to drill down to get the actual value.
-    s.store(in: &cancleable)
+    s.store(in: &cancelable)
     
     let user = User(name: .init("Mainul"))
     passThroughUserSubject.send(user)
@@ -50,26 +50,18 @@ func publisherOfPublisher() {
 
 func publisherOfPublisherWithFlatMap() {
     let passThroughUserSubject = PassthroughSubject<User, Never>()
-    /*
-    => if we ignore the upstream as .map's output and pass a Just publisher, like
-    : passThroughUserSubject.map { _ in Just(1) }
-    => the return type
-    :   Publisher.Map<PassthroughSubject<User, Never>, Just<Int>>
-    => where the upstream type was
-    :    PassthroughSubject<User, Never>
-    */
-    
+
     let fm = passThroughUserSubject
         .flatMap { $0.name } // Publishers.FlatMap<CurrentValueSubject<String, Never>, PassthroughSubject<User, Never>>
         .eraseToAnyPublisher() // AnyPublisher<String, Never>
         .print("", to: nil)
         // .switchToLatest() // will not compile
-        // flatMap will flaten down the multi dimentional publisher into a single dimentional publisher
-        // and will only emit raw value, which is not a publisher property anymore (contrarary to map)
+        // flatMap will flatten down the multi dimensional publisher into a single dimensional publisher
+        // and will only emit raw value, which is not a publisher property anymore (contrary to map)
         // and .switchToLatest() expect a property which is a publisher itself, not raw value
         
     let s = fm.sink { print(" User.name: \($0)") }
-    s.store(in: &cancleable)
+    s.store(in: &cancelable)
     
     let user = User(name: .init("Mainul"))
     passThroughUserSubject.send(user)

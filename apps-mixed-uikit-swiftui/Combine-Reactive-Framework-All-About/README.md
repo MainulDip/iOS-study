@@ -224,6 +224,8 @@ All operators are defined inside of `extension Publisher {}`, so they are meant 
 * We don't need to handle the `Never` type. When a Publisher is `<Output, Never>`, only output is need to be processed.
 
 ```swift
+var cancelable: [AnyCancellable] = []
+
 struct User {
     let name: CurrentValueSubject<String, Never>
 }
@@ -245,7 +247,36 @@ func publisherOfPublisher() {
     // let s = m.sink { print(" User.name: \($0.value)") } // if the publisher is a User's property (name), we can print using $0.value
     // here m: Publishers.Map<PassthroughSubject<User, Never>, User>
     let s = m.sink { print(" User.name: \($0.name.value)") } // if the publisher is a whole User type, we have to drill down to get the actual value.
-    s.store(in: &cancleable)
+    s.store(in: &cancelable)
+    
+    let user = User(name: .init("Mainul"))
+    passThroughUserSubject.send(user)
+    // prints `User.name: Mainul`
+}
+```
+
+### `flatMap` operator (not work with `.switchToLatest()`):
+```swift
+var cancelable: [AnyCancellable] = []
+
+struct User {
+    let name: CurrentValueSubject<String, Never>
+}
+
+func publisherOfPublisherWithFlatMap() {
+    let passThroughUserSubject = PassthroughSubject<User, Never>()
+
+    let fm = passThroughUserSubject
+        .flatMap { $0.name } // Publishers.FlatMap<CurrentValueSubject<String, Never>, PassthroughSubject<User, Never>>
+        .eraseToAnyPublisher() // AnyPublisher<String, Never>
+        .print("", to: nil)
+        // .switchToLatest() // will not compile
+        // flatMap will flatten down the multi dimensional publisher into a single dimensional publisher
+        // and will only emit raw value, which is not a publisher property anymore (contrary to map)
+        // and .switchToLatest() expect a property which is a publisher itself, not raw value
+        
+    let s = fm.sink { print(" User.name: \($0)") }
+    s.store(in: &cancelable)
     
     let user = User(name: .init("Mainul"))
     passThroughUserSubject.send(user)
@@ -641,6 +672,24 @@ print("Average value: \(average), failure rate: \(failureRate * 100.0)%.")
 // Prints values such as: "Average value: 47.95, failure rate: 48.69%."
 
 ```
+
+### `@Published` as publisher using `$` prefix:
+```swift
+
+@Published var sth = "Hello World"
+
+func publishedVarAsPublisher() {
+    $sth.sink { completion in
+             switch completion {
+             case .finished:
+                 print("")
+             }
+        } receiveValue: { value in
+            print("value")
+        }
+        .store(in: &cancellables)
+}
+``` 
 
 ### SwiftUI Property Wrappers, combine and non-combine:
 Combine related:  `@ObservedObject`, `@EnvironmentObject`, and `@Published`. SwiftUI uses these property wrappers to create a publisher that will inform SwiftUI when those models have changed, creating a objectWillChange publisher. Having an object conform to `ObservableObject` will also get a default objectWillChange publisher.

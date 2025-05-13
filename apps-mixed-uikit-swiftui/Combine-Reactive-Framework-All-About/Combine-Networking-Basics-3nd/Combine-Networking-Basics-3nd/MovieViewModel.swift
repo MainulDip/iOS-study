@@ -9,12 +9,20 @@ import Foundation
 import Combine
 
 final class MovieViewModel: ObservableObject {
-    @Published var movies: [Movie] = []
-    @Published var searchResult: [Movie] = []
+    @Published private var upcommimgMovies: [Movie] = []
+    @Published private var searchResult: [Movie] = []
     @Published var searchQuery = ""
-    @Published var sth = "Hello World"
-    @Published var sthArr = [1,2,3]
+    
     var cancellables: Set<AnyCancellable> = []
+    var movies: [Movie] {
+        get {
+            if searchQuery.isEmpty {
+                return upcommimgMovies
+            } else {
+                return searchResult
+            }
+        }
+    }
     
     init() {
         let a = $searchQuery
@@ -38,19 +46,6 @@ final class MovieViewModel: ObservableObject {
     }
     
     func fetchInitialData() {
-        
-        
-        $sth.sink { conplition in
-             switch conplition {
-             case .finished:
-                 print("")
-             }
-        } receiveValue: { value in
-            print("value")
-        }
-        .store(in: &cancellables)
-
-        
         fetchMovies()
             .map(\.results)
             .receive(on: DispatchQueue.main)
@@ -59,7 +54,7 @@ final class MovieViewModel: ObservableObject {
                 return Empty<[Movie], Never>()
             }
 //            .replaceEmpty(with: [])
-            .assign(to: &$movies)
+            .assign(to: &$upcommimgMovies)
 //            .sink(receiveCompletion: { completion in
 //                switch completion {
 //                case .finished:
