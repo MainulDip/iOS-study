@@ -11,7 +11,7 @@ import Foundation
 // protocol
 // reference to presenter
 // fetch data, perform interaction and handover the data to the presenter
-// api call to https://jsonplaceholder.typicode.com/todos/1
+// api call to https://jsonplaceholder.typicode.com/users
 
 protocol AnyInteractor {
     var presenter: AnyPresenter? { get set }
@@ -25,6 +25,24 @@ class UserInteractor: AnyInteractor {
     
     func getUser() {
         print("Call Network Fetch User")
+        guard let url = URL(string: "https://jsonplaceholder.typicode.com/users") else { return }
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error  in
+            guard let data = data, error == nil else {
+                self?.presenter?.interactorDidFetchUsers(with: .failure(FetchError.NetworkRequestFailed("\(String(describing: error))")))
+                return
+            }
+            
+            do {
+                let decodeDataResponse = try JSONDecoder().decode([User].self, from: data)
+                self?.presenter?.interactorDidFetchUsers(with: .success(decodeDataResponse))
+                
+            } catch {
+                self?.presenter?.interactorDidFetchUsers(with: .failure(FetchError.DecodingFailed("\(error)")))
+            }
+        }
+        
+        task.resume()
+        
     }
     
     

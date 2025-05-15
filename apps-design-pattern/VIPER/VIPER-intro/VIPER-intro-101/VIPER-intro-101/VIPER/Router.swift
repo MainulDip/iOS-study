@@ -16,10 +16,9 @@ import UIKit
 // Router is an Object
 
 
-typealias EntryPoint = AnyView & UIViewController
-
 protocol AnyRouter {
     // var view: AnyView & UIViewController { get }
+    typealias EntryPoint = AnyView & UIViewController
     var entryPoint: EntryPoint? { get }
     static func start() -> AnyRouter
 }

@@ -26,13 +26,29 @@ protocol AnyPresenter {
 class UserPresenter: AnyPresenter {
     var router: (any AnyRouter)?
     
-    var interactor: (any AnyInteractor)?
+    var interactor: (any AnyInteractor)? {
+        didSet {
+            interactor?.getUser()
+        }
+    }
     
     var view: (any AnyView)?
     
     func interactorDidFetchUsers(with result: Result<[User], any Error>) {
-        print("Data finished fetching")
+        print("From UserPresenter:interactorDidFetchUsers Data finished fetching")
+        
+        switch result {
+            
+        case .success(let data):
+            view?.update(with: data)
+        case .failure(let error):
+            print("From UserPresenter:interactorDidFetchUsers \(error)")
+            view?.update(with: "Something went wrong : From UserPresenter:interactorDidFetchUsers")
+        }
     }
-    
-    
+}
+
+enum FetchError: Error {
+    case NetworkRequestFailed(String)
+    case DecodingFailed(String)
 }
