@@ -61,14 +61,14 @@ struct LoginIntroApp: App { // inherit App protocol
     }
 }
 ```
-- Scene : protocol Scene acts as a container for a view hierarchy. It's lifecycle is managed by the system.
-- WindowGroup: It's a Scene that represents a group of identically structured windows or view hierarchy. It behaves differently on ios, macos and ipad-os. Each window created form this maintains independent state. 
-- Views : Views are placed inside body. ie: var body: some View { //views are placed here }
+- `Scene` : protocol Scene acts as a container for a view hierarchy. It's lifecycle is managed by the system.
+- `WindowGroup`: It's a Scene that represents a group of identically structured windows or view hierarchy. It behaves differently on ios, macos and ipad-os. Each window created form this maintains independent state. 
+- `Views` : Views are placed inside body. ie: var body: some View { //views are placed here }
     - Layout Views: VStack, HStack, ZStack, Lazy V/H Stacks, Spacer, etc.
     - Control Views: Text, Label, Button, TabView, NavigationView/NavigationLink, Label, etc
     - Paints Views: Angular/Linear/Radial Gradient
     - Other Views: Image, Group, Capsule, Container Relative Shape, Empty View, Menu etc.
-- Icons : There are many system icons which can be listed/viewed using "SF Symbols" developer app (need to install it from apples's developer website). And can be inserted into views using : Image(systemName: "NameOfTheIcon").......
+- `Icons` : There are many system icons which can be listed/viewed using "SF Symbols" developer app (need to install it from apples's developer website). And can be inserted into views using : Image(systemName: "NameOfTheIcon").......
 
 ### Background Color:
 Background color works with ZStack (depth stack). So everything needs to be inserted into

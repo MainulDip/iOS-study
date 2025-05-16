@@ -15,8 +15,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         vm = SolidVM()
+        
         self.view.backgroundColor = .green
-    } 
+    }
 
 
 }
