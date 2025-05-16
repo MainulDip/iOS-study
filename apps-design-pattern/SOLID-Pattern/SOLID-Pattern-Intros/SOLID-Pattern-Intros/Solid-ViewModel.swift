@@ -1,21 +1,12 @@
-### SOLID Pattern:
+//
+//  Solid-ViewModel.swift
+//  SOLID-Pattern-Intros
+//
+//  Created by Mainul Dip on 5/15/25.
+//
 
-Single Responsibility
-Open (to adopt change) Close (to modification)
-Liskov substitution principal 
-    - (Subtypes must be substitutable for the base type, ie `enum NetworkError: Error{}` )
-Interface Segregation 
-    - (client should not be forced to implement a interface that may not be used)
-Dependency Inversion 
-    - (Higher level module should not depend directly for lower level module)
-    - both higher and lower module should depend on 3rd module
+import Foundation
 
-### Single Responsibility Principle:
-A class should implement one function responsible for business logic. 
-
-We can have a builder class which can glue all the pieces together for easy access. But one class should be responsible for single business logic declaration.
-
-```swift
 class SolidVM {
     init () {
         print("SolidVM initialized")
@@ -113,4 +104,3 @@ struct InvoicePersistance {
         print("Invoice is saved successfully!")
     }
 }
-```

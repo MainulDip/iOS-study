@@ -8,11 +8,15 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    private var vm: SolidVM?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-    }
+        vm = SolidVM()
+        self.view.backgroundColor = .green
+    } 
 
 
 }
