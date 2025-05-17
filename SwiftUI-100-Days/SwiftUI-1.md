@@ -174,7 +174,7 @@ TextField("Amount", value: $amount, format: .currency(code: local.currency?.iden
 `@StateObject` is used to store new instances of reference type data that conforms to the ObservableObject protocol. This owns its data
 `@UIApplicationDelegateAdaptor` is used to create and register a class as the app delegate for an iOS app. This owns its data. 
 
-From : https://www.hackingwithswift.com/quick-start/swiftui/all-swiftui-property-wrappers-explained-and-compared
+From : https://www.hackingwithswift.com/quick-start/swiftui/all-swiftui-property-wrappers-explained-and-compared.......
 
 
 --------------------------- GuessTheFlag-2 ---------------------

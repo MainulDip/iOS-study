@@ -10,7 +10,7 @@ Dependency Inversion
     - (Higher level module should not depend directly for lower level module)
     - both higher and lower module should depend on 3rd module
 
-### Single Responsibility Principle:
+### Single Responsibility Principle (SRP):
 A class should implement one function responsible for business logic. 
 
 We can have a builder class which can glue all the pieces together for easy access. But one class should be responsible for single business logic declaration.
