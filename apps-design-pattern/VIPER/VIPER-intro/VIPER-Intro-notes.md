@@ -42,3 +42,12 @@ protocol AnyRouter {
     static func start() -> AnyRouter
 }
 ```
+
+### VIPER with Builder pattern (Solid):
+https://medium.com/swlh/viper-architecture-and-solid-principles-in-ios-96480cfe88b9
+ 
+> https://github.com/pnalvarez/PokemonViper/blob/master/ViperEx/Modules/List/User%20Interface/Router/PokemonListRouter.swift
+
+All View (VC), Interactor, Presenter will all have its builder class (ViewControllerBuilder, InteractorBuilder, PresenterBuilder) with a `static` `make` function, which will create the instance and inject dependency.
+
+The Router will instantiate the ViewController Builder. And the ViewController Builder will instantiate all other classes, inject all dependencies and will return the ViewController.
