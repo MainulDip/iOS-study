@@ -1,5 +1,5 @@
 ### TableView Theory:
-A UITableView is a subclass of UIScrollView which is a view that users can scroll through. UITableView is used to show a list of data. Each item inside of this list is represented by a view called a `UITableViewCell`. Each cell tends to look very similar to one another but are holding different data.
+A UITableView is a subclass of UIScrollView which is a view that users can scroll through. UITableView is used to show a list of data. Each item inside of this list is represented by a view called a `UITableViewCell`. Each cell tends to look very similar to one another but are holding different data
 
 A UITableView can also contains sections where each section contains rows, and each row being represented by a cell
 
