@@ -3,6 +3,11 @@
 
 - Integrated Docs : Unique Feature. All the developer's docs can be found of the "help" section of xcode.
 
+### Opening project from terminal:
+`open .` to open the current directory in `File viewer` and then open the `.xcodeproj` for non-CocoaPods and `.xcworkspace` for CocoaPods project
+
+- `xed .` will open the folder containing the project in xcode, for both CocoaPods and non-CocoaPods project.
+
 ### Turn on/off AI code prediction:
 Xcode > Preference/Setting > Text Editing > Editing
 
