@@ -1,5 +1,6 @@
 ## Overview:
-uikit quick guide.
+Everything that starts with UI (UIButton, UILable, etc) are coming from UIKit.
+
 
 ### Structure:
 - LaunchScreen.storyboard : Launch Screen of the app, only associated with intro animation/screen.
@@ -36,7 +37,7 @@ class ViewController: UIViewController {
 ```
 
 ### imageLiteral is Deprecated
-it's a drag and drop interface to put images directly into variables. Instade use 
+it's a drag and drop interface to put images directly into variables. Instead use 
 ```swift
 diceImageView1.image =  UIImage(imageLiteralResourceName: "DiceSix")
 ```
@@ -137,7 +138,8 @@ struct QuestionStore {
 }
 ```
 
-Note: if a protocol prefixes a method with mutating keyword, inherited class's method does not need to be prefixed with it. Like "class ViewController: UIViewController{}" in ios
+* Note: if a protocol prefixes a method with mutating keyword, inherited class's method does not need to be prefixed with it. Like "class ViewController: UIViewController{}" in ios
+
 ```swift
 protocol baseProtocol {
     // if protocol states the mutating keyword, inherited method does not need to be prefixed with mutating
@@ -180,15 +182,6 @@ Base class for ios. All classes inherit from this class. Steeve Jobs started thi
 
 EX: UIButton <= UIControl <= UIView <= UIResponder <= NSObject
 
-### UIKit:
-Everything that starts with UI (UIButton, UILable, etc) are coming from UIKit.
-
-### CG | CoreGraphics:
-- CGRect : Core Graphics Rectangle
-### Navigation | Controller to Controller :
-```swift
-// initialize the controller and call self.present with the controller as one of its parameter.
-```
 ### Creating View on the fly by code Without Storyboard/GUI:
 ```swift
 import UIKit
@@ -251,7 +244,7 @@ let struct: SomeStruct?
 print("\(struct?.prop ?? "default value")")
 ```
 ### Light/Dark Mode || Appearance :
-Apple only provide system color with dark/light mode variant. For custo color, "color set" of the xcassets is used for dark/light variant.
+Apple only provide system color with dark/light mode variant. For custom color, "color set" of the xcassets is used for dark/light variant.
 - color: From xcassets, add the color "color set" option to set the light mode and dark mode color, use the appearance attribute to "any light and dark" to get the option for dark mode variant.
 - image: form xcassets add the "image set", set the appearances to "any light and dark" then set light/dark mode images. For vector image, set scales to single as vector image don't need other higher res variant
 

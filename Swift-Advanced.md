@@ -117,3 +117,6 @@ If the value changes, SwiftUI updates any parts of your view that depend on the 
 
 @Environment Docs: https://developer.apple.com/documentation/swiftui/environment
 EnvironmentValue Docs: https://developer.apple.com/documentation/swiftui/environmentvalues.......
+
+### `@ViewBuilder` and `@resultBuilder`:
+@ViewBuilder (attribute/annotation) is one of the few result builders available as built API in SwiftUI.

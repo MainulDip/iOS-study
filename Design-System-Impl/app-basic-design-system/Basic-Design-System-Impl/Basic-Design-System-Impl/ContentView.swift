@@ -8,14 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @Environment(\.designTokens) private var tokens
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
             Text("Hello, world!")
+                .padding(tokens.spacing.buttonPadding)
+                .font(tokens.typography.headlineLarge)
+                .foregroundColor(tokens.colors.onSedondary)
+                .background(tokens.colors.sedondary)
+                .cornerRadius(tokens.spacing.radiusSm)
+                
         }
         .padding()
+        .background(tokens.colors.background)
     }
 }
 

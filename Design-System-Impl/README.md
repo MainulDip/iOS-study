@@ -307,7 +307,7 @@ private extension DSButton {
         switch style {
             case .primary: return DSColors.onPrimary
             case .secondary: return DSColors.primary
-            case .destruction: return DSColors.onPrimary
+            case .destructive: return DSColors.onPrimary
             case .ghost: return DSColors.primary
         }
     }
@@ -316,7 +316,7 @@ private extension DSButton {
         switch style {
             case .primary: return DSColors.primary 
             case .secondary: return DSColors.surface
-            case .destruction: return DSColors.error
+            case .destructive: return DSColors.error
             case .ghost: return DSColors.clear
         }
     }
