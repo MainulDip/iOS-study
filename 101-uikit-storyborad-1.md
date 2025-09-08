@@ -207,11 +207,15 @@ class SecondViewController: UIViewController {
     }
 }
 ```
-### Navigation Storyboard, Cocoa Touch, Segue and Storyboard Segue Identifier :
-- To perform Navigation based on storyboard design, Cocoa Touch Template can be used to make the view controller for it. 
-- The newly created viewcontroller class name needs to be supplied inside storyboard's targeted scene's identity inspectory's class properties name.
+### Navigation Storyboard, Cocoa Touch, Segue and Storyboard Segue Identifier | Interface Builder :
+- To perform Navigation based on storyboard design, Cocoa Touch Template can be used to make the view controller for it. Cocoa Touch file comes with some boilerplate uikit class and some of methods. Good for `interface builder` / `xib` file. For a blank swift file, no boilerplate is provided.
+
+- The newly created viewController class name needs to be supplied inside storyboard's targeted scene's identity inspector's class properties name.
+
 - Then to create a navigation direction a segue need to be created by holding ctrl and dragging a connection handle form Storyboard's view controller to view controller.
+
 - After creating the segue connection, the segue connection itself needs an identifier which will be used to perform navigation suing self.performSegue form a ViewController class (btn action event usually).
+
 - Sending Data form controller to controller : "override func prepare(for segue: UIStoryboardSegue, sender: Any?){}" is used. and segue.destination is used to get the destination controller object itself.
 - Back Navigation: 
 ```swift
@@ -229,12 +233,13 @@ If a class is inheriting form a superClass, we can treat the class as the superC
 // ex : class CustomViewController : UIViewController {...}
 let customViewController = method.thatReturnUIViewController as! CustomViewController // forced DownCasting as the custom class
 // send values as class parameter or something else
-cutomViewController.props = newValue
+customViewController.props = newValue
 ``` 
 ### Optional Unwrapping, Optional Binding, Nil Coalescing Operations (??):
-- Optional Unwrapping: optional!
-- Optional Binding : if let safeOptional = optional { do something with safeOptional if it is really not nil }
-- Nil Coalescing Operator : return optional ?? "some other value if optional is nil"
+- Optional Unwrapping: `optionalVariable!`
+- Optional Binding :
+ - `if let safeOptional = optional { do something with safeOptional if it is really not nil }`
+- Nil Coalescing Operator | `??` : return optional ?? "some other value if optional is nil"
 
 ### Optional Struct and Optional Chaining:
 Anything can be optional. Structs are treated as a Type, it can be optional too.
@@ -242,42 +247,14 @@ Anything can be optional. Structs are treated as a Type, it can be optional too.
 struct SomeStruct {...}
 let struct: SomeStruct?
 print("\(struct?.prop ?? "default value")")
+// `??` is the Nil Coalescing operator, used here
 ```
 ### Light/Dark Mode || Appearance :
 Apple only provide system color with dark/light mode variant. For custom color, "color set" of the xcassets is used for dark/light variant.
 - color: From xcassets, add the color "color set" option to set the light mode and dark mode color, use the appearance attribute to "any light and dark" to get the option for dark mode variant.
 - image: form xcassets add the "image set", set the appearances to "any light and dark" then set light/dark mode images. For vector image, set scales to single as vector image don't need other higher res variant
 
-### task
-- set the search field: 
-    - set `IBOutlet` and `IBAction` for search btn (get and print the search input text)
-    - set the keyboard (soft) enter button bind with the text field search button
-    - `UITextFieldDelegate`: Implement from the viewController and add textFieldCustom.delegate = self (the view controller will be notified on text field event)
-    - `textFielShouldReturn` : this will bind the soft keyboard's return/go btn with the text field's search
-    - `textFieldCustom.endEditing(true)` : this will dismiss the soft keyboard upon the search button pressed
-    - `textFieldDidEndEditing` : its a delegated method, it will triggered when the soft keyboard's enter btn is pressed. can be used to clear the search's text
-    - `textFieldShouldEndEditing` : will trigger if user touche else where, or during the typing. can be used to validate the input text. true will dismiss the kyboard and the textFieldDidEndEditing method will be called
-
-    - `touchesBegan` : to track if user touched/clicked somewhere else other than the soft keyboard or desired places.
-    - 
-
-### Lifecycle method's naming and functions:
-...ShouldEnd... 's return true will trigger ...DidEnd... function
-
-### Delegates (Protocol) :
-It's the interface in other programming language. Both class and struct can implement form Protocol/s. Structs can only implement form Protocol/s not form another struct. But properties/methods can return anything (class or structure)
-- for class, superclass comes first, the protocol/s => class myClass: SuperClass1, SuperClass2, Protocol1, Protocol2 {}
-- protocol method cannot have bodies 
-### Delegate Design Pattern
-
-### Clima App:
-
-### Flash-Chat App:
-A chatting app, it's inside the apps dir
-### Table View (android's ListView):
-It is a vertical scrolling component, it stacks elements one after another vertically (ie: chatting interface) 
-
-### Animation | Basing Using For Loop:
+### Animation | With For Loop:
 ```swift
 @IBOutlet weak var titleLabel: UILabel!
     
@@ -308,10 +285,11 @@ Docs : https://cocoapods.org/
 * Install :
 - sudo gem install cocoapods
 - pod setup --verbose
-* Setting Up and Intalling 3rd party project
+
+* Setting Up and Installing 3rd party project
 - navigate to the app's directory (same level as .xcodeproj) and run `pod init` to initialize the "Podfile"
 - Setup the newly generated "Podfile" (a ruby file), customize the platform version, and other things
-- inside the "target '' do" (ruby function) append the 3rd party library to add, ex: pod 'CLTypingLabel'.......
+- inside the "target `do (ruby function)` append the 3rd party library to add, ex: pod 'CLTypingLabel'.......
 - then run "pod install"
 - after the install, close any running xcode project, and open current project into xcode using newly generated `...xcworkspace` file (as of cocoapod instruction)
 * Updating Packages/Library:
@@ -353,8 +331,6 @@ It a package is eligible for swift package manager, the root directory of the pa
     }
 }
 ```
-### Login | Logout and Other :
-See Flash Chat repo
 
 ### Constants from Global Use:
 - Developers Use "K" as Constants (practice), and store all the constants inside the struct as typed property (static)
@@ -415,19 +391,23 @@ class SomeClass {
 - table view : its the ListView/Recycler View in Android. It contains all the lists/cells as "table view cells"
     - attribute :  separator : separator for each line
 - table view cells || prototype cell/view : blueprint of the list element
-    * important attribute:
-    - identifier : String to identify the cell blueprint form code
+
+* important attribute:
+- `identifier` : String to identify the cell blueprint form code
 - table view controller : it's little limited compared to the "`table view`", so stick with that
-### TableView DataSource vs Delegate:
-- DataSource : forward data to the controller. It populate the tableView
-- Delegate : 
-### Table Cell Init:
+
+- TableView DataSource vs Delegate:
+    - DataSource : forward data to the controller. It populate the tableView
+    - Delegate : 
+
+### Table Cell Init | xib | Interface Builder:
 - create a CocaTouch file with subclass of UITableViewCell (with xib checked) inside views directory to implement the fine-grain control over cell
 - xcode will create 2 files, 1 swift and 1 XIB
 - Note: XIB is a design file (formally known as NIB). It's like a storyboard file and the controller of this XIB file is the newly created swift file.
 - provide an identifier for the top level container of the xib file
 - after designing the xib file, connect IBOutlets and other things with the assistance.
-- then the xib design file needs to be registered in the tableView Controller file. we need the "identifier" the parent/top container (Table View Cell) inside the xib and the name of the xib file (without xib extension)
+- then the xib design file needs to be registered in the tableView Controller file. we need the `identifier` the parent/top container (Table View Cell) inside the xib and the name of the xib file (without xib extension)
+
 ```swift
 // inside viewDidLoad
 tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)

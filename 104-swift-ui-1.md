@@ -22,7 +22,9 @@ It's a declarative layout system based on VHZ (Vertical/Y, Horizontal/X, Depth/z
 ### Login-Intro App Docs:
 - String to Binding<String> : $string
 - @State : @ is attribute in swift
-- some : It is used together with a protocol to create an opaque type that represents something that is conformed to a specific protocol. 
+- some : It is used together with a protocol to create an opaque type that represents something that is conformed to a specific protocol.
+
+* using `some` keyword, a generic function can minimize code and add syntactic sugar. `func do<T: CustomProtocol>(_ element: T){...}` can be written `func do(_ element: some CustomProtocol){...}`
 
 ```swift
 // The following 3 function signatures are identical.

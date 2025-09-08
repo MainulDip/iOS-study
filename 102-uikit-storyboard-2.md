@@ -31,7 +31,7 @@ alert.addAction(action)
 present(alert, animated: true)
 ```
 
-### First Time Init to Check:
+### Initialize app:
 ```swift
 // on AppDelegate, initialize the Realm without let and assign to underscores inside do/catch block
 _ = Try Realm()

@@ -50,6 +50,7 @@ let imageView = UIImageView(image: .yummyFoodLogo) // predictable way
 ```
 
 Also `cmd + shift + l` (gui `view > show library`) import (drag/drop) image, UIComponents/View etc 
+
 ### Auto Layout Constraints and organized code:
 auto layout needs at least two constraints for views having an intrinsic size (images, having width & height) and four for views without having an intrinsic size (text, size of text depends on various factors)
 
