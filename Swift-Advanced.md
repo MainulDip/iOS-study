@@ -118,5 +118,18 @@ If the value changes, SwiftUI updates any parts of your view that depend on the 
 @Environment Docs: https://developer.apple.com/documentation/swiftui/environment
 EnvironmentValue Docs: https://developer.apple.com/documentation/swiftui/environmentvalues.......
 
+### `some` Opaque type:
+
+
 ### `@ViewBuilder` and `@resultBuilder`:
 @ViewBuilder (attribute/annotation) is one of the few result builders available as built API in SwiftUI.
+
+### Meta types | `.self` | `.type` | `.protocol`:
+
+
+Docs: https://swiftrocks.com/whats-type-and-self-swift-metatypes
+
+### protocol `associatedtype` | Usages with generics:
+Swift doesn't has generic protocol, the same generic functionalities are implemented using `associatedtype` 
+
+guides: https://www.avanderlee.com/swift/associated-types-protocols/
