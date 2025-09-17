@@ -20,4 +20,4 @@ This for only testing some swift code on the fly.
 -> After Export check the swift version to confirm
  - swift --version
 
-Note: Only by terminal command -> export PATH=/path/to/Swift/usr/bin:"${PATH}" -> Temporarily add the executable in path, no permanent solution.
+Note: Only by terminal command -> export PATH=/path/to/Swift/usr/bin:"${PATH}" -> Temporarily add the executable in path, no permanent solutions

@@ -130,6 +130,59 @@ EnvironmentValue Docs: https://developer.apple.com/documentation/swiftui/environ
 Docs: https://swiftrocks.com/whats-type-and-self-swift-metatypes
 
 ### protocol `associatedtype` | Usages with generics:
-Swift doesn't has generic protocol, the same generic functionalities are implemented using `associatedtype` 
+Swift doesn't has generic protocol, the same generic-protocol functionalities are implemented using `associatedtype`.
+
+`associatedtype`s are placeholders for types that the protocol.
+
+```swift
+protocol CarrierRobot {
+    associatedtype Item
+    func carry(_ item: Item)
+}
+
+struct BookCarrier: CarrierRobot {
+    // the associatedtype replacement is specified here to `Book`
+    func carry(_ item: Book) {
+        print("Carrying a book titled \(item.title)")
+    }
+}
+
+struct Book {  
+    let title: String  
+}
+
+struct BallCarrier: CarrierRobot {
+    // the associatedtype is specified here to `Ball`
+    func carry(_ item: Ball) {
+        print("Carrying a ball of size \(item.size)")
+    }
+}
+
+struct Ball {  
+    let size: Int
+}
+```
+
+
+* Using generics (function) with protocol associatedtype
+
+```swift
+protocol CarrierRobot {
+    associatedtype Item
+    func carry(_ item: Item)
+}
+
+struct GenericCarrier<T>: CarrierRobot {
+    func carry(_ item: T) {
+        print("Carrying item: \(item)")
+    }
+}
+
+let bookCarrier = GenericCarrier<Book>()
+bookCarrier.carry(Book(title: "Swift Programming"))
+
+let ballCarrier = GenericCarrier<Ball>()
+ballCarrier.carry(Ball(size: 10))
+```
 
 guides: https://www.avanderlee.com/swift/associated-types-protocols/

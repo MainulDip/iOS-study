@@ -140,7 +140,7 @@ Like most networking APIs, the URLSession API is highly asynchronous. Depending 
 
 2. usually provide completion handler
 
-3. receive callbacks to a delegate method as the transfer progresses and immediately after it completes
+3. receive callbacks to a delegate method as the transfer progresses and immediately after it completes.......
 
 the URLSession also provides status and progress properties to make programmatic decisions based on the current state of the task (with the caveat that its state can change at any time).
 
