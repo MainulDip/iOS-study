@@ -22,11 +22,12 @@ struct ContentView: View {
                 .foregroundColor(tokens.colors.onSedondary)
                 .background(tokens.colors.sedondary)
                 .cornerRadius(tokens.spacing.radiusSm)
-                
+            
         }
         .padding()
         .background(tokens.colors.background)
     }
+        
 }
 
 #Preview {

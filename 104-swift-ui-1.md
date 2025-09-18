@@ -298,3 +298,104 @@ struct MainView: View {
     }
 }
 ```
+
+### `@ViewBuilder` and `@resultBuilder`:
+The `@ViewBuilder` attribute is one of the few result builders `@resultBuilder` already available in SwiftUI. Used to constructs one or more view from closures.
+
+```swift
+struct VHStack<Content: View>: View {
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+
+    let content: Content
+
+    init(@ViewBuilder _ content: () -> Content) {
+        self.content = content()
+    }
+
+    var body: some View {
+        if horizontalSizeClass == .compact {
+            VStack {
+                content
+            }
+        } else {
+            HStack {
+                content
+            }
+        }
+    }
+}
+
+struct ContentView: View {
+    var body: some View {
+        VHStack {
+            Text("Hello, World!")
+            Text("Result Builders are great!")
+        }
+    }
+}
+
+// we can get rid of custom init, as Structs comes with a default one
+struct VHStack<Content: View>: View {
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @ViewBuilder var content: () -> Content
+
+    var body: some View {
+        if horizontalSizeClass == .compact {
+            VStack {
+                content()
+            }
+        } else {
+            HStack {
+                content()
+            }
+        }
+    }
+}
+
+// Creating methods with `@ViewBuilder`
+extension Slider {
+    @ViewBuilder
+    func minimumTrackColor(_ color: Color) -> some View {
+        if #available(macOS 11.0, *) {
+            accentColor(color)
+        } else {
+            self
+        }
+    }
+}
+```
+
+
+Docs: https://www.avanderlee.com/swiftui/viewbuilder/
+
+* `@resultBuilder` : Result builders are used to build up a result using ‘build blocks’ lined up after each other. It's kind of creating a `DSL` for building a result minimizing return statement.
+
+* requires to have buildBlock() function
+
+```swift
+@resultBuilder
+struct SimpleStringBuilder {
+    static func buildBlock(_ parts: String...) -> String {
+        parts.joined(separator: "\n")
+    }
+}
+
+let joined = SimpleStringBuilder.buildBlock(
+    "Why settle for a Duke",
+    "when you can have",
+    "a Prince?"
+)
+
+print(joined)
+
+// also possible
+@SimpleStringBuilder func makeSentence3() -> String {
+    "Why settle for a Duke"
+    "when you can have"
+    "a Prince?"
+}
+
+print(makeSentence3())
+```
+
+Docs: https://www.hackingwithswift.com/swift/5.4/result-builders

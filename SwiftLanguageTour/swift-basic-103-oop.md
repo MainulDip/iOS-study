@@ -678,6 +678,8 @@ print(SomeClass.computedTypeProperty)
 ### Subscripts
 Classes, structures, and enumerations can define subscripts, which are shortcuts for accessing the member elements of a collection, list, or sequence. 
 
+* every type comes with a keyPath subscript already defined `subscript(keyPath:)`
+
 ```swift
 /*
 * Basic Subscripts
@@ -737,6 +739,197 @@ let mars = Planet[4]
 print(mars)
 ```
 
-### Generics:
+### types | MetaType | `.Type` | `.self` | `.Protocol` | `typeOf()`:
+A metatype type refers to the type (dynamic/runtime type) of any type (Static/Compile time type), including class types, structure types, enumeration types, and protocol types.
+
+* using metatype, everything of a class can be accessed from an instance (`type(of: instance)`). 
+
+The static type of a value is the known, compile-time type of the value. The dynamic type of a value is the value’s actual type at run-time, which can be a subtype of its concrete type.
+
+```swift
+// type(of:) for fetching runtime type
+func printInfo(_ value: Any) {
+    let t = type(of: value)
+    print("'\(value)' of type '\(t)'")
+}
+
+
+let count: Int = 5
+printInfo(count)
+// '5' of type 'Int'
+```
+
+Metatype for class, structure, or enumeration are the type followed by `.Type` and for Protocol `.Protocol`. 
+
+`SomeClass.self` to get metatype as value. For example, SomeClass.self returns SomeClass itself, not an instance of SomeClass. Same for `SomeProtocol.self`.
+
+```swift
+class SomeBaseClass {
+  // class functions are static + overriable 
+    class func printClassName() {
+        print("SomeBaseClass")
+    }
+}
+class SomeSubClass: SomeBaseClass {
+    override class func printClassName() {
+        print("SomeSubClass")
+    }
+}
+let someInstance: SomeBaseClass = SomeSubClass()
+// The compile-time type of someInstance is SomeBaseClass,
+// and the runtime type of someInstance is SomeSubClass
+type(of: someInstance).printClassName()
+// Prints "SomeSubClass"
+
+print(type(of: someInstance.self)) // SomeSubClass
+print("\(SomeBaseClass.self)") // SomeBaseClass
+
+let x: SomeBaseClass.Type = type(of: someInstance)
+print(type(of: x)) // SomeBaseClass.Type
+
+let y: SomeSubClass.Type = type(of: SomeSubClass())
+print(type(of: y)) // SomeSubClass.Type
+
+// `.self` is the value of metatype `.Type`
+let z: SomeSubClass.Type = SomeSubClass.self
+print(z) // SomeSubClass
+```
+
+Docs:
+- https://swiftrocks.com/whats-type-and-self-swift-metatypes
+- https://docs.swift.org/swift-book/documentation/the-swift-programming-language/types/#Metatype-Type
+
+### types | opaque type `some` with Protocol:
+An opaque type defines a type that conforms to a protocol or protocol composition, without specifying the underlying concrete type. A function that uses an opaque type as its return type must return values that share a single underlying type. To return multiple types, use @resultBuilder (@ViewBuilder) to compose multiple returns into single.
+
+Writing an opaque type for a parameter is syntactic sugar for using a generic type, without specifying a name for the generic type parameter.
+
+* opaque type cannot be used as a parameter to a function/closure type
+
+```swift
+func someFunction(x: some MyProtocol, y: some MyProtocol) { }
+func someFunction<T1: MyProtocol, T2: MyProtocol>(x: T1, y: T2) { }
+// both are same, the opaque type `some` adds syntactic sugar
+
+// not allowed in parameters of a function/closure type
+protocol MyProtocol { }
+func badFunction() -> (some MyProtocol) -> Void { }  // Error
+func anotherBadFunction(callback: (some MyProtocol) -> Void) { }  // Error
+```
+
+### KeyPath Expressions | `\<#type name#>.<#path#>`:
+A key-path expression refers to a instance property or subscript of a type (class,struct, enum, etc). Not for static or class property.
+
+* At compile time, a key-path expression is replaced by an instance of the KeyPath class `class KeyPath<Root, Value>`
+
+To access a value using a key path, pass the key path to the subscript(keyPath:) subscript, which is available on all types.
+
+* subscript(keypath:) is available on all types
+
+```swift
+struct SomeStructure {
+    var someValue: Int
+}
+
+let s = SomeStructure(someValue: 12)
+let pathToProperty = \SomeStructure.someValue
+
+
+let value = s[keyPath: pathToProperty]
+print(value) // value is 12
+
+// The type name can be omitted if it is inferable
+let value = s[keyPath: \.someValue]
+
+// The path can refer to self to create the identity key path (\.self)
+var compoundValue = (a: 1, b: 2)
+// Equivalent to compoundValue = (a: 10, b: 20)
+compoundValue[keyPath: \.self] = (a: 10, b: 20) // mutating all at once
+```
+
+Docs: https://docs.swift.org/swift-book/documentation/the-swift-programming-language/expressions/#Key-Path-Expression
+
+### KeyPath as function:
+Key path literals can now be passed as functions from swift 5.2
+
+```swift
+struct Movie {
+    var name: String
+    var isFavorite: Bool
+    ...
+}
+
+let movies: [Movie] = loadMovies() // array of movies
+
+// Equivalent to movies.map { $0.name }
+let movieNames = movies.map(\.name)
+
+// Equivalent to movies.filter { $0.isFavorite }
+let favoriteMovies = movies.filter(\.isFavorite)
+```
+
+### Escaping Closure | `@escaping`:
+When a closure in a function's parameter live longer than the container function, ie, calling later in time by storing into outer variable, the closure should specify `@escaping` statement.
+
+* Note: functions and closures are reference type not value.
+
+```swift
+// * we're storing closure into this variable, which will outlive the container closure
+var completionHandlers: [() -> Void] = []
+func someFunctionWithEscapingClosure(completionHandler: @escaping () -> Void) {
+    completionHandlers.append(completionHandler)
+}
+
+func someFunctionWithNonescapingClosure(closure: () -> Void) {
+    closure()
+}
+
+
+class SomeClass {
+    var x = 10
+    func doSomething() {
+        someFunctionWithEscapingClosure { self.x = 100 }
+        // someFunctionWithEscapingClosure { [self] in x = 100 } // capturing self will also work
+        someFunctionWithNonescapingClosure { x = 200 } // no need for explicit self
+    }
+}
+
+
+let instance = SomeClass()
+instance.doSomething()
+print(instance.x)
+// Prints "200"
+
+
+completionHandlers.first?() // calling closure from stored list
+print(instance.x)
+// Prints "100"
+```
+
+* `@escaping` closure cannot capture self within value type (struct/enum) for self mutation. only classes are supported. 
+
+```swift
+struct SomeStruct {
+    var x = 10
+    mutating func doSomething() {
+        someFunctionWithNonescapingClosure { x = 200 }  // Ok
+        someFunctionWithEscapingClosure { x = 100 }     // Error
+    }
+}
+```
+
+Docs : https://docs.swift.org/swift-book/documentation/the-swift-programming-language/closures/#Escaping-Closures
+
+### AutoClosure | `@autoclosure`:
+By specifying a functions parameter closure (`() -> Void` type) with `@autoclosure` will provide flexibility to just pass the body of the closure without enclosing into braces `{}` (closure expression).
+
+```swift
+// customersInLine is ["Ewa", "Barry", "Daniella"]
+func serve(customer customerProvider: @autoclosure () -> String) {
+    print("Now serving \(customerProvider())!")
+}
+serve(customer: customersInLine.remove(at: 0))
+// Prints "Now serving Ewa!"
+```
 
 ### Methods

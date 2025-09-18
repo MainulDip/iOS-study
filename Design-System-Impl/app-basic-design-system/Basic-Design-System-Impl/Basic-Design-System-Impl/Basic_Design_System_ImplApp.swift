@@ -9,9 +9,23 @@ import SwiftUI
 
 @main
 struct Basic_Design_System_ImplApp: App {
+    
+    init () {
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .task {
+                    performAsyncTask {
+                        print("hello world")
+                    }
+                }
         }
+    }
+    
+    func performAsyncTask(completion: () -> Void) {
+        Thread.sleep(forTimeInterval: 10.0)
+        completion() // Calling the completion closure after the task is finished
     }
 }
