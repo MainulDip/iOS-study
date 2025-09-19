@@ -41,7 +41,7 @@ print(quotation)
 * - Mutable Collection: Defined with var (variable)
 * - Immutable Collection: Defined with let (constant)
 
-To create an empty array or dictionary, use the initializer syntax, ie `[]`, `[:]`
+Dictionary Creation: To create an empty array or dictionary, use the initializer syntax, ie array `[]`, dictionary `[:]`
 ```swift
 var emptyArray: [String] = [] // empty array
 var emptySet = Set<String>() // empty set

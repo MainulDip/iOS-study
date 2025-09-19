@@ -388,7 +388,7 @@ let joined = SimpleStringBuilder.buildBlock(
 
 print(joined)
 
-// also possible
+// using with function 
 @SimpleStringBuilder func makeSentence3() -> String {
     "Why settle for a Duke"
     "when you can have"

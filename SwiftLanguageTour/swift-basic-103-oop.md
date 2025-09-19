@@ -203,6 +203,236 @@ case let .failure(message):
 // Failure...  Out of cheese.
 ```
 
+* Creating custom Button component using enum (for predictable button variances) in SwiftUI
+
+```swift
+public struct DSButton: View {
+    
+    public enum Style {
+        case primary
+        case secondary
+        case destructive
+        case ghost
+    }
+    
+    public enum Size {
+        case small
+        case medium
+        case large
+    }
+    
+    private let title: String
+    private let style: Style
+    private let size: Size
+    private let isLoading: Bool
+    private let action: () -> Void
+    
+    public init(
+        _ title: String,
+        style: Style = .primary,
+        size: Size = .medium,
+        isLoading: Bool = false,
+        action: @escaping () -> Void
+    ) {
+        self.title = title
+        self.style = style
+        self.size = size
+        self.isLoading = isLoading
+        self.action = action
+    }
+    
+    public var body: some View {
+        Button {
+            action()
+        } label: {
+            Text(title)
+                .font(fontForSize)
+                .foregroundStyle(foregroundColorForStyle)
+                .padding(paddingForSize)
+        }
+        .background(backgroundColorForStyle)
+        .cornerRadius(cornerRadiusForSize)
+    }
+}
+
+private extension DSButton {
+    var fontForSize: Font {
+        switch size {
+        case .small: return DSTypography.labelSmall
+        case .medium: return DSTypography.labelMedium
+        case .large: return DSTypography.labelLarge
+        }
+    }
+    
+    var fontWeightForStyle: Font.Weight {
+        switch style {
+        case .primary, .destructive: return .semibold
+        case .secondary, .ghost: return .medium
+        }
+    }
+    
+    var foregroundColorForStyle: Color {
+        switch style {
+        case .primary: return DSColors.onPrimary
+        case .secondary: return DSColors.onSedondary
+        case .destructive: return DSColors.onError
+        case .ghost: return DSColors.onSurface
+        }
+    }
+    
+    var backgroundColorForStyle: Color {
+        switch style {
+        case .primary: return DSColors.primary
+        case .secondary: return DSColors.sedondary
+        case .destructive: return DSColors.error
+        case .ghost: return DSColors.surface
+        }
+    }
+    
+    var paddingForSize: EdgeInsets {
+        switch size {
+            case .small: return EdgeInsets(top: DSSpacing.sm, leading: DSSpacing.md, bottom: DSSpacing.sm, trailing: DSSpacing.md)
+            case .medium: return EdgeInsets(top: DSSpacing.md, leading: DSSpacing.lg, bottom: DSSpacing.md, trailing: DSSpacing.lg)
+            case .large: return EdgeInsets(top: DSSpacing.lg, leading: DSSpacing.xl, bottom: DSSpacing.lg, trailing: DSSpacing.xl)
+        }
+    }
+    
+    var cornerRadiusForSize: CGFloat {
+        switch size {
+            case .small: return DSSpacing.sm
+            case .medium: return DSSpacing.md
+            case .large: return DSSpacing.lg
+        }
+    }
+}
+```
+
+* Using enum to construct different kind-of end-points for Networking layers.
+
+```swift
+enum Endpoint {
+    case fetchPosts(url: String = "/posts")
+    case fetchOnePost(url: String = "/posts", postId: Int = 1)
+    case sendPost(url: String = "/posts", post: Post)
+    
+    var request: URLRequest? {
+        guard let url = self.url else { return nil }
+        var request = URLRequest(url: url)
+        request.httpMethod = self.httpMethod
+        request.httpBody = self.httpBody
+        request.addValues(for: self)
+        return request
+    }
+    
+    private var url: URL? {
+        var components = URLComponents()
+        components.scheme = Constants.scheme
+        components.host = Constants.baseURL
+        components.port = Constants.port
+        components.path = self.path
+        components.queryItems = self.queryItems
+        return components.url
+    }
+    
+    private var path: String {
+        switch self {
+        case .fetchPosts(let url):
+            return url
+        case .fetchOnePost(let url, let postId):
+            return "\(url)/\(postId.description)"
+        case .sendPost(let url, _):
+            return url
+            
+        }
+    }
+    
+    private var queryItems: [URLQueryItem] {
+        switch self {
+            default :
+            return []
+        }
+    }
+    
+    private var httpMethod: String {
+        switch self {
+        case .fetchPosts, .fetchOnePost:
+            return HTTP.Method.get.rawValue
+        case .sendPost:
+            return HTTP.Method.post.rawValue
+        }
+    }
+    
+    private var httpBody: Data? {
+        switch self {
+        case .fetchPosts, .fetchOnePost:
+            return nil
+        case .sendPost( _, let post ):
+            let jsonPost = try? JSONEncoder().encode(post)
+            return jsonPost
+        }
+    }
+}
+
+
+extension URLRequest {
+    mutating func addValues(for endpoint: Endpoint) {
+        switch endpoint {
+        case .fetchPosts, .fetchOnePost:
+            break
+        case .sendPost:
+            self.setValue(HTTP.Headers.Value.applicationJson.rawValue, forHTTPHeaderField: HTTP.Headers.Key.contentType.rawValue)
+        }
+    }
+}
+
+enum APIError: Error {
+    case urlSessionError(String)
+    case serverError(String = "Invalid API key")
+    case invalidResponse(String = "Invalid Response from server")
+    case decodingError(String = "Decoding Error, Error persing server response")
+    
+}
+
+protocol Service {
+    func makeRequest<T: Codable> (with request: URLRequest, type: T.Type, completion: @escaping (T?, APIError?) -> Void)
+}
+
+class APIService: Service {
+    func makeRequest<T: Codable>(with request: URLRequest, type: T.Type, completion: @escaping (T?, APIError?) -> Void) {
+        //completion(nil, APIError.decodingError())
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let error = error {
+                completion(nil, .urlSessionError(error.localizedDescription))
+                return
+            }
+            
+            if let res = response as? HTTPURLResponse, res.statusCode > 299 {
+                completion(nil, .serverError())
+                return
+            }
+            
+            guard let data = data else {
+                completion(nil, .invalidResponse())
+                return
+            }
+            
+            do {
+                let result = try JSONDecoder().decode(T.self, from: data)
+                completion(result, nil)
+            } catch let err {
+                print(err)
+                completion(nil, .decodingError())
+                return
+            }
+            
+            
+        }
+        .resume()
+    }
+}
+```
+
 
 ### Structure/Enumeration vs Class (value type vs reference type):
 * value type `struct` vs reference type `class`
@@ -264,7 +494,6 @@ struct Paramedic: AdvancedLifeSupport {
     // performCPR method is required by AdvancedLifeSupport protocol
     func performCPR() {
         print("The paramedic does chest compression, 30 per second")
-        
     } 
 }
 
@@ -317,6 +546,7 @@ struct S1: Ex {
 class C1: Ex {
     var a = 7.0;
     var b = 7.0;
+    class var overridableStaticProp = 123
     func res() -> Double {
         a = pow(a, 2); // or a = a * a;
         b = pow(b, 2); // or b = b * b;
@@ -440,8 +670,10 @@ When a property is computed using other stored properties. Use signature like `v
 
 ```swift
 struct S {
-  var prop1: Int = 1
-  var prop2: Int = 2
+  var prop1: Int = 1 // stored property
+  var prop2: Int = 2 // stored property
+
+  // comp and comp2 are computed properties here
   var comp: Int { prop1 + prop2 } // only implicit get{} is supplied
 
   // both get/set are supplied
