@@ -161,7 +161,7 @@ do {
 ```swift
 let age = -3
 assert(age >= 0, "A person's age can't be less than zero.")
-// This assertion fails because -3 isn't >= 0.
+// This assertion fails because -3 isn't >= 0
 ```
 
 * Preconditions:

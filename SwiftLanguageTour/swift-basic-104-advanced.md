@@ -16,7 +16,7 @@ class X {
     
     lazy var lazyClosureWithParam: Int = { (a: Int, b: Int) -> Int in
         return a * b
-    } (12, 12) // lazy always requires envoked/called closure
+    } (12, 12) // lazy always requires invoked/called closure
     
     lazy var lazyFn: () -> Int = {
         return 12
@@ -53,7 +53,7 @@ print("\(i.number)")
 print("\(i.closureWithParam(1,2))") // 2
 print("\(i.closureWithParam(3,4))") // 12
 print("\(i.closureWithParam2)") // 49
-// print("\(insS.closureWithParam2(3,4))") // closureWithParam2 is not a function type, as it's been envoked already, its only an Int
+// print("\(insS.closureWithParam2(3,4))") // closureWithParam2 is not a function type, as it's been invoked already, its only an Int
 print("\(i.lazyClosureWithParam)") // 144
 print("\(i.lazyFn())") // 12
 print("\(i.lazyFnWithParam(21))") // 144
@@ -110,21 +110,41 @@ class VehicleWithRequiredInit {
 
 class CarWithRequiredInit: VehicleWithRequiredInit {
     var brand: String
-    
+    required init(numberOfWheels: Int) {
+        self.brand = "Generic Brand"
+        super.init(numberOfWheels: numberOfWheels)
+        print("carWithRequiredInit Single required init")
+    }
+}
+
+class CarWithRequiredInit2: VehicleWithRequiredInit {
+    var brand: String
+    required init(numberOfWheels: Int) {
+        self.brand = "Generic2 Brand"
+        super.init(numberOfWheels: numberOfWheels)
+        print("carWithRequiredInit2")
+    }
+
+    // we can have multiple required init, but should have the super class's init's param, `numberOfWheels` in this case
     required init(brand: String, numberOfWheels: Int) {
         self.brand = brand
         super.init(numberOfWheels: numberOfWheels)
         print("CarWithRequiredInit - Brand: \(brand)")
     }
-
-    required init(numberOfWheels: Int) {
-        fatalError("init(numberOfWheels:) has not been implemented")
-    }
 }
 
-// Create an instance of CarWithRequiredInit
-let carWithRequiredInit = CarWithRequiredInit(brand: "Toyota", numberOfWheels: 4)
-print(carWithRequiredInit)
+// Single required init
+let carWithRequiredInit = CarWithRequiredInit(numberOfWheels: 6)
+
+// Multiple required init, calling any one will work
+let carWithRequiredInit2a = CarWithRequiredInit2(brand: "Toyota", numberOfWheels: 4)
+let carWithRequiredInit2b = CarWithRequiredInit2(numberOfWheels: 12)
+
+// subclass gets the numberOfWheels properties from its super class 
+print("carWithRequiredInit.numberOfWheels = \(carWithRequiredInit.numberOfWheels)") // 6
+
+print(type(of: carWithRequiredInit2a)) // CarWithRequiredInit2
+print(type(of: carWithRequiredInit2b)) // CarWithRequiredInit2
 ```
 
 In this example, both Vehicle and Car classes have a required initializer that must be implemented by any subclass.
@@ -152,10 +172,6 @@ if let temperature = Temperature(celsius: 25) {
 ```
 
 Blog Post => https://medium.com/@shahriarhossain_dev/understanding-swifts-init-methods-from-basics-to-advanced-ef094a495e04
-
-### Failable Initializers:
-https://developer.apple.com/swift/blog/?id=17
-
 
 
 ### Capture Lists in Depth | `[self] | [weak self]` in closure: 
@@ -302,7 +318,7 @@ print("x = \(x), y = \(y) and unchanged z = \(z)")
 - and they need to cover all possibility (exhaustive). If not enum, there must be `default` statement. 
 
 * switch case's value binding
-A switch case can name the value or values it matches to temporary constants or variables, for use in the body of the case. This behavior is known as value binding, because the values are bound to temporary constants or variables within the case’s body.
+A switch case can name the value or values it matches to temporary constants or variables, for use in the body of the case. This behavior is known as `value binding`, because the values are bound to temporary constants or variables within the case’s body.
 
 * Where
 - A switch case can use a where clause to check for additional conditions.
@@ -497,7 +513,7 @@ extension Stack where Element: Equatable {
 }
 ```
 
-### Contextual where clause:
+### Contextual where clause (with Protocol):
 This make defined function available when it matches where condition/s. It's a way to define `Contextual Constraint`. Without this, we may need to break the extension in multipart using top level where clause.
 
 * utilizing contextual where clause constraints
@@ -580,7 +596,7 @@ let stringIndex = findIndex(of: "Andrea", in: ["Mike", "Malcolm", "Andrea"])
 ```
 
 ### static func vs class func:
-`static` and `class` both associate a method with a class, rather than an instance of a class. The difference is that subclasses can override class methods; they cannot override `static` methods.
+`static` and `class` both associate a method with a class, rather than an instance of a class. The difference is that subclasses can override class methods, but they cannot override `static` methods.
 
 ```swift
 class AClass {

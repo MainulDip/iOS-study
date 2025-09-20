@@ -1168,4 +1168,4 @@ serve(customer: customersInLine.remove(at: 0))
 // Prints "Now serving Ewa!"
 ```
 
-### Methods
+### Method:
