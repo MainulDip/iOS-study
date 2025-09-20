@@ -664,7 +664,7 @@ print("\(storedPropEx.sthGet)") // prints 7
 ```
 
 #### computed property:
-When a property is computed using other stored properties. Use signature like `var computedProp: T { get{return:} set{} }`....
+When a property is computed using other stored properties. Use signature like `var computedProp: T { get{return:} set{} }`. Computed properties don't have default value like stored property.
 
 * Note: computed property must have an explicit type
 
@@ -701,10 +701,13 @@ print("\(s.comp)") // 6
 #### property observers | `willSet` & `didSet`:
 observers `willSet/didSet` can be applied to the stored properties (not in computed properties) as side effect triggers. `newValue` is available in `willSet` and `oldValue` is available in `didSet`.
 
-* willSet is called just before the value is stored.
-* didSet is called immediately after the new value is stored.
-* those will only trigger when their property changes after initialization, so changing property in `init` block will not trigger observers.
-* usually used to change other stored properties as side-effect
+* Stored property can have property observers
+* property observers and computed properties can't stay together
+
+- willSet is called just before the value is stored.
+- didSet is called immediately after the new value is stored.
+- those will only trigger when their property changes after initialization, so changing property in `init` block will not trigger observers.
+- usually/can-be used to change other stored properties as side-effect
 
 ```swift
 struct Person {
@@ -793,7 +796,7 @@ var singer = Person()
 print(singer.fibonacciOfAge)
 ```
 
-### Property Wrappers (@propertyWrapper) | requires `wrappedValue` computed properties:
+### Property Wrappers (`@propertyWrapper`) | requires `wrappedValue` computed properties:
 A property wrapper adds a layer of separation between code that manages how a property is stored and the code that defines a property. It helps to write the management code once (when defining the wrapper), and then reuse that management code by applying it to multiple properties. Supports both struct and class.
 
 * Requirements
@@ -888,10 +891,11 @@ enum SomeEnumeration {
 }
 class SomeClass {
     static var storedTypeProperty = "Some value."
+    class var someOverridableProp = "class properties can be overridden by sub classes"
     static var computedTypeProperty: Int {
         return 27
     }
-    class var overrideableComputedTypeProperty: Int {
+    class var overridableComputedTypeProperty: Int {
         return 107
     }
 }

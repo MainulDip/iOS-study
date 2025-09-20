@@ -790,7 +790,7 @@ Macros are used minimize repetitive code by wrapping them (in source code) to be
 
 2 kinds: they are called differently (`#` vs `@`)
  - `Freestanding` macros appear on their own, without being attached to a declaration. Starts with `#` like `#function` or `#warning("")`, signature `#macro(:)`
- - `Attached` macros modify the declaration that they’re attached to. Starts with `@` like `@Observable, @OptionSet<Int>` (signature `@macro<?>(??)`)
+ - `Attached` macros modify the declaration that they’re attached to. Starts with `@` like `@Observable, @OptionSet<Int>` (signature `@macro<?>(??)`).......
 
 ```swift
 // Freestanding Macro
@@ -977,7 +977,7 @@ print("name = \(name) age = \(age)") // name = Hello age = 26
 print("Casting name: \(p2.name as String) and age: \(p2.age as Int)") // Casting name: Hello and age: 26
 ```
 
-### Void vs Never:
+### Void `()` vs Never:
 When a function returns `Void`, it's actual return is an empty tuple `()`. But a function returning a Never, return nothing. Never is used to crash the app.
 
 When there is a combine operator's error type (second Generics Parameter) is Never. It means, we don't need to handle the error anymore, only the output is needs to be handled. Usually the error is handled before this steep in the pipeline. 

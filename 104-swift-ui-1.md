@@ -368,7 +368,7 @@ extension Slider {
 
 Docs: https://www.avanderlee.com/swiftui/viewbuilder/
 
-* `@resultBuilder` : Result builders are used to build up a result using ‘build blocks’ lined up after each other. It's kind of creating a `DSL` for building a result minimizing return statement.
+* `@resultBuilder` : Result builders are used to build up a result using ‘build blocks’ lined up after each other. It's kind of creating a `DSL` for building a result minimizing return statement.......
 
 * requires to have buildBlock() function
 
