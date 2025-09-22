@@ -1,5 +1,5 @@
 ### code organization and use of class/struct `extension`:
-when a ViewController gets long
+when a ViewController gets long (break that down)
 - the initial class declaration should contain only stored properties and property observers. As `extension` can not contain stored and property observers `willSet/didSet`
 - use `// MARK: <identification-comment>` before stored properties declaration, try to make similar properties live together.
 - maintain same order of placement for related methods (linked with the properties) in the `extension`
@@ -21,7 +21,7 @@ For client do - `obfuscation`
 https://www.massicotte.org/concurrency-glossary.......
 
 ### Indi app developer case study:
-https://swiftrocks.com/things-that-did-and-didnt-contribute-to-burnout-buddys-success.......
+https://swiftrocks.com/things-that-did-and-didnt-contribute-to-burnout-buddys-success
 
 ### API Key Managements for Development Phase:
 For development phase, its same for all, create the Env file and put that into the gitignore.
@@ -30,7 +30,7 @@ For iOS, create a property file `.plist` in xcode, add `.gitignore` entry for th
     - build the file path targeting the plist file
         - `Bundle.main.path(forResource: resourceName, ofType: "plist")`
     - and use that file path to build the `NSDictionary` like Set<String>
-        - `NSDictionary(contentsOfFile: filePath)`
+        - `NSDictionary(contentsOfFile: filePath)`.......
 
 
 Structured Way: Same approach can be used for `secret key` management for publishing app store apps
@@ -100,4 +100,4 @@ class ProdEnv: BaseEnv, APIKeyable {
 
 
 ### API Key Managements Secured/Production Phase:
-For apps those are intended to be published into app store, API key should never be stored into publicly available App's file. The should be stored into backend server, and app should use a bunch of secret keys as rotation. Never include your API keys in published apps
+For apps those are intended to be published into app store, API key should never be stored into publicly available App's file. They should be stored into backend server, and app should use a bunch of secret keys as rotation. Never include your API keys in published apps

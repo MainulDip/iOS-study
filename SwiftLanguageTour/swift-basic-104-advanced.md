@@ -723,13 +723,14 @@ f(x: 5)
 // Prints "First defer"
 ```
 
-Do statement: 
+### Do statement: 
     - do { try } catch { }
     - do { try } catch <pattern 1>, <pattern 2> where <condition> {}
     - do throw(<type>) {} catch <pattern> {} catch {}
 
 
-Compiler Control Statement: allows the program to change aspects of the compiler's behavior. 3 types
+### Compiler Control Statement: 
+allows the program to change aspects of the compiler's behavior. 3 types
     - conditional-compilation-block `#if`, `#elseif`, `#else`, `#endif`
     - line-control-statement: `sourceLocation()` for debugging in build directory
     - diagnostic-statement: `#available()` or `#unavailable()` followed by #if/#elseif
@@ -769,7 +770,7 @@ targetEnvironment(): simulator, macCatalyst
 */
 ```
 
-Line control statement example
+### Line control statement example
 
 ```swift
 #sourceLocation(file: <#file path#>, line: <#line number#>)
@@ -778,7 +779,7 @@ Line control statement example
 // file-path → static-string-literal
 ```
 
-Availability Condition Example
+### Availability Condition Example
 
 ```swift
 if #available(<#platform name#> <#version#>, <#...#>, *) {
@@ -804,7 +805,7 @@ Macros are used minimize repetitive code by wrapping them (in source code) to be
 
 * Macros add new code, but they never delete or modify existing code (non related)
 
-2 kinds: they are called differently (`#` vs `@`)
+Those are 2 kinds & they are called differently (`#` vs `@`)
  - `Freestanding` macros appear on their own, without being attached to a declaration. Starts with `#` like `#function` or `#warning("")`, signature `#macro(:)`
  - `Attached` macros modify the declaration that they’re attached to. Starts with `@` like `@Observable, @OptionSet<Int>` (signature `@macro<?>(??)`).......
 

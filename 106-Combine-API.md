@@ -118,7 +118,7 @@ struct MySubscriber: Subscriber {
 }
 ```
 
-https://medium.com/@amitaswal87/combine-in-swift-third-part-types-of-publishers-and-subscribers-40175524b601
+https://medium.com/@amitaswal87/combine-in-swift-third-part-types-of-publishers-and-subscribers-40175524b601.......
 
 ### Combine basic usages (intro 1):
 ```swift
