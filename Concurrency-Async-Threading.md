@@ -688,6 +688,6 @@ Non blocking
 `Timer.scheduledTimer(:withTimeInterval:repeats)`
 `DispatchQueue.main.asyncAfter()`
 
-### Todo:
+### Todo
 => Find way like `thread sleep` to emulate concurrent behavior
 => Find what available for like `thread sleep` on both sync and async 

@@ -18,7 +18,7 @@ Always store them in the server
 For client do - `obfuscation`
 
 ### Swift Concurrency:
-https://www.massicotte.org/concurrency-glossary.......
+https://www.massicotte.org/concurrency-glossary
 
 ### Indi app developer case study:
 https://swiftrocks.com/things-that-did-and-didnt-contribute-to-burnout-buddys-success
