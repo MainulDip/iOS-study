@@ -45,7 +45,7 @@ func run() {
     - `Subscribers` are the same as Observers (props those listen for any changes on the publishers)
         - unless a Subscriber is attached, the Publisher will not emit data
         - All Subscribers conform to the `Cancellable` protocol
-        - Ex: `sink` and `assign`, and `onReceive` specifically for SwiftUI
+        - Ex: `sink` and `assign`, and `onReceive` ( `onReceive` is for SwiftUI )
         - `onReceive` takes a closure like `sink`, that can mutate `@State` or `@Bindings`
     - `Operators` are prebuilt functions included under Publisher, are used for business logic, encoding/decoding, error handling, retry logic, buffering and prefetch, and supporting debugging
         - Mapping Operators: `scan`, `map`, `tryScan`, `setFailureType`, `tryMap`, `flatMap`
@@ -60,7 +60,7 @@ func run() {
         - Ex: `CurrentValueSubject` (requires initial state) and `PassthroughSubject` (doesn't require initial state). Both will emit updates when `.send()` is invoked
         - Both are also useful for creating publisher for object conforming to `ObservableObject` protocol in SwiftUI
 
-* If we imagine a `Combine` workflow as a pipeline, the `Publisher` and `Subjects` (Special king of Publisher) are entry point, the Subscribers are the end of the pipeline, and `Operator` lives in the middle of the pipeline.
+* If we imagine a `Combine` workflow as a pipeline, the `Publisher` and `Subjects` (Special kind of Publisher) are entry point, the Subscribers are the end of the pipeline, and `Operator` lives in the middle of the pipeline.
 
 
 ### Combine TLDR | Frequently Used `Publishers`, `Subscriber` and Built-in + Custom Publisher/Subscriber:
@@ -170,8 +170,8 @@ Usually publishers are 2 types, but can be mixed (using operators)
 - PassThroughSubject and CurrentValueSubject (multi-shot)
 
 ### Scheduler | Threads:
-Publishers and Operators can run on different dispatchQueue and runloops, So, a subscriber needs to specify a `scheduler`. For uiUpdates, scheduler should be the `main thread` (RunLoop.main)
-    - receive(on: RunLoop.main) and subscribe are 2 function
+Publishers and Operators can run on different dispatchQueue and runloops, So, a `Subscriber` needs to specify a `scheduler`. For uiUpdates, scheduler should be the `main thread` (RunLoop.main)
+    - receive(on: RunLoop.main) and subscribe are 2 functions
         that need to specify scheduler
     - some operators, like, `delay`, `debounce` and `throttle` needs to specify scheduler.
 
@@ -299,7 +299,7 @@ https://www.donnywals.com/using-map-flatmap-and-compactmap-in-combine/
 
 https://www.vadimbulavin.com/map-flatmap-switchtolatest-in-combine-framework/
 
-### `PassthroughSubject` and `CurrentValueSubject` and Subject's Lifecycle:
+### Subject (Publisher) `PassthroughSubject` and `CurrentValueSubject` and Subject's Lifecycle:
 PassthroughSubject has no default value, doesn't capture state, it only pass-through the emitted values to the subscriber. and drop emitting when there is no subscriber attached.
 
 ```swift
@@ -442,17 +442,19 @@ Subscriber is need to be chained with a publisher, usually after specifying a sc
 ```swift
 // ViewModel
 final class MovieViewModel: ObservableObject {
-    @Published var movies: [Movie] = []
+    @Published var movies: [Movie] = [] // wherever (in SwiftUI view) this prop will be referenced, will be updated automatically
     var cancellables: Set<AnyCancellable> = []
     
     func fetchInitialData() {
+        // fetchMovies() -> some Publisher<MovieResponse, Error>
+        // struct MovieResponse: Decodable { let results: [Movie] }
         fetchMovies()
             .map(\.results)
             .receive(on: DispatchQueue.main)
             // .replaceError(with: []) // instead of using `.catch` block, this can also be used
             .catch { error in
                 print("Error: \(error)")
-                return Empty<[Movie], Never>()
+                return Empty<[Movie], Never>() 
             }
             // .assign(to: \.movies, on: self)
             .assign(to: &$movies) // better version than previous assign version with 2 parameters
@@ -471,12 +473,12 @@ final class MovieViewModel: ObservableObject {
 }
 ```
 
-### `ViewModel` Integration and code spiting:
+### `ViewModel` Integration (Combine + SwiftUI) and code splitting:
 ViewModel class conforms to `ObservableObject`, and properties are marked with `@Published` wrapper. VM functions will update the `@Published` properties and will be called from the View. 
 
-A property marked with `@StateObject` will get the ViewModel instance. `.onAppear` call back will call the VM function when that view is finished rendered.
+A property marked with `@StateObject` will get the ViewModel instance (in SwiftUI View). `.onAppear` callback will call the VM function when that view is finished rendered.
 
-Usually subscriber will be attached inside viewModel function.  
+Usually `subscriber`s will be already attached in viewModel class and will forward the data only (will not emit another publisher).  
 
 ```swift
 struct MoviesView: View {
@@ -642,6 +644,7 @@ struct RandomnessMonitor {
 
 
     mutating func sample() {
+        // instantiating a Result object, which can hold either the expected output (Int here) or an Error (`Result<Int, Error>`)
         let sample = Result { try randomnessSource.random() }
         results.append(sample)
     }

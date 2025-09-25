@@ -1,7 +1,7 @@
 ### Overviews:
 Quick guide building view's programmatically instead of interface builder (storyboard, ib-outlet) on uikit.
 
-### Setups:
+### Setups
 Starting a new app using `storyboard` and start coding from the `ViewController` will work. 
 
 Changing the background of the first screen.

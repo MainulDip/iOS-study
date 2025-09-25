@@ -70,7 +70,7 @@ struct LoginIntroApp: App { // inherit App protocol
     - Control Views: `Text`, `Label`, `Button`, `TabView`, `NavigationView/NavigationLink`, `Label`, etc
     - Paintings Views: Angular/Linear/Radial Gradient
     - Other Views: `Image`, `Group`, `Capsule`, `Container` Relative Shape, Empty View, Menu etc.
-- `Icons` : There are many system icons which can be listed/viewed using "SF Symbols" developer app (need to be installed). And can be inserted into views using : Image(systemName: "NameOfTheIcon").......
+- `Icons` : There are many system icons which can be listed/viewed using "SF Symbols" developer app (need to be installed), And can be inserted into views using : Image(systemName: "NameOfTheIcon").......
 
 ### Background Color:
 Background color works with ZStack (depth stack). So everything needs to be inserted into
