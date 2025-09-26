@@ -40,7 +40,7 @@ override func viewDidLoad() {
 ```
 
 ### Importing and using assets/images:
-From `Assets.xcassets` Images can be imported or dragged into. Each entry can support multiple (usually 3) variants for different device resolution. When dragging multiple images together, images suffixed with `@1..3x` will be sorted automatically, like `imagename@1x.jpeg` (`name@Nx.ext`)
+From `Assets.xcassets` Images can be imported or dragged into. Each entry can support multiple (usually 3) variants for different device resolution. When dragging multiple images together, images suffixed with `@1..3x` will be sorted automatically, like `imagename@1x.jpeg` (`name@Nx.ext`).......
 
 After importing into xcassets, images can be imported predictable way where parameter accepts `UIImage?`
 ```swift

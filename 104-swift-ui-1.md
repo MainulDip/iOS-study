@@ -73,7 +73,7 @@ struct LoginIntroApp: App { // inherit App protocol
 - `Icons` : There are many system icons which can be listed/viewed using "SF Symbols" developer app (need to be installed), And can be inserted into views using : Image(systemName: "NameOfTheIcon").......
 
 ### Background Color:
-Background color works with ZStack (depth stack). So everything needs to be inserted into
+Background color works with ZStack (depth stack). So everything needs to be inserted into ZStack
 
 ```swift
 ZStack {

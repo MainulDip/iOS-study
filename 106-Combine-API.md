@@ -651,6 +651,8 @@ struct RandomnessMonitor {
 
 
     func summary() -> (Double, Double) {
+        // on reduce's callback, first param is the object with initial and count and second param is the array element
+        // here the `sample` is an `Result` object containing `.success` and `.failure` cases. Which we can use to calculate the output
         let totals = results.reduce((sum: 0, count: 0)) { total, sample in
             switch sample {
             case .success(let number):
