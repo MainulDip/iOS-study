@@ -940,5 +940,7 @@ struct TestSome {
 }
 ```
 
-### `.self`, `.type` | Swift Meta-types:
-https://swiftrocks.com/whats-type-and-self-swift-metatypes
+### ObservableObject protocol to `@Observable` migration:
+
+
+Docs: https://developer.apple.com/documentation/swiftui/migrating-from-the-observable-object-protocol-to-the-observable-macro
