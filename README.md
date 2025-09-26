@@ -7,4 +7,3 @@ This repo is a personalized iOS and Swift study notes. Lets jump into. This repo
 https://github.com/dkhamsing/open-source-ios-apps.......
 
 ### Tasks:
-- Merge `navigation.md` into UIKit and SwiftUI-main
