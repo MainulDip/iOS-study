@@ -690,4 +690,4 @@ Non blocking
 
 ### Todo
 => Find way like `thread sleep` to emulate concurrent behavior
-=> Find what available for like `thread sleep` on both sync and async 
+=> Find what available for like `thread sleep` on both sync and async.

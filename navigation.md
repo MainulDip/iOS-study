@@ -64,4 +64,3 @@ NavigationView {
     }      
 }
 ```
-### Navigation Bar Buttons:

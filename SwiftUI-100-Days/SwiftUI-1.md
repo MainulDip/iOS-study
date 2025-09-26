@@ -50,7 +50,7 @@ To be able to get a mutable variable `@State` property-wrapper (annotation).
 
 It's said that `SwiftUI’s views are a function of their state`. So if state change the view will be updated.
 
-`$ Two Way Binding` (Binding<Type>) - is used to change/mutate/read (Read/Write) the declared state variable inside and outside of the body property at the same time. using two way binding, the view is informed about the change on a defined State. Is done by `$stateName` inside of a body::view and declaration of @State var.
+`$ Two Way Binding` (Binding<Type>) - is used to change/mutate/read (Read/Write) the declared state variable inside and outside of the body property at the same time. using two way binding, the view is informed about the change on a defined State. Is done by `$stateName` inside of the `body` and declaration of @State var.
 ```swift
 struct ContentView: View {
 
@@ -166,7 +166,7 @@ TextField("Amount", value: $amount, format: .currency(code: local.currency?.iden
 `@GestureState` stores values associated with a gesture that is currently in progress, such as how far you have swiped, except it will be reset to its default value when the gesture stops. This owns its data. More info.
 `@Namespace` creates an animation namespace to allow matched geometry effects, which can be shared by other views. This owns its data.
 `@NSApplicationDelegateAdaptor` is used to create and register a class as the app delegate for a macOS app. This owns its data.
-@ObservedObject refers to an instance of an external class that conforms to the ObservableObject protocol. This does not own its data
+`@ObservedObject` refers to an instance of an external class that conforms to the ObservableObject protocol. This does not own its data. 
 `@Published `is attached to properties inside an ObservableObject, and tells SwiftUI that it should refresh any views that use this property when it is changed. This owns its data
 `@ScaledMetric `reads the user’s Dynamic Type setting and scales numbers up or down based on an original value you provide. This owns its data
 `@SceneStorage `lets us save and restore small amounts of data for state restoration. This owns its data

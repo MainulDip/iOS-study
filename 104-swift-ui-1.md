@@ -72,8 +72,8 @@ struct LoginIntroApp: App { // inherit App protocol
     - Other Views: `Image`, `Group`, `Capsule`, `Container` Relative Shape, Empty View, Menu etc.
 - `Icons` : There are many system icons which can be listed/viewed using "SF Symbols" developer app (need to be installed), And can be inserted into views using : Image(systemName: "NameOfTheIcon").......
 
-### Background Color:
-Background color works with ZStack (depth stack). So everything needs to be inserted into ZStack
+### Background Color (App Screen):
+App Screen Background color works with ZStack (depth stack). So everything needs to be inserted into ZStack
 
 ```swift
 ZStack {
@@ -96,7 +96,7 @@ struct ContactBtn_Previews: PreviewProvider {
 }
 // also make the preview area "selectable" form the left bottom panel of the preview area
 ```
-### Scene Background Color:
+### Scene Background Color (App Screen Backgound):
 ```swift
 var body: some View {
     ZStack {

@@ -100,4 +100,4 @@ class ProdEnv: BaseEnv, APIKeyable {
 
 
 ### API Key Managements Secured/Production Phase:
-For apps those are intended to be published into app store, API key should never be stored into publicly available App's file. They should be stored into backend server, and app should use a bunch of secret keys as rotation. Never include your API keys in published app
+For apps those are intended to be published into app store, API key should never be stored into publicly available App's file. They should be stored into backend server, and app should use a bunch of secret keys as rotation. Never include your API keys in published apps

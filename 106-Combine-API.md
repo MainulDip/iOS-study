@@ -788,7 +788,7 @@ struct RootView: View {
 ```
 
 ```swift
-/* @Environment */
+/* @Environment usages*/
 
 struct ThemeEnvironmentKey: EnvironmentKey {
     static var defaultValue = Theme.default
