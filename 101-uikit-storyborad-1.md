@@ -409,7 +409,7 @@ class SomeClass {
 - then the xib design file needs to be registered in the tableView Controller file. we need the `identifier` the parent/top container (Table View Cell) inside the xib and the name of the xib file (without xib extension)
 
 ```swift
-// inside viewDidLoad
+// inside viewDidLoad function
 tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
 ```
 

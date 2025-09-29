@@ -344,12 +344,12 @@ Text("Hello, world!")
 
 
 ### some View and Opaque Type Protocol:
-Opaque Type Hide implementation details about a value’s type. Likw `: some View` is any type Struct that implements View Protocol. (NB, Structs cannot inherit from another struct, can only implement multiple protocols and class can do both)
+Opaque Type Hide implementation details about a value’s type. Like `: some View` is any type Struct that implements View Protocol. (NB, Structs cannot inherit from another struct, can only implement multiple protocols and class can do both)
 docs: https://docs.swift.org/swift-book/documentation/the-swift-programming-language/opaquetypes/
 
 
 ### Conditional Modifiers:
-Using Modifies Conditionally to generate value using ternary operators based on a @State is more efficient than Conditionally generate different views.
+Using Modifiers, Conditionally to generate value using ternary operators based on a @State is more efficient than Conditionally generate different views.
 ```swift
 @State private var useRedText = false
 
@@ -406,7 +406,7 @@ VStack {
 * NB: there is no way of knowing ahead of time which modifiers are environment modifiers and which are regular modifiers other than reading the individual documentation for each modifier
 
 ### Properties to store and compute Views:
-View can be stored to Structs propety and can be used inside layout (body: some View). 
+View can be stored as property and can be used inside layout (body: some View). 
 ```swift
 struct ContentView: View {
     let motto1 = Text("Draco dormiens")
@@ -642,7 +642,7 @@ struct ContentView: View {
          * Date, Date Component and Calender is used
          */
         
-        let calenderTodayC = Calendar.current // get iser's current calender
+        let calenderTodayC = Calendar.current // get user's current calender
         let calenderToday : DateComponents = calenderTodayC.dateComponents(in: .current, from: Date.now)
         
         print("calenderToday props => hour : \(calenderToday.hour!), day:  \(calenderToday.day!), month :  \(calenderToday.month!), year : \(calenderToday.year!)")
