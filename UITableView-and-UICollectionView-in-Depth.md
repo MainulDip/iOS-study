@@ -4,7 +4,7 @@ A UITableView is a subclass of UIScrollView which is a view that users can scrol
 A UITableView can also contains sections where each section contains rows, and each row being represented by a cell
 
 ### TableView Implementation:
-Can be implemented into a `ViewController` or Using Separate class inheriting from `UITableViewController` 
+Can be implemented into a `ViewController` or Using Separate class inheriting from the `UITableViewController` 
 
 (UITableViewController Comes with Delegate and Datasource all ready inherited)
 

@@ -1105,6 +1105,8 @@ struct TextGestureAnimation: View {
     
     var body: some View {
         HStack(spacing: 0) {
+        // foreach signature
+        // public init<C>(_ data: Binding<C>, id: KeyPath<C.Element, ID>, @ViewBuilder content: @escaping (Binding<C.Element>) -> Content)
             ForEach(0..<letters.count, id: \.self) { num in
                 Text(String(letters[num]))
                     .padding(5)

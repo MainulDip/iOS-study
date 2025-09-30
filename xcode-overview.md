@@ -17,7 +17,7 @@ When writing code, keep open the `Inspector's quick help ?` (top right corner), 
 - `ctrl + cmd + left` to navigate to the previous file (ie, when there are some error, the editor will be already change to the file that is throwing the error, the cause of the error is not that file obviously, so to switch back the editing file, use the keyword). For inspecting doc this kind of navigation is also handy, `ctrl+cmd+left/right` .......
 
 ### Major areas:
-- Left (cmd 0) | Right | Bottom .
+- Left (cmd 0) | Right (cmd opt 0) | Bottom .
 - right inspector panel (cmd + alt/option + 0)
 - right preview area `cmd+alt+enter` to show/hide and `cmd+enter` to hide
 - Show/Hide Bottom App Launcher Panel `cmd+alt+d`
