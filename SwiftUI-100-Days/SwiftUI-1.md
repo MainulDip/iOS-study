@@ -1166,7 +1166,7 @@ struct ConditionalViewToggleAnim: View {
 }
 ```
 ### Custom transition with Custom Modifier:
-Custom transition animation is made possible by the .modifier transition, which accepts any view modifier we want. But we need to be able to instantiate the modifier, which means the `.modifier` needs to be one we create ourselves (custom modifier implementation).
+Custom transition animation is made possible by the .modifier transition, which accepts any view modifier we want. But we need to be able to instantiate the modifier, which means the `.modifier` needs to be one created by ourselves (custom modifier implementation).
 ```swift
 struct CustomTransitionAnim: View {
     
@@ -1216,7 +1216,7 @@ extension AnyTransition {
 }
 ```
 
-### Combine transition:
+### Combining transition:
 https://www.hackingwithswift.com/quick-start/swiftui/how-to-combine-transitions
 
 ### AnyTransition in SwiftUI:
@@ -1262,7 +1262,7 @@ print("student4 name: \(student4.name)") // Y
 
 
 ### Using Class For Sharing @State:
-`Structs` always have unique owners, so if we have two SwiftUI views and we send them both the same struct to work with, they actually each have a unique copy of that struct, if one changes it, the other won’t see that change. On the other hand, if we create an instance of a class and send that to both views, they will share changes.
+`Structs` always have unique owners/copies, so if we have two SwiftUI views and we send them both the same struct to work with, they actually each have a unique copy of that struct, if one changes it, the other won’t see that change. On the other hand, if we create an instance of a class and send that to both views, they will share changes.
 
 - How @State works in struct and Class
 With Struct, every time we modified a property of that struct Swift was actually creating a new instance of the struct. @State was able to spot that change, and automatically reloaded our view. When we have a class, that behavior no longer happens: Swift can just modify the value directly.
@@ -1284,7 +1284,7 @@ class DataClass {/* props and other definitions */}
 ```
 
 ### Macro , @Observable and Observation import:
-`Macro` -> adds extra functionality behind the scene to the annotated wrapper `@...` clode block. `@Observable` property-wrapper/annotation is a macro. It add more code to provide desired Observation functionality behind the scene.
+`Macro` -> adds extra functionality behind the scene to the annotated wrapper `@...` code block. `@Observable` property-wrapper/annotation is a macro. It add more code to provide desired Observation functionality behind the scene.
 
 xcode can reveal what is happening by using the `@Observable` macro annotation with a class by using a `import Observation` declaration. Then right click on the @Observable and choose `Expand Macro` to see the details
 
@@ -1435,7 +1435,7 @@ If the value changes, SwiftUI updates any parts of your view that depend on the 
 @Environment Docs: https://developer.apple.com/documentation/swiftui/environment
 EnvironmentValue Docs: https://developer.apple.com/documentation/swiftui/environmentvalues
 
-### Deleting Items Wid Swipe Delete and .toolbar:EditButton :
+### Deleting Items With Swipe Delete and .toolbar:EditButton :
 SwiftUI provides some builtin Modifier and function to delete list items by swiping or select delete.
 
 This example creates a view where user can add numbers to the screen and delete it by swiping left or an Edit button on toolbar to select and delete multiple items at once.
@@ -1472,6 +1472,7 @@ struct DeletingItem: View {
 ### UserDefaults for storing user setting/data and @AppStorage:
 UserDefault is suitable for storing small amount of data. There is no limit set, but as everything will loads while app opens, storing big data could slow app initialization. Best to be lower than 512KB.
 
+
 @AppStorage can Wrap-up the UserDefaults, which provide more simpler property storage option.
 
 ```swift
@@ -1506,7 +1507,7 @@ struct ContentView: View {
 }
 ```
 
-* Note on AppStore Submission: Apple asks that you let them know why you're loading and saving data using UserDefaults. This also applies to the @AppStorage property wrapper. They just want to make sure developers aren't trying to identify users across apps.
+* Note on AppStore Submission: Apple asks that you let them know why you're loading and saving data using UserDefaults. This also applies to the @AppStorage property wrapper. They just want to make sure developers aren't trying to identify users across apps
 
 ### Codable and Object Archiving with JSONEncoder/Decoder:
 ```swift

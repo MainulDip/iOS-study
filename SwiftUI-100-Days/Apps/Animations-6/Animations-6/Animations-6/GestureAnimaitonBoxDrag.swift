@@ -11,6 +11,8 @@ struct GestureAnimaitonBoxDrag : View {
     
     @State private var dragAmount = CGSize.zero
     
+    @State var someArr = Array(0..<100)
+    
     var body: some View {
         VStack {
             LinearGradient(colors: [.yellow, .red], startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -30,6 +32,21 @@ struct GestureAnimaitonBoxDrag : View {
                 )
                 // .animation(.easeInOut, value: dragAmount)
                 // removing the both way animation with only onEnded part by withAnimation inside the callback
+            
+            List {
+                Text("Hello, World!")
+                
+                ForEach(someArr, id: \.self) { i in Text("\(i)") }
+                    .onDelete { indexSet in
+                        print("Deleted number is \(someArr[Array(indexSet)[0]])")
+                        
+                        for (index, element) in indexSet.enumerated() {
+                            print("Selected index: \(index) and current element index: \(element)")
+                        }
+                        
+                        someArr = someArr.filter { !indexSet.contains($0) }
+                    }
+            }
         }
     }
 }
