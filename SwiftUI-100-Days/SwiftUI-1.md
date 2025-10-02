@@ -1827,7 +1827,7 @@ struct GridExample: View {
 }
 ```
 
-### Bundle and creating a extension for loading and decoding a JSON file:
+### Bundle and creating an extension for loading and decoding a JSON file:
 Apple uses bundles to represent apps, frameworks, plug-ins, and many other specific types of content. By using a bundle object, you can access a bundle's resources without knowing the structure of the bundle in different platform. The bundle object provides a single interface for locating items, taking into account the bundle structure, user preferences, available localizations, and other relevant factors.
 
 Any executable can use a bundle object to locate resources, either inside an app’s bundle or in a known bundle located elsewhere. But not in a container directory or in other parts of the file system.

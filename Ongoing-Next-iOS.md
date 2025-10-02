@@ -5,10 +5,14 @@ https://www.hackingwithswift.com/books/ios-swiftui/adding-a-segmented-control-fo
 
 
 ### Now:
-- Dynamic font size (like NSLayoutConstraint)
-- how to debug layout constraints  conflict
-- workflow - do you setup all views first then arranges 
-- how do you use content hugging and content resistance
+
+- @StateObject and vs @ObservedObject
+- @Binding
+- @EnvironmentObject
+- @Environment
+- ObservableObject protocol vs @Observable
+- Preference Key
+- 
 
 
 ### Must Check:

@@ -925,7 +925,8 @@ struct TestSome {
             return 0
             // return ""
             // returning different type (Int or String) is not allowed when return type is prefixed with `some`
-            // though both Int and Stirng are equatable
+            
+            // though both Int and String are equatable
             // `some` will enforce all the return must be of same type
         }
     }
