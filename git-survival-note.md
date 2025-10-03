@@ -1,5 +1,4 @@
 # Git Notes:
-
 First: on new os set the git’s global config 
 
 - `git config --global user.name <name>`  && `git config --global user.email <email@whatever.com>`

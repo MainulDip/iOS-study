@@ -6,11 +6,14 @@ https://www.hackingwithswift.com/books/ios-swiftui/adding-a-segmented-control-fo
 
 ### Now:
 
-- @StateObject and vs @ObservedObject
-- @Binding
-- @EnvironmentObject
-- @Environment
-- ObservableObject protocol vs @Observable
+- `@StateObject` and vs `@ObservedObject`
+    - both `property-wrappers` tell a SwiftUI view to update in response to changes from an observed object (@Observable & ObservableObject Protocol). When a view redraws, `@StateObject` retain its old state but `@ObservedState` doesn't (starts from initial state). When injecting state object from a parent view, `@ObservedState` can suite there
+
+- `@Binding` is to use state in a child view (expecting state will be injected from its parent), the `@state` cannot be left uninitialized, binding is saviour here
+
+- `@EnvironmentObject`
+- `@Environment`
+- `ObservableObject` protocol vs @Observable
 - Preference Key
 - 
 

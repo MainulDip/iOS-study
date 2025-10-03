@@ -2038,3 +2038,17 @@ ScrollView(.horizontal, showsIndicators: false) {
 }
 ```
 https://www.hackingwithswift.com/quick-start/swiftui/how-to-adjust-the-size-of-a-view-relative-to-its-container
+
+### `+` to Combine Text Views Together:
+SwiftUI’s text view overloads the `+` operator so that you can combine them together to make new text views
+```swift
+Text("SwiftUI ")
+    .foregroundStyle(.red)
++ Text("is ")
+    .foregroundStyle(.orange)
+    .fontWeight(.black)
++ Text("awesome")
+    .foregroundStyle(.blue)
+```
+
+Guide: https://www.hackingwithswift.com/quick-start/swiftui/how-to-combine-text-views-together
