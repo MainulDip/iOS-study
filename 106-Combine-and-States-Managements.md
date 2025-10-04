@@ -762,33 +762,58 @@ https://www.swiftbysundell.com/articles/swiftui-state-management-guide/
 ```swift
 /* @EnvironmentObject */
 
+// to pass theme as EnvironmentObject, conformation to ObservableObject is required
+final class Theme: ObservableObject {
+    @Published var primaryColor: Color = .orange
+
+    func changeToBlue() {
+        primaryColor = .blue
+    }
+}
+
+// container/parent view
+// the theme instance should be injected using `.environmentObject` modifier
+struct RootView: View {
+    @StateObject var theme = Theme()
+
+    var body: some View {
+        ArticleListView()
+            .environmentObject(theme)
+    }
+}
+
+// child view
 struct ArticleView: View {
     @EnvironmentObject var theme: Theme
-    var article: Article
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(article.title)
-                .foregroundColor(theme.titleTextColor)
-            Text(article.body)
-                .foregroundColor(theme.bodyTextColor)
+            Text("Hello")
+                .foregroundColor(theme.primaryColor)
+            Text("World")
+                .foregroundColor(theme.primaryColor)
+            Button("Change Color") {
+                theme.changeToBlue()
+            }
         }
     }
 }
 
-struct RootView: View {
-    @ObservedObject var theme: Theme
-    @ObservedObject var articleLibrary: ArticleLibrary
-
-    var body: some View {
-        ArticleListView(articles: articleLibrary.articles)
-            .environmentObject(theme)
-    }
-}
 ```
 
+The `@Environment` Property Wrapper allows you to read default values from SwiftUI’s environment or custom-injected objects.
+
+* to read Default/Pre-defined keys, use signature `@Environment(\.key) var sth`
+
 ```swift
-/* @Environment usages*/
+@Environment(\.horizontalSizeClass) var horizontalSizeClass
+@Environment(\.managedObjectContext) var managedObjectContext
+```
+
+* to send/inject custom object, `.environment` modifier need to be called form parent view
+
+```swift
+/* @Environment usages with custom object*/
 
 struct ThemeEnvironmentKey: EnvironmentKey {
     static var defaultValue = Theme.default
@@ -851,7 +876,7 @@ struct ChildView: View {
 
 
 ### SwiftUI preferences system | `.preference` & `.onPreferenceChange`:
-It's a way to to send data only reverse direction, from child to parent (`@Binding` is 2 directional).  
+It's a way to to send data only reverse direction, from child to parent (`@Binding` is two directional).  
 
 ```swift
 import SwiftUI

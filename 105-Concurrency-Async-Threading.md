@@ -688,6 +688,16 @@ Non blocking
 `Timer.scheduledTimer(:withTimeInterval:repeats)`
 `DispatchQueue.main.asyncAfter()`
 
+### Thread Safe Type | Sendable protocol:
+
+Docs: https://developer.apple.com/documentation/Swift/Sendable
+
+Guide: https://www.avanderlee.com/swift/sendable-protocol-closures/
+
+### Locking Mechanism for Thread Safety:
+
+guide: https://medium.com/@abozaid.ibrahim11/thread-safety-in-swift-a-comparison-of-locking-strategies-locks-vs-lock-free-70e872ac8e29
+
 ### Todo
 => Find way like `thread sleep` to emulate concurrent behavior
 => Find what available for like `thread sleep` on both sync and async.

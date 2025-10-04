@@ -6,4 +6,4 @@ This repo is a personalized iOS and Swift study notes. Lets jump into. This repo
 ### Open Source iOS App Collections:
 https://github.com/dkhamsing/open-source-ios-apps
 
-### Tasks:
+### Task

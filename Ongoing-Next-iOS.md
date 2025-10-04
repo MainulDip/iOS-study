@@ -11,11 +11,12 @@ https://www.hackingwithswift.com/books/ios-swiftui/adding-a-segmented-control-fo
 
 - `@Binding` is to use state in a child view (expecting state will be injected from its parent), the `@state` cannot be left uninitialized, binding is saviour here
 
-- `@EnvironmentObject`
-- `@Environment`
+- `@EnvironmentObject` &`@Environment`
+
 - `ObservableObject` protocol vs @Observable
+
+
 - Preference Key
-- 
 
 
 ### Must Check:
