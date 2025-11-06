@@ -966,6 +966,49 @@ struct TestSome {
 }
 ```
 
+### `ObservableObject` with UIKit:
+
+```swift
+import Combine
+import Foundation
+
+class MyDataModel: ObservableObject {
+    @Published var name: String = "John Doe"
+    @Published var age: Int = 30
+}
+
+class MyViewController: UIViewController {
+    private let dataModel = MyDataModel()
+    private var cancellables = Set<AnyCancellable>()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        dataModel.$name
+            .sink { [weak self] newName in
+                self?.nameLabel.text = newName
+            }
+            .store(in: &cancellables)
+
+        dataModel.$age
+            .sink { [weak self] newAge in
+                self?.ageLabel.text = "Age: \(newAge)"
+            }
+            .store(in: &cancellables)
+
+        // Example of changing data model properties
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.dataModel.name = "Jane Smith"
+            self.dataModel.age = 25
+        }
+    }
+
+    // ... UI elements like nameLabel and ageLabel
+    let nameLabel = UILabel()
+    let ageLabel = UILabel()
+}
+```
+
 ### ObservableObject protocol to `@Observable` migration:
 
 

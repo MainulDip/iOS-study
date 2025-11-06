@@ -228,6 +228,25 @@ let descriptionTextView: UITextView = {
     return textView
 }()
 ```
+
+* Build Attributed Text for an array
+
+```swift
+func attributedTextBuilder(errorArray: [String]) -> NSMutableAttributedString {
+    let mutableAttributedString = NSMutableAttributedString()
+    let errorAttributes: [NSAttributedString.Key : Any] = [
+        .font: UIFont.systemFont(ofSize: 13, weight: .medium),
+        .foregroundColor: UIColor.systemRed
+    ]
+    
+    for (i, str) in errorArray.enumerated() {
+        let attributedString = NSAttributedString(string: "* \(str)\(i == errorArray.count - 1 ? "" : "\n")", attributes: errorAttributes)
+        mutableAttributedString.append(attributedString)
+    }
+    
+    return mutableAttributedString
+}
+```
 ### Padding left/right using `constant:`:
 ```swift
 descriptionTextView.topAnchor.constraint(equalTo: topImageContainerView.bottomAnchor, constant: 12).isActive = true // constant will behave like padding
