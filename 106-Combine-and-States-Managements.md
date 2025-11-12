@@ -474,7 +474,7 @@ final class MovieViewModel: ObservableObject {
 ```
 
 ### `ViewModel` Integration (Combine + SwiftUI) and code splitting:
-ViewModel class conforms to `ObservableObject`, and properties are marked with `@Published` wrapper. VM functions will update the `@Published` properties and will be called from the View. 
+ViewModel class conforms to `ObservableObject`, and properties are marked with `@Published` wrapper. VM functions will update the `@Published` properties and will be called from the View
 
 A property marked with `@StateObject` will get the ViewModel instance (in SwiftUI View). `.onAppear` callback will call the VM function when that view is finished rendered.
 

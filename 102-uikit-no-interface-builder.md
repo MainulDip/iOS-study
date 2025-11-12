@@ -570,3 +570,110 @@ Recursion Technic https://www.geeksforgeeks.org/recursive-functions/
 
 ### Enum and Namespace:
 https://stackoverflow.com/questions/7000729/where-should-enums-live-in-an-mvc-project-structure
+
+### Core Graphics:
+Its the low level API to work with UI. Came long before UIKit framework. 
+
+```swift
+class ViewController: UIViewController {
+    
+    let myView = MyView()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .systemGray5
+        myView.translatesAutoresizingMaskIntoConstraints = false
+        myView.backgroundColor = .cyan
+        view.addSubview(myView)
+        NSLayoutConstraint.activate([
+            myView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            myView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            myView.widthAnchor.constraint(equalToConstant: 400),
+            myView.heightAnchor.constraint(equalToConstant: 400)
+        ])
+        
+        print(UIScreen.main.bounds.size)
+    }
+}
+
+
+class MyView: UIView {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func draw(_ rect: CGRect) {
+        // everything in core graphis is driven by contex
+        guard let context = UIGraphicsGetCurrentContext() else { return }
+        
+        // define canvas or painting area
+        let rectangle = CGRect(x: 0, y: 0, width: 200, height: 180).insetBy(dx: 10, dy: 10)
+        
+        context.setFillColor(UIColor.systemBlue.cgColor)
+        context.setStrokeColor(UIColor.systemGreen.cgColor)
+        context.setLineWidth(20)
+        context.addRect(rectangle)
+        context.drawPath(using: .fillStroke)
+        context.fill(rectangle)
+        
+        
+        // Painters Model: Anything is painted is painted, we can add new layer as overlay. But we cannot modify previouly paintend layer
+        let circle = CGRect(x: 240, y: 240, width: 100, height: 100)
+        context.setFillColor(UIColor.systemRed.cgColor)
+        context.setStrokeColor(UIColor.systemYellow.cgColor)
+        context.setLineWidth(10)
+        context.addEllipse(in: circle)
+        context.drawPath(using: .fillStroke)
+    }
+}
+```
+
+* Core graphics with UIImageView
+
+```swift
+class ViewController: UIViewController {
+    
+    let imageView = UIImageView()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .cyan
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(imageView)
+        
+        NSLayoutConstraint.activate([
+            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+        
+        drawCircle()
+    }
+    
+    func drawCircle() {
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 400, height: 400))
+        
+        let img = renderer.image { ctx in
+            let circle = CGRect(x: 0, y: 0, width: 400, height: 400).insetBy(dx: 10, dy: 10)
+            
+            ctx.cgContext.setFillColor(UIColor.systemBlue.cgColor)
+            ctx.cgContext.setStrokeColor(UIColor.systemPink.cgColor)
+            ctx.cgContext.setLineWidth(10)
+            ctx.cgContext.addEllipse(in: circle)
+            ctx.cgContext.drawPath(using: .fillStroke)
+        }
+        
+        imageView.image = img
+    }
+}
+```
+
+### Core Animation:
+Core Animation is the underlying/low level animation api for UIkit/AppKit/SwiftUI. While higher level APIs are often easier to use and recommended. Sits on top of core graphics api.
+
+Core animation happens in the CALayer (every UIView has an underlying CALayer).
